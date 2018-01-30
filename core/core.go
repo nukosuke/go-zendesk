@@ -22,5 +22,4 @@ func NewClient(client *http.Client, subdomain string) *CoreAPI {
 	return &CoreAPI{
 		client:    client,
 		subdomain: subdomain,
-	}
 }
