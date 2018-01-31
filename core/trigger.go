@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// zendesk trigger condition
+// TriggerCondition zendesk trigger condition
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#conditions-reference
 type TriggerCondition struct {
 	Field    string `json:"field"`
@@ -12,14 +12,14 @@ type TriggerCondition struct {
 	Value    string `json:"value"`
 }
 
-// zendesk trigger action
+// TriggerAction is zendesk trigger action
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#actions
 type TriggerAction struct {
 	Field string `json:"field"`
 	Value string `json:"value"`
 }
 
-// zendesk trigger JSON payload format
+// Trigger is zendesk trigger JSON payload format
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#json-format
 type Trigger struct {
 	ID         int64  `json:"id"`
