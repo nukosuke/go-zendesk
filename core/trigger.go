@@ -1,5 +1,9 @@
 package core
 
+import (
+	"time"
+)
+
 type TriggerCondition struct {
 	Field    string `json:"field"`
 	Operator string `json:"operator"`
