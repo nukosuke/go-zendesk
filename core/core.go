@@ -5,14 +5,14 @@ import (
 )
 
 const (
-	ZENDESK_DOMAIN = "zendesk.com"
-	API_ROOT       = ZENDESK_DOMAIN + "/api/v2"
+	ZendeskDomain = "zendesk.com"
+	APIRoot       = ZendeskDomain + "/api/v2"
 )
 
-var API_ENDPOINT = map[string]string{
-	"ticket_form":  API_ROOT + "/ticket_forms",
-	"ticket_field": API_ROOT + "/ticket_fields",
-	"triggers":     API_ROOT + "/triggers",
+var APIEndpoint = map[string]string{
+	"ticket_form":  APIRoot + "/ticket_forms",
+	"ticket_field": APIRoot + "/ticket_fields",
+	"triggers":     APIRoot + "/triggers",
 }
 
 type CoreAPI struct {
