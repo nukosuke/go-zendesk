@@ -4,12 +4,30 @@ import (
 	"net/http"
 )
 
-type CoreAPI struct {
-	client *http.Client
+const (
+	// ZendeskDomain is domain of zendesk
+	ZendeskDomain = "zendesk.com"
+
+	// APIRoot is API path including version prefix
+	APIRoot       = ZendeskDomain + "/api/v2"
+)
+
+// APIEndpoint is resource name and API endpoint mapping
+var APIEndpoint = map[string]string{
+	"ticket_form":  APIRoot + "/ticket_forms",
+	"ticket_field": APIRoot + "/ticket_fields",
+	"triggers":     APIRoot + "/triggers",
 }
 
-func NewClient(client *http.Client) *CoreAPI {
+type CoreAPI struct {
+	client    *http.Client
+	subdomain string
+}
+
+// NewClient create new CoreAPI
+func NewClient(client *http.Client, subdomain string) *CoreAPI {
 	return &CoreAPI{
-		client: client,
+		client:    client,
+		subdomain: subdomain,
 	}
 }
