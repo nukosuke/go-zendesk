@@ -20,6 +20,7 @@ type CoreAPI struct {
 	subdomain string
 }
 
+// create new CoreAPI
 func NewClient(client *http.Client, subdomain string) *CoreAPI {
 	return &CoreAPI{
 		client:    client,
