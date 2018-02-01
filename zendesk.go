@@ -15,8 +15,9 @@ const (
 	headerRateRemaining = "X-RateLimit-Remaining"
 )
 
+// Client of Zendesk API
 type Client struct {
-	Core *core.CoreService
+	Core *core.Service
 	//TODO: support other APIs
 }
 
@@ -39,7 +40,7 @@ func NewClient(httpClient *http.Client, subdomain string) *Client {
 		UserAgent:  userAgent,
 	}
 
-	client.Core = (*core.CoreService)(service)
+	client.Core = (*core.Service)(service)
 	// other services...
 	return client
 }

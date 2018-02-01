@@ -4,4 +4,5 @@ import (
 	"github.com/zenform/go-zendesk/common"
 )
 
-type CoreService common.Service
+// Service of Core API
+type Service common.Service

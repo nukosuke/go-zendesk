@@ -36,6 +36,7 @@ type Trigger struct {
 	UpdatedAt   time.Time       `json:"updated_at"`
 }
 
-func (c *CoreService) GetTriggers() ([]Trigger, error) {
+// GetTriggers fetch trigger list
+func (s *Service) GetTriggers() ([]Trigger, error) {
 	return []Trigger{}, nil
 }
