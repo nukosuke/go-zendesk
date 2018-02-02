@@ -40,6 +40,7 @@ type Trigger struct {
 	UpdatedAt   time.Time       `json:"updated_at"`
 }
 
+// GetTriggersResponse is response structure of triggers list
 type GetTriggersResponse struct {
 	Triggers []Trigger `json:"triggers"`
 	*common.Paginatable
