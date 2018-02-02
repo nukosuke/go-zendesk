@@ -2,6 +2,7 @@ package core
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/zenform/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
@@ -19,8 +20,27 @@ type TriggerCondition struct {
 // TriggerAction is zendesk trigger action
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#actions
 type TriggerAction struct {
-	Field string `json:"field"`
-	Value string `json:"value"`
+	Field string             `json:"field"`
+	Value TriggerActionValue `json:"value"`
+}
+
+type TriggerActionValue struct {
+	AsString      string
+	AsStringArray []string
+}
+
+func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
+	switch string(data)[0] {
+	case '"':
+		if err := json.Unmarshal(data, &tav.AsString); err != nil {
+			fmt.Errorf("failed to unmarshal trigger.action.value as string")
+		}
+	case '[':
+		if err := json.Unmarshal(data, &tav.AsStringArray); err != nil {
+			fmt.Errorf("failed to unmarshal trigger.action.value as []string")
+		}
+	}
+	return nil
 }
 
 // Trigger is zendesk trigger JSON payload format
