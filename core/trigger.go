@@ -1,6 +1,10 @@
 package core
 
 import (
+	"encoding/json"
+	"github.com/zenform/go-zendesk/common"
+	"io/ioutil"
+	"net/http"
 	"time"
 )
 
@@ -36,7 +40,40 @@ type Trigger struct {
 	UpdatedAt   time.Time       `json:"updated_at"`
 }
 
+// GetTriggersResponse is response structure of triggers list
+type GetTriggersResponse struct {
+	Triggers []Trigger `json:"triggers"`
+	*common.Paginatable
+}
+
 // GetTriggers fetch trigger list
-func (s *Service) GetTriggers() ([]Trigger, error) {
-	return []Trigger{}, nil
+func (s *Service) GetTriggers() (GetTriggersResponse, error) {
+	req, err := http.NewRequest("GET", s.BaseURL.String()+"/triggers.json", nil)
+	if err != nil {
+		return GetTriggersResponse{}, err
+	}
+
+	req.Header.Set("User-Agent", s.UserAgent)
+
+	//TODO: read email & token from s
+	req.SetBasicAuth("user@example.com/token", "apitoken")
+
+	resp, err := s.HTTPClient.Do(req)
+	defer resp.Body.Close()
+	if err != nil {
+		return GetTriggersResponse{}, err
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return GetTriggersResponse{}, err
+	}
+
+	var triggers GetTriggersResponse
+	err = json.Unmarshal(body, &triggers)
+	if err != nil {
+		return GetTriggersResponse{}, err
+	}
+
+	return triggers, nil
 }
