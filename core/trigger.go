@@ -24,11 +24,15 @@ type TriggerAction struct {
 	Value TriggerActionValue `json:"value"`
 }
 
+// TriggerActionValue is value holder of TriggerAction#Value.
+// This is because type difference of value in JSON response.
 type TriggerActionValue struct {
 	AsString      string
 	AsStringArray []string
 }
 
+// UnmarshalJSON deserialize JSON body to TriggerActionValue
+// according its value type
 func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
 	switch string(data)[0] {
 	case '"':
