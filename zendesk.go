@@ -41,7 +41,7 @@ func NewClient(httpClient *http.Client) (*Client, error) {
 	return client, nil
 }
 
-// Client.SetSubdomain saves subdomain in client. It will be used
+// SetSubdomain saves subdomain in client. It will be used
 // when call API
 func (c *Client) SetSubdomain(subdomain string) error {
 	if !subdomainRegexp.MatchString(subdomain) {
@@ -58,7 +58,7 @@ func (c *Client) SetSubdomain(subdomain string) error {
 	return nil
 }
 
-// Client.SetCredential saves credential in client. It will be set
+// SetCredential saves credential in client. It will be set
 // to request header when call API
 func (c *Client) SetCredential(cred *common.Credential) error {
 	//TODO: validate credential
