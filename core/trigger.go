@@ -37,11 +37,11 @@ func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
 	switch string(data)[0] {
 	case '"':
 		if err := json.Unmarshal(data, &tav.AsString); err != nil {
-			fmt.Errorf("failed to unmarshal trigger.action.value as string")
+			return fmt.Errorf("failed to unmarshal trigger.action.value as string")
 		}
 	case '[':
 		if err := json.Unmarshal(data, &tav.AsStringArray); err != nil {
-			fmt.Errorf("failed to unmarshal trigger.action.value as []string")
+			return fmt.Errorf("failed to unmarshal trigger.action.value as []string")
 		}
 	}
 	return nil
