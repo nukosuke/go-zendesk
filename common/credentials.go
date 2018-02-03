@@ -5,9 +5,12 @@ const (
 	APIToken
 )
 
-type Credentials struct {
-	AuthType AuthType
-	Email    string
-	Password string
-	APIToken string
+type AuthType int
+
+type Credential struct {
+	Subdomain string
+	AuthType  AuthType
+	Email     string
+	Password  string
+	APIToken  string
 }
