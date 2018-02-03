@@ -1,24 +1,38 @@
 package zendesk
 
 import (
+	"github.com/zenform/go-zendesk/common"
 	"net/http"
 	"testing"
 )
 
-func TestNewClientSuccess(t *testing.T) {
+func TestSetSubdomainSuccess(t *testing.T) {
 	validSubdomain := "subdomain"
 
-	_, err := NewClient(&http.Client{}, validSubdomain)
-	if err != nil {
-		t.Fatal("NewClient with valid params must success")
+	client, _ := NewClient(&http.Client{})
+	if err := client.SetSubdomain(validSubdomain); err != nil {
+		t.Fatal("SetSubdomain should success")
 	}
 }
 
-func TestNewClientFail(t *testing.T) {
+func TestSetSubdomainFail(t *testing.T) {
 	invalidSubdomain := ".subdomain"
 
-	_, err := NewClient(&http.Client{}, invalidSubdomain)
-	if err == nil {
-		t.Fatal("NewClient with invalid params must fail")
+	client, _ := NewClient(&http.Client{})
+	if err := client.SetSubdomain(invalidSubdomain); err == nil {
+		t.Fatal("SetSubdomain should fail")
+	}
+}
+
+func TestSetCredential(t *testing.T) {
+	cred := &common.Credential{
+		AuthType: common.APIToken,
+		Email:    "zenform@example.com",
+		APIToken: "0123456789abcdefgh",
+	}
+
+	client, _ := NewClient(&http.Client{})
+	if err := client.SetCredential(cred); err != nil {
+		t.Fatal("SetCredential should success")
 	}
 }

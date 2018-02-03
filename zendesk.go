@@ -25,29 +25,44 @@ type Client struct {
 }
 
 // NewClient creates new Zendesk API client
-func NewClient(httpClient *http.Client, subdomain string) (*Client, error) {
+func NewClient(httpClient *http.Client) (*Client, error) {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
-	}
-
-	if !subdomainRegexp.MatchString(subdomain) {
-		return nil, fmt.Errorf("%s is invalid subdomain", subdomain)
-	}
-
-	baseURLString := fmt.Sprintf(baseURLFormat, subdomain)
-	baseURL, err := url.Parse(baseURLString)
-	if err != nil {
-		return nil, err
 	}
 
 	client := &Client{}
 	service := &common.Service{
 		HTTPClient: httpClient,
-		BaseURL:    baseURL,
 		UserAgent:  userAgent,
 	}
 
 	client.Core = (*core.Service)(service)
 	// other services...
 	return client, nil
+}
+
+// SetSubdomain saves subdomain in client. It will be used
+// when call API
+func (c *Client) SetSubdomain(subdomain string) error {
+	if !subdomainRegexp.MatchString(subdomain) {
+		return fmt.Errorf("%s is invalid subdomain", subdomain)
+	}
+
+	baseURLString := fmt.Sprintf(baseURLFormat, subdomain)
+	baseURL, err := url.Parse(baseURLString)
+	if err != nil {
+		return err
+	}
+
+	c.Core.BaseURL = baseURL
+	return nil
+}
+
+// SetCredential saves credential in client. It will be set
+// to request header when call API
+func (c *Client) SetCredential(cred *common.Credential) error {
+	//TODO: validate credential
+
+	c.Core.Credential = cred
+	return nil
 }

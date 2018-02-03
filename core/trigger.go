@@ -79,8 +79,13 @@ func (s *Service) GetTriggers() (GetTriggersResponse, error) {
 
 	req.Header.Set("User-Agent", s.UserAgent)
 
-	//TODO: read email & token from s
-	req.SetBasicAuth("user@example.com/token", "apitoken")
+	cred := s.Credential
+	switch cred.AuthType {
+	case common.BasicAuth:
+		req.SetBasicAuth(cred.Email, cred.Password)
+	case common.APIToken:
+		req.SetBasicAuth(cred.Email+"/token", cred.APIToken)
+	}
 
 	resp, err := s.HTTPClient.Do(req)
 	defer resp.Body.Close()
