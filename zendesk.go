@@ -41,8 +41,7 @@ func NewClient(httpClient *http.Client) (*Client, error) {
 	return client, nil
 }
 
-func (c *Client) SetCredential(cred *common.Credential) error {
-	subdomain := cred.Subdomain
+func (c *Client) SetSubdomain(subdomain string) error {
 	if !subdomainRegexp.MatchString(subdomain) {
 		return fmt.Errorf("%s is invalid subdomain", subdomain)
 	}
@@ -54,6 +53,12 @@ func (c *Client) SetCredential(cred *common.Credential) error {
 	}
 
 	c.Core.BaseURL = baseURL
+	return nil
+}
+
+func (c *Client) SetCredential(cred *common.Credential) error {
+	//TODO: validate credential
+
 	c.Core.Credential = cred
 	return nil
 }

@@ -8,7 +8,6 @@ const (
 type AuthType int
 
 type Credential struct {
-	Subdomain string
 	AuthType  AuthType
 	Email     string
 	Password  string

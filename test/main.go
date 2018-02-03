@@ -11,7 +11,6 @@ import (
 func main() {
 	httpClient := &http.Client{}
 	cred := &common.Credential{
-		Subdomain: os.Getenv("ZD_SUBDOMAIN"),
 		AuthType:  common.APIToken,
 		Email:     os.Getenv("ZD_EMAIL"),
 		APIToken:  os.Getenv("ZD_TOKEN"),
@@ -23,6 +22,10 @@ func main() {
 		os.Exit(1)
 	}
 
+	if err = client.SetSubdomain(os.Getenv("ZD_SUBDOMAIN")); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 	if err = client.SetCredential(cred); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
