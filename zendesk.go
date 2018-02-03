@@ -25,31 +25,35 @@ type Client struct {
 }
 
 // NewClient creates new Zendesk API client
-func NewClient(httpClient *http.Client, cred *common.Credential) (*Client, error) {
+func NewClient(httpClient *http.Client) (*Client, error) {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
-	}
-
-	subdomain := cred.Subdomain
-	if !subdomainRegexp.MatchString(subdomain) {
-		return nil, fmt.Errorf("%s is invalid subdomain", subdomain)
-	}
-
-	baseURLString := fmt.Sprintf(baseURLFormat, subdomain)
-	baseURL, err := url.Parse(baseURLString)
-	if err != nil {
-		return nil, err
 	}
 
 	client := &Client{}
 	service := &common.Service{
 		HTTPClient: httpClient,
-		BaseURL:    baseURL,
 		UserAgent:  userAgent,
-		Credential: cred,
 	}
 
 	client.Core = (*core.Service)(service)
 	// other services...
 	return client, nil
+}
+
+func (c *Client) SetCredential(cred *common.Credential) error {
+	subdomain := cred.Subdomain
+	if !subdomainRegexp.MatchString(subdomain) {
+		return fmt.Errorf("%s is invalid subdomain", subdomain)
+	}
+
+	baseURLString := fmt.Sprintf(baseURLFormat, subdomain)
+	baseURL, err := url.Parse(baseURLString)
+	if err != nil {
+		return err
+	}
+
+	c.Core.BaseURL = baseURL
+	c.Core.Credential = cred
+	return nil
 }

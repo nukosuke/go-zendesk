@@ -17,12 +17,16 @@ func main() {
 		APIToken:  os.Getenv("ZD_TOKEN"),
 	}
 
-	client, err := zendesk.NewClient(httpClient, cred)
+	client, err := zendesk.NewClient(httpClient)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	//client.SetAPIToken(os.Getenv("ZD_EMAIL"), os.Getenv("ZD_TOKEN"))
+
+	if err = client.SetCredential(cred); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	triggers, err := client.Core.GetTriggers()
 	if err != nil {
