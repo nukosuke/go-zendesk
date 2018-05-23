@@ -1,7 +1,6 @@
 package zendesk
 
 import (
-	"github.com/nukosuke/go-zendesk/common"
 	"net/http"
 	"testing"
 )
