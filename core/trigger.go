@@ -3,7 +3,7 @@ package core
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/zenform/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -78,14 +78,7 @@ func (s *Service) GetTriggers() (GetTriggersResponse, error) {
 	}
 
 	req.Header.Set("User-Agent", s.UserAgent)
-
-	cred := s.Credential
-	switch cred.AuthType {
-	case common.BasicAuth:
-		req.SetBasicAuth(cred.Email, cred.Password)
-	case common.APIToken:
-		req.SetBasicAuth(cred.Email+"/token", cred.APIToken)
-	}
+	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
 
 	resp, err := s.HTTPClient.Do(req)
 	defer resp.Body.Close()

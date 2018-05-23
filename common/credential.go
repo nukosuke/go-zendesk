@@ -1,19 +1,55 @@
 package common
 
-const (
-	// BasicAuth is type of Basic authentication
-	BasicAuth AuthType = iota
-	// APIToken is type of API access token
-	APIToken
-)
+// Credential is interface of API credential
+type Credential interface {
+	Email() string
+	Secret() string
+}
 
-// AuthType is enum of API authentication type
-type AuthType int
+// BasicAuthCredential is type of credential for Basic authentication
+type BasicAuthCredential struct {
+	email    string
+	password string
+}
 
-// Credential has data to authenticate user for API
-type Credential struct {
-	AuthType  AuthType
-	Email     string
-	Password  string
-	APIToken  string
+// NewBasicAuthCredential creates BasicAuthCredential and returns its pointer
+func NewBasicAuthCredential(email string, password string) *BasicAuthCredential {
+	return &BasicAuthCredential{
+		email: email,
+		password: password,
+	}
+}
+
+// Email is accessor which returns email address
+func (c BasicAuthCredential) Email() string {
+	return c.email
+}
+
+// Secret is accessor which returns password
+func (c BasicAuthCredential) Secret() string {
+	return c.password
+}
+
+// APITokenCredential is type of credential for API token authentication
+type APITokenCredential struct {
+	email    string
+	apiToken string
+}
+
+// NewAPITokenCredential creates APITokenCredential and returns its pointer
+func NewAPITokenCredential(email string, apiToken string) *APITokenCredential {
+	return &APITokenCredential{
+		email: email,
+		apiToken: apiToken,
+	}
+}
+
+// Email is accessor which returns email address
+func (c APITokenCredential) Email() string {
+	return c.email
+}
+
+// Secret is accessor which returns API token
+func (c APITokenCredential) Secret() string {
+	return c.apiToken + "/token"
 }

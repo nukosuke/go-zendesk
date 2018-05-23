@@ -10,5 +10,5 @@ type Service struct {
 	HTTPClient *http.Client
 	BaseURL    *url.URL
 	UserAgent  string
-	Credential *Credential
+	Credential Credential
 }
