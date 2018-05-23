@@ -3,7 +3,7 @@ package common
 // Credential is interface of API credential
 type Credential interface{}
 
-// Basicauthcredential is type of credential for Basic authentication
+// BasicAuthCredential is type of credential for Basic authentication
 type BasicAuthCredential struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
