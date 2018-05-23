@@ -35,5 +35,5 @@ func (c APITokenCredential) Email() string {
 
 // Secret is accessor which returns API token
 func (c APITokenCredential) Secret() string {
-	return c.apiToken
+	return c.apiToken + "/token"
 }
