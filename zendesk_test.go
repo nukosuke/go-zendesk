@@ -24,15 +24,3 @@ func TestSetSubdomainFail(t *testing.T) {
 	}
 }
 
-func TestSetCredential(t *testing.T) {
-	cred := &common.Credential{
-		AuthType: common.APIToken,
-		Email:    "zenform@example.com",
-		APIToken: "0123456789abcdefgh",
-	}
-
-	client, _ := NewClient(&http.Client{})
-	if err := client.SetCredential(cred); err != nil {
-		t.Fatal("SetCredential should success")
-	}
-}
