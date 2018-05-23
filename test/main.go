@@ -10,11 +10,7 @@ import (
 
 func main() {
 	httpClient := &http.Client{}
-	cred := &common.Credential{
-		AuthType:  common.APIToken,
-		Email:     os.Getenv("ZD_EMAIL"),
-		APIToken:  os.Getenv("ZD_TOKEN"),
-	}
+	cred := common.NewAPITokenCredential(os.Getenv("ZD_EMAIL"), os.Getenv("ZD_TOKEN"))
 
 	client, err := zendesk.NewClient(httpClient)
 	if err != nil {
@@ -26,11 +22,8 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	if err = client.SetCredential(cred); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
 
+	client.SetCredential(cred)
 	triggers, err := client.Core.GetTriggers()
 	if err != nil {
 		fmt.Println(err)
