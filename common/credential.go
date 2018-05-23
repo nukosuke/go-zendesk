@@ -12,10 +12,12 @@ type BasicAuthCredential struct {
 	password string
 }
 
+// APITokenCredential.Email is accessor which returns email address
 func (c BasicAuthCredential) Email() string {
 	return c.email
 }
 
+// APITokenCredential.Secret is accessor which returns password
 func (c BasicAuthCredential) Secret() string {
 	return c.password
 }
@@ -26,10 +28,12 @@ type APITokenCredential struct {
 	apiToken string
 }
 
+// APITokenCredential.Email is accessor which returns email address
 func (c APITokenCredential) Email() string {
 	return c.email
 }
 
+// APITokenCredential.Secret is accessor which returns API token
 func (c APITokenCredential) Secret() string {
 	return c.apiToken
 }
