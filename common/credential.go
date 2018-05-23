@@ -1,19 +1,16 @@
 package common
 
-const (
-	// BasicAuth is type of Basic authentication
-	BasicAuth AuthType = iota
-	// APIToken is type of API access token
-	APIToken
-)
+// Credential is interface of API credential
+type Credential interface{}
 
-// AuthType is enum of API authentication type
-type AuthType int
+// Basicauthcredential is type of credential for Basic authentication
+type BasicAuthCredential struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
 
-// Credential has data to authenticate user for API
-type Credential struct {
-	AuthType  AuthType
-	Email     string
-	Password  string
-	APIToken  string
+// APITokenCredential is type of credential for API token authentication
+type APITokenCredential struct {
+	Email    string `json:"email"`
+	APIToken string `json:"api_token"`
 }
