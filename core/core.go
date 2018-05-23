@@ -1,7 +1,7 @@
 package core
 
 import (
-	"github.com/zenform/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk/common"
 )
 
 // Service of Core API

@@ -2,8 +2,8 @@ package zendesk
 
 import (
 	"fmt"
-	"github.com/zenform/go-zendesk/common"
-	"github.com/zenform/go-zendesk/core"
+	"github.com/nukosuke/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk/core"
 	"net/http"
 	"net/url"
 	"regexp"

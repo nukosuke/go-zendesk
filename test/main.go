@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/zenform/go-zendesk"
-	"github.com/zenform/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk"
+	"github.com/nukosuke/go-zendesk/common"
 	"net/http"
 	"os"
 )

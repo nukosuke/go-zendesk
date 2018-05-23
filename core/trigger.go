@@ -3,7 +3,7 @@ package core
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/zenform/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
 	"time"
