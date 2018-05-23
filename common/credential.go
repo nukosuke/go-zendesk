@@ -12,6 +12,14 @@ type BasicAuthCredential struct {
 	password string
 }
 
+// NewBasicAuthCredential creates BasicAuthCredential and returns its pointer
+func NewBasicAuthCredential(email string, password string) *BasicAuthCredential {
+	return &BasicAuthCredential{
+		email: email,
+		password: password,
+	}
+}
+
 // Email is accessor which returns email address
 func (c BasicAuthCredential) Email() string {
 	return c.email
@@ -26,6 +34,14 @@ func (c BasicAuthCredential) Secret() string {
 type APITokenCredential struct {
 	email    string
 	apiToken string
+}
+
+// NewAPITokenCredential creates APITokenCredential and returns its pointer
+func NewAPITokenCredential(email string, apiToken string) *APITokenCredential {
+	return &APITokenCredential{
+		email: email,
+		apiToken: apiToken,
+	}
 }
 
 // Email is accessor which returns email address
