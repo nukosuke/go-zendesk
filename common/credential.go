@@ -1,16 +1,35 @@
 package common
 
 // Credential is interface of API credential
-type Credential interface{}
+type Credential interface {
+	Email() string
+	Secret() string
+}
 
 // BasicAuthCredential is type of credential for Basic authentication
 type BasicAuthCredential struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	email    string
+	password string
+}
+
+func (c BasicAuthCredential) Email() string {
+	return c.email
+}
+
+func (c BasicAuthCredential) Secret() string {
+	return c.password
 }
 
 // APITokenCredential is type of credential for API token authentication
 type APITokenCredential struct {
-	Email    string `json:"email"`
-	APIToken string `json:"api_token"`
+	email    string
+	apiToken string
+}
+
+func (c APITokenCredential) Email() string {
+	return c.email
+}
+
+func (c APITokenCredential) Secret() string {
+	return c.apiToken
 }
