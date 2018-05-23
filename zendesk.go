@@ -60,9 +60,6 @@ func (c *Client) SetSubdomain(subdomain string) error {
 
 // SetCredential saves credential in client. It will be set
 // to request header when call API
-func (c *Client) SetCredential(cred *common.Credential) error {
-	//TODO: validate credential
-
+func (c *Client) SetCredential(cred common.Credential) {
 	c.Core.Credential = cred
-	return nil
 }
