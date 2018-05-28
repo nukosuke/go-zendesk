@@ -46,10 +46,10 @@ func NewAPITokenCredential(email string, apiToken string) *APITokenCredential {
 
 // Email is accessor which returns email address
 func (c APITokenCredential) Email() string {
-	return c.email
+	return c.email + "/token"
 }
 
 // Secret is accessor which returns API token
 func (c APITokenCredential) Secret() string {
-	return c.apiToken + "/token"
+	return c.apiToken
 }
