@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/nukosuke/go-zendesk"
-	"github.com/nukosuke/go-zendesk/core"
-	"github.com/nukosuke/go-zendesk/common"
+	"github.com/nukosuke/go-zendesk/zendesk"
 	"net/http"
 	"os"
 )
 
 func main() {
 	httpClient := &http.Client{}
-	cred := common.NewAPITokenCredential(os.Getenv("ZD_EMAIL"), os.Getenv("ZD_TOKEN"))
+	cred := zendesk.NewAPITokenCredential(os.Getenv("ZD_EMAIL"), os.Getenv("ZD_TOKEN"))
 
 	client, err := zendesk.NewClient(httpClient)
 	if err != nil {
@@ -25,21 +23,21 @@ func main() {
 	}
 
 	client.SetCredential(cred)
-	triggers, err := client.Core.GetTriggers()
+	triggers, err := client.GetTriggers()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 	fmt.Println(triggers.Triggers)
 
-	ticketFields, page, err := client.Core.GetTicketFields()
+	ticketFields, page, err := client.GetTicketFields()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 	fmt.Println(ticketFields)
 
-	ticketForms, err := client.Core.GetTicketForms()
+	ticketForms, err := client.GetTicketForms()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -49,5 +47,5 @@ func main() {
 	fmt.Println(page.HasNext())
 	fmt.Println(ticketForms.TicketForms)
 
-	client.Core.PostTicketField(core.TicketField{Type: "text", Title: "Age"})
+	client.PostTicketField(zendesk.TicketField{Type: "text", Title: "Age"})
 }
