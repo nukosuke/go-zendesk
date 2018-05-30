@@ -54,6 +54,8 @@ type TicketField struct {
 	AgentDescription    string                         `json:"agent_description,omitempty"`
 }
 
+// GetTicketFields fetches ticket field list
+// ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
 func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	type Payload struct {
 		TicketFields []TicketField `json:"ticket_fields"`
@@ -85,6 +87,8 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	return payload.TicketFields, payload.Page, nil
 }
 
+// PostTicketField creates new ticket field
+// ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#create-ticket-field
 func (z Client) PostTicketField(ticketField TicketField) (TicketField, error) {
 	type Payload struct {
 		TicketField TicketField `json:"ticket_field"`

@@ -16,6 +16,7 @@ type GetTicketFormsResponse struct {
 	Page        Page
 }
 
+// GetTicketForms 
 func (z Client) GetTicketForms() (GetTicketFormsResponse, error) {
 	req, err := http.NewRequest("GET", z.BaseURL.String()+"/ticket_forms.json", nil)
 	if err != nil {
