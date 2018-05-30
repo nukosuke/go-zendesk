@@ -67,7 +67,7 @@ type Trigger struct {
 // GetTriggersResponse is response structure of triggers list
 type GetTriggersResponse struct {
 	Triggers []Trigger `json:"triggers"`
-	*common.Paginatable
+	Page     common.Page
 }
 
 // GetTriggers fetch trigger list
