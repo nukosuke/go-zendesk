@@ -14,7 +14,7 @@ type TicketForm struct {
 
 type GetTicketFormsResponse struct {
 	TicketForms []TicketForm `json:"ticket_forms"`
-	*common.Paginatable
+	Page        common.Page
 }
 
 func (s Service) GetTicketForms() (GetTicketFormsResponse, error) {
