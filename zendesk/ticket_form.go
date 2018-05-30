@@ -6,11 +6,13 @@ import (
 	"net/http"
 )
 
+// TicketForm is JSON payload struct
 type TicketForm struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
+// GetTicketFormsResponse is response structure
 type GetTicketFormsResponse struct {
 	TicketForms []TicketForm `json:"ticket_forms"`
 	Page        Page
