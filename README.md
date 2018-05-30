@@ -6,3 +6,17 @@
 [![GoDoc](https://godoc.org/github.com/zenform/go-zendesk?status.svg)](https://godoc.org/github.com/zenform/go-zendesk)
 
 Zendesk API client library
+
+## Installation
+
+  ```sh
+  $ go get github.com/nukosuke/go-zendesk/zendesk
+```
+
+## Author
+
+nukosuke <nukosuke@lavabit.com>
+
+## License
+
+MIT
