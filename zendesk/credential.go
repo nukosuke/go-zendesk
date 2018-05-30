@@ -1,4 +1,4 @@
-package common
+package zendesk
 
 // Credential is interface of API credential
 type Credential interface {
@@ -15,7 +15,7 @@ type BasicAuthCredential struct {
 // NewBasicAuthCredential creates BasicAuthCredential and returns its pointer
 func NewBasicAuthCredential(email string, password string) *BasicAuthCredential {
 	return &BasicAuthCredential{
-		email: email,
+		email:    email,
 		password: password,
 	}
 }
@@ -39,7 +39,7 @@ type APITokenCredential struct {
 // NewAPITokenCredential creates APITokenCredential and returns its pointer
 func NewAPITokenCredential(email string, apiToken string) *APITokenCredential {
 	return &APITokenCredential{
-		email: email,
+		email:    email,
 		apiToken: apiToken,
 	}
 }

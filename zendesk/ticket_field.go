@@ -1,14 +1,12 @@
-package core
+package zendesk
 
 import (
 	"encoding/json"
-	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
-	"net/http"
-	"strings"
 	"time"
 )
 
+// TicketFieldSystemFieldOption is struct for value of `system_field_options`
 type TicketFieldSystemFieldOption struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
@@ -18,6 +16,7 @@ type TicketFieldSystemFieldOption struct {
 	Value    string `json:"value"`
 }
 
+// TicketFieldCustomFieldOption is struct for value of `custom_field_options`
 type TicketFieldCustomFieldOption struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
@@ -27,6 +26,7 @@ type TicketFieldCustomFieldOption struct {
 	Value    string `json:"value"`
 }
 
+// TicketField is struct for ticket_field payload
 type TicketField struct {
 	ID                  int64                          `json:"id,omitempty"`
 	URL                 string                         `json:"url,omitempty"`
@@ -54,61 +54,53 @@ type TicketField struct {
 	AgentDescription    string                         `json:"agent_description,omitempty"`
 }
 
-func (s Service) GetTicketFields() ([]TicketField, common.Page, error) {
+// GetTicketFields fetches ticket field list
+// ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
+func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	type Payload struct {
 		TicketFields []TicketField `json:"ticket_fields"`
-		Page         common.Page
+		Page         Page
 	}
 
-	req, err := http.NewRequest("GET", s.BaseURL.String()+"/ticket_fields.json", nil)
+	req, err := z.NewGetRequest("/ticket_fields.json")
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
-	req.Header.Set("User-Agent", s.UserAgent)
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
-
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	var payload Payload
 	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	return payload.TicketFields, payload.Page, nil
 }
 
-func (s Service) PostTicketField(ticketField TicketField) (TicketField, error) {
+// PostTicketField creates new ticket field
+// ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#create-ticket-field
+func (z Client) PostTicketField(ticketField TicketField) (TicketField, error) {
 	type Payload struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
 
 	payload := Payload{TicketField: ticketField}
-	jsonStr, err := json.Marshal(payload)
+	req, err := z.NewPostRequest("/ticket_fields.json", payload)
 	if err != nil {
 		return TicketField{}, err
 	}
 
-	req, err := http.NewRequest("POST", s.BaseURL.String()+"/ticket_fields.json", strings.NewReader(string(jsonStr)))
-	if err != nil {
-		return TicketField{}, err
-	}
-
-	req.Header.Set("User-Agent", s.UserAgent)
-	req.Header.Set("Content-Type", "application/json")
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
-
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
 		return TicketField{}, err

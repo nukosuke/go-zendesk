@@ -1,32 +1,34 @@
-package core
+package zendesk
 
 import (
 	"encoding/json"
-	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
 )
 
+// TicketForm is JSON payload struct
 type TicketForm struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
+// GetTicketFormsResponse is response structure
 type GetTicketFormsResponse struct {
 	TicketForms []TicketForm `json:"ticket_forms"`
-	Page        common.Page
+	Page        Page
 }
 
-func (s Service) GetTicketForms() (GetTicketFormsResponse, error) {
-	req, err := http.NewRequest("GET", s.BaseURL.String()+"/ticket_forms.json", nil)
+// GetTicketForms fetches ticket forms
+func (z Client) GetTicketForms() (GetTicketFormsResponse, error) {
+	req, err := http.NewRequest("GET", z.BaseURL.String()+"/ticket_forms.json", nil)
 	if err != nil {
 		return GetTicketFormsResponse{}, err
 	}
 
-	req.Header.Set("User-Agent", s.UserAgent)
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
+	req.Header.Set("User-Agent", z.UserAgent)
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
 		return GetTicketFormsResponse{}, err

@@ -1,9 +1,8 @@
-package core
+package zendesk
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -67,20 +66,20 @@ type Trigger struct {
 // GetTriggersResponse is response structure of triggers list
 type GetTriggersResponse struct {
 	Triggers []Trigger `json:"triggers"`
-	Page     common.Page
+	Page     Page
 }
 
 // GetTriggers fetch trigger list
-func (s *Service) GetTriggers() (GetTriggersResponse, error) {
-	req, err := http.NewRequest("GET", s.BaseURL.String()+"/triggers.json", nil)
+func (z *Client) GetTriggers() (GetTriggersResponse, error) {
+	req, err := http.NewRequest("GET", z.BaseURL.String()+"/triggers.json", nil)
 	if err != nil {
 		return GetTriggersResponse{}, err
 	}
 
-	req.Header.Set("User-Agent", s.UserAgent)
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
+	req.Header.Set("User-Agent", z.UserAgent)
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
 		return GetTriggersResponse{}, err
