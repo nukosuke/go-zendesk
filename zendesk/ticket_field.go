@@ -3,11 +3,10 @@ package zendesk
 import (
 	"encoding/json"
 	"io/ioutil"
-	"net/http"
-	"strings"
 	"time"
 )
 
+// TicketFieldSystemFieldOption is struct for value of `system_field_options`
 type TicketFieldSystemFieldOption struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
@@ -17,6 +16,7 @@ type TicketFieldSystemFieldOption struct {
 	Value    string `json:"value"`
 }
 
+// TicketFieldCustomFieldOption is struct for value of `custom_field_options`
 type TicketFieldCustomFieldOption struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
@@ -26,6 +26,7 @@ type TicketFieldCustomFieldOption struct {
 	Value    string `json:"value"`
 }
 
+// TicketField is struct for ticket_field payload
 type TicketField struct {
 	ID                  int64                          `json:"id,omitempty"`
 	URL                 string                         `json:"url,omitempty"`
@@ -59,13 +60,10 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 		Page         Page
 	}
 
-	req, err := http.NewRequest("GET", z.BaseURL.String()+"/ticket_fields.json", nil)
+	req, err := z.NewGetRequest("/ticket_fields.json")
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
-
-	req.Header.Set("User-Agent", z.UserAgent)
-	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
 	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
@@ -93,19 +91,10 @@ func (z Client) PostTicketField(ticketField TicketField) (TicketField, error) {
 	}
 
 	payload := Payload{TicketField: ticketField}
-	jsonStr, err := json.Marshal(payload)
+	req, err := z.NewPostRequest("/ticket_fields.json", payload)
 	if err != nil {
 		return TicketField{}, err
 	}
-
-	req, err := http.NewRequest("POST", z.BaseURL.String()+"/ticket_fields.json", strings.NewReader(string(jsonStr)))
-	if err != nil {
-		return TicketField{}, err
-	}
-
-	req.Header.Set("User-Agent", z.UserAgent)
-	req.Header.Set("Content-Type", "application/json")
-	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
 	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
