@@ -1,15 +1,17 @@
 package zendesk
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
 	"regexp"
+	"strings"
 )
 
 const (
 	baseURLFormat       = "https://%s.zendesk.com/api/v2"
-	userAgent           = "zenform/go-zendesk"
+	userAgent           = "nukosuke/go-zendesk"
 	headerRateLimit     = "X-RateLimit-Limit"
 	headerRateRemaining = "X-RateLimit-Remaining"
 )
@@ -55,4 +57,30 @@ func (z *Client) SetSubdomain(subdomain string) error {
 // to request header when call API
 func (c *Client) SetCredential(cred Credential) {
 	c.Credential = cred
+}
+
+func (z Client) NewGetRequest(path string) (*http.Request, error) {
+	req, err := http.NewRequest("GET", z.BaseURL.String()+path, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
+	req.Header.Set("User-Agent", z.UserAgent)
+	return req, nil
+}
+
+func (z Client) NewPostRequest(path string, payload interface{}) (*http.Request, error) {
+	bytes, err := json.Marshal(payload)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", z.BaseURL.String()+path, strings.NewReader(string(bytes)))
+	if err != nil {
+		return nil, err
+	}
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
+	req.Header.Set("User-Agent", z.UserAgent)
+	req.Header.Set("Content-Type", "application/json")
+	return req, nil
 }
