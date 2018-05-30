@@ -1,4 +1,4 @@
-package common
+package zendesk
 
 // Page is base struct for resource pagination
 type Page struct {

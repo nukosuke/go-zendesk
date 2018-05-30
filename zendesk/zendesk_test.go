@@ -22,4 +22,3 @@ func TestSetSubdomainFail(t *testing.T) {
 		t.Fatal("SetSubdomain should fail")
 	}
 }
-

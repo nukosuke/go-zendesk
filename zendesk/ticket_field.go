@@ -1,8 +1,7 @@
-package core
+package zendesk
 
 import (
 	"encoding/json"
-	"github.com/nukosuke/go-zendesk/common"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -54,41 +53,41 @@ type TicketField struct {
 	AgentDescription    string                         `json:"agent_description,omitempty"`
 }
 
-func (s Service) GetTicketFields() ([]TicketField, common.Page, error) {
+func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	type Payload struct {
 		TicketFields []TicketField `json:"ticket_fields"`
-		Page         common.Page
+		Page         Page
 	}
 
-	req, err := http.NewRequest("GET", s.BaseURL.String()+"/ticket_fields.json", nil)
+	req, err := http.NewRequest("GET", z.BaseURL.String()+"/ticket_fields.json", nil)
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
-	req.Header.Set("User-Agent", s.UserAgent)
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
+	req.Header.Set("User-Agent", z.UserAgent)
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	var payload Payload
 	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		return []TicketField{}, common.Page{}, err
+		return []TicketField{}, Page{}, err
 	}
 
 	return payload.TicketFields, payload.Page, nil
 }
 
-func (s Service) PostTicketField(ticketField TicketField) (TicketField, error) {
+func (z Client) PostTicketField(ticketField TicketField) (TicketField, error) {
 	type Payload struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
@@ -99,16 +98,16 @@ func (s Service) PostTicketField(ticketField TicketField) (TicketField, error) {
 		return TicketField{}, err
 	}
 
-	req, err := http.NewRequest("POST", s.BaseURL.String()+"/ticket_fields.json", strings.NewReader(string(jsonStr)))
+	req, err := http.NewRequest("POST", z.BaseURL.String()+"/ticket_fields.json", strings.NewReader(string(jsonStr)))
 	if err != nil {
 		return TicketField{}, err
 	}
 
-	req.Header.Set("User-Agent", s.UserAgent)
+	req.Header.Set("User-Agent", z.UserAgent)
 	req.Header.Set("Content-Type", "application/json")
-	req.SetBasicAuth(s.Credential.Email(), s.Credential.Secret())
+	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
-	resp, err := s.HTTPClient.Do(req)
+	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
 		return TicketField{}, err
