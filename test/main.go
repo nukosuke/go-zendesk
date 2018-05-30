@@ -37,7 +37,7 @@ func main() {
 	}
 	fmt.Println(ticketFields)
 
-	ticketForms, err := client.GetTicketForms()
+	ticketForms, _, err := client.GetTicketForms()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -45,7 +45,7 @@ func main() {
 
 	fmt.Println("===== page has next")
 	fmt.Println(page.HasNext())
-	fmt.Println(ticketForms.TicketForms)
+	fmt.Println(ticketForms)
 
 	client.PostTicketField(zendesk.TicketField{Type: "text", Title: "Age"})
 }
