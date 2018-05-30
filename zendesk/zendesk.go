@@ -55,10 +55,11 @@ func (z *Client) SetSubdomain(subdomain string) error {
 
 // SetCredential saves credential in client. It will be set
 // to request header when call API
-func (c *Client) SetCredential(cred Credential) {
-	c.Credential = cred
+func (z *Client) SetCredential(cred Credential) {
+	z.Credential = cred
 }
 
+// NewGetRequest create GET *http.Request with headers which are required for authentication.
 func (z Client) NewGetRequest(path string) (*http.Request, error) {
 	req, err := http.NewRequest("GET", z.BaseURL.String()+path, nil)
 	if err != nil {
@@ -69,6 +70,7 @@ func (z Client) NewGetRequest(path string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewPostRequest create POST *http.Request with headers which are required for authentication.
 func (z Client) NewPostRequest(path string, payload interface{}) (*http.Request, error) {
 	bytes, err := json.Marshal(payload)
 	if err != nil {
