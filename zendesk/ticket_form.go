@@ -3,7 +3,6 @@ package zendesk
 import (
 	"encoding/json"
 	"io/ioutil"
-	"net/http"
 )
 
 // TicketForm is JSON payload struct
@@ -19,31 +18,28 @@ type GetTicketFormsResponse struct {
 }
 
 // GetTicketForms fetches ticket forms
-func (z Client) GetTicketForms() (GetTicketFormsResponse, error) {
-	req, err := http.NewRequest("GET", z.BaseURL.String()+"/ticket_forms.json", nil)
+func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
+	req, err := z.NewGetRequest("/ticket_forms.json")
 	if err != nil {
-		return GetTicketFormsResponse{}, err
+		return []TicketForm{}, Page{}, err
 	}
-
-	req.Header.Set("User-Agent", z.UserAgent)
-	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
 	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
-		return GetTicketFormsResponse{}, err
+		return []TicketForm{}, Page{}, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return GetTicketFormsResponse{}, err
+		return []TicketForm{}, Page{}, err
 	}
 
-	var ticketForms GetTicketFormsResponse
-	err = json.Unmarshal(body, &ticketForms)
+	var payload GetTicketFormsResponse
+	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		return GetTicketFormsResponse{}, err
+		return []TicketForm{}, Page{}, err
 	}
 
-	return ticketForms, nil
+	return payload.TicketForms, payload.Page, nil
 }
