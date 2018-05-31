@@ -23,12 +23,12 @@ func main() {
 	}
 
 	client.SetCredential(cred)
-	triggers, err := client.GetTriggers()
+	triggers, _, err := client.GetTriggers()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Println(triggers.Triggers)
+	fmt.Println(triggers)
 
 	ticketFields, page, err := client.GetTicketFields()
 	if err != nil {
@@ -47,5 +47,5 @@ func main() {
 	fmt.Println(page.HasNext())
 	fmt.Println(ticketForms)
 
-	client.PostTicketField(zendesk.TicketField{Type: "text", Title: "Age"})
+	client.CreateTicketField(zendesk.TicketField{Type: "text", Title: "Age"})
 }
