@@ -9,7 +9,7 @@ import (
 
 // TicketForm is JSON payload struct
 type TicketForm struct {
-	ID   int64  `json:"id"`
+	ID   int64  `json:"id,omitempty"`
 	Name string `json:"name"`
 }
 
