@@ -2,7 +2,9 @@ package zendesk
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
+	"net/http"
 	"time"
 )
 
@@ -72,6 +74,9 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return TicketField{}, errors.New(http.StatusText(resp.StatusCode))
+	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -104,6 +109,9 @@ func (z Client) PostTicketField(ticketField TicketField) (TicketField, error) {
 	defer resp.Body.Close()
 	if err != nil {
 		return TicketField{}, err
+	}
+	if resp.StatusCode != http.StatusCreated {
+		return TicketField{}, errors.New(http.StatusText(resp.StatusCode))
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
