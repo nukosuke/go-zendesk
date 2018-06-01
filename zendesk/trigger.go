@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"time"
 )
 
@@ -70,31 +69,28 @@ type GetTriggersResponse struct {
 }
 
 // GetTriggers fetch trigger list
-func (z *Client) GetTriggers() (GetTriggersResponse, error) {
-	req, err := http.NewRequest("GET", z.BaseURL.String()+"/triggers.json", nil)
+func (z *Client) GetTriggers() ([]Trigger, Page, error) {
+	req, err := z.NewGetRequest("/triggers.json")
 	if err != nil {
-		return GetTriggersResponse{}, err
+		return []Trigger{}, Page{}, err
 	}
-
-	req.Header.Set("User-Agent", z.UserAgent)
-	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
 
 	resp, err := z.HTTPClient.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
-		return GetTriggersResponse{}, err
+		return []Trigger{}, Page{}, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return GetTriggersResponse{}, err
+		return []Trigger{}, Page{}, err
 	}
 
-	var triggers GetTriggersResponse
-	err = json.Unmarshal(body, &triggers)
+	var payload GetTriggersResponse
+	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		return GetTriggersResponse{}, err
+		return []Trigger{}, Page{}, err
 	}
 
-	return triggers, nil
+	return payload.Triggers, payload.Page, nil
 }
