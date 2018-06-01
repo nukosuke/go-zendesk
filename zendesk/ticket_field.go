@@ -75,7 +75,7 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 		return []TicketField{}, Page{}, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		return TicketField{}, errors.New(http.StatusText(resp.StatusCode))
+		return []TicketField{}, Page{}, errors.New(http.StatusText(resp.StatusCode))
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
