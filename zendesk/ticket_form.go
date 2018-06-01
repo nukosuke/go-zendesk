@@ -73,11 +73,11 @@ func (z Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
 		return TicketForm{}, err
 	}
 
-	var resultTicketForm TicketForm
-	err = json.Unmarshal(body, &resultTicketForm)
+	var result Payload
+	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return TicketForm{}, err
 	}
 
-	return resultTicketForm, nil
+	return result.TicketForm, nil
 }

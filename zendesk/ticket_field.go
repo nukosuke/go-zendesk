@@ -119,11 +119,11 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 		return TicketField{}, err
 	}
 
-	var resultTicketField TicketField
-	err = json.Unmarshal(body, &resultTicketField)
+	var result Payload
+	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return TicketField{}, err
 	}
 
-	return resultTicketField, nil
+	return result.TicketField, nil
 }

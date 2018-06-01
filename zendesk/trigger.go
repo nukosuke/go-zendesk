@@ -124,11 +124,11 @@ func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 		return Trigger{}, err
 	}
 
-	var resultTrigger Trigger
-	err = json.Unmarshal(body, &resultTrigger)
+	var result Payload
+	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return Trigger{}, err
 	}
 
-	return resultTrigger, nil
+	return result.Trigger, nil
 }
