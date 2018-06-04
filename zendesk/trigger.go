@@ -50,18 +50,18 @@ func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
 // Trigger is zendesk trigger JSON payload format
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#json-format
 type Trigger struct {
-	ID         int64  `json:"id"`
+	ID         int64  `json:"id,omitempty"`
 	Title      string `json:"title"`
 	Active     bool   `json:"active"`
-	Position   int64  `json:"position"`
+	Position   int64  `json:"position,omitempty"`
 	Conditions struct {
 		All []TriggerCondition `json:"all"`
 		Any []TriggerCondition `json:"any"`
 	} `json:"conditions"`
 	Actions     []TriggerAction `json:"actions"`
-	Description string          `json:"description"`
-	CreatedAt   time.Time       `json:"created_at"`
-	UpdatedAt   time.Time       `json:"updated_at"`
+	Description string          `json:"description,omitempty"`
+	CreatedAt   time.Time       `json:"created_at,omitempty"`
+	UpdatedAt   time.Time       `json:"updated_at,omitempty"`
 }
 
 // GetTriggersResponse is response structure of triggers list
