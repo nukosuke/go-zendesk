@@ -20,8 +20,8 @@ type TriggerCondition struct {
 // TriggerAction is zendesk trigger action
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#actions
 type TriggerAction struct {
-	Field string             `json:"field"`
-	Value TriggerActionValue `json:"value"`
+	Field string      `json:"field"`
+	Value interface{} `json:"value"`
 }
 
 // TriggerActionValue is value holder of TriggerAction#Value.
