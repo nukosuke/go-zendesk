@@ -20,11 +20,11 @@ type TicketFieldSystemFieldOption struct {
 
 // TicketFieldCustomFieldOption is struct for value of `custom_field_options`
 type TicketFieldCustomFieldOption struct {
-	ID       int64  `json:"id"`
+	ID       int64  `json:"id,omitempty"`
 	Name     string `json:"name"`
-	Position int64  `json:"position"`
-	RawName  string `json:"raw_name"`
-	URL      string `json:"url"`
+	Position int64  `json:"position,omitempty"`
+	RawName  string `json:"raw_name,omitempty"`
+	URL      string `json:"url,omitempty"`
 	Value    string `json:"value"`
 }
 

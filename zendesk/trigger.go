@@ -60,8 +60,8 @@ type Trigger struct {
 	} `json:"conditions"`
 	Actions     []TriggerAction `json:"actions"`
 	Description string          `json:"description,omitempty"`
-	CreatedAt   time.Time       `json:"created_at,omitempty"`
-	UpdatedAt   time.Time       `json:"updated_at,omitempty"`
+	CreatedAt   *time.Time      `json:"created_at,omitempty"`
+	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
 // GetTriggersResponse is response structure of triggers list
