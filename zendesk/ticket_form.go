@@ -9,8 +9,18 @@ import (
 
 // TicketForm is JSON payload struct
 type TicketForm struct {
-	ID   int64  `json:"id,omitempty"`
-	Name string `json:"name"`
+	ID                 int64   `json:"id,omitempty"`
+	Name               string  `json:"name"`
+	RawName            string  `json:"raw_name,omitempty"`
+	DisplayName        string  `json:"display_name,omitempty"`
+	RawDisplayName     string  `json:"raw_display_name,omitempty"`
+	Position           int64   `json:"position"`
+	Active             bool    `json:"active,omitempty"`
+	EndUserVisible     bool    `json:"end_user_visible,omitempty"`
+	Default            bool    `json:"default,omitempty"`
+	TicketFieldIDs     []int64 `json:"ticket_field_ids,omitempty"`
+	InAllBrands        bool    `json:"in_all_brands,omitempty"`
+	RestrictedBrandIDs []int64 `json:"restricted_brand_ids,omitempty"`
 }
 
 // GetTicketFormsResponse is response structure
