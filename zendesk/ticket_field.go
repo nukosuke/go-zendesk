@@ -70,10 +70,10 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 	}
 
 	resp, err := z.HTTPClient.Do(req)
-	defer resp.Body.Close()
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		return []TicketField{}, Page{}, errors.New(http.StatusText(resp.StatusCode))
 	}
@@ -106,10 +106,10 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 	}
 
 	resp, err := z.HTTPClient.Do(req)
-	defer resp.Body.Close()
 	if err != nil {
 		return TicketField{}, err
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
 		return TicketField{}, errors.New(http.StatusText(resp.StatusCode))
 	}

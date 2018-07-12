@@ -37,10 +37,10 @@ func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 	}
 
 	resp, err := z.HTTPClient.Do(req)
-	defer resp.Body.Close()
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

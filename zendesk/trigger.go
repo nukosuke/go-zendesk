@@ -78,10 +78,10 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 	}
 
 	resp, err := z.HTTPClient.Do(req)
-	defer resp.Body.Close()
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
