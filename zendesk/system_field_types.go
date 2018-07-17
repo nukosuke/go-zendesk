@@ -71,6 +71,7 @@ var SystemActionFieldTypes = FieldTypes{
 	"comment_value",
 	"comment_value_html",
 	"comment_mode_is_public",
+	"ticket_form_id",
 }
 
 // Include checks if FieldTypes include target type string
