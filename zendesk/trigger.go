@@ -52,7 +52,7 @@ func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
 type Trigger struct {
 	ID         int64  `json:"id,omitempty"`
 	Title      string `json:"title"`
-	Active     bool   `json:"active"`
+	Active     bool   `json:"active,omitempty"`
 	Position   int64  `json:"position,omitempty"`
 	Conditions struct {
 		All []TriggerCondition `json:"all"`
