@@ -3,7 +3,6 @@ package zendesk
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -22,29 +21,6 @@ type TriggerCondition struct {
 type TriggerAction struct {
 	Field string      `json:"field"`
 	Value interface{} `json:"value"`
-}
-
-// TriggerActionValue is value holder of TriggerAction#Value.
-// This is because type difference of value in JSON response.
-type TriggerActionValue struct {
-	AsString      string
-	AsStringArray []string
-}
-
-// UnmarshalJSON deserialize JSON body to TriggerActionValue
-// according its value type
-func (tav *TriggerActionValue) UnmarshalJSON(data []byte) error {
-	switch string(data)[0] {
-	case '"':
-		if err := json.Unmarshal(data, &tav.AsString); err != nil {
-			return fmt.Errorf("failed to unmarshal trigger.action.value as string")
-		}
-	case '[':
-		if err := json.Unmarshal(data, &tav.AsStringArray); err != nil {
-			return fmt.Errorf("failed to unmarshal trigger.action.value as []string")
-		}
-	}
-	return nil
 }
 
 // Trigger is zendesk trigger JSON payload format
