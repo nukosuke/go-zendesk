@@ -36,7 +36,7 @@ func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 		return []TicketForm{}, Page{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
@@ -69,7 +69,7 @@ func (z Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
 		return TicketForm{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return TicketForm{}, err
 	}

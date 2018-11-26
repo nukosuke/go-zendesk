@@ -69,7 +69,7 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 		return []TicketField{}, Page{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
@@ -105,7 +105,7 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 		return TicketField{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return TicketField{}, err
 	}

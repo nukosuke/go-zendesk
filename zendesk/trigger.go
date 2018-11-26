@@ -53,7 +53,7 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 		return []Trigger{}, Page{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
@@ -86,7 +86,7 @@ func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 		return Trigger{}, err
 	}
 
-	resp, err := z.HTTPClient.Do(req)
+	resp, err := z.httpClient.Do(req)
 	if err != nil {
 		return Trigger{}, err
 	}
