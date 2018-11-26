@@ -1,0 +1,19 @@
+build: off
+
+clone_folder: c:\gopath\src\github.com\nukosuke\go-zendesk
+
+environment:
+  GOPATH: c:\gopath
+
+stack: go 1.11
+
+install:
+  - go get -u github.com/golang/dep/...
+  - set PATH=%PATH%;%GOPATH%\bin
+  - dep ensure
+
+before_test:
+  - go vet ./...
+
+test_script:
+  - go test ./...
