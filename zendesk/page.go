@@ -9,7 +9,7 @@ type Page struct {
 
 // HasPrev checks if the Page has previous page
 func (p Page) HasPrev() bool {
-	return (p.NextPage != nil)
+	return (p.PreviousPage != nil)
 }
 
 // HasNext checks if the Page has next page
