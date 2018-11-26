@@ -63,6 +63,18 @@ func (z *Client) SetSubdomain(subdomain string) error {
 	return nil
 }
 
+// SetEndpointURL replace full URL of endpoint without subdomain validation.
+// This is mainly used for testing to point to mock API server.
+func (z *Client) SetEndpointURL(newURL string) error {
+	baseURL, err := url.Parse(newURL)
+	if err != nil {
+		return err
+	}
+
+	z.baseURL = baseURL
+	return nil
+}
+
 // SetCredential saves credential in client. It will be set
 // to request header when call API
 func (z *Client) SetCredential(cred Credential) {
