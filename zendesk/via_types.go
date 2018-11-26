@@ -55,3 +55,37 @@ const (
 	// ViaAnyChannel : Channel framework
 	ViaAnyChannel = 55
 )
+
+var viaTypeText = map[int]string{
+	ViaWebForm:                "web_form",
+	ViaMail:                   "mail",
+	ViaChat:                   "chat",
+	ViaTwitter:                "twitter",
+	ViaTwitterDM:              "twitter_dm",
+	ViaTwitterFavorite:        "twitter_favorite",
+	ViaVoicemail:              "voicemail",
+	ViaPhoneCallInbound:       "phone_call_inbound",
+	ViaPhoneCallOutbound:      "phone_call_outbound",
+	ViaAPIVoicemail:           "api_voicemail",
+	ViaAPIPhoneCallInbound:    "api_phone_call_inbound",
+	ViaAPIPhoneCallOutbound:   "api_phone_call_outbound",
+	ViaSMS:                    "sms",
+	ViaGetSatisfaction:        "get_satisfaction",
+	ViaWebWidget:              "web_widget",
+	ViaMobileSDK:              "mobile_sdk",
+	ViaMobile:                 "mobile",
+	ViaHelpCenter:             "helpcenter",
+	ViaWebService:             "web_service",
+	ViaRule:                   "rule",
+	ViaClosedTicket:           "closed_ticket",
+	ViaTicketSharing:          "ticket_sharing",
+	ViaFacebookPost:           "facebook_post",
+	ViaFacebookMessage:        "facebook_message",
+	ViaSatisfactionPrediction: "satisfaction_prediction",
+	ViaAnyChannel:             "any_channel",
+}
+
+// ViaTypeText takes via_id and returns via_type
+func ViaTypeText(viaID int) string {
+	return viaTypeText[viaID]
+}
