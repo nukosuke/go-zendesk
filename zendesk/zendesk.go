@@ -11,19 +11,23 @@ import (
 
 const (
 	baseURLFormat       = "https://%s.zendesk.com/api/v2"
-	userAgent           = "nukosuke/go-zendesk"
 	headerRateLimit     = "X-RateLimit-Limit"
 	headerRateRemaining = "X-RateLimit-Remaining"
 )
+
+var defaultHeaders = map[string]string{
+	"User-Agent":   "nukosuke/go-zendesk",
+	"Content-Type": "application/json",
+}
 
 var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
 
 // Client of Zendesk API
 type Client struct {
 	BaseURL    *url.URL
-	UserAgent  string
 	HTTPClient *http.Client
 	Credential Credential
+	headers    map[string]string
 }
 
 // NewClient creates new Zendesk API client
@@ -33,7 +37,13 @@ func NewClient(httpClient *http.Client) (*Client, error) {
 	}
 
 	client := &Client{HTTPClient: httpClient}
+	client.headers = defaultHeaders
 	return client, nil
+}
+
+// SetHeader saves HTTP header in client. It will be included all API request
+func (z *Client) SetHeader(key string, value string) {
+	z.headers[key] = value
 }
 
 // SetSubdomain saves subdomain in client. It will be used
@@ -65,8 +75,8 @@ func (z Client) NewGetRequest(path string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+	z.includeHeaders(req)
 	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
-	req.Header.Set("User-Agent", z.UserAgent)
 	return req, nil
 }
 
@@ -81,8 +91,14 @@ func (z Client) NewPostRequest(path string, payload interface{}) (*http.Request,
 	if err != nil {
 		return nil, err
 	}
+	z.includeHeaders(req)
 	req.SetBasicAuth(z.Credential.Email(), z.Credential.Secret())
-	req.Header.Set("User-Agent", z.UserAgent)
-	req.Header.Set("Content-Type", "application/json")
 	return req, nil
+}
+
+// includeHeaders set HTTP headers from client.headers to *http.Request
+func (z *Client) includeHeaders(req *http.Request) {
+	for key, value := range z.headers {
+		req.Header.Set(key, value)
+	}
 }
