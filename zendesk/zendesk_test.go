@@ -2,8 +2,24 @@ package zendesk
 
 import (
 	"net/http"
+	"strings"
 	"testing"
 )
+
+func TestNewClient(t *testing.T) {
+	if _, err := NewClient(nil); err != nil {
+		t.Fatal("Failed to create Client")
+	}
+}
+
+func TestSetHeader(t *testing.T) {
+	client, _ := NewClient(nil)
+	client.SetHeader("Header1", "hogehoge")
+
+	if client.headers["Header1"] != "hogehoge" {
+		t.Fatal("Header1 is wrong")
+	}
+}
 
 func TestSetSubdomainSuccess(t *testing.T) {
 	validSubdomain := "subdomain"
@@ -40,5 +56,68 @@ func TestSetCredential(t *testing.T) {
 	}
 	if secret := client.credential.Secret(); secret != "password" {
 		t.Fatal("client.credential.Secret() returns wrong secret: " + secret)
+	}
+}
+
+func TestNewGetRequest(t *testing.T) {
+	client, _ := NewClient(nil)
+	client.SetEndpointURL("http://localhost")
+	client.SetCredential(NewAPITokenCredential("email", "token"))
+
+	req, err := client.NewGetRequest("/")
+	if err != nil {
+		t.Fatalf("Failed to create http.Request: %s", err)
+	}
+
+	if req.Method != "GET" {
+		t.Fatal("HTTP method not match")
+	}
+}
+
+func TestNewPostRequest(t *testing.T) {
+	client, _ := NewClient(nil)
+	client.SetEndpointURL("http://localhost")
+	client.SetCredential(NewAPITokenCredential("email", "token"))
+
+	req, err := client.NewPostRequest("/", map[string]string{})
+	if err != nil {
+		t.Fatalf("Failed to create http.Request: %s", err)
+	}
+
+	if req.Method != "POST" {
+		t.Fatal("HTTP method not match")
+	}
+}
+
+func TestIncludeHeaders(t *testing.T) {
+	client, _ := NewClient(nil)
+	client.headers = map[string]string{
+		"Header1":      "1",
+		"Header2":      "2",
+		"Content-Type": "application/json",
+	}
+
+	req, _ := http.NewRequest("POST", "localhost", strings.NewReader(""))
+	client.includeHeaders(req)
+
+	if len(req.Header) != 3 {
+		t.Fatal("req.Header length does not match")
+	}
+
+	for k, v := range req.Header {
+		switch k {
+		case "Header1":
+			if v[0] != "1" {
+				t.Fatalf(`%s header expect "1", but got "%s"`, k, v[0])
+			}
+		case "Header2":
+			if v[0] != "2" {
+				t.Fatalf(`%s header expect "2", but got "%s"`, k, v[0])
+			}
+		case "Content-Type":
+			if v[0] != "application/json" {
+				t.Fatalf(`%s header expect "2", but got "%s"`, k, v[0])
+			}
+		}
 	}
 }
