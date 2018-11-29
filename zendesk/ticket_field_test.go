@@ -1,9 +1,12 @@
 package zendesk
 
-import "testing"
+import (
+	"net/http"
+	"testing"
+)
 
 func TestGetTicketFields(t *testing.T) {
-	mockAPI := newMockAPI("ticket_fields.json")
+	mockAPI := newMockAPI(http.MethodGet, "ticket_fields.json")
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
