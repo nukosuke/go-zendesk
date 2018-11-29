@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 )
+
+////////// Helper //////////
 
 func fixture(filename string) string {
 	dir, err := filepath.Abs("../test/fixtures")
@@ -26,6 +29,21 @@ func readFixture(filename string) []byte {
 		os.Exit(1)
 	}
 	return bytes
+}
+
+func newMockAPI(filename string) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(readFixture(filename))
+	}))
+}
+
+func newTestClient(mockAPI *httptest.Server) *Client {
+	c := &Client{
+		httpClient: http.DefaultClient,
+		credential: NewAPITokenCredential("", ""),
+	}
+	c.SetEndpointURL(mockAPI.URL)
+	return c
 }
 
 ////////// Test //////////

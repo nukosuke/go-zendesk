@@ -1,27 +1,13 @@
 package zendesk
 
 import (
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 )
 
-// TODO: make API mocking helper
 func TestGetTriggers(t *testing.T) {
-	triggersJSON, err := ioutil.ReadFile("../test/fixtures/triggers.json")
-	if err != nil {
-		fmt.Printf("Failed to read fixture: %s", err)
-	}
-	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write(triggersJSON)
-	}))
+	mockAPI := newMockAPI("triggers.json")
+	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
-
-	client, _ := NewClient(nil)
-	client.SetCredential(NewAPITokenCredential("", ""))
-	client.SetEndpointURL(mockAPI.URL)
 
 	triggers, _, err := client.GetTriggers()
 	if err != nil {
