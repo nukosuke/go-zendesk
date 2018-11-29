@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -16,6 +17,15 @@ func fixture(filename string) string {
 		os.Exit(1)
 	}
 	return filepath.Join(dir, filename)
+}
+
+func readFixture(filename string) []byte {
+	bytes, err := ioutil.ReadFile(fixture(filename))
+	if err != nil {
+		fmt.Printf("Failed to read fixture. Check the path: %s", err)
+		os.Exit(1)
+	}
+	return bytes
 }
 
 ////////// Test //////////
