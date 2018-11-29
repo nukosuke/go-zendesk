@@ -1,10 +1,52 @@
 package zendesk
 
 import (
+	"fmt"
+	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
+
+////////// Helper //////////
+
+func fixture(filename string) string {
+	dir, err := filepath.Abs("../fixture")
+	if err != nil {
+		fmt.Printf("Failed to resolve fixture directory. Check the path: %s", err)
+		os.Exit(1)
+	}
+	return filepath.Join(dir, filename)
+}
+
+func readFixture(filename string) []byte {
+	bytes, err := ioutil.ReadFile(fixture(filename))
+	if err != nil {
+		fmt.Printf("Failed to read fixture. Check the path: %s", err)
+		os.Exit(1)
+	}
+	return bytes
+}
+
+func newMockAPI(method string, filename string) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(readFixture(filepath.Join(method, filename)))
+	}))
+}
+
+func newTestClient(mockAPI *httptest.Server) *Client {
+	c := &Client{
+		httpClient: http.DefaultClient,
+		credential: NewAPITokenCredential("", ""),
+	}
+	c.SetEndpointURL(mockAPI.URL)
+	return c
+}
+
+////////// Test //////////
 
 func TestNewClient(t *testing.T) {
 	if _, err := NewClient(nil); err != nil {

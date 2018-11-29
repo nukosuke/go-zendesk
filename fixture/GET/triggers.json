@@ -1,0 +1,337 @@
+{
+    "triggers": [
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295714.json",
+            "id": 360056295714,
+            "title": "Notify requester of received request",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:14Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "requester_id",
+                        "[Request received]",
+                        "Your request ({{ticket.id}}) has been received and is being reviewed by our support staff.\n\nTo add additional comments, reply to this email."
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "update_type",
+                        "operator": "is",
+                        "value": "Create"
+                    },
+                    {
+                        "field": "status",
+                        "operator": "is_not",
+                        "value": "solved"
+                    },
+                    {
+                        "field": "ticket_is_public",
+                        "operator": "is",
+                        "value": "public"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 0,
+            "raw_title": "Notify requester of received request"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295734.json",
+            "id": 360056295734,
+            "title": "Notify requester of comment update",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "requester_id",
+                        "[{{ticket.account}}] Re: {{ticket.title}}",
+                        "Your request ({{ticket.id}}) has been updated. To add additional comments, reply to this email.\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "update_type",
+                        "operator": "is",
+                        "value": "Change"
+                    },
+                    {
+                        "field": "comment_is_public",
+                        "operator": "is",
+                        "value": "requester_can_see_comment"
+                    },
+                    {
+                        "field": "requester_id",
+                        "operator": "is_not",
+                        "value": "current_user"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 1,
+            "raw_title": "Notify requester of comment update"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295754.json",
+            "id": 360056295754,
+            "title": "Notify assignee of comment update",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "assignee_id",
+                        "[{{ticket.account}}] Re: {{ticket.title}}",
+                        "This ticket (#{{ticket.id}}) has been updated.\n\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "comment_is_public",
+                        "operator": "is",
+                        "value": "not_relevant"
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "is_not",
+                        "value": "current_user"
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "is_not",
+                        "value": "requester_id"
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "not_changed",
+                        "value": null
+                    },
+                    {
+                        "field": "status",
+                        "operator": "not_value_previous",
+                        "value": "solved"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 4,
+            "raw_title": "Notify assignee of comment update"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295774.json",
+            "id": 360056295774,
+            "title": "Notify assignee of assignment",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "assignee_id",
+                        "[{{ticket.account}}] Assignment: {{ticket.title}}",
+                        "You have been assigned to this ticket (#{{ticket.id}}).\n\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "assignee_id",
+                        "operator": "changed",
+                        "value": null
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "is_not",
+                        "value": "current_user"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 5,
+            "raw_title": "Notify assignee of assignment"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295794.json",
+            "id": 360056295794,
+            "title": "Notify assignee of reopened ticket",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "assignee_id",
+                        "[{{ticket.account}}] Re: {{ticket.title}}",
+                        "This ticket (#{{ticket.id}}) has been reopened.\n\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "assignee_id",
+                        "operator": "is_not",
+                        "value": "current_user"
+                    },
+                    {
+                        "field": "status",
+                        "operator": "value_previous",
+                        "value": "solved"
+                    },
+                    {
+                        "field": "status",
+                        "operator": "is_not",
+                        "value": "closed"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 6,
+            "raw_title": "Notify assignee of reopened ticket"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295814.json",
+            "id": 360056295814,
+            "title": "Notify group of assignment",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_group",
+                    "value": [
+                        "group_id",
+                        "[{{ticket.account}}] \"{{ticket.group.name}}\" assignment:  {{ticket.title}}",
+                        "This ticket (#{{ticket.id}}) has been assigned to group '{{ticket.group.name}}', of which you are a member.\n\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "group_id",
+                        "operator": "is_not",
+                        "value": ""
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "is",
+                        "value": ""
+                    }
+                ],
+                "any": [
+                    {
+                        "field": "group_id",
+                        "operator": "changed",
+                        "value": ""
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "changed",
+                        "value": ""
+                    }
+                ]
+            },
+            "description": null,
+            "position": 7,
+            "raw_title": "Notify group of assignment"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295834.json",
+            "id": 360056295834,
+            "title": "Notify all agents of received request",
+            "active": true,
+            "updated_at": "2018-11-23T16:05:14Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "notification_user",
+                    "value": [
+                        "all_agents",
+                        "[{{ticket.account}}] {{ticket.title}}",
+                        "A ticket (#{{ticket.id}}) by {{ticket.requester.name}} has been received. It is unassigned.\n\n{{ticket.comments_formatted}}"
+                    ]
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "update_type",
+                        "operator": "is",
+                        "value": "Create"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 8,
+            "raw_title": "Notify all agents of received request"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295854.json",
+            "id": 360056295854,
+            "title": "Auto-assign to first email responding agent",
+            "active": false,
+            "updated_at": "2018-11-23T16:05:13Z",
+            "created_at": "2018-11-23T16:05:12Z",
+            "actions": [
+                {
+                    "field": "assignee_id",
+                    "value": "current_user"
+                }
+            ],
+            "conditions": {
+                "all": [
+                    {
+                        "field": "update_type",
+                        "operator": "is",
+                        "value": "Change"
+                    },
+                    {
+                        "field": "current_via_id",
+                        "operator": "is",
+                        "value": "4"
+                    },
+                    {
+                        "field": "assignee_id",
+                        "operator": "is",
+                        "value": ""
+                    },
+                    {
+                        "field": "role",
+                        "operator": "is_not",
+                        "value": "end_user"
+                    }
+                ],
+                "any": []
+            },
+            "description": null,
+            "position": 9998,
+            "raw_title": "Auto-assign to first email responding agent"
+        }
+    ],
+    "next_page": null,
+    "previous_page": null,
+    "count": 8
+}
