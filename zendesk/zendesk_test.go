@@ -1,10 +1,24 @@
 package zendesk
 
 import (
+	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
+
+func fixture(filename string) string {
+	dir, err := filepath.Abs("../test/fixtures")
+	if err != nil {
+		fmt.Printf("Failed to resolve fixture directory. Check the path: %s", err)
+		os.Exit(1)
+	}
+	return filepath.Join(dir, filename)
+}
+
+////////// Test //////////
 
 func TestNewClient(t *testing.T) {
 	if _, err := NewClient(nil); err != nil {
