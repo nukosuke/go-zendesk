@@ -1,7 +1,7 @@
 {
     "ticket_fields": [
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737434.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737434.json",
             "id": 360011737434,
             "type": "subject",
             "title": "Subject",
@@ -25,7 +25,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737454.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737454.json",
             "id": 360011737454,
             "type": "description",
             "title": "Description",
@@ -49,7 +49,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737474.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737474.json",
             "id": 360011737474,
             "type": "status",
             "title": "Status",
@@ -88,7 +88,7 @@
             "sub_type_id": 0
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737494.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737494.json",
             "id": 360011737494,
             "type": "tickettype",
             "title": "Type",
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737514.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737514.json",
             "id": 360011737514,
             "type": "priority",
             "title": "Priority",
@@ -173,7 +173,7 @@
             "sub_type_id": 0
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737534.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737534.json",
             "id": 360011737534,
             "type": "group",
             "title": "Group",
@@ -197,7 +197,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011737554.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011737554.json",
             "id": 360011737554,
             "type": "assignee",
             "title": "Assignee",
@@ -221,7 +221,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011759674.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011759674.json",
             "id": 360011759674,
             "type": "tagger",
             "title": "Tagger Field",
@@ -261,7 +261,7 @@
             ]
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011748674.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011748674.json",
             "id": 360011748674,
             "type": "regexp",
             "title": "Regexp Field",
@@ -285,7 +285,7 @@
             "agent_description": ""
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011747974.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011747974.json",
             "id": 360011747974,
             "type": "decimal",
             "title": "Decimal Field",
@@ -309,7 +309,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011747994.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011747994.json",
             "id": 360011747994,
             "type": "text",
             "title": "Text Field",
@@ -333,7 +333,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011672493.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011672493.json",
             "id": 360011672493,
             "type": "textarea",
             "title": "Textarea Field",
@@ -357,7 +357,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011748014.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011748014.json",
             "id": 360011748014,
             "type": "integer",
             "title": "Integer Field",
@@ -381,7 +381,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011672513.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011672513.json",
             "id": 360011672513,
             "type": "date",
             "title": "Date Field",
@@ -405,7 +405,7 @@
             "agent_description": null
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/ticket_fields/360011672533.json",
+            "url": "https://example.zendesk.com/api/v2/ticket_fields/360011672533.json",
             "id": 360011672533,
             "type": "checkbox",
             "title": "Checkbox Field",

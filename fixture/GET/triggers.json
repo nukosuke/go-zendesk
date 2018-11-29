@@ -1,7 +1,7 @@
 {
     "triggers": [
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295714.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295714.json",
             "id": 360056295714,
             "title": "Notify requester of received request",
             "active": true,
@@ -42,7 +42,7 @@
             "raw_title": "Notify requester of received request"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295734.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295734.json",
             "id": 360056295734,
             "title": "Notify requester of comment update",
             "active": true,
@@ -83,7 +83,7 @@
             "raw_title": "Notify requester of comment update"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295754.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295754.json",
             "id": 360056295754,
             "title": "Notify assignee of comment update",
             "active": true,
@@ -134,7 +134,7 @@
             "raw_title": "Notify assignee of comment update"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295774.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295774.json",
             "id": 360056295774,
             "title": "Notify assignee of assignment",
             "active": true,
@@ -170,7 +170,7 @@
             "raw_title": "Notify assignee of assignment"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295794.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295794.json",
             "id": 360056295794,
             "title": "Notify assignee of reopened ticket",
             "active": true,
@@ -211,7 +211,7 @@
             "raw_title": "Notify assignee of reopened ticket"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295814.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295814.json",
             "id": 360056295814,
             "title": "Notify group of assignment",
             "active": true,
@@ -258,7 +258,7 @@
             "raw_title": "Notify group of assignment"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295834.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295834.json",
             "id": 360056295834,
             "title": "Notify all agents of received request",
             "active": true,
@@ -289,7 +289,7 @@
             "raw_title": "Notify all agents of received request"
         },
         {
-            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/triggers/360056295854.json",
+            "url": "https://example.zendesk.com/api/v2/triggers/360056295854.json",
             "id": 360056295854,
             "title": "Auto-assign to first email responding agent",
             "active": false,
