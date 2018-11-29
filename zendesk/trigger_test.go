@@ -1,11 +1,12 @@
 package zendesk
 
 import (
+	"net/http"
 	"testing"
 )
 
 func TestGetTriggers(t *testing.T) {
-	mockAPI := newMockAPI("triggers.json")
+	mockAPI := newMockAPI(http.MethodGet, "triggers.json")
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 

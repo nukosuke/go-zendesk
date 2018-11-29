@@ -14,7 +14,7 @@ import (
 ////////// Helper //////////
 
 func fixture(filename string) string {
-	dir, err := filepath.Abs("../test/fixtures")
+	dir, err := filepath.Abs("../fixture")
 	if err != nil {
 		fmt.Printf("Failed to resolve fixture directory. Check the path: %s", err)
 		os.Exit(1)
@@ -31,9 +31,9 @@ func readFixture(filename string) []byte {
 	return bytes
 }
 
-func newMockAPI(filename string) *httptest.Server {
+func newMockAPI(method string, filename string) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write(readFixture(filename))
+		w.Write(readFixture(filepath.Join(method, filename)))
 	}))
 }
 
