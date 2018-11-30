@@ -2,9 +2,6 @@ package zendesk
 
 import (
 	"encoding/json"
-	"errors"
-	"io/ioutil"
-	"net/http"
 )
 
 // TicketForm is JSON payload struct
@@ -45,35 +42,18 @@ func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 // CreateTicketForm creates new ticket form
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_forms#create-ticket-forms
 func (z Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
-	type Payload struct {
+	var data, result struct {
 		TicketForm TicketForm `json:"ticket_form"`
 	}
 
-	payload := Payload{TicketForm: ticketForm}
-	req, err := z.NewPostRequest("/ticket_forms.json", payload)
+	body, err := z.Post("/ticket_forms.json", data)
 	if err != nil {
 		return TicketForm{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
-	if err != nil {
-		return TicketForm{}, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusCreated {
-		return TicketForm{}, errors.New(http.StatusText(resp.StatusCode))
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return TicketForm{}, err
-	}
-
-	var result Payload
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return TicketForm{}, err
 	}
-
 	return result.TicketForm, nil
 }

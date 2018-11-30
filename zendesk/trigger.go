@@ -2,9 +2,6 @@ package zendesk
 
 import (
 	"encoding/json"
-	"errors"
-	"io/ioutil"
-	"net/http"
 	"time"
 )
 
@@ -62,35 +59,18 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 // CreateTrigger creates new trigger
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
 func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
-	type Payload struct {
+	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	payload := Payload{Trigger: trigger}
-	req, err := z.NewPostRequest("/triggers.json", payload)
+	body, err := z.Post("/triggers.json", data)
 	if err != nil {
 		return Trigger{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
-	if err != nil {
-		return Trigger{}, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusCreated {
-		return Trigger{}, errors.New(http.StatusText(resp.StatusCode))
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return Trigger{}, err
-	}
-
-	var result Payload
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return Trigger{}, err
 	}
-
 	return result.Trigger, nil
 }

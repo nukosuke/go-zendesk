@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -108,9 +109,9 @@ func (z Client) Get(path string) ([]byte, error) {
 	return body, nil
 }
 
-// NewPostRequest create POST *http.Request with headers which are required for authentication.
-func (z Client) NewPostRequest(path string, payload interface{}) (*http.Request, error) {
-	bytes, err := json.Marshal(payload)
+// Post send data to API and returns response body as []bytes
+func (z Client) Post(path string, data interface{}) ([]byte, error) {
+	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +122,22 @@ func (z Client) NewPostRequest(path string, payload interface{}) (*http.Request,
 	}
 	z.includeHeaders(req)
 	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
-	return req, nil
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusCreated {
+		return nil, errors.New(http.StatusText(resp.StatusCode))
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
 }
 
 // includeHeaders set HTTP headers from client.headers to *http.Request
