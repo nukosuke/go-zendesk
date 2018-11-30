@@ -59,37 +59,21 @@ type TicketField struct {
 // GetTicketFields fetches ticket field list
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
 func (z Client) GetTicketFields() ([]TicketField, Page, error) {
-	type Payload struct {
+	var data struct {
 		TicketFields []TicketField `json:"ticket_fields"`
 		Page         Page
 	}
 
-	req, err := z.NewGetRequest("/ticket_fields.json")
+	body, err := z.Get("/ticket_fields.json")
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
+	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return []TicketField{}, Page{}, errors.New(http.StatusText(resp.StatusCode))
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return []TicketField{}, Page{}, err
-	}
-
-	var payload Payload
-	err = json.Unmarshal(body, &payload)
-	if err != nil {
-		return []TicketField{}, Page{}, err
-	}
-
-	return payload.TicketFields, payload.Page, nil
+	return data.TicketFields, data.Page, nil
 }
 
 // CreateTicketField creates new ticket field

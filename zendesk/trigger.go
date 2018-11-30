@@ -40,37 +40,23 @@ type Trigger struct {
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
-// GetTriggersResponse is response structure of triggers list
-type GetTriggersResponse struct {
-	Triggers []Trigger `json:"triggers"`
-	Page     Page
-}
-
 // GetTriggers fetch trigger list
 func (z *Client) GetTriggers() ([]Trigger, Page, error) {
-	req, err := z.NewGetRequest("/triggers.json")
+	var data struct {
+		Triggers []Trigger `json:"triggers"`
+		Page     Page
+	}
+
+	body, err := z.Get("/triggers.json")
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
+	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return []Trigger{}, Page{}, err
-	}
-
-	var payload GetTriggersResponse
-	err = json.Unmarshal(body, &payload)
-	if err != nil {
-		return []Trigger{}, Page{}, err
-	}
-
-	return payload.Triggers, payload.Page, nil
+	return data.Triggers, data.Page, nil
 }
 
 // CreateTrigger creates new trigger

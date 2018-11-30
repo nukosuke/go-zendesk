@@ -23,37 +23,23 @@ type TicketForm struct {
 	RestrictedBrandIDs []int64 `json:"restricted_brand_ids,omitempty"`
 }
 
-// GetTicketFormsResponse is response structure
-type GetTicketFormsResponse struct {
-	TicketForms []TicketForm `json:"ticket_forms"`
-	Page        Page
-}
-
 // GetTicketForms fetches ticket forms
 func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
-	req, err := z.NewGetRequest("/ticket_forms.json")
+	var data struct {
+		TicketForms []TicketForm `json:"ticket_forms"`
+		Page        Page
+	}
+
+	body, err := z.Get("/ticket_forms.json")
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
+	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return []TicketForm{}, Page{}, err
-	}
-
-	var payload GetTicketFormsResponse
-	err = json.Unmarshal(body, &payload)
-	if err != nil {
-		return []TicketForm{}, Page{}, err
-	}
-
-	return payload.TicketForms, payload.Page, nil
+	return data.TicketForms, data.Page, nil
 }
 
 // CreateTicketForm creates new ticket form

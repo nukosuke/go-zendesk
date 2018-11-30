@@ -82,18 +82,6 @@ func (z *Client) SetCredential(cred Credential) {
 	z.credential = cred
 }
 
-// NewGetRequest create GET *http.Request with headers which are required for authentication.
-// DEPRECATED. Use Get() instead.
-func (z Client) NewGetRequest(path string) (*http.Request, error) {
-	req, err := http.NewRequest("GET", z.baseURL.String()+path, nil)
-	if err != nil {
-		return nil, err
-	}
-	z.includeHeaders(req)
-	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
-	return req, nil
-}
-
 // Get get JSON data from API and returns its body as []bytes
 func (z Client) Get(path string) ([]byte, error) {
 	req, err := http.NewRequest("GET", z.baseURL.String()+path, nil)

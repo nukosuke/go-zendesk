@@ -108,18 +108,18 @@ func TestSetCredential(t *testing.T) {
 	}
 }
 
-func TestNewGetRequest(t *testing.T) {
-	client, _ := NewClient(nil)
-	client.SetEndpointURL("http://localhost")
-	client.SetCredential(NewAPITokenCredential("email", "token"))
+func TestGet(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
 
-	req, err := client.NewGetRequest("/")
+	body, err := client.Get("/groups.json")
 	if err != nil {
-		t.Fatalf("Failed to create http.Request: %s", err)
+		t.Fatalf("Failed to send request: %s", err)
 	}
 
-	if req.Method != "GET" {
-		t.Fatal("HTTP method not match")
+	if len(body) == 0 {
+		t.Fatal("Response body is empty")
 	}
 }
 
