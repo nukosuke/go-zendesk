@@ -2,9 +2,6 @@ package zendesk
 
 import (
 	"encoding/json"
-	"errors"
-	"io/ioutil"
-	"net/http"
 	"time"
 )
 
@@ -40,71 +37,40 @@ type Trigger struct {
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
-// GetTriggersResponse is response structure of triggers list
-type GetTriggersResponse struct {
-	Triggers []Trigger `json:"triggers"`
-	Page     Page
-}
-
 // GetTriggers fetch trigger list
 func (z *Client) GetTriggers() ([]Trigger, Page, error) {
-	req, err := z.NewGetRequest("/triggers.json")
+	var data struct {
+		Triggers []Trigger `json:"triggers"`
+		Page     Page
+	}
+
+	body, err := z.Get("/triggers.json")
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
+	err = json.Unmarshal(body, &data)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return []Trigger{}, Page{}, err
-	}
-
-	var payload GetTriggersResponse
-	err = json.Unmarshal(body, &payload)
-	if err != nil {
-		return []Trigger{}, Page{}, err
-	}
-
-	return payload.Triggers, payload.Page, nil
+	return data.Triggers, data.Page, nil
 }
 
 // CreateTrigger creates new trigger
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
 func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
-	type Payload struct {
+	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	payload := Payload{Trigger: trigger}
-	req, err := z.NewPostRequest("/triggers.json", payload)
+	body, err := z.Post("/triggers.json", data)
 	if err != nil {
 		return Trigger{}, err
 	}
 
-	resp, err := z.httpClient.Do(req)
-	if err != nil {
-		return Trigger{}, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusCreated {
-		return Trigger{}, errors.New(http.StatusText(resp.StatusCode))
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return Trigger{}, err
-	}
-
-	var result Payload
 	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return Trigger{}, err
 	}
-
 	return result.Trigger, nil
 }
