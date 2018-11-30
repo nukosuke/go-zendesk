@@ -5,6 +5,14 @@ import (
 	"testing"
 )
 
+func TestUserRoleText(t *testing.T) {
+	for key := UserRoleEndUser; key <= UserRoleAdmin; key++ {
+		if text := UserRoleText(key); text == "" {
+			t.Fatalf("key=%d is undefined", key)
+		}
+	}
+}
+
 func TestGetUsers(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "users.json")
 	client := newTestClient(mockAPI)
