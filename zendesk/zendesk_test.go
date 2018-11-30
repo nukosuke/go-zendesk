@@ -37,6 +37,13 @@ func newMockAPI(method string, filename string) *httptest.Server {
 	}))
 }
 
+func newMockAPIWithStatus(method string, filename string, status int) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(status)
+		w.Write(readFixture(filepath.Join(method, filename)))
+	}))
+}
+
 func newTestClient(mockAPI *httptest.Server) *Client {
 	c := &Client{
 		httpClient: http.DefaultClient,

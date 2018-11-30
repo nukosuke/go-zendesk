@@ -3,6 +3,7 @@ package zendesk
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -82,6 +83,7 @@ func (z *Client) SetCredential(cred Credential) {
 }
 
 // NewGetRequest create GET *http.Request with headers which are required for authentication.
+// DEPRECATED. Use Get() instead.
 func (z Client) NewGetRequest(path string) (*http.Request, error) {
 	req, err := http.NewRequest("GET", z.baseURL.String()+path, nil)
 	if err != nil {
@@ -90,6 +92,32 @@ func (z Client) NewGetRequest(path string) (*http.Request, error) {
 	z.includeHeaders(req)
 	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
 	return req, nil
+}
+
+// Get get JSON data from API and returns its body as []bytes
+func (z Client) Get(path string) ([]byte, error) {
+	req, err := http.NewRequest("GET", z.baseURL.String()+path, nil)
+	if err != nil {
+		return nil, err
+	}
+	z.includeHeaders(req)
+	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	// TODO:
+	// http status check
+	// accept only 200 ok
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
 }
 
 // NewPostRequest create POST *http.Request with headers which are required for authentication.
