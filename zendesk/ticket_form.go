@@ -24,7 +24,7 @@ type TicketForm struct {
 func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 	var data struct {
 		TicketForms []TicketForm `json:"ticket_forms"`
-		Page        Page
+		Page
 	}
 
 	body, err := z.Get("/ticket_forms.json")

@@ -41,7 +41,7 @@ type Trigger struct {
 func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 	var data struct {
 		Triggers []Trigger `json:"triggers"`
-		Page     Page
+		Page
 	}
 
 	body, err := z.Get("/triggers.json")
