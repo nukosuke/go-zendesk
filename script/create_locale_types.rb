@@ -19,10 +19,6 @@ else
     abort "failed to fetch from locale API: #{res.body.inspect}"
 end
 
-# > fit string length to longest one for indentation
-# > + 2 is double quotes ("")
-# max_len = data['locales'].max { |locale| locale['locale'].length }['locale'].length + 2
-# ('"' + locale['locale'] + '"').rjust(locale['locale'].include?('-') ? max_len+1 : max_len)
 __END__
 package zendesk
 
