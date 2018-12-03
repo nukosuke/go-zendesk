@@ -1,0 +1,97 @@
+{
+    "items": [
+        {
+            "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774.json",
+            "id": 360000346774,
+            "name": "title",
+            "placeholder": "{{dc.title}}",
+            "default_locale_id": 1,
+            "outdated": false,
+            "created_at": "2018-12-03T14:09:14Z",
+            "updated_at": "2018-12-03T14:14:23Z",
+            "variants": [
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001100153.json",
+                    "id": 360001100153,
+                    "content": "ZendeskのためのTerraform provider",
+                    "locale_id": 67,
+                    "outdated": false,
+                    "active": true,
+                    "default": false,
+                    "created_at": "2018-12-03T14:13:56Z",
+                    "updated_at": "2018-12-03T14:13:56Z"
+                },
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001113534.json",
+                    "id": 360001113534,
+                    "content": "Zendesk的Terraform provider",
+                    "locale_id": 9,
+                    "outdated": false,
+                    "active": true,
+                    "default": false,
+                    "created_at": "2018-12-03T14:14:23Z",
+                    "updated_at": "2018-12-03T14:14:23Z"
+                },
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001113514.json",
+                    "id": 360001113514,
+                    "content": "Terraform provider for Zendesk",
+                    "locale_id": 1,
+                    "outdated": false,
+                    "active": true,
+                    "default": true,
+                    "created_at": "2018-12-03T14:09:14Z",
+                    "updated_at": "2018-12-03T14:09:14Z"
+                }
+            ]
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000354093.json",
+            "id": 360000354093,
+            "name": "description",
+            "placeholder": "{{dc.description}}",
+            "default_locale_id": 1,
+            "outdated": false,
+            "created_at": "2018-12-03T14:17:44Z",
+            "updated_at": "2018-12-03T14:19:26Z",
+            "variants": [
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000354093/variants/360001100193.json",
+                    "id": 360001100193,
+                    "content": "使用example，您可以使用Terraform设置Zendesk",
+                    "locale_id": 9,
+                    "outdated": false,
+                    "active": true,
+                    "default": false,
+                    "created_at": "2018-12-03T14:19:26Z",
+                    "updated_at": "2018-12-03T14:19:26Z"
+                },
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000354093/variants/360001113554.json",
+                    "id": 360001113554,
+                    "content": "exampleを使えばTerraformでZendeskをセットアップすることができます",
+                    "locale_id": 67,
+                    "outdated": false,
+                    "active": true,
+                    "default": false,
+                    "created_at": "2018-12-03T14:19:16Z",
+                    "updated_at": "2018-12-03T14:19:16Z"
+                },
+                {
+                    "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000354093/variants/360001100173.json",
+                    "id": 360001100173,
+                    "content": "example can setup your Zendesk by Terraform",
+                    "locale_id": 1,
+                    "outdated": false,
+                    "active": true,
+                    "default": true,
+                    "created_at": "2018-12-03T14:17:44Z",
+                    "updated_at": "2018-12-03T14:17:44Z"
+                }
+            ]
+        }
+    ],
+    "next_page": null,
+    "previous_page": null,
+    "count": 2
+}
