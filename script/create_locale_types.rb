@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # create_locale_types.rb
 # Create locale_types.go from public locale list from API
 #
@@ -13,10 +14,10 @@ req = Net::HTTP::Get.new(uri)
 res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(req) }
 
 if res.is_a? Net::HTTPSuccess
-    data = JSON.parse(res.body)
-    puts ERB.new(DATA.read).result(binding)
+  data = JSON.parse(res.body)
+  puts ERB.new(DATA.read).result(binding)
 else
-    abort "failed to fetch from locale API: #{res.body.inspect}"
+  abort "failed to fetch from locale API: #{res.body.inspect}"
 end
 
 __END__
