@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # create_locale_types.rb
 # Create locale_types.go from public locale list from API
 #
