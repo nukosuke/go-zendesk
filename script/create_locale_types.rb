@@ -12,7 +12,9 @@ require 'erb'
 
 uri = URI.parse('https://terraform-provider-zendesk.zendesk.com/api/v2/locales/public.json')
 req = Net::HTTP::Get.new(uri)
-res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(req) }
+res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+  http.request(req)
+end
 
 if res.is_a? Net::HTTPSuccess
   data = JSON.parse(res.body)
