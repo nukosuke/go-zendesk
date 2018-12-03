@@ -33,12 +33,12 @@ package zendesk
 
 const (<% data['locales'].each_with_index do |locale, idx| %>
 	// Locale<%= locale_key = locale['locale'].gsub('-', '').upcase %> <%= locale['presentation_name'] %>
-	Locale<%= locale_key %><% if idx == 0 %> = iota<% end %><% end %>
+	Locale<%= locale_key %> = <%= locale['id'] %><% end %>
 )
 
 var localeTypeText = map[int]string {<% data['locales'].each do |locale| %>
 	// Locale<%= locale_key = locale['locale'].gsub('-', '').upcase %> <%= locale['presentation_name'] %>
-    Locale<%= locale_key %>: "<%= locale['locale'] %>",<% end %>
+	Locale<%= locale_key %>: "<%= locale['locale'] %>",<% end %>
 }
 
 // LocaleTypeText returns locale type text
