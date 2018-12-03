@@ -7,133 +7,133 @@ package zendesk
 
 const (
 	// LocaleENUS English
-	LocaleENUS = iota
+	LocaleENUS = 1
 	// LocaleES Spanish - español
-	LocaleES
+	LocaleES = 2
 	// LocaleDE German - Deutsch
-	LocaleDE
+	LocaleDE = 8
 	// LocaleZHTW Traditional Chinese - 繁體中文
-	LocaleZHTW
+	LocaleZHTW = 9
 	// LocaleZHCN Simplified Chinese - 简体中文
-	LocaleZHCN
+	LocaleZHCN = 10
 	// LocalePL Polish - polski
-	LocalePL
+	LocalePL = 13
 	// LocaleFR French - français
-	LocaleFR
+	LocaleFR = 16
 	// LocalePTBR Brazilian Portuguese - português (Brasil)
-	LocalePTBR
+	LocalePTBR = 19
 	// LocaleIT Italian - italiano
-	LocaleIT
+	LocaleIT = 22
 	// LocaleRO Romanian - română
-	LocaleRO
+	LocaleRO = 23
 	// LocaleIS Icelandic - íslenska
-	LocaleIS
+	LocaleIS = 24
 	// LocaleVI Vietnamese - Tiếng Việt
-	LocaleVI
+	LocaleVI = 26
 	// LocaleRU Russian - русский
-	LocaleRU
+	LocaleRU = 27
 	// LocaleHE Hebrew - עברית
-	LocaleHE
+	LocaleHE = 30
 	// LocaleNO Norwegian - norsk
-	LocaleNO
+	LocaleNO = 34
 	// LocaleFIL Filipino
-	LocaleFIL
+	LocaleFIL = 47
 	// LocaleAR Arabic - العربية
-	LocaleAR
+	LocaleAR = 66
 	// LocaleJA Japanese - 日本語
-	LocaleJA
+	LocaleJA = 67
 	// LocaleKO Korean - 한국어
-	LocaleKO
+	LocaleKO = 69
 	// LocaleSL Slovenian - slovenščina
-	LocaleSL
+	LocaleSL = 72
 	// LocaleHR Croatian - hrvatski
-	LocaleHR
+	LocaleHR = 74
 	// LocaleID Indonesian - Indonesia
-	LocaleID
+	LocaleID = 77
 	// LocaleCS Czech - čeština
-	LocaleCS
+	LocaleCS = 78
 	// LocaleTH Thai - ไทย
-	LocaleTH
+	LocaleTH = 81
 	// LocaleFI Finnish - suomi
-	LocaleFI
+	LocaleFI = 84
 	// LocaleTR Turkish - Türkçe
-	LocaleTR
+	LocaleTR = 88
 	// LocaleSV Swedish - svenska
-	LocaleSV
+	LocaleSV = 92
 	// LocaleEL Greek - Ελληνικά
-	LocaleEL
+	LocaleEL = 93
 	// LocaleBG Bulgarian - български
-	LocaleBG
+	LocaleBG = 94
 	// LocaleET Estonian - eesti
-	LocaleET
+	LocaleET = 101
 	// LocaleDA Danish - dansk
-	LocaleDA
+	LocaleDA = 1000
 	// LocaleSK Slovak - slovenčina
-	LocaleSK
+	LocaleSK = 1003
 	// LocaleNL Dutch - Nederlands
-	LocaleNL
+	LocaleNL = 1005
 	// LocaleHU Hungarian - magyar
-	LocaleHU
+	LocaleHU = 1009
 	// LocalePT Portuguese - português
-	LocalePT
+	LocalePT = 1011
 	// LocaleFA Persian - فارسی
-	LocaleFA
+	LocaleFA = 1016
 	// LocaleCA Catalan - català
-	LocaleCA
+	LocaleCA = 1075
 	// LocaleLT Lithuanian - lietuvių
-	LocaleLT
+	LocaleLT = 1092
 	// LocaleLV Latvian - latviešu
-	LocaleLV
+	LocaleLV = 1101
 	// LocaleSR Serbian - српски
-	LocaleSR
+	LocaleSR = 1150
 	// LocaleUK Ukrainian - українська
-	LocaleUK
+	LocaleUK = 1173
 	// LocaleENGB British English
-	LocaleENGB
+	LocaleENGB = 1176
 	// LocaleENCA Canadian English
-	LocaleENCA
+	LocaleENCA = 1181
 	// LocaleESES European Spanish - español de España
-	LocaleESES
+	LocaleESES = 1186
 	// LocaleFRCA Canadian French - français canadien
-	LocaleFRCA
+	LocaleFRCA = 1187
 	// LocaleES419 Latin American Spanish - español latinoamericano
-	LocaleES419
+	LocaleES419 = 1194
 	// LocaleENAU Australian English
-	LocaleENAU
+	LocaleENAU = 1277
 	// LocaleENIN English (India)
-	LocaleENIN
+	LocaleENIN = 1278
 	// LocaleENIE English (Ireland)
-	LocaleENIE
+	LocaleENIE = 1279
 	// LocaleENSG English (Singapore)
-	LocaleENSG
+	LocaleENSG = 1281
 	// LocaleENNZ English (New Zealand)
-	LocaleENNZ
+	LocaleENNZ = 1288
 	// LocaleENZA English (South Africa)
-	LocaleENZA
+	LocaleENZA = 1289
 	// LocaleFRBE French (Belgium) - français (Belgique)
-	LocaleFRBE
+	LocaleFRBE = 1291
 	// LocaleFRCH Swiss French - français suisse
-	LocaleFRCH
+	LocaleFRCH = 1292
 	// LocaleNLBE Flemish - Nederlands (België)
-	LocaleNLBE
+	LocaleNLBE = 1293
 	// LocaleDEAT Austrian German - Österreichisches Deutsch
-	LocaleDEAT
+	LocaleDEAT = 1294
 	// LocaleDECH Swiss High German - Schweizer Hochdeutsch
-	LocaleDECH
+	LocaleDECH = 1295
 	// LocaleSRME Serbian (Montenegro) - srpski (Crna Gora)
-	LocaleSRME
+	LocaleSRME = 1298
 	// LocaleHI Hindi - हिन्दी
-	LocaleHI
+	LocaleHI = 1303
 	// LocaleMS Malay - Bahasa Melayu
-	LocaleMS
+	LocaleMS = 1307
 	// LocaleENBE English (Belgium)
-	LocaleENBE
+	LocaleENBE = 1350
 	// LocaleESMX Mexican Spanish - español de México
-	LocaleESMX
+	LocaleESMX = 1364
 	// LocaleFRFR French (France) - français (France)
-	LocaleFRFR
+	LocaleFRFR = 1365
 	// LocaleENPH English (Philippines)
-	LocaleENPH
+	LocaleENPH = 1392
 )
 
 var localeTypeText = map[int]string{
