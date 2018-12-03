@@ -21,7 +21,7 @@ type Group struct {
 func (z *Client) GetGroups() ([]Group, Page, error) {
 	var data struct {
 		Groups []Group `json:"groups"`
-		Page   Page
+		Page
 	}
 
 	body, err := z.Get("/groups.json")

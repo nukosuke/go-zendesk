@@ -71,7 +71,7 @@ func UserRoleText(role int) string {
 func (z *Client) GetUsers() ([]User, Page, error) {
 	var data struct {
 		Users []User `json:"users"`
-		Page  Page
+		Page
 	}
 
 	body, err := z.Get("/users.json")
