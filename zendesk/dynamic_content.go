@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"encoding/json"
 	"time"
 )
 
@@ -30,4 +31,24 @@ type DynamicContentVariant struct {
 	Default   bool      `json:"default,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
+}
+
+// GetDynamicContentItems fetches dynamic content item list
+// https://developer.zendesk.com/rest_api/docs/support/dynamic_content#list-items
+func (z *Client) GetDynamicContentItems() ([]DynamicContentItem, Page, error) {
+	var data struct {
+		Items []DynamicContentItem `json:"items"`
+		Page
+	}
+
+	body, err := z.Get("/dynamic_content/items.json")
+	if err != nil {
+		return []DynamicContentItem{}, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return []DynamicContentItem{}, Page{}, err
+	}
+	return data.Items, data.Page, nil
 }
