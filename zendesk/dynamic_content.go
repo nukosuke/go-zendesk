@@ -52,3 +52,22 @@ func (z *Client) GetDynamicContentItems() ([]DynamicContentItem, Page, error) {
 	}
 	return data.Items, data.Page, nil
 }
+
+// CreateDynamicContentItem creates new dynamic content item
+// https://developer.zendesk.com/rest_api/docs/support/dynamic_content#create-item
+func (z *Client) CreateDynamicContentItem(item DynamicContentItem) (DynamicContentItem, error) {
+	var data, result struct {
+		Item DynamicContentItem `json:"item"`
+	}
+
+	body, err := z.Post("/groups.json", data)
+	if err != nil {
+		return DynamicContentItem{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return DynamicContentItem{}, err
+	}
+	return result.Item, nil
+}

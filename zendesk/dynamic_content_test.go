@@ -27,3 +27,17 @@ func TestGetDynamicContentItems(t *testing.T) {
 		t.Fatalf("page fields are wrong: %v", page)
 	}
 }
+
+func TestCreateDynamicContentItem(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "dynamic_content/items.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	item, err := client.CreateDynamicContentItem(DynamicContentItem{})
+	if err != nil {
+		t.Fatalf("Failed to get valid response: %s", err)
+	}
+	if item.ID == 0 {
+		t.Fatal("Failed to create dynamic content item")
+	}
+}
