@@ -15,16 +15,6 @@ type TicketFieldSystemFieldOption struct {
 	Value    string `json:"value"`
 }
 
-// TicketFieldCustomFieldOption is struct for value of `custom_field_options`
-type TicketFieldCustomFieldOption struct {
-	ID       int64  `json:"id,omitempty"`
-	Name     string `json:"name"`
-	Position int64  `json:"position,omitempty"`
-	RawName  string `json:"raw_name,omitempty"`
-	URL      string `json:"url,omitempty"`
-	Value    string `json:"value"`
-}
-
 // TicketField is struct for ticket_field payload
 type TicketField struct {
 	ID                  int64                          `json:"id,omitempty"`
@@ -47,7 +37,7 @@ type TicketField struct {
 	CreatedAt           *time.Time                     `json:"created_at,omitempty"`
 	UpdatedAt           *time.Time                     `json:"updated_at,omitempty"`
 	SystemFieldOptions  []TicketFieldSystemFieldOption `json:"system_field_options,omitempty"`
-	CustomFieldOptions  []TicketFieldCustomFieldOption `json:"custom_field_options,omitempty"`
+	CustomFieldOptions  []CustomFieldOption            `json:"custom_field_options,omitempty"`
 	SubTypeID           int64                          `json:"sub_type_id,omitempty"`
 	Removable           bool                           `json:"removable,omitempty"`
 	AgentDescription    string                         `json:"agent_description,omitempty"`
