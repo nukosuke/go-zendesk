@@ -1,0 +1,47 @@
+{
+    "item": {
+        "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774.json",
+        "id": 360000346774,
+        "name": "title",
+        "placeholder": "{{dc.title}}",
+        "default_locale_id": 1,
+        "outdated": false,
+        "created_at": "2018-12-03T14:09:14Z",
+        "updated_at": "2018-12-03T14:14:23Z",
+        "variants": [
+            {
+                "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001100153.json",
+                "id": 360001100153,
+                "content": "ZendeskのためのTerraform provider",
+                "locale_id": 67,
+                "outdated": false,
+                "active": true,
+                "default": false,
+                "created_at": "2018-12-03T14:13:56Z",
+                "updated_at": "2018-12-03T14:13:56Z"
+            },
+            {
+                "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001113534.json",
+                "id": 360001113534,
+                "content": "Zendesk的Terraform provider",
+                "locale_id": 9,
+                "outdated": false,
+                "active": true,
+                "default": false,
+                "created_at": "2018-12-03T14:14:23Z",
+                "updated_at": "2018-12-03T14:14:23Z"
+            },
+            {
+                "url": "https://example.zendesk.com/api/v2/dynamic_content/items/360000346774/variants/360001113514.json",
+                "id": 360001113514,
+                "content": "Terraform provider for Zendesk",
+                "locale_id": 1,
+                "outdated": false,
+                "active": true,
+                "default": true,
+                "created_at": "2018-12-03T14:09:14Z",
+                "updated_at": "2018-12-03T14:09:14Z"
+            }
+        ]
+    }
+}

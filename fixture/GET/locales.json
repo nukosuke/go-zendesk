@@ -1,0 +1,43 @@
+{
+    "locales": [
+        {
+            "url": "https://example.zendesk.com/api/v2/locales/en-US.json",
+            "id": 1,
+            "locale": "en-US",
+            "name": "English",
+            "native_name": "English",
+            "presentation_name": "English",
+            "rtl": false,
+            "created_at": null,
+            "updated_at": "2018-11-30T20:42:59Z",
+            "default": true
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/locales/ja.json",
+            "id": 67,
+            "locale": "ja",
+            "name": "日本語 (Japanese)",
+            "native_name": "日本語",
+            "presentation_name": "Japanese - 日本語",
+            "rtl": false,
+            "created_at": "2009-03-23T19:42:53Z",
+            "updated_at": "2018-11-30T15:00:47Z",
+            "default": false
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/locales/zh-tw.json",
+            "id": 9,
+            "locale": "zh-tw",
+            "name": "繁體中文 (Traditional Chinese)",
+            "native_name": "繁體中文",
+            "presentation_name": "Traditional Chinese - 繁體中文",
+            "rtl": false,
+            "created_at": "2009-02-18T03:48:45Z",
+            "updated_at": "2018-12-03T03:19:51Z",
+            "default": false
+        }
+    ],
+    "next_page": null,
+    "previous_page": null,
+    "count": 3
+}
