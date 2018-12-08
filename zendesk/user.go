@@ -29,22 +29,22 @@ type User struct {
 	Phone               string `json:"phone,omitempty"`
 	SharedPhoneNumber   bool   `json:"shared_phone_number,omitempty"`
 	//TODO: Photo Attachment
-	RestrictedAgent      bool        `json:"restricted_agent,omitempty"`
-	Role                 string      `json:"role,omitempty"`
-	Shared               bool        `json:"shared,omitempty"`
-	SharedAgent          bool        `json:"shared_agent,omitempty"`
-	Signature            string      `json:"signature,omitempty"`
-	Suspended            bool        `json:"suspended,omitempty"`
-	Tags                 []string    `json:"tags,omitempty"`
-	TicketRestriction    string      `json:"ticket_restriction,omitempty"`
-	Timezone             string      `json:"time_zone,omitempty"`
-	TwoFactorAuthEnabled bool        `json:"two_factor_auth_enabled,omitempty"`
-	UserFields           []UserField `json:"user_fields,omitempty"`
-	Verified             bool        `json:"verified,omitempty"`
-	ReportCSV            bool        `json:"report_csv,omitempty"`
-	LastLoginAt          time.Time   `json:"last_login_at,omitempty"`
-	CreatedAt            time.Time   `json:"created_at,omitempty"`
-	UpdatedAt            time.Time   `json:"updated_at,omitempty"`
+	RestrictedAgent      bool                   `json:"restricted_agent,omitempty"`
+	Role                 string                 `json:"role,omitempty"`
+	Shared               bool                   `json:"shared,omitempty"`
+	SharedAgent          bool                   `json:"shared_agent,omitempty"`
+	Signature            string                 `json:"signature,omitempty"`
+	Suspended            bool                   `json:"suspended,omitempty"`
+	Tags                 []string               `json:"tags,omitempty"`
+	TicketRestriction    string                 `json:"ticket_restriction,omitempty"`
+	Timezone             string                 `json:"time_zone,omitempty"`
+	TwoFactorAuthEnabled bool                   `json:"two_factor_auth_enabled,omitempty"`
+	UserFields           map[string]interface{} `json:"user_fields,omitempty"`
+	Verified             bool                   `json:"verified,omitempty"`
+	ReportCSV            bool                   `json:"report_csv,omitempty"`
+	LastLoginAt          time.Time              `json:"last_login_at,omitempty"`
+	CreatedAt            time.Time              `json:"created_at,omitempty"`
+	UpdatedAt            time.Time              `json:"updated_at,omitempty"`
 }
 
 const (
