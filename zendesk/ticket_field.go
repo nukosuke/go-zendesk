@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -80,4 +81,23 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 		return TicketField{}, err
 	}
 	return result.TicketField, nil
+}
+
+func (z Client) GetTicketField(ticketID int64) (TicketField, error) {
+	var result struct {
+		TicketField TicketField `json:"ticket_field"`
+	}
+
+	body, err := z.Get(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+
+	if err != nil {
+		return TicketField{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return TicketField{}, err
+	}
+
+	return result.TicketField, err
 }
