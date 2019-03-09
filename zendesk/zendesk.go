@@ -2,7 +2,6 @@ package zendesk
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -20,6 +19,22 @@ const (
 var defaultHeaders = map[string]string{
 	"User-Agent":   "nukosuke/go-zendesk",
 	"Content-Type": "application/json",
+}
+
+// Error an error type containing the http response from zendesk
+type Error struct {
+	resp *http.Response
+	msg  string
+}
+
+// Error the error string for this error
+func (e Error) Error() string {
+	return fmt.Sprintf("%d: %s", e.resp.StatusCode, e.msg)
+}
+
+// Response the http response returned by zendesk
+func (e Error) Response() *http.Response {
+	return e.resp
 }
 
 var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
@@ -98,13 +113,16 @@ func (z Client) Get(path string) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 
-	// TODO:
-	// http status check
-	// accept only 200 ok
-
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, Error{
+			msg:  string(body),
+			resp: resp,
+		}
 	}
 	return body, nil
 }
@@ -127,16 +145,20 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusCreated {
-		return nil, errors.New(http.StatusText(resp.StatusCode))
-	}
-
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
+
+	if resp.StatusCode != http.StatusCreated {
+		return nil, Error{
+			msg:  string(body),
+			resp: resp,
+		}
+	}
+
 	return body, nil
 }
 
