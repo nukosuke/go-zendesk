@@ -16,3 +16,7 @@ vendor/
 
 # coverage by go test
 coverage.txt
+
+.idea
+*.iml
+.pre-commit-config.yaml
