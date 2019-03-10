@@ -16,7 +16,7 @@ install:
 
 script:
   - go test -v ./...
-  - goveralls -service=travis-ci
+  - goveralls -service=travis-ci -ignore=zendesk/mock/client.go
 
 notifications:
   email: false
