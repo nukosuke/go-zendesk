@@ -16,6 +16,11 @@ type Locale struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// LocaleAPI an interface containing all of the local related zendesk methods
+type LocaleAPI interface {
+	GetLocales() ([]Locale, error)
+}
+
 // GetLocales lists the translation locales available for the account.
 // https://developer.zendesk.com/rest_api/docs/support/locales#list-locales
 func (z *Client) GetLocales() ([]Locale, error) {
