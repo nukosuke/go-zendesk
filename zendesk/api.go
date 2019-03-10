@@ -5,4 +5,5 @@ type API interface {
 	GroupAPI
 	LocaleAPI
 	TicketFieldAPI
+	TicketFormAPI
 }
