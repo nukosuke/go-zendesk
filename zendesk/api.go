@@ -7,4 +7,5 @@ type API interface {
 	TicketFieldAPI
 	TicketFormAPI
 	TriggerAPI
+	UserAPI
 }

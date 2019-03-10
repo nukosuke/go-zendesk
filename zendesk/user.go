@@ -67,6 +67,12 @@ func UserRoleText(role int) string {
 	return userRoleText[role]
 }
 
+// UserAPI an interface containing all user related methods
+type UserAPI interface {
+	GetUsers() ([]User, Page, error)
+	CreateUser(user User) (User, error)
+}
+
 // GetUsers fetch user list
 func (z *Client) GetUsers() ([]User, Page, error) {
 	var data struct {
