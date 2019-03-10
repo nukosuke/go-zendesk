@@ -45,6 +45,13 @@ type TicketField struct {
 	AgentDescription    string                         `json:"agent_description,omitempty"`
 }
 
+// TicketFieldAPI an interface containing all of the ticket field related zendesk methods
+type TicketFieldAPI interface {
+	GetTicketFields() ([]TicketField, Page, error)
+	CreateTicketField(ticketField TicketField) (TicketField, error)
+	GetTicketField(ticketID int64) (TicketField, error)
+}
+
 // GetTicketFields fetches ticket field list
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
 func (z Client) GetTicketFields() ([]TicketField, Page, error) {

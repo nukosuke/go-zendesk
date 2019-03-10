@@ -4,4 +4,5 @@ package zendesk
 type API interface {
 	GroupAPI
 	LocaleAPI
+	TicketFieldAPI
 }
