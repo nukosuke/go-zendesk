@@ -34,6 +34,7 @@ type TicketField struct {
 	RawTitleInPortal    string                         `json:"raw_title_in_portal,omitempty"`
 	VisibleInPortal     bool                           `json:"visible_in_portal,omitempty"`
 	EditableInPortal    bool                           `json:"editable_in_portal,omitempty"`
+	RequiredInPortal    bool                           `json:"required_in_portal,omitempty"`
 	Tag                 string                         `json:"tag,omitempty"`
 	CreatedAt           *time.Time                     `json:"created_at,omitempty"`
 	UpdatedAt           *time.Time                     `json:"updated_at,omitempty"`
