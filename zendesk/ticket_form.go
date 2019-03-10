@@ -45,6 +45,7 @@ func (z Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
 	var data, result struct {
 		TicketForm TicketForm `json:"ticket_form"`
 	}
+	data.TicketForm = ticketForm
 
 	body, err := z.Post("/ticket_forms.json", data)
 	if err != nil {
