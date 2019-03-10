@@ -123,6 +123,21 @@ func TestGet(t *testing.T) {
 	}
 }
 
+func TestGetFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodGet, "groups.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.Get("/groups.json")
+	if err == nil {
+		t.Fatal("Did not receive error from client")
+	}
+
+	if _, ok := err.(Error); !ok {
+		t.Fatalf("Did not return a zendesk error %s", err)
+	}
+}
+
 func TestPost(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "groups.json", http.StatusCreated)
 	client := newTestClient(mockAPI)
@@ -135,6 +150,21 @@ func TestPost(t *testing.T) {
 
 	if len(body) == 0 {
 		t.Fatal("Response body is empty")
+	}
+}
+
+func TestPostFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "groups.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.Post("/groups.json", Group{})
+	if err == nil {
+		t.Fatal("Did not receive error from client")
+	}
+
+	if _, ok := err.(Error); !ok {
+		t.Fatalf("Did not return a zendesk error %s", err)
 	}
 }
 
