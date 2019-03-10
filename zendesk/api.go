@@ -6,4 +6,5 @@ type API interface {
 	LocaleAPI
 	TicketFieldAPI
 	TicketFormAPI
+	TriggerAPI
 }

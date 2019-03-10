@@ -37,6 +37,12 @@ type Trigger struct {
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
+// TriggerAPI an interface containing all trigger related methods
+type TriggerAPI interface {
+	GetTriggers() ([]Trigger, Page, error)
+	CreateTrigger(trigger Trigger) (Trigger, error)
+}
+
 // GetTriggers fetch trigger list
 func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 	var data struct {
