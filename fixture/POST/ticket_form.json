@@ -1,0 +1,22 @@
+{
+  "ticket_form": {
+    "url": "https://example.zendesk.com/api/v2/ticket_forms/360000124108.json",
+    "id": 360000124108,
+    "name": "デフォルトのチケットフォーム",
+    "raw_name": "デフォルトのチケットフォーム",
+    "display_name": "デフォルトのチケットフォーム",
+    "raw_display_name": "デフォルトのチケットフォーム",
+    "end_user_visible": true,
+    "position": 1,
+    "ticket_field_ids": [
+      360000422488,
+      360000422508
+    ],
+    "active": true,
+    "default": true,
+    "created_at": "2018-07-13T06:20:04Z",
+    "updated_at": "2018-07-13T06:20:04Z",
+    "in_all_brands": true,
+    "restricted_brand_ids": []
+  }
+}
