@@ -48,6 +48,7 @@ func (z *Client) CreateGroup(group Group) (Group, error) {
 	var data, result struct {
 		Group Group `json:"group"`
 	}
+	data.Group = group
 
 	body, err := z.Post("/groups.json", data)
 	if err != nil {

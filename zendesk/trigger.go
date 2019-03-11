@@ -68,6 +68,7 @@ func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
+	data.Trigger = trigger
 
 	body, err := z.Post("/triggers.json", data)
 	if err != nil {
