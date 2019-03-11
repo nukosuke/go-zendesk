@@ -78,6 +78,7 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 	var data, result struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
+	data.TicketField = ticketField
 
 	body, err := z.Post("/ticket_fields.json", data)
 	if err != nil {

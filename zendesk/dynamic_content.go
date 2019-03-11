@@ -59,6 +59,7 @@ func (z *Client) CreateDynamicContentItem(item DynamicContentItem) (DynamicConte
 	var data, result struct {
 		Item DynamicContentItem `json:"item"`
 	}
+	data.Item = item
 
 	body, err := z.Post("/groups.json", data)
 	if err != nil {

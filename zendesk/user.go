@@ -100,6 +100,7 @@ func (z Client) CreateUser(user User) (User, error) {
 	var data, result struct {
 		User User `json:"user"`
 	}
+	data.User = user
 
 	body, err := z.Post("/users.json", data)
 	if err != nil {
