@@ -16,6 +16,12 @@ type Group struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 }
 
+// GroupAPI an interface containing all methods associated with zendesk groups
+type GroupAPI interface {
+	GetGroups() ([]Group, Page, error)
+	CreateGroup(group Group) (Group, error)
+}
+
 // GetGroups fetches group list
 // https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
 func (z *Client) GetGroups() ([]Group, Page, error) {

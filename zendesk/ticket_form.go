@@ -20,6 +20,12 @@ type TicketForm struct {
 	RestrictedBrandIDs []int64 `json:"restricted_brand_ids,omitempty"`
 }
 
+// TicketFormAPI an interface containing all ticket form related methods
+type TicketFormAPI interface {
+	GetTicketForms() ([]TicketForm, Page, error)
+	CreateTicketForm(ticketForm TicketForm) (TicketForm, error)
+}
+
 // GetTicketForms fetches ticket forms
 func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 	var data struct {
