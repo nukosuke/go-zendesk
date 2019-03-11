@@ -35,3 +35,14 @@ func TestGetTicketField(t *testing.T) {
 		t.Fatalf("Returned ticket field does not have the expected ID %d. Ticket id is %d", expectedID, ticketField.ID)
 	}
 }
+
+func TestCreateTicketField(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "ticket_fields.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.CreateTicketField(TicketField{})
+	if err != nil {
+		t.Fatalf("Failed to send request to create ticket field: %s", err)
+	}
+}
