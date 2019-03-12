@@ -20,6 +20,7 @@ type Group struct {
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
 	GetGroups() ([]Group, Page, error)
+	GetGroup(groupID int64) (Group, error)
 	CreateGroup(group Group) (Group, error)
 }
 
