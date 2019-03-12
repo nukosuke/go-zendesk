@@ -161,6 +161,40 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 	return body, nil
 }
 
+// Put sends data to API and returns response body as []bytes
+func (z Client) Put(path string, data interface{}) ([]byte, error) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, z.baseURL.String()+path, strings.NewReader(string(bytes)))
+	if err != nil {
+		return nil, err
+	}
+	z.prepareRequest(req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, Error{
+			msg:  string(body),
+			resp: resp,
+		}
+	}
+
+	return body, nil
+}
+
 // prepare request sets common request variables such as authn and user agent
 func (z *Client) prepareRequest(req *http.Request) {
 	z.includeHeaders(req)

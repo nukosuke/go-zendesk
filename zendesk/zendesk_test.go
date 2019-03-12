@@ -168,6 +168,36 @@ func TestPostFailure(t *testing.T) {
 	}
 }
 
+func TestPut(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "groups.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	body, err := client.Put("/groups.json", Group{})
+	if err != nil {
+		t.Fatalf("Failed to send request: %s", err)
+	}
+
+	if len(body) == 0 {
+		t.Fatal("Response body is empty")
+	}
+}
+
+func TestPutFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "groups.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.Put("/groups.json", Group{})
+	if err == nil {
+		t.Fatal("Did not receive error from client")
+	}
+
+	if _, ok := err.(Error); !ok {
+		t.Fatalf("Did not return a zendesk error %s", err)
+	}
+}
+
 func TestIncludeHeaders(t *testing.T) {
 	client, _ := NewClient(nil)
 	client.headers = map[string]string{
