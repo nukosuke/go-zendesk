@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
