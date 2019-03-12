@@ -100,12 +100,12 @@ func (z *Client) SetCredential(cred Credential) {
 
 // Get get JSON data from API and returns its body as []bytes
 func (z Client) Get(path string) ([]byte, error) {
-	req, err := http.NewRequest("GET", z.baseURL.String()+path, nil)
+	req, err := http.NewRequest(http.MethodGet, z.baseURL.String()+path, nil)
 	if err != nil {
 		return nil, err
 	}
-	z.includeHeaders(req)
-	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+
+	z.prepareRequest(req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -134,12 +134,11 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", z.baseURL.String()+path, strings.NewReader(string(bytes)))
+	req, err := http.NewRequest(http.MethodPost, z.baseURL.String()+path, strings.NewReader(string(bytes)))
 	if err != nil {
 		return nil, err
 	}
-	z.includeHeaders(req)
-	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+	z.prepareRequest(req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -160,6 +159,12 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 	}
 
 	return body, nil
+}
+
+// prepare request sets common request variables such as authn and user agent
+func (z *Client) prepareRequest(req *http.Request) {
+	z.includeHeaders(req)
+	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
 }
 
 // includeHeaders set HTTP headers from client.headers to *http.Request
