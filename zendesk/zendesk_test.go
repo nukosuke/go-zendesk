@@ -153,7 +153,7 @@ func TestGetFailureCanReadErrorBody(t *testing.T) {
 		t.Fatalf("Did not return a zendesk error %s", err)
 	}
 
-	body := clientErr.Response().Body
+	body := clientErr.Body()
 	_, err = ioutil.ReadAll(body)
 	if err != nil {
 		t.Fatal("Client received error while reading client body")
