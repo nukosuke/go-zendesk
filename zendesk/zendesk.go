@@ -1,8 +1,10 @@
 package zendesk
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -23,18 +25,33 @@ var defaultHeaders = map[string]string{
 
 // Error an error type containing the http response from zendesk
 type Error struct {
+	body []byte
 	resp *http.Response
-	msg  string
 }
 
 // Error the error string for this error
 func (e Error) Error() string {
-	return fmt.Sprintf("%d: %s", e.resp.StatusCode, e.msg)
+	msg := string(e.body)
+	if msg == "" {
+		msg = http.StatusText(e.Status())
+	}
+
+	return fmt.Sprintf("%d: %s", e.resp.StatusCode, msg)
 }
 
-// Response the http response returned by zendesk
-func (e Error) Response() *http.Response {
-	return e.resp
+// Body is the Body of the HTTP response
+func (e Error) Body() io.ReadCloser {
+	return ioutil.NopCloser(bytes.NewBuffer(e.body))
+}
+
+// Headers the HTTP headers returned from zendesk
+func (e Error) Headers() http.Header {
+	return e.resp.Header
+}
+
+// Status the HTTP status code returned from zendesk
+func (e Error) Status() int {
+	return e.resp.StatusCode
 }
 
 var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
@@ -120,7 +137,7 @@ func (z Client) Get(path string) ([]byte, error) {
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}
@@ -153,7 +170,7 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 
 	if resp.StatusCode != http.StatusCreated {
 		return nil, Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}
@@ -187,7 +204,7 @@ func (z Client) Put(path string, data interface{}) ([]byte, error) {
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}
@@ -216,7 +233,7 @@ func (z Client) Delete(path string) error {
 
 	if resp.StatusCode != http.StatusNoContent {
 		return Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}

@@ -6,30 +6,70 @@ import (
 	"testing"
 )
 
-func TestError_Response(t *testing.T) {
-	resp := &http.Response{}
-	err := Error{
-		msg:  "foo",
-		resp: resp,
-	}
-
-	if err.Response() != resp {
-		t.Fatal("Response did not  return the provided response")
-	}
-}
-
 func TestError_Error(t *testing.T) {
 	status := http.StatusOK
 	resp := &http.Response{
 		StatusCode: status,
 	}
-	body := "foo"
+	body := []byte("foo")
 	err := Error{
-		msg:  body,
+		body: body,
 		resp: resp,
 	}
 
-	if err.Error() != fmt.Sprintf("%d: %s", status, body) {
-		t.Fatal("Error did not have expected value")
+	expected := fmt.Sprintf("%d: %s", status, body)
+	if v := err.Error(); v != expected {
+		t.Fatalf("Error %s did not have expected value %s", v, expected)
+	}
+}
+
+func TestError_ErrorEmptyBody(t *testing.T) {
+	status := http.StatusOK
+	resp := &http.Response{
+		StatusCode: status,
+	}
+	err := Error{
+		resp: resp,
+	}
+
+	expected := fmt.Sprintf("%d: %s", status, http.StatusText(status))
+	if v := err.Error(); v != expected {
+		t.Fatalf("Error %s did not have expected value %s", v, expected)
+	}
+}
+
+func TestError_Headers(t *testing.T) {
+	retryAfter := "Retry-After"
+	resp := &http.Response{
+		StatusCode: http.StatusTooManyRequests,
+		Header: http.Header{
+			retryAfter: []string{"92"},
+		},
+	}
+
+	err := Error{
+		resp: resp,
+	}
+
+	if _, ok := err.Headers()[retryAfter]; !ok {
+		t.Fatal("Could not get header values from zendesk error")
+	}
+}
+
+func TestError_Status(t *testing.T) {
+	retryAfter := "Retry-After"
+	resp := &http.Response{
+		StatusCode: http.StatusTooManyRequests,
+		Header: http.Header{
+			retryAfter: []string{"92"},
+		},
+	}
+
+	err := Error{
+		resp: resp,
+	}
+
+	if status := err.Status(); status != http.StatusTooManyRequests {
+		t.Fatal("Status returned from error was not the correct status code")
 	}
 }

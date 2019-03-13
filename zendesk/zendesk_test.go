@@ -138,6 +138,33 @@ func TestGetFailure(t *testing.T) {
 	}
 }
 
+func TestGetFailureCanReadErrorBody(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodGet, "groups.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.Get("/groups.json")
+	if err == nil {
+		t.Fatal("Did not receive error from client")
+	}
+
+	clientErr, ok := err.(Error)
+	if !ok {
+		t.Fatalf("Did not return a zendesk error %s", err)
+	}
+
+	body := clientErr.Body()
+	_, err = ioutil.ReadAll(body)
+	if err != nil {
+		t.Fatal("Client received error while reading client body")
+	}
+
+	err = body.Close()
+	if err != nil {
+		t.Fatal("Client received error while closing body")
+	}
+}
+
 func TestPost(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "groups.json", http.StatusCreated)
 	client := newTestClient(mockAPI)
