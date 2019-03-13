@@ -11,3 +11,5 @@ type API interface {
 	TriggerAPI
 	UserAPI
 }
+
+var _ API = (*Client)(nil)
