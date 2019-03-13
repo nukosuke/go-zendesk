@@ -17,8 +17,24 @@ func TestError_Error(t *testing.T) {
 		resp: resp,
 	}
 
-	if err.Error() != fmt.Sprintf("%d: %s", status, body) {
-		t.Fatal("Error did not have expected value")
+	expected := fmt.Sprintf("%d: %s", status, body)
+	if v := err.Error(); v != expected {
+		t.Fatalf("Error %s did not have expected value %s", v, expected)
+	}
+}
+
+func TestError_ErrorEmptyBody(t *testing.T) {
+	status := http.StatusOK
+	resp := &http.Response{
+		StatusCode: status,
+	}
+	err := Error{
+		resp: resp,
+	}
+
+	expected := fmt.Sprintf("%d: %s", status, http.StatusText(status))
+	if v := err.Error(); v != expected {
+		t.Fatalf("Error %s did not have expected value %s", v, expected)
 	}
 }
 
