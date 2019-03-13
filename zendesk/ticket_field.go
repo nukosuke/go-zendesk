@@ -50,6 +50,7 @@ type TicketFieldAPI interface {
 	GetTicketFields() ([]TicketField, Page, error)
 	CreateTicketField(ticketField TicketField) (TicketField, error)
 	GetTicketField(ticketID int64) (TicketField, error)
+	DeleteTicketField(ticketID int64) error
 }
 
 // GetTicketFields fetches ticket field list
@@ -111,4 +112,16 @@ func (z Client) GetTicketField(ticketID int64) (TicketField, error) {
 	}
 
 	return result.TicketField, err
+}
+
+// DeleteTicketField deletes the specified ticket field
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
+func (z Client) DeleteTicketField(ticketID int64) error {
+	err := z.Delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

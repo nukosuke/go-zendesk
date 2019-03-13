@@ -108,6 +108,20 @@ func (mr *ClientMockRecorder) CreateUser(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0)
 }
 
+// DeleteTicketField mocks base method
+func (m *Client) DeleteTicketField(arg0 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTicketField", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTicketField indicates an expected call of DeleteTicketField
+func (mr *ClientMockRecorder) DeleteTicketField(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketField", reflect.TypeOf((*Client)(nil).DeleteTicketField), arg0)
+}
+
 // GetGroup mocks base method
 func (m *Client) GetGroup(arg0 int64) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
