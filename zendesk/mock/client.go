@@ -108,6 +108,21 @@ func (mr *ClientMockRecorder) CreateUser(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0)
 }
 
+// GetGroup mocks base method
+func (m *Client) GetGroup(arg0 int64) (zendesk.Group, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroup", arg0)
+	ret0, _ := ret[0].(zendesk.Group)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetGroup indicates an expected call of GetGroup
+func (mr *ClientMockRecorder) GetGroup(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroup", reflect.TypeOf((*Client)(nil).GetGroup), arg0)
+}
+
 // GetGroups mocks base method
 func (m *Client) GetGroups() ([]zendesk.Group, zendesk.Page, error) {
 	m.ctrl.T.Helper()
