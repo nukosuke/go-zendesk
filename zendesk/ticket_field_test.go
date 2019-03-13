@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -44,5 +45,18 @@ func TestCreateTicketField(t *testing.T) {
 	_, err := client.CreateTicketField(TicketField{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create ticket field: %s", err)
+	}
+}
+
+func TestDeleteTicketField(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	err := c.DeleteTicketField(1234)
+	if err != nil {
+		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
 }
