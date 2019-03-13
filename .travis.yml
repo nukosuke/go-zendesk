@@ -1,18 +1,28 @@
 language: go
 
-go:
-  - 1.9
-  - 1.10.x
-  - 1.11.x
-  - 1.12.x
-  - master
+matrix:
+  include:
+  - go: 1.9
+  - go: 1.10.x
+  - go: 1.11.x
+    env: GO111MODULE=on
+  - go: 1.12.x
+    env: GO111MODULE=on
+  - go: master
+    env: GO111MODULE=on
 
 before_install:
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - if [ $GO111MODULE != "on" ]; then
+      curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh;
+    fi
   - go get github.com/mattn/goveralls # for profiling coverage
 
 install:
-  - dep ensure
+  - if [ $GO111MODULE == "on" ]; then
+      go mod download;
+    else
+      dep ensure;
+    fi
 
 script:
   - go test -v ./...
