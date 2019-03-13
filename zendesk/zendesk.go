@@ -1,8 +1,10 @@
 package zendesk
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -23,18 +25,28 @@ var defaultHeaders = map[string]string{
 
 // Error an error type containing the http response from zendesk
 type Error struct {
+	body []byte
 	resp *http.Response
-	msg  string
 }
 
 // Error the error string for this error
 func (e Error) Error() string {
-	return fmt.Sprintf("%d: %s", e.resp.StatusCode, e.msg)
+	return fmt.Sprintf("%d: %s", e.resp.StatusCode, string(e.body))
 }
 
-// Response the http response returned by zendesk
-func (e Error) Response() *http.Response {
-	return e.resp
+// Body is the Body of the HTTP response
+func (e Error) Body() io.ReadCloser {
+	return ioutil.NopCloser(bytes.NewBuffer(e.body))
+}
+
+// Headers the HTTP headers returned from zendesk
+func (e Error) Headers() http.Header {
+	return e.resp.Header
+}
+
+// Status the HTTP status code returned from zendesk
+func (e Error) Status() int {
+	return e.resp.StatusCode
 }
 
 var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
@@ -120,7 +132,7 @@ func (z Client) Get(path string) ([]byte, error) {
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}
@@ -154,12 +166,81 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 
 	if resp.StatusCode != http.StatusCreated {
 		return nil, Error{
-			msg:  string(body),
+			body: body,
 			resp: resp,
 		}
 	}
 
 	return body, nil
+}
+
+// Put sends data to API and returns response body as []bytes
+func (z Client) Put(path string, data interface{}) ([]byte, error) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPut, z.baseURL.String()+path, strings.NewReader(string(bytes)))
+	if err != nil {
+		return nil, err
+	}
+	z.prepareRequest(req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, Error{
+			body: body,
+			resp: resp,
+		}
+	}
+
+	return body, nil
+}
+
+// Delete sends data to API and returns an error if unsuccessful
+func (z Client) Delete(path string) error {
+	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
+	if err != nil {
+		return err
+	}
+	z.prepareRequest(req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	if resp.StatusCode != http.StatusNoContent {
+		return Error{
+			body: body,
+			resp: resp,
+		}
+	}
+
+	return nil
+}
+
+// prepare request sets common request variables such as authn and user agent
+func (z *Client) prepareRequest(req *http.Request) {
+	z.includeHeaders(req)
+	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
 }
 
 // includeHeaders set HTTP headers from client.headers to *http.Request

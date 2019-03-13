@@ -6,26 +6,14 @@ import (
 	"testing"
 )
 
-func TestError_Response(t *testing.T) {
-	resp := &http.Response{}
-	err := Error{
-		msg:  "foo",
-		resp: resp,
-	}
-
-	if err.Response() != resp {
-		t.Fatal("Response did not  return the provided response")
-	}
-}
-
 func TestError_Error(t *testing.T) {
 	status := http.StatusOK
 	resp := &http.Response{
 		StatusCode: status,
 	}
-	body := "foo"
+	body := []byte("foo")
 	err := Error{
-		msg:  body,
+		body: body,
 		resp: resp,
 	}
 
