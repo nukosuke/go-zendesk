@@ -195,6 +195,35 @@ func (z Client) Put(path string, data interface{}) ([]byte, error) {
 	return body, nil
 }
 
+// Delete sends data to API and returns an error if unsuccessful
+func (z Client) Delete(path string) error {
+	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
+	if err != nil {
+		return err
+	}
+	z.prepareRequest(req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	if resp.StatusCode != http.StatusNoContent {
+		return Error{
+			msg:  string(body),
+			resp: resp,
+		}
+	}
+
+	return nil
+}
+
 // prepare request sets common request variables such as authn and user agent
 func (z *Client) prepareRequest(req *http.Request) {
 	z.includeHeaders(req)

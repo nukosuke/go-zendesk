@@ -198,6 +198,32 @@ func TestPutFailure(t *testing.T) {
 	}
 }
 
+func TestDelete(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	err := c.Delete("/foo/id")
+	if err != nil {
+		t.Fatalf("Failed to send request: %s", err)
+	}
+}
+
+func TestDeleteFailure(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	err := c.Delete("/foo/id")
+	if err == nil {
+		t.Fatalf("Failed to recieve error from Delete")
+	}
+}
+
 func TestIncludeHeaders(t *testing.T) {
 	client, _ := NewClient(nil)
 	client.headers = map[string]string{
