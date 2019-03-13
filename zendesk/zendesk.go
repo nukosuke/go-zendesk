@@ -31,7 +31,12 @@ type Error struct {
 
 // Error the error string for this error
 func (e Error) Error() string {
-	return fmt.Sprintf("%d: %s", e.resp.StatusCode, string(e.body))
+	msg := string(e.body)
+	if msg == "" {
+		msg = http.StatusText(e.Status())
+	}
+
+	return fmt.Sprintf("%d: %s", e.resp.StatusCode, msg)
 }
 
 // Body is the Body of the HTTP response
