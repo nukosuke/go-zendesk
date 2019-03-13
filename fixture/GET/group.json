@@ -1,0 +1,10 @@
+{
+  "group": {
+    "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/groups/360002440594.json",
+    "id": 360002440594,
+    "name": "Support",
+    "deleted": false,
+    "created_at": "2018-11-23T16:05:12Z",
+    "updated_at": "2018-11-23T16:05:15Z"
+  }
+}

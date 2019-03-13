@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -19,6 +20,7 @@ type Group struct {
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
 	GetGroups() ([]Group, Page, error)
+	GetGroup(groupID int64) (Group, error)
 	CreateGroup(group Group) (Group, error)
 }
 
@@ -60,4 +62,25 @@ func (z *Client) CreateGroup(group Group) (Group, error) {
 		return Group{}, err
 	}
 	return result.Group, nil
+}
+
+// GetGroup gets a specified group
+// ref: https://developer.zendesk.com/rest_api/docs/support/groups#show-group
+func (z *Client) GetGroup(groupID int64) (Group, error) {
+	var result struct {
+		Group Group `json:"group"`
+	}
+
+	body, err := z.Get(fmt.Sprintf("/groups/%d.json", groupID))
+
+	if err != nil {
+		return Group{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Group{}, err
+	}
+
+	return result.Group, err
 }
