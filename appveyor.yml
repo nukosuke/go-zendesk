@@ -1,16 +1,19 @@
 build: off
 
-clone_folder: c:\gopath\src\github.com\nukosuke\go-zendesk
+clone_folder: c:\github.com\nukosuke\go-zendesk
 
 environment:
   GOPATH: c:\gopath
+  GO111MODULE: on
+
+cache:
+  - '%LocalAppData%\go-build'
+  - '%GOPATH%\pkg\mod'
 
 stack: go 1.11
 
 install:
-  - go get -u github.com/golang/dep/...
-  - set PATH=%PATH%;%GOPATH%\bin
-  - dep ensure
+  - go mod download
 
 before_test:
   - go vet ./...
