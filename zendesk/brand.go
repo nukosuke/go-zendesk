@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"encoding/json"
 	"time"
 )
 
@@ -22,4 +23,29 @@ type Brand struct {
 	SignatureTemplate string     `json:"signature_template"`
 	CreatedAt         time.Time  `json:"created_at,omitempty"`
 	UpdatedAt         time.Time  `json:"updated_at,omitempty"`
+}
+
+// BrandAPI an interface containing all methods associated with zendesk brands
+type BrandAPI interface {
+	CreateBrand(brand Brand) (Brand, error)
+}
+
+// CreateBrand creates new brand
+// https://developer.zendesk.com/rest_api/docs/support/brands#create-brand
+func (z *Client) CreateBrand(brand Brand) (Brand, error) {
+	var data, result struct {
+		Brand Brand `json:"brand"`
+	}
+	data.Brand = brand
+
+	body, err := z.Post("/brands.json", data)
+	if err != nil {
+		return Brand{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Brand{}, err
+	}
+	return result.Brand, nil
 }
