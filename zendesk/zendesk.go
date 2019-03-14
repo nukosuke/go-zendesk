@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -8,12 +9,14 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+	"time"
 )
 
 const (
 	baseURLFormat       = "https://%s.zendesk.com/api/v2"
 	headerRateLimit     = "X-RateLimit-Limit"
 	headerRateRemaining = "X-RateLimit-Remaining"
+	deadline            = 1000
 )
 
 var defaultHeaders = map[string]string{
@@ -100,10 +103,13 @@ func (z *Client) SetCredential(cred Credential) {
 
 // Get get JSON data from API and returns its body as []bytes
 func (z Client) Get(path string) ([]byte, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), deadline*time.Millisecond)
+	defer cancel()
 	req, err := http.NewRequest(http.MethodGet, z.baseURL.String()+path, nil)
 	if err != nil {
 		return nil, err
 	}
+	req = req.WithContext(ctx)
 
 	z.prepareRequest(req)
 
@@ -129,6 +135,8 @@ func (z Client) Get(path string) ([]byte, error) {
 
 // Post send data to API and returns response body as []bytes
 func (z Client) Post(path string, data interface{}) ([]byte, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), deadline*time.Millisecond)
+	defer cancel()
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -138,6 +146,7 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	req = req.WithContext(ctx)
 	z.prepareRequest(req)
 
 	resp, err := z.httpClient.Do(req)
@@ -163,6 +172,8 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 
 // Put sends data to API and returns response body as []bytes
 func (z Client) Put(path string, data interface{}) ([]byte, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), deadline*time.Millisecond)
+	defer cancel()
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -172,6 +183,7 @@ func (z Client) Put(path string, data interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	req = req.WithContext(ctx)
 	z.prepareRequest(req)
 
 	resp, err := z.httpClient.Do(req)
@@ -197,10 +209,13 @@ func (z Client) Put(path string, data interface{}) ([]byte, error) {
 
 // Delete sends data to API and returns an error if unsuccessful
 func (z Client) Delete(path string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), deadline*time.Millisecond)
+	defer cancel()
 	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
 	if err != nil {
 		return err
 	}
+	req = req.WithContext(ctx)
 	z.prepareRequest(req)
 
 	resp, err := z.httpClient.Do(req)
