@@ -50,6 +50,8 @@ type TicketFieldAPI interface {
 	GetTicketFields() ([]TicketField, Page, error)
 	CreateTicketField(ticketField TicketField) (TicketField, error)
 	GetTicketField(ticketID int64) (TicketField, error)
+	UpdateTicketField(ticketID int64, field TicketField) (TicketField, error)
+	DeleteTicketField(ticketID int64) error
 }
 
 // GetTicketFields fetches ticket field list
@@ -111,4 +113,39 @@ func (z Client) GetTicketField(ticketID int64) (TicketField, error) {
 	}
 
 	return result.TicketField, err
+}
+
+// UpdateTicketField updates a field with the specified ticket field
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#update-ticket-field
+func (z Client) UpdateTicketField(ticketID int64, field TicketField) (TicketField, error) {
+	var result, data struct {
+		TicketField TicketField `json:"ticket_field"`
+	}
+
+	data.TicketField = field
+
+	body, err := z.Put(fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
+
+	if err != nil {
+		return TicketField{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return TicketField{}, err
+	}
+
+	return result.TicketField, err
+}
+
+// DeleteTicketField deletes the specified ticket field
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
+func (z Client) DeleteTicketField(ticketID int64) error {
+	err := z.Delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
