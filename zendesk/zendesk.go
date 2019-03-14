@@ -2,7 +2,7 @@ package zendesk
 
 import (
 	"bytes"
-  "context"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
