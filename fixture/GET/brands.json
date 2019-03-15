@@ -1,0 +1,98 @@
+{
+  "brands": [
+    {
+      "url": "https://example.zendesk.com/api/v2/brands/360002143133.json",
+      "id": 360002143133,
+      "name": "brand2",
+      "brand_url": "https://example-brand2.zendesk.com",
+      "subdomain": "example-brand2",
+      "has_help_center": false,
+      "help_center_state": "disabled",
+      "active": true,
+      "default": false,
+      "is_deleted": false,
+      "logo": {
+        "url": "https://example.zendesk.com/api/v2/attachments/360000142813.json",
+        "id": 360000142813,
+        "file_name": "zendesk_logo.jpeg",
+        "content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo.jpeg",
+        "mapped_content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo.jpeg",
+        "content_type": "image/jpeg",
+        "size": 4060,
+        "width": 80,
+        "height": 80,
+        "inline": false,
+        "thumbnails": [
+          {
+            "url": "https://example.zendesk.com/api/v2/attachments/360000142833.json",
+            "id": 360000142833,
+            "file_name": "zendesk_logo_thumb.jpeg",
+            "content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo_thumb.jpeg",
+            "mapped_content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo_thumb.jpeg",
+            "content_type": "image/jpeg",
+            "size": 2040,
+            "width": 32,
+            "height": 32,
+            "inline": false
+          },
+          {
+            "url": "https://example.zendesk.com/api/v2/attachments/360000142853.json",
+            "id": 360000142853,
+            "file_name": "zendesk_logo_small.jpeg",
+            "content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo_small.jpeg",
+            "mapped_content_url": "https://example.zendesk.com/system/brands/3600/0014/2813/zendesk_logo_small.jpeg",
+            "content_type": "image/jpeg",
+            "size": 1322,
+            "width": 24,
+            "height": 24,
+            "inline": false
+          }
+        ]
+      },
+      "ticket_form_ids": [
+        360000124108,
+        360000124128,
+        360000124148,
+        360000124168,
+        360000124188,
+        360000128407,
+        360000128427,
+        360000128447
+      ],
+      "signature_template": "{{agent.signature}}",
+      "created_at": "2019-03-15T03:12:57Z",
+      "updated_at": "2019-03-15T03:23:23Z",
+      "host_mapping": null
+    },
+    {
+      "url": "https://example.zendesk.com/api/v2/brands/360000021288.json",
+      "id": 360000021288,
+      "name": "サンドボックス",
+      "brand_url": "https://example.zendesk.com",
+      "subdomain": "example",
+      "has_help_center": true,
+      "help_center_state": "restricted",
+      "active": true,
+      "default": true,
+      "is_deleted": false,
+      "logo": null,
+      "ticket_form_ids": [
+        360000124108,
+        360000124128,
+        360000124148,
+        360000124168,
+        360000124188,
+        360000128407,
+        360000128427,
+        360000128447
+      ],
+      "signature_template": "{{agent.signature}}",
+      "created_at": "2018-07-13T06:20:01Z",
+      "updated_at": "2018-07-13T06:20:01Z",
+      "host_mapping": null
+    }
+  ],
+  "next_page": null,
+  "previous_page": null,
+  "count": 2
+}
