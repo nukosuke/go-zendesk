@@ -33,6 +33,21 @@ func (m *Client) EXPECT() *ClientMockRecorder {
 	return m.recorder
 }
 
+// CreateBrand mocks base method
+func (m *Client) CreateBrand(arg0 zendesk.Brand) (zendesk.Brand, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateBrand", arg0)
+	ret0, _ := ret[0].(zendesk.Brand)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateBrand indicates an expected call of CreateBrand
+func (mr *ClientMockRecorder) CreateBrand(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0)
+}
+
 // CreateGroup mocks base method
 func (m *Client) CreateGroup(arg0 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()

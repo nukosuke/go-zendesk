@@ -1,0 +1,29 @@
+{
+  "brand": {
+    "url": "https://example.zendesk.com/api/v2/brands/360002143293.json",
+    "id": 360002143293,
+    "name": "Brand 1",
+    "brand_url": "https://example-brand1.zendesk.com",
+    "subdomain": "terraform-provider-zendesk-brand1",
+    "has_help_center": false,
+    "help_center_state": "disabled",
+    "active": true,
+    "default": false,
+    "is_deleted": false,
+    "logo": null,
+    "ticket_form_ids": [
+      360000124108,
+      360000124128,
+      360000124148,
+      360000124168,
+      360000124188,
+      360000128407,
+      360000128427,
+      360000128447
+    ],
+    "signature_template": null,
+    "created_at": "2019-03-15T03:37:08Z",
+    "updated_at": "2019-03-15T03:37:08Z",
+    "host_mapping": null
+  }
+}
