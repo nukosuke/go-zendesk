@@ -4,6 +4,7 @@ package zendesk
 
 // API an interface containing all of the zendesk client methods
 type API interface {
+	AttachmentAPI
 	BrandAPI
 	GroupAPI
 	LocaleAPI

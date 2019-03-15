@@ -150,6 +150,11 @@ func (wr *writer) Close() (Upload, error) {
 	return data.Upload, nil
 }
 
+// AttachmentAPI an interface containing all of the attachment related zendesk methods
+type AttachmentAPI interface {
+	UploadAttachment(filename string, token string) UploadWriter
+}
+
 // UploadAttachment returns a writer that can be used to create a zendesk attachment
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#upload-files
 func (z *Client) UploadAttachment(filename string, token string) UploadWriter {
