@@ -30,6 +30,26 @@ type BrandAPI interface {
 	CreateBrand(brand Brand) (Brand, error)
 }
 
+// GetBrands fetches brand list
+// https://developer.zendesk.com/rest_api/docs/support/brands#list-brands
+func (z *Client) GetBrands() ([]Brand, Page, error) {
+	var data struct {
+		Brands []Brand `json:"brands"`
+		Page
+	}
+
+	body, err := z.Get("/brands.json")
+	if err != nil {
+		return []Brand{}, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return []Brand{}, Page{}, err
+	}
+	return data.Brands, data.Page, nil
+}
+
 // CreateBrand creates new brand
 // https://developer.zendesk.com/rest_api/docs/support/brands#create-brand
 func (z *Client) CreateBrand(brand Brand) (Brand, error) {
