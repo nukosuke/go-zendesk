@@ -27,7 +27,7 @@ type TicketFormAPI interface {
 }
 
 // GetTicketForms fetches ticket forms
-func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
+func (z *Client) GetTicketForms() ([]TicketForm, Page, error) {
 	var data struct {
 		TicketForms []TicketForm `json:"ticket_forms"`
 		Page
@@ -47,7 +47,7 @@ func (z Client) GetTicketForms() ([]TicketForm, Page, error) {
 
 // CreateTicketForm creates new ticket form
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_forms#create-ticket-forms
-func (z Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
+func (z *Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
 	var data, result struct {
 		TicketForm TicketForm `json:"ticket_form"`
 	}
