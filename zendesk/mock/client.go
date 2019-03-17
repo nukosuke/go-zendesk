@@ -276,3 +276,17 @@ func (mr *ClientMockRecorder) UpdateTicketField(arg0, arg1 interface{}) *gomock.
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketField", reflect.TypeOf((*Client)(nil).UpdateTicketField), arg0, arg1)
 }
+
+// UploadAttachment mocks base method
+func (m *Client) UploadAttachment(arg0, arg1 string) zendesk.UploadWriter {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UploadAttachment", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.UploadWriter)
+	return ret0
+}
+
+// UploadAttachment indicates an expected call of UploadAttachment
+func (mr *ClientMockRecorder) UploadAttachment(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UploadAttachment", reflect.TypeOf((*Client)(nil).UploadAttachment), arg0, arg1)
+}
