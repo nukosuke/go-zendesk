@@ -116,7 +116,7 @@ func (z *Client) SetCredential(cred Credential) {
 }
 
 // Get get JSON data from API and returns its body as []bytes
-func (z Client) Get(path string) ([]byte, error) {
+func (z *Client) Get(path string) ([]byte, error) {
 	req, err := http.NewRequest(http.MethodGet, z.baseURL.String()+path, nil)
 	if err != nil {
 		return nil, err
@@ -145,7 +145,7 @@ func (z Client) Get(path string) ([]byte, error) {
 }
 
 // Post send data to API and returns response body as []bytes
-func (z Client) Post(path string, data interface{}) ([]byte, error) {
+func (z *Client) Post(path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (z Client) Post(path string, data interface{}) ([]byte, error) {
 }
 
 // Put sends data to API and returns response body as []bytes
-func (z Client) Put(path string, data interface{}) ([]byte, error) {
+func (z *Client) Put(path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ func (z Client) Put(path string, data interface{}) ([]byte, error) {
 }
 
 // Delete sends data to API and returns an error if unsuccessful
-func (z Client) Delete(path string) error {
+func (z *Client) Delete(path string) error {
 	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
 	if err != nil {
 		return err

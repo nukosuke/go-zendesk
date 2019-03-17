@@ -96,7 +96,7 @@ func (z *Client) GetUsers() ([]User, Page, error) {
 
 // CreateUser creates new user
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
-func (z Client) CreateUser(user User) (User, error) {
+func (z *Client) CreateUser(user User) (User, error) {
 	var data, result struct {
 		User User `json:"user"`
 	}

@@ -64,7 +64,7 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 
 // CreateTrigger creates new trigger
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
-func (z Client) CreateTrigger(trigger Trigger) (Trigger, error) {
+func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}

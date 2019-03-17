@@ -56,7 +56,7 @@ type TicketFieldAPI interface {
 
 // GetTicketFields fetches ticket field list
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
-func (z Client) GetTicketFields() ([]TicketField, Page, error) {
+func (z *Client) GetTicketFields() ([]TicketField, Page, error) {
 	var data struct {
 		TicketFields []TicketField `json:"ticket_fields"`
 		Page
@@ -76,7 +76,7 @@ func (z Client) GetTicketFields() ([]TicketField, Page, error) {
 
 // CreateTicketField creates new ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#create-ticket-field
-func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) {
+func (z *Client) CreateTicketField(ticketField TicketField) (TicketField, error) {
 	var data, result struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
@@ -96,7 +96,7 @@ func (z Client) CreateTicketField(ticketField TicketField) (TicketField, error) 
 
 // GetTicketField gets a specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#show-ticket-field
-func (z Client) GetTicketField(ticketID int64) (TicketField, error) {
+func (z *Client) GetTicketField(ticketID int64) (TicketField, error) {
 	var result struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
@@ -117,7 +117,7 @@ func (z Client) GetTicketField(ticketID int64) (TicketField, error) {
 
 // UpdateTicketField updates a field with the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#update-ticket-field
-func (z Client) UpdateTicketField(ticketID int64, field TicketField) (TicketField, error) {
+func (z *Client) UpdateTicketField(ticketID int64, field TicketField) (TicketField, error) {
 	var result, data struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
@@ -140,7 +140,7 @@ func (z Client) UpdateTicketField(ticketID int64, field TicketField) (TicketFiel
 
 // DeleteTicketField deletes the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
-func (z Client) DeleteTicketField(ticketID int64) error {
+func (z *Client) DeleteTicketField(ticketID int64) error {
 	err := z.Delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
 
 	if err != nil {
