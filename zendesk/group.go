@@ -22,6 +22,8 @@ type GroupAPI interface {
 	GetGroups() ([]Group, Page, error)
 	GetGroup(groupID int64) (Group, error)
 	CreateGroup(group Group) (Group, error)
+	UpdateGroup(groupID int64, group Group) (Group, error)
+	DeleteGroup(groupID int64) error
 }
 
 // GetGroups fetches group list
