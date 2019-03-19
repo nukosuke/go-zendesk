@@ -165,6 +165,20 @@ func (mr *ClientMockRecorder) DeleteTicketField(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketField", reflect.TypeOf((*Client)(nil).DeleteTicketField), arg0)
 }
 
+// DeleteTicketForm mocks base method
+func (m *Client) DeleteTicketForm(arg0 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTicketForm", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTicketForm indicates an expected call of DeleteTicketForm
+func (mr *ClientMockRecorder) DeleteTicketForm(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketForm", reflect.TypeOf((*Client)(nil).DeleteTicketForm), arg0)
+}
+
 // GetBrand mocks base method
 func (m *Client) GetBrand(arg0 int64) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
@@ -255,6 +269,21 @@ func (m *Client) GetTicketFields() ([]zendesk.TicketField, zendesk.Page, error) 
 func (mr *ClientMockRecorder) GetTicketFields() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFields", reflect.TypeOf((*Client)(nil).GetTicketFields))
+}
+
+// GetTicketForm mocks base method
+func (m *Client) GetTicketForm(arg0 int64) (zendesk.TicketForm, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketForm", arg0)
+	ret0, _ := ret[0].(zendesk.TicketForm)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicketForm indicates an expected call of GetTicketForm
+func (mr *ClientMockRecorder) GetTicketForm(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketForm", reflect.TypeOf((*Client)(nil).GetTicketForm), arg0)
 }
 
 // GetTicketForms mocks base method
@@ -348,6 +377,21 @@ func (m *Client) UpdateTicketField(arg0 int64, arg1 zendesk.TicketField) (zendes
 func (mr *ClientMockRecorder) UpdateTicketField(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketField", reflect.TypeOf((*Client)(nil).UpdateTicketField), arg0, arg1)
+}
+
+// UpdateTicketForm mocks base method
+func (m *Client) UpdateTicketForm(arg0 int64, arg1 zendesk.TicketForm) (zendesk.TicketForm, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTicketForm", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.TicketForm)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTicketForm indicates an expected call of UpdateTicketForm
+func (mr *ClientMockRecorder) UpdateTicketForm(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketForm", reflect.TypeOf((*Client)(nil).UpdateTicketForm), arg0, arg1)
 }
 
 // UploadAttachment mocks base method
