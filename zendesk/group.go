@@ -22,6 +22,8 @@ type GroupAPI interface {
 	GetGroups() ([]Group, Page, error)
 	GetGroup(groupID int64) (Group, error)
 	CreateGroup(group Group) (Group, error)
+	UpdateGroup(groupID int64, group Group) (Group, error)
+	DeleteGroup(groupID int64) error
 }
 
 // GetGroups fetches group list
@@ -83,4 +85,38 @@ func (z *Client) GetGroup(groupID int64) (Group, error) {
 	}
 
 	return result.Group, err
+}
+
+// UpdateGroup updates a group with the specified group
+// ref: https://developer.zendesk.com/rest_api/docs/support/groups#update-group
+func (z *Client) UpdateGroup(groupID int64, group Group) (Group, error) {
+	var result, data struct {
+		Group Group `json:"group"`
+	}
+	data.Group = group
+
+	body, err := z.Put(fmt.Sprintf("/groups/%d.json", groupID), data)
+
+	if err != nil {
+		return Group{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Group{}, err
+	}
+
+	return result.Group, err
+}
+
+// DeleteGroup deletes the specified group
+// ref: https://developer.zendesk.com/rest_api/docs/support/groups#delete-group
+func (z *Client) DeleteGroup(groupID int64) error {
+	err := z.Delete(fmt.Sprintf("/groups/%d.json", groupID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
