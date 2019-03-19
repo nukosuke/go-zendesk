@@ -123,6 +123,20 @@ func (mr *ClientMockRecorder) CreateUser(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0)
 }
 
+// DeleteBrand mocks base method
+func (m *Client) DeleteBrand(arg0 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteBrand", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteBrand indicates an expected call of DeleteBrand
+func (mr *ClientMockRecorder) DeleteBrand(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteBrand", reflect.TypeOf((*Client)(nil).DeleteBrand), arg0)
+}
+
 // DeleteGroup mocks base method
 func (m *Client) DeleteGroup(arg0 int64) error {
 	m.ctrl.T.Helper()
@@ -149,6 +163,21 @@ func (m *Client) DeleteTicketField(arg0 int64) error {
 func (mr *ClientMockRecorder) DeleteTicketField(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketField", reflect.TypeOf((*Client)(nil).DeleteTicketField), arg0)
+}
+
+// GetBrand mocks base method
+func (m *Client) GetBrand(arg0 int64) (zendesk.Brand, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBrand", arg0)
+	ret0, _ := ret[0].(zendesk.Brand)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBrand indicates an expected call of GetBrand
+func (mr *ClientMockRecorder) GetBrand(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0)
 }
 
 // GetGroup mocks base method
@@ -274,6 +303,21 @@ func (m *Client) GetUsers() ([]zendesk.User, zendesk.Page, error) {
 func (mr *ClientMockRecorder) GetUsers() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers))
+}
+
+// UpdateBrand mocks base method
+func (m *Client) UpdateBrand(arg0 int64, arg1 zendesk.Brand) (zendesk.Brand, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateBrand", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Brand)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateBrand indicates an expected call of UpdateBrand
+func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBrand", reflect.TypeOf((*Client)(nil).UpdateBrand), arg0, arg1)
 }
 
 // UpdateGroup mocks base method

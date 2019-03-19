@@ -29,6 +29,9 @@ type Brand struct {
 // BrandAPI an interface containing all methods associated with zendesk brands
 type BrandAPI interface {
 	CreateBrand(brand Brand) (Brand, error)
+	GetBrand(brandID int64) (Brand, error)
+	UpdateBrand(brandID int64, brand Brand) (Brand, error)
+	DeleteBrand(brandID int64) error
 }
 
 // CreateBrand creates new brand
