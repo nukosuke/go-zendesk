@@ -25,6 +25,9 @@ type TicketForm struct {
 type TicketFormAPI interface {
 	GetTicketForms() ([]TicketForm, Page, error)
 	CreateTicketForm(ticketForm TicketForm) (TicketForm, error)
+	DeleteTicketForm(id int64) error
+	UpdateTicketForm(id int64, form TicketForm) (TicketForm, error)
+	GetTicketForm(id int64) (TicketForm, error)
 }
 
 // GetTicketForms fetches ticket forms
