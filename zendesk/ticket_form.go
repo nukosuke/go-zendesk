@@ -85,3 +85,24 @@ func (z *Client) GetTicketForm(id int64) (TicketForm, error) {
 	}
 	return result.TicketForm, nil
 }
+
+// UpdateTicketForm updates the specified ticket form and returns the updated form
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#update-ticket-forms
+func (z *Client) UpdateTicketForm(id int64, form TicketForm) (TicketForm, error) {
+	var data, result struct {
+		TicketForm TicketForm `json:"ticket_form"`
+	}
+
+	data.TicketForm = form
+	body, err := z.Put(fmt.Sprintf("/ticket_forms/%d.json", id), data)
+	if err != nil {
+		return TicketForm{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return TicketForm{}, err
+	}
+
+	return result.TicketForm, nil
+}
