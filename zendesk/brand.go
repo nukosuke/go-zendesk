@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -48,4 +49,60 @@ func (z *Client) CreateBrand(brand Brand) (Brand, error) {
 		return Brand{}, err
 	}
 	return result.Brand, nil
+}
+
+// GetBrand gets a specified brand
+// ref: https://developer.zendesk.com/rest_api/docs/support/brands#show-brand
+func (z *Client) GetBrand(brandID int64) (Brand, error) {
+	var result struct {
+		Brand Brand `json:"brand"`
+	}
+
+	body, err := z.Get(fmt.Sprintf("/brands/%d.json", brandID))
+
+	if err != nil {
+		return Brand{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Brand{}, err
+	}
+
+	return result.Brand, err
+}
+
+// UpdateBrand updates a brand with the specified brand
+// ref: https://developer.zendesk.com/rest_api/docs/support/brands#update-brand
+func (z *Client) UpdateBrand(brandID int64, brand Brand) (Brand, error) {
+	var result, data struct {
+		Brand Brand `json:"brand"`
+	}
+
+	data.Brand = brand
+
+	body, err := z.Put(fmt.Sprintf("/brands/%d.json", brandID), data)
+
+	if err != nil {
+		return Brand{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Brand{}, err
+	}
+
+	return result.Brand, err
+}
+
+// DeleteBrand deletes the specified brand
+// ref: https://developer.zendesk.com/rest_api/docs/support/brands#delete-brand
+func (z *Client) DeleteBrand(brandID int64) error {
+	err := z.Delete(fmt.Sprintf("/brands/%d.json", brandID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
