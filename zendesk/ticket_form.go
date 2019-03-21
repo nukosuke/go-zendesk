@@ -8,6 +8,7 @@ import (
 // TicketForm is JSON payload struct
 type TicketForm struct {
 	ID                 int64   `json:"id,omitempty"`
+	URL                string  `json:"url,omitempty"`
 	Name               string  `json:"name"`
 	RawName            string  `json:"raw_name,omitempty"`
 	DisplayName        string  `json:"display_name,omitempty"`
