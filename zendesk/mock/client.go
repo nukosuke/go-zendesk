@@ -179,6 +179,35 @@ func (mr *ClientMockRecorder) DeleteTicketForm(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketForm", reflect.TypeOf((*Client)(nil).DeleteTicketForm), arg0)
 }
 
+// DeleteUpload mocks base method
+func (m *Client) DeleteUpload(arg0 string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteUpload", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteUpload indicates an expected call of DeleteUpload
+func (mr *ClientMockRecorder) DeleteUpload(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUpload", reflect.TypeOf((*Client)(nil).DeleteUpload), arg0)
+}
+
+// GetAttachment mocks base method
+func (m *Client) GetAttachment(arg0 int64) (zendesk.Attachment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAttachment", arg0)
+	ret0, _ := ret[0].(zendesk.Attachment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAttachment indicates an expected call of GetAttachment
+func (mr *ClientMockRecorder) GetAttachment(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAttachment", reflect.TypeOf((*Client)(nil).GetAttachment), arg0)
+}
+
 // GetBrand mocks base method
 func (m *Client) GetBrand(arg0 int64) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
