@@ -47,3 +47,32 @@ func TestWrite(t *testing.T) {
 		t.Fatalf("Check sum of the written file does not match the expected checksum")
 	}
 }
+
+func TestDeleteUpload(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	err := c.DeleteUpload("foobar")
+	if err != nil {
+		t.Fatalf("Failed to delete ticket field: %s", err)
+	}
+}
+
+func TestGetAttachment(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "attachment.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	attachment, err := client.GetAttachment(123)
+	if err != nil {
+		t.Fatalf("Failed to get attachment: %s", err)
+	}
+
+	expectedID := int64(498483)
+	if attachment.ID != expectedID {
+		t.Fatalf("Returned attachment does not have the expected ID %d. Attachment id is %d", expectedID, attachment.ID)
+	}
+}
