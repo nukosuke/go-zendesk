@@ -45,6 +45,10 @@ func main() {
 }
 ```
 
+## Authors
+- [nukosuke](https://github.com/nukosuke)
+- [tamccall](https://github.com/tamccall)
+
 ## License
 
 MIT License.
