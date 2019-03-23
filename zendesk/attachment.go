@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -11,13 +12,13 @@ import (
 // Attachment is struct for attachment payload
 // https://developer.zendesk.com/rest_api/docs/support/attachments.html
 type Attachment struct {
-	ID          int64   `json:"id"`
-	FileName    string  `json:"file_name"`
-	ContentURL  string  `json:"content_url"`
-	ContentType string  `json:"content_type"`
-	Size        int64   `json:"size"`
-	Thumbnails  []Photo `json:"thumbnails"`
-	Inline      bool    `json:"inline"`
+	ID          int64   `json:"id,omitempty"`
+	FileName    string  `json:"file_name,omitempty"`
+	ContentURL  string  `json:"content_url,omitempty"`
+	ContentType string  `json:"content_type,omitempty"`
+	Size        int64   `json:"size,omitempty"`
+	Thumbnails  []Photo `json:"thumbnails,omitempty"`
+	Inline      bool    `json:"inline,omitempty"`
 }
 
 // Photo is thumbnail which is included in attachment
@@ -153,6 +154,8 @@ func (wr *writer) Close() (Upload, error) {
 // AttachmentAPI an interface containing all of the attachment related zendesk methods
 type AttachmentAPI interface {
 	UploadAttachment(filename string, token string) UploadWriter
+	DeleteUpload(token string) error
+	GetAttachment(id int64) (Attachment, error)
 }
 
 // UploadAttachment returns a writer that can be used to create a zendesk attachment
@@ -163,4 +166,30 @@ func (z *Client) UploadAttachment(filename string, token string) UploadWriter {
 		filename: filename,
 		token:    token,
 	}
+}
+
+// DeleteUpload deletes a previously uploaded file
+// ref: https://developer.zendesk.com/rest_api/docs/support/attachments#delete-upload
+func (z *Client) DeleteUpload(token string) error {
+	return z.Delete(fmt.Sprintf("/uploads/%s.json", token))
+}
+
+// GetAttachment returns the current state of an uploaded attachment
+// ref: https://developer.zendesk.com/rest_api/docs/support/attachments#show-attachment
+func (z *Client) GetAttachment(id int64) (Attachment, error) {
+	var result struct {
+		Attachment Attachment `json:"attachment"`
+	}
+
+	body, err := z.Get(fmt.Sprintf("/attachments/%d.json", id))
+	if err != nil {
+		return Attachment{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Attachment{}, err
+	}
+
+	return result.Attachment, nil
 }
