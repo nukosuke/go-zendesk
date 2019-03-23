@@ -179,6 +179,20 @@ func (mr *ClientMockRecorder) DeleteTicketForm(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketForm", reflect.TypeOf((*Client)(nil).DeleteTicketForm), arg0)
 }
 
+// DeleteTrigger mocks base method
+func (m *Client) DeleteTrigger(arg0 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTrigger", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTrigger indicates an expected call of DeleteTrigger
+func (mr *ClientMockRecorder) DeleteTrigger(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTrigger", reflect.TypeOf((*Client)(nil).DeleteTrigger), arg0)
+}
+
 // DeleteUpload mocks base method
 func (m *Client) DeleteUpload(arg0 string) error {
 	m.ctrl.T.Helper()
@@ -331,6 +345,21 @@ func (mr *ClientMockRecorder) GetTicketForms() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketForms", reflect.TypeOf((*Client)(nil).GetTicketForms))
 }
 
+// GetTrigger mocks base method
+func (m *Client) GetTrigger(arg0 int64) (zendesk.Trigger, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTrigger", arg0)
+	ret0, _ := ret[0].(zendesk.Trigger)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTrigger indicates an expected call of GetTrigger
+func (mr *ClientMockRecorder) GetTrigger(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTrigger", reflect.TypeOf((*Client)(nil).GetTrigger), arg0)
+}
+
 // GetTriggers mocks base method
 func (m *Client) GetTriggers() ([]zendesk.Trigger, zendesk.Page, error) {
 	m.ctrl.T.Helper()
@@ -421,6 +450,21 @@ func (m *Client) UpdateTicketForm(arg0 int64, arg1 zendesk.TicketForm) (zendesk.
 func (mr *ClientMockRecorder) UpdateTicketForm(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketForm", reflect.TypeOf((*Client)(nil).UpdateTicketForm), arg0, arg1)
+}
+
+// UpdateTrigger mocks base method
+func (m *Client) UpdateTrigger(arg0 int64, arg1 zendesk.Trigger) (zendesk.Trigger, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTrigger", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Trigger)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTrigger indicates an expected call of UpdateTrigger
+func (mr *ClientMockRecorder) UpdateTrigger(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTrigger", reflect.TypeOf((*Client)(nil).UpdateTrigger), arg0, arg1)
 }
 
 // UploadAttachment mocks base method

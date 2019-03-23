@@ -1,0 +1,43 @@
+{
+  "trigger": {
+    "url": "https://example.zendesk.com/api/v2/triggers/360056295714.json",
+    "id": 360056295714,
+    "title": "Notify requester of received request",
+    "active": true,
+    "updated_at": "2018-11-23T16:05:14Z",
+    "created_at": "2018-11-23T16:05:12Z",
+    "actions": [
+      {
+        "field": "notification_user",
+        "value": [
+          "requester_id",
+          "[Request received]",
+          "Your request ({{ticket.id}}) has been received and is being reviewed by our support staff.\n\nTo add additional comments, reply to this email."
+        ]
+      }
+    ],
+    "conditions": {
+      "all": [
+        {
+          "field": "update_type",
+          "operator": "is",
+          "value": "Create"
+        },
+        {
+          "field": "status",
+          "operator": "is_not",
+          "value": "solved"
+        },
+        {
+          "field": "ticket_is_public",
+          "operator": "is",
+          "value": "public"
+        }
+      ],
+      "any": []
+    },
+    "description": null,
+    "position": 0,
+    "raw_title": "Notify requester of received request"
+  }
+}

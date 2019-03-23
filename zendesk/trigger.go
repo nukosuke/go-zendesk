@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -41,9 +42,13 @@ type Trigger struct {
 type TriggerAPI interface {
 	GetTriggers() ([]Trigger, Page, error)
 	CreateTrigger(trigger Trigger) (Trigger, error)
+	GetTrigger(id int64) (Trigger, error)
+	UpdateTrigger(id int64, trigger Trigger) (Trigger, error)
+	DeleteTrigger(id int64) error
 }
 
 // GetTriggers fetch trigger list
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
 func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 	var data struct {
 		Triggers []Trigger `json:"triggers"`
@@ -63,7 +68,7 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 }
 
 // CreateTrigger creates new trigger
-// ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#create-trigger
 func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
@@ -80,4 +85,55 @@ func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 		return Trigger{}, err
 	}
 	return result.Trigger, nil
+}
+
+// GetTrigger returns the specified trigger
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
+func (z *Client) GetTrigger(id int64) (Trigger, error) {
+	var result struct {
+		Trigger Trigger `json:"trigger"`
+	}
+
+	body, err := z.Get(fmt.Sprintf("/triggers/%d.json", id))
+	if err != nil {
+		return Trigger{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Trigger{}, err
+	}
+	return result.Trigger, nil
+}
+
+// UpdateTrigger updates the specified trigger and returns the updated one
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#update-trigger
+func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
+	var data, result struct {
+		Trigger Trigger `json:"trigger"`
+	}
+
+	data.Trigger = trigger
+	body, err := z.Put(fmt.Sprintf("/triggers/%d.json", id), data)
+	if err != nil {
+		return Trigger{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Trigger{}, err
+	}
+
+	return result.Trigger, nil
+}
+
+// DeleteTrigger deletes the specified trigger
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
+func (z *Client) DeleteTrigger(id int64) error {
+	err := z.Delete(fmt.Sprintf("/triggers/%d.json", id))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
