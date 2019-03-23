@@ -87,7 +87,7 @@ func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 	return result.Trigger, nil
 }
 
-// GetTrigger returns the specified ticket form
+// GetTrigger returns the specified trigger
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
 func (z *Client) GetTrigger(id int64) (Trigger, error) {
 	var result struct {
@@ -106,14 +106,14 @@ func (z *Client) GetTrigger(id int64) (Trigger, error) {
 	return result.Trigger, nil
 }
 
-// UpdateTrigger updates the specified ticket form and returns the updated form
+// UpdateTrigger updates the specified trigger and returns the updated one
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#update-trigger
-func (z *Client) UpdateTrigger(id int64, form Trigger) (Trigger, error) {
+func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	data.Trigger = form
+	data.Trigger = trigger
 	body, err := z.Put(fmt.Sprintf("/triggers/%d.json", id), data)
 	if err != nil {
 		return Trigger{}, err
@@ -127,7 +127,7 @@ func (z *Client) UpdateTrigger(id int64, form Trigger) (Trigger, error) {
 	return result.Trigger, nil
 }
 
-// DeleteTrigger deletes the specified ticket form
+// DeleteTrigger deletes the specified trigger
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
 func (z *Client) DeleteTrigger(id int64) error {
 	err := z.Delete(fmt.Sprintf("/triggers/%d.json", id))
