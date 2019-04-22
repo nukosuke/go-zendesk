@@ -361,9 +361,9 @@ func (mr *ClientMockRecorder) GetTrigger(arg0 interface{}) *gomock.Call {
 }
 
 // GetTriggers mocks base method
-func (m *Client) GetTriggers() ([]zendesk.Trigger, zendesk.Page, error) {
+func (m *Client) GetTriggers(arg0 int) ([]zendesk.Trigger, zendesk.Page, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetTriggers")
+	ret := m.ctrl.Call(m, "GetTriggers", arg0)
 	ret0, _ := ret[0].([]zendesk.Trigger)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
@@ -371,9 +371,9 @@ func (m *Client) GetTriggers() ([]zendesk.Trigger, zendesk.Page, error) {
 }
 
 // GetTriggers indicates an expected call of GetTriggers
-func (mr *ClientMockRecorder) GetTriggers() *gomock.Call {
+func (mr *ClientMockRecorder) GetTriggers(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggers", reflect.TypeOf((*Client)(nil).GetTriggers))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggers", reflect.TypeOf((*Client)(nil).GetTriggers), arg0)
 }
 
 // GetUsers mocks base method
