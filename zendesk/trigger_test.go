@@ -11,7 +11,7 @@ func TestGetTriggers(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	triggers, _, err := client.GetTriggers()
+	triggers, _, err := client.GetTriggers(1)
 	if err != nil {
 		t.Fatalf("Failed to get triggers: %s", err)
 	}
