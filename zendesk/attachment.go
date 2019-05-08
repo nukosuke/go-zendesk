@@ -171,7 +171,7 @@ type AttachmentAPI interface {
 
 // UploadAttachment returns a writer that can be used to create a zendesk attachment
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#upload-files
-func (z *Client) UploadAttachment(ctx context.Context, filename string) UploadWriter {
+func (z *Client) UploadAttachment(ctx context.Context, filename string) UploadHandler {
 	return &writer{
 		Client:   z,
 		filename: filename,
