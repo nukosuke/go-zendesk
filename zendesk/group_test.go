@@ -13,7 +13,7 @@ func TestGetGroups(t *testing.T) {
 
 	groups, _, err := client.GetGroups()
 	if err != nil {
-		t.Fatalf("Failed to Get groups: %s", err)
+		t.Fatalf("Failed to get groups: %s", err)
 	}
 
 	if len(groups) != 1 {
@@ -39,7 +39,7 @@ func TestGetGroup(t *testing.T) {
 
 	group, err := client.GetGroup(123)
 	if err != nil {
-		t.Fatalf("Failed to Get group: %s", err)
+		t.Fatalf("Failed to get group: %s", err)
 	}
 
 	expectedID := int64(360002440594)
@@ -73,6 +73,6 @@ func TestDeleteGroup(t *testing.T) {
 	c := newTestClient(mockAPI)
 	err := c.DeleteGroup(1234)
 	if err != nil {
-		t.Fatalf("Failed to Delete group: %s", err)
+		t.Fatalf("Failed to delete group: %s", err)
 	}
 }

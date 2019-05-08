@@ -13,7 +13,7 @@ func TestGetTriggers(t *testing.T) {
 
 	triggers, _, err := client.GetTriggers()
 	if err != nil {
-		t.Fatalf("Failed to Get triggers: %s", err)
+		t.Fatalf("Failed to get triggers: %s", err)
 	}
 
 	if len(triggers) != 8 {
@@ -39,7 +39,7 @@ func TestGetTrigger(t *testing.T) {
 
 	trg, err := client.GetTrigger(123)
 	if err != nil {
-		t.Fatalf("Failed to Get trigger: %s", err)
+		t.Fatalf("Failed to get trigger: %s", err)
 	}
 
 	expectedID := int64(360056295714)
@@ -68,7 +68,7 @@ func TestUpdateTrigger(t *testing.T) {
 
 	trg, err := client.UpdateTrigger(123, Trigger{})
 	if err != nil {
-		t.Fatalf("Failed to Get trigger: %s", err)
+		t.Fatalf("Failed to get trigger: %s", err)
 	}
 
 	expectedID := int64(360056295714)
@@ -99,7 +99,7 @@ func TestDeleteTrigger(t *testing.T) {
 	c := newTestClient(mockAPI)
 	err := c.DeleteTrigger(1234)
 	if err != nil {
-		t.Fatalf("Failed to Delete trigger: %s", err)
+		t.Fatalf("Failed to delete trigger: %s", err)
 	}
 }
 

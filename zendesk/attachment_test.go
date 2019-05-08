@@ -57,7 +57,7 @@ func TestDeleteUpload(t *testing.T) {
 	c := newTestClient(mockAPI)
 	err := c.DeleteUpload("foobar")
 	if err != nil {
-		t.Fatalf("Failed to Delete ticket field: %s", err)
+		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
 }
 
@@ -68,7 +68,7 @@ func TestGetAttachment(t *testing.T) {
 
 	attachment, err := client.GetAttachment(123)
 	if err != nil {
-		t.Fatalf("Failed to Get attachment: %s", err)
+		t.Fatalf("Failed to get attachment: %s", err)
 	}
 
 	expectedID := int64(498483)

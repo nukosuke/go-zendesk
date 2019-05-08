@@ -20,7 +20,7 @@ func TestGetUsers(t *testing.T) {
 
 	users, _, err := client.GetUsers()
 	if err != nil {
-		t.Fatalf("Failed to Get users: %s", err)
+		t.Fatalf("Failed to get users: %s", err)
 	}
 
 	if len(users) != 2 {
@@ -38,7 +38,7 @@ func TestCreateUser(t *testing.T) {
 		Name:  "testuser",
 	})
 	if err != nil {
-		t.Fatalf("Failed to Get valid response: %s", err)
+		t.Fatalf("Failed to get valid response: %s", err)
 	}
 	if user.ID == 0 {
 		t.Fatal("Failed to create user")
