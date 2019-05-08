@@ -14,7 +14,7 @@ import (
 ////////// Helper //////////
 
 func fixture(filename string) string {
-	dir, err := filepath.Abs("../fixture")
+	dir, err := filepath.Abs("../../fixture")
 	if err != nil {
 		fmt.Printf("Failed to resolve fixture directory. Check the path: %s", err)
 		os.Exit(1)
