@@ -52,7 +52,6 @@ type UploadWriter interface {
 
 type UploadHandler interface {
 	UploadWriter
-	SetToken(string)
 }
 
 type writer struct {
@@ -63,10 +62,6 @@ type writer struct {
 	token    string
 	c        chan result
 	ctx context.Context
-}
-
-func (wr *writer) SetToken(s string) {
-	wr.token = s
 }
 
 func (wr *writer) open() error {
@@ -164,17 +159,18 @@ func (wr *writer) Close() (Upload, error) {
 
 // AttachmentAPI an interface containing all of the attachment related zendesk methods
 type AttachmentAPI interface {
-	UploadAttachment(ctx context.Context, filename string) UploadHandler
+	UploadAttachment(ctx context.Context, filename string, token string) UploadHandler
 	DeleteUpload(ctx context.Context, token string) error
 	GetAttachment(ctx context.Context, id int64) (Attachment, error)
 }
 
 // UploadAttachment returns a writer that can be used to create a zendesk attachment
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#upload-files
-func (z *Client) UploadAttachment(ctx context.Context, filename string) UploadHandler {
+func (z *Client) UploadAttachment(ctx context.Context, filename string, token string) UploadHandler {
 	return &writer{
 		Client:   z,
 		filename: filename,
+		token: token,
 		ctx: ctx,
 	}
 }

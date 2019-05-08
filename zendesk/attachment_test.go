@@ -28,8 +28,7 @@ func TestWrite(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	w := c.UploadAttachment(ctx.Background(), "foo")
-	w.SetToken("bar")
+	w := c.UploadAttachment(ctx.Background(), "foo", "bar")
 
 	_, err := io.Copy(w, r)
 	if err != nil {
