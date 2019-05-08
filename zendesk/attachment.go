@@ -50,10 +50,6 @@ type UploadWriter interface {
 	Close() (Upload, error)
 }
 
-type UploadHandler interface {
-	UploadWriter
-}
-
 type writer struct {
 	*Client
 	once     sync.Once
