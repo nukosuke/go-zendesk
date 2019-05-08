@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -115,14 +116,18 @@ func (z *Client) SetCredential(cred Credential) {
 	z.credential = cred
 }
 
-// Get get JSON data from API and returns its body as []bytes
+// Get Get JSON data from API and returns its body as []bytes
 func (z *Client) Get(path string) ([]byte, error) {
+	return z.get(context.Background(), path)
+}
+
+func (z *Client) get(ctx context.Context, path string) ([]byte, error) {
 	req, err := http.NewRequest(http.MethodGet, z.baseURL.String()+path, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	z.prepareRequest(req)
+	z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -146,6 +151,11 @@ func (z *Client) Get(path string) ([]byte, error) {
 
 // Post send data to API and returns response body as []bytes
 func (z *Client) Post(path string, data interface{}) ([]byte, error) {
+	return z.post(context.Background(), path, data)
+}
+
+// Post send data to API and returns response body as []bytes
+func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -155,7 +165,7 @@ func (z *Client) Post(path string, data interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	z.prepareRequest(req)
+	z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -180,6 +190,10 @@ func (z *Client) Post(path string, data interface{}) ([]byte, error) {
 
 // Put sends data to API and returns response body as []bytes
 func (z *Client) Put(path string, data interface{}) ([]byte, error) {
+	return z.put(context.Background(), path, data)
+}
+
+func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
@@ -189,7 +203,7 @@ func (z *Client) Put(path string, data interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	z.prepareRequest(req)
+	z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -214,11 +228,15 @@ func (z *Client) Put(path string, data interface{}) ([]byte, error) {
 
 // Delete sends data to API and returns an error if unsuccessful
 func (z *Client) Delete(path string) error {
+	return z.delete(context.Background(), path)
+}
+
+func (z *Client) delete(ctx context.Context, path string) error {
 	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
 	if err != nil {
 		return err
 	}
-	z.prepareRequest(req)
+	z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -241,8 +259,10 @@ func (z *Client) Delete(path string) error {
 	return nil
 }
 
+
 // prepare request sets common request variables such as authn and user agent
-func (z *Client) prepareRequest(req *http.Request) {
+func (z *Client) prepareRequest(ctx context.Context, req *http.Request) {
+	req.WithContext(ctx)
 	z.includeHeaders(req)
 	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
 }

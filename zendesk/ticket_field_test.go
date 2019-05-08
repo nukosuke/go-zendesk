@@ -13,7 +13,7 @@ func TestGetTicketFields(t *testing.T) {
 
 	ticketFields, _, err := client.GetTicketFields()
 	if err != nil {
-		t.Fatalf("Failed to get ticket fields: %s", err)
+		t.Fatalf("Failed to Get ticket fields: %s", err)
 	}
 
 	if len(ticketFields) != 15 {
@@ -28,7 +28,7 @@ func TestGetTicketField(t *testing.T) {
 
 	ticketField, err := client.GetTicketField(123)
 	if err != nil {
-		t.Fatalf("Failed to get ticket fields: %s", err)
+		t.Fatalf("Failed to Get ticket fields: %s", err)
 	}
 
 	expectedID := int64(360011737434)
@@ -73,6 +73,6 @@ func TestDeleteTicketField(t *testing.T) {
 	c := newTestClient(mockAPI)
 	err := c.DeleteTicketField(1234)
 	if err != nil {
-		t.Fatalf("Failed to delete ticket field: %s", err)
+		t.Fatalf("Failed to Delete ticket field: %s", err)
 	}
 }

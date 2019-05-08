@@ -12,7 +12,7 @@ func TestGetDynamicContentItems(t *testing.T) {
 
 	items, page, err := client.GetDynamicContentItems()
 	if err != nil {
-		t.Fatalf("Failed to get dynamic content items: %s", err)
+		t.Fatalf("Failed to Get dynamic content items: %s", err)
 	}
 
 	if len(items) != 2 {
@@ -35,7 +35,7 @@ func TestCreateDynamicContentItem(t *testing.T) {
 
 	item, err := client.CreateDynamicContentItem(DynamicContentItem{})
 	if err != nil {
-		t.Fatalf("Failed to get valid response: %s", err)
+		t.Fatalf("Failed to Get valid response: %s", err)
 	}
 	if item.ID == 0 {
 		t.Fatal("Failed to create dynamic content item")

@@ -24,7 +24,7 @@ func TestGetBrand(t *testing.T) {
 
 	brand, err := client.GetBrand(123)
 	if err != nil {
-		t.Fatalf("Failed to get brand: %s", err)
+		t.Fatalf("Failed to Get brand: %s", err)
 	}
 
 	expectedID := int64(360002143133)
@@ -58,6 +58,6 @@ func TestDeleteBrand(t *testing.T) {
 	c := newTestClient(mockAPI)
 	err := c.DeleteBrand(1234)
 	if err != nil {
-		t.Fatalf("Failed to delete brand: %s", err)
+		t.Fatalf("Failed to Delete brand: %s", err)
 	}
 }

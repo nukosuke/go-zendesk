@@ -52,7 +52,7 @@ func TestError_Headers(t *testing.T) {
 	}
 
 	if _, ok := err.Headers()[retryAfter]; !ok {
-		t.Fatal("Could not get header values from zendesk error")
+		t.Fatal("Could not Get header values from zendesk error")
 	}
 }
 

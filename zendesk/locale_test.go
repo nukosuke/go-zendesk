@@ -12,7 +12,7 @@ func TestGetLocales(t *testing.T) {
 
 	locales, err := client.GetLocales()
 	if err != nil {
-		t.Fatalf("Failed to get locales: %s", err)
+		t.Fatalf("Failed to Get locales: %s", err)
 	}
 
 	if len(locales) != 3 {

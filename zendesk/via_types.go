@@ -36,7 +36,7 @@ const (
 	ViaMobileSDK = 49
 	// ViaMobile : Mobile
 	ViaMobile = 56
-	// ViaHelpCenter : Help Center post
+	// ViaHelpCenter : Help Center Post
 	ViaHelpCenter = 50
 	// ViaWebService : Web service (API)
 	ViaWebService = 5
@@ -46,7 +46,7 @@ const (
 	ViaClosedTicket = 27
 	// ViaTicketSharing : Ticket Sharing
 	ViaTicketSharing = 31
-	// ViaFacebookPost : Facebook post
+	// ViaFacebookPost : Facebook Post
 	ViaFacebookPost = 38
 	// ViaFacebookMessage : Facebook private message
 	ViaFacebookMessage = 41
