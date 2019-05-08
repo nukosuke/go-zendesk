@@ -41,7 +41,7 @@ func (z *Client) GetDynamicContentItems() ([]DynamicContentItem, Page, error) {
 		Page
 	}
 
-	body, err := z.Get("/dynamic_content/items.json")
+	body, err := z.get("/dynamic_content/items.json")
 	if err != nil {
 		return []DynamicContentItem{}, Page{}, err
 	}
@@ -61,7 +61,7 @@ func (z *Client) CreateDynamicContentItem(item DynamicContentItem) (DynamicConte
 	}
 	data.Item = item
 
-	body, err := z.Post("/groups.json", data)
+	body, err := z.post("/groups.json", data)
 	if err != nil {
 		return DynamicContentItem{}, err
 	}

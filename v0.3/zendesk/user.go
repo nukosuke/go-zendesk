@@ -80,7 +80,7 @@ func (z *Client) GetUsers() ([]User, Page, error) {
 		Page
 	}
 
-	body, err := z.Get("/users.json")
+	body, err := z.get("/users.json")
 	if err != nil {
 		return nil, Page{}, err
 	}
@@ -102,7 +102,7 @@ func (z *Client) CreateUser(user User) (User, error) {
 	}
 	data.User = user
 
-	body, err := z.Post("/users.json", data)
+	body, err := z.post("/users.json", data)
 	if err != nil {
 		return User{}, err
 	}

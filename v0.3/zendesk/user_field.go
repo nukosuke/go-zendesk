@@ -31,7 +31,7 @@ func (z *Client) GetUserFields() ([]UserField, Page, error) {
 		UserFields []UserField `json:"user_fields"`
 		Page
 	}
-	body, err := z.Get("/user_fields.json")
+	body, err := z.get("/user_fields.json")
 	if err != nil {
 		return nil, Page{}, err
 	}

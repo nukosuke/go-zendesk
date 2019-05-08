@@ -28,7 +28,7 @@ func (z *Client) GetLocales() ([]Locale, error) {
 		Locales []Locale `json:"locales"`
 	}
 
-	body, err := z.Get("/locales.json")
+	body, err := z.get("/locales.json")
 	if err != nil {
 		return nil, err
 	}

@@ -62,7 +62,7 @@ func (z *Client) GetTicketFields() ([]TicketField, Page, error) {
 		Page
 	}
 
-	body, err := z.Get("/ticket_fields.json")
+	body, err := z.get("/ticket_fields.json")
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
@@ -82,7 +82,7 @@ func (z *Client) CreateTicketField(ticketField TicketField) (TicketField, error)
 	}
 	data.TicketField = ticketField
 
-	body, err := z.Post("/ticket_fields.json", data)
+	body, err := z.post("/ticket_fields.json", data)
 	if err != nil {
 		return TicketField{}, err
 	}
@@ -101,7 +101,7 @@ func (z *Client) GetTicketField(ticketID int64) (TicketField, error) {
 		TicketField TicketField `json:"ticket_field"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	body, err := z.get(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
 
 	if err != nil {
 		return TicketField{}, err
@@ -124,7 +124,7 @@ func (z *Client) UpdateTicketField(ticketID int64, field TicketField) (TicketFie
 
 	data.TicketField = field
 
-	body, err := z.Put(fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
+	body, err := z.put(fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
 
 	if err != nil {
 		return TicketField{}, err
@@ -141,7 +141,7 @@ func (z *Client) UpdateTicketField(ticketID int64, field TicketField) (TicketFie
 // DeleteTicketField deletes the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
 func (z *Client) DeleteTicketField(ticketID int64) error {
-	err := z.Delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	err := z.delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
 
 	if err != nil {
 		return err

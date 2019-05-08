@@ -55,7 +55,7 @@ func (z *Client) GetTriggers() ([]Trigger, Page, error) {
 		Page
 	}
 
-	body, err := z.Get("/triggers.json")
+	body, err := z.get("/triggers.json")
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
@@ -75,7 +75,7 @@ func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 	}
 	data.Trigger = trigger
 
-	body, err := z.Post("/triggers.json", data)
+	body, err := z.post("/triggers.json", data)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -94,7 +94,7 @@ func (z *Client) GetTrigger(id int64) (Trigger, error) {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/triggers/%d.json", id))
+	body, err := z.get(fmt.Sprintf("/triggers/%d.json", id))
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -114,7 +114,7 @@ func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
 	}
 
 	data.Trigger = trigger
-	body, err := z.Put(fmt.Sprintf("/triggers/%d.json", id), data)
+	body, err := z.put(fmt.Sprintf("/triggers/%d.json", id), data)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -130,7 +130,7 @@ func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
 // DeleteTrigger deletes the specified trigger
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
 func (z *Client) DeleteTrigger(id int64) error {
-	err := z.Delete(fmt.Sprintf("/triggers/%d.json", id))
+	err := z.delete(fmt.Sprintf("/triggers/%d.json", id))
 	if err != nil {
 		return err
 	}

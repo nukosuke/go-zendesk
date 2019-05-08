@@ -39,7 +39,7 @@ func (z *Client) GetTicketForms() ([]TicketForm, Page, error) {
 		Page
 	}
 
-	body, err := z.Get("/ticket_forms.json")
+	body, err := z.get("/ticket_forms.json")
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
@@ -59,7 +59,7 @@ func (z *Client) CreateTicketForm(ticketForm TicketForm) (TicketForm, error) {
 	}
 	data.TicketForm = ticketForm
 
-	body, err := z.Post("/ticket_forms.json", data)
+	body, err := z.post("/ticket_forms.json", data)
 	if err != nil {
 		return TicketForm{}, err
 	}
@@ -78,7 +78,7 @@ func (z *Client) GetTicketForm(id int64) (TicketForm, error) {
 		TicketForm TicketForm `json:"ticket_form"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/ticket_forms/%d.json", id))
+	body, err := z.get(fmt.Sprintf("/ticket_forms/%d.json", id))
 	if err != nil {
 		return TicketForm{}, err
 	}
@@ -98,7 +98,7 @@ func (z *Client) UpdateTicketForm(id int64, form TicketForm) (TicketForm, error)
 	}
 
 	data.TicketForm = form
-	body, err := z.Put(fmt.Sprintf("/ticket_forms/%d.json", id), data)
+	body, err := z.put(fmt.Sprintf("/ticket_forms/%d.json", id), data)
 	if err != nil {
 		return TicketForm{}, err
 	}
@@ -114,7 +114,7 @@ func (z *Client) UpdateTicketForm(id int64, form TicketForm) (TicketForm, error)
 // DeleteTicketForm deletes the specified ticket form
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#delete-ticket-form
 func (z *Client) DeleteTicketForm(id int64) error {
-	err := z.Delete(fmt.Sprintf("/ticket_forms/%d.json", id))
+	err := z.delete(fmt.Sprintf("/ticket_forms/%d.json", id))
 	if err != nil {
 		return err
 	}

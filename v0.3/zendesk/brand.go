@@ -42,7 +42,7 @@ func (z *Client) CreateBrand(brand Brand) (Brand, error) {
 	}
 	data.Brand = brand
 
-	body, err := z.Post("/brands.json", data)
+	body, err := z.post("/brands.json", data)
 	if err != nil {
 		return Brand{}, err
 	}
@@ -61,7 +61,7 @@ func (z *Client) GetBrand(brandID int64) (Brand, error) {
 		Brand Brand `json:"brand"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/brands/%d.json", brandID))
+	body, err := z.get(fmt.Sprintf("/brands/%d.json", brandID))
 
 	if err != nil {
 		return Brand{}, err
@@ -84,7 +84,7 @@ func (z *Client) UpdateBrand(brandID int64, brand Brand) (Brand, error) {
 
 	data.Brand = brand
 
-	body, err := z.Put(fmt.Sprintf("/brands/%d.json", brandID), data)
+	body, err := z.put(fmt.Sprintf("/brands/%d.json", brandID), data)
 
 	if err != nil {
 		return Brand{}, err
@@ -101,7 +101,7 @@ func (z *Client) UpdateBrand(brandID int64, brand Brand) (Brand, error) {
 // DeleteBrand deletes the specified brand
 // ref: https://developer.zendesk.com/rest_api/docs/support/brands#delete-brand
 func (z *Client) DeleteBrand(brandID int64) error {
-	err := z.Delete(fmt.Sprintf("/brands/%d.json", brandID))
+	err := z.delete(fmt.Sprintf("/brands/%d.json", brandID))
 
 	if err != nil {
 		return err

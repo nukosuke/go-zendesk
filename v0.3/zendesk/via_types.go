@@ -28,7 +28,7 @@ const (
 	ViaAPIPhoneCallOutbound = 46
 	// ViaSMS : SMS
 	ViaSMS = 57
-	// ViaGetSatisfaction : Get Satisfaction
+	// ViaGetSatisfaction : get Satisfaction
 	ViaGetSatisfaction = 16
 	// ViaWebWidget : Web Widget
 	ViaWebWidget = 48
