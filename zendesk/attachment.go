@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -69,7 +70,7 @@ func (wr *writer) open() error {
 		return err
 	}
 
-	wr.prepareRequest(req)
+	wr.prepareRequest(context.Background(), req)
 	req.Header.Set("Content-Type", "application/binary")
 
 	q := req.URL.Query()
