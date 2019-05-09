@@ -469,10 +469,10 @@ func (mr *ClientMockRecorder) UpdateTrigger(arg0, arg1 interface{}) *gomock.Call
 }
 
 // UploadAttachment mocks base method
-func (m *Client) UploadAttachment(arg0 context.Context, arg1, arg2 string) zendesk.UploadHandler {
+func (m *Client) UploadAttachment(arg0 context.Context, arg1, arg2 string) zendesk.UploadWriter {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UploadAttachment", arg0, arg1, arg2)
-	ret0, _ := ret[0].(zendesk.UploadHandler)
+	ret0, _ := ret[0].(zendesk.UploadWriter)
 	return ret0
 }
 
