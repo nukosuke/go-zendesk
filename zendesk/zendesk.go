@@ -9,8 +9,11 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"regexp"
 	"strings"
+
+	"github.com/google/go-querystring/query"
 )
 
 const (
@@ -259,7 +262,6 @@ func (z *Client) delete(ctx context.Context, path string) error {
 	return nil
 }
 
-
 // prepare request sets common request variables such as authn and user agent
 func (z *Client) prepareRequest(ctx context.Context, req *http.Request) {
 	req.WithContext(ctx)
@@ -272,4 +274,25 @@ func (z *Client) includeHeaders(req *http.Request) {
 	for key, value := range z.headers {
 		req.Header.Set(key, value)
 	}
+}
+
+// addOptions build query string
+func addOptions(s string, opts interface{}) (string, error) {
+	v := reflect.ValueOf(opts)
+	if v.Kind() == reflect.Ptr && v.IsNil() {
+		return s, nil
+	}
+
+	u, err := url.Parse(s)
+	if err != nil {
+		return s, err
+	}
+
+	qs, err := query.Values(opts)
+	if err != nil {
+		return s, err
+	}
+
+	u.RawQuery = qs.Encode()
+	return u.String(), nil
 }
