@@ -38,9 +38,19 @@ type Trigger struct {
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
+// TriggerListOptions is options for GetTriggers
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#list-triggers
+type TriggerListOptions struct {
+	PageOptions
+	Active    bool   `url:"active,omitempty"`
+	SortBy    string `url:"sort_by,omitempty"`
+	SortOrder string `url:"sort_order,omitempty"`
+}
+
 // TriggerAPI an interface containing all trigger related methods
 type TriggerAPI interface {
-	GetTriggers() ([]Trigger, Page, error)
+	GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error)
 	CreateTrigger(trigger Trigger) (Trigger, error)
 	GetTrigger(id int64) (Trigger, error)
 	UpdateTrigger(id int64, trigger Trigger) (Trigger, error)
@@ -49,13 +59,18 @@ type TriggerAPI interface {
 
 // GetTriggers fetch trigger list
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
-func (z *Client) GetTriggers() ([]Trigger, Page, error) {
+func (z *Client) GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error) {
 	var data struct {
 		Triggers []Trigger `json:"triggers"`
 		Page
 	}
 
-	body, err := z.Get("/triggers.json")
+	u, err := addOptions("/triggers.json", opts)
+	if err != nil {
+		return []Trigger{}, Page{}, err
+	}
+
+	body, err := z.Get(u)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
