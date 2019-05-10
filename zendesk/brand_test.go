@@ -11,7 +11,7 @@ func TestCreateBrand(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateBrand(Brand{})
+	_, err := client.CreateBrand(ctx, Brand{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create brand: %s", err)
 	}
@@ -22,7 +22,7 @@ func TestGetBrand(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	brand, err := client.GetBrand(123)
+	brand, err := client.GetBrand(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get brand: %s", err)
 	}
@@ -38,7 +38,7 @@ func TestUpdateBrand(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	updatedBrand, err := client.UpdateBrand(int64(1234), Brand{})
+	updatedBrand, err := client.UpdateBrand(ctx, int64(1234), Brand{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create brand: %s", err)
 	}
@@ -56,7 +56,7 @@ func TestDeleteBrand(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteBrand(1234)
+	err := c.DeleteBrand(ctx, 1234)
 	if err != nil {
 		t.Fatalf("Failed to delete brand: %s", err)
 	}

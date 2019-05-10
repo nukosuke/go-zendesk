@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -28,21 +29,21 @@ type Brand struct {
 
 // BrandAPI an interface containing all methods associated with zendesk brands
 type BrandAPI interface {
-	CreateBrand(brand Brand) (Brand, error)
-	GetBrand(brandID int64) (Brand, error)
-	UpdateBrand(brandID int64, brand Brand) (Brand, error)
-	DeleteBrand(brandID int64) error
+	CreateBrand(ctx context.Context, brand Brand) (Brand, error)
+	GetBrand(ctx context.Context, brandID int64) (Brand, error)
+	UpdateBrand(ctx context.Context, brandID int64, brand Brand) (Brand, error)
+	DeleteBrand(ctx context.Context, brandID int64) error
 }
 
 // CreateBrand creates new brand
 // https://developer.zendesk.com/rest_api/docs/support/brands#create-brand
-func (z *Client) CreateBrand(brand Brand) (Brand, error) {
+func (z *Client) CreateBrand(ctx context.Context, brand Brand) (Brand, error) {
 	var data, result struct {
 		Brand Brand `json:"brand"`
 	}
 	data.Brand = brand
 
-	body, err := z.Post("/brands.json", data)
+	body, err := z.post(ctx, "/brands.json", data)
 	if err != nil {
 		return Brand{}, err
 	}
@@ -56,12 +57,12 @@ func (z *Client) CreateBrand(brand Brand) (Brand, error) {
 
 // GetBrand gets a specified brand
 // ref: https://developer.zendesk.com/rest_api/docs/support/brands#show-brand
-func (z *Client) GetBrand(brandID int64) (Brand, error) {
+func (z *Client) GetBrand(ctx context.Context, brandID int64) (Brand, error) {
 	var result struct {
 		Brand Brand `json:"brand"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/brands/%d.json", brandID))
+	body, err := z.get(ctx, fmt.Sprintf("/brands/%d.json", brandID))
 
 	if err != nil {
 		return Brand{}, err
@@ -77,14 +78,14 @@ func (z *Client) GetBrand(brandID int64) (Brand, error) {
 
 // UpdateBrand updates a brand with the specified brand
 // ref: https://developer.zendesk.com/rest_api/docs/support/brands#update-brand
-func (z *Client) UpdateBrand(brandID int64, brand Brand) (Brand, error) {
+func (z *Client) UpdateBrand(ctx context.Context, brandID int64, brand Brand) (Brand, error) {
 	var result, data struct {
 		Brand Brand `json:"brand"`
 	}
 
 	data.Brand = brand
 
-	body, err := z.Put(fmt.Sprintf("/brands/%d.json", brandID), data)
+	body, err := z.put(ctx, fmt.Sprintf("/brands/%d.json", brandID), data)
 
 	if err != nil {
 		return Brand{}, err
@@ -100,8 +101,8 @@ func (z *Client) UpdateBrand(brandID int64, brand Brand) (Brand, error) {
 
 // DeleteBrand deletes the specified brand
 // ref: https://developer.zendesk.com/rest_api/docs/support/brands#delete-brand
-func (z *Client) DeleteBrand(brandID int64) error {
-	err := z.Delete(fmt.Sprintf("/brands/%d.json", brandID))
+func (z *Client) DeleteBrand(ctx context.Context, brandID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/brands/%d.json", brandID))
 
 	if err != nil {
 		return err
