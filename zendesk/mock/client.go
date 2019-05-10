@@ -35,18 +35,18 @@ func (m *Client) EXPECT() *ClientMockRecorder {
 }
 
 // CreateBrand mocks base method
-func (m *Client) CreateBrand(arg0 zendesk.Brand) (zendesk.Brand, error) {
+func (m *Client) CreateBrand(arg0 context.Context, arg1 zendesk.Brand) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateBrand", arg0)
+	ret := m.ctrl.Call(m, "CreateBrand", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.Brand)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // CreateBrand indicates an expected call of CreateBrand
-func (mr *ClientMockRecorder) CreateBrand(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) CreateBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0, arg1)
 }
 
 // CreateGroup mocks base method
@@ -125,17 +125,17 @@ func (mr *ClientMockRecorder) CreateUser(arg0 interface{}) *gomock.Call {
 }
 
 // DeleteBrand mocks base method
-func (m *Client) DeleteBrand(arg0 int64) error {
+func (m *Client) DeleteBrand(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteBrand", arg0)
+	ret := m.ctrl.Call(m, "DeleteBrand", arg0, arg1)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // DeleteBrand indicates an expected call of DeleteBrand
-func (mr *ClientMockRecorder) DeleteBrand(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) DeleteBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteBrand", reflect.TypeOf((*Client)(nil).DeleteBrand), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteBrand", reflect.TypeOf((*Client)(nil).DeleteBrand), arg0, arg1)
 }
 
 // DeleteGroup mocks base method
@@ -224,18 +224,18 @@ func (mr *ClientMockRecorder) GetAttachment(arg0, arg1 interface{}) *gomock.Call
 }
 
 // GetBrand mocks base method
-func (m *Client) GetBrand(arg0 int64) (zendesk.Brand, error) {
+func (m *Client) GetBrand(arg0 context.Context, arg1 int64) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetBrand", arg0)
+	ret := m.ctrl.Call(m, "GetBrand", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.Brand)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetBrand indicates an expected call of GetBrand
-func (mr *ClientMockRecorder) GetBrand(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0, arg1)
 }
 
 // GetGroup mocks base method
@@ -394,18 +394,18 @@ func (mr *ClientMockRecorder) GetUsers() *gomock.Call {
 }
 
 // UpdateBrand mocks base method
-func (m *Client) UpdateBrand(arg0 int64, arg1 zendesk.Brand) (zendesk.Brand, error) {
+func (m *Client) UpdateBrand(arg0 context.Context, arg1 int64, arg2 zendesk.Brand) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateBrand", arg0, arg1)
+	ret := m.ctrl.Call(m, "UpdateBrand", arg0, arg1, arg2)
 	ret0, _ := ret[0].(zendesk.Brand)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // UpdateBrand indicates an expected call of UpdateBrand
-func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBrand", reflect.TypeOf((*Client)(nil).UpdateBrand), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBrand", reflect.TypeOf((*Client)(nil).UpdateBrand), arg0, arg1, arg2)
 }
 
 // UpdateGroup mocks base method

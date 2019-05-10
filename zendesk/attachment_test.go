@@ -2,7 +2,6 @@ package zendesk
 
 import (
 	"bytes"
-	ctx "context"
 	"crypto/sha1"
 	"io"
 	"net/http"
@@ -28,7 +27,7 @@ func TestWrite(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	w := c.UploadAttachment(ctx.Background(), "foo", "bar")
+	w := c.UploadAttachment(ctx, "foo", "bar")
 
 	_, err := io.Copy(w, r)
 	if err != nil {
@@ -57,7 +56,7 @@ func TestDeleteUpload(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteUpload(ctx.Background(), "foobar")
+	err := c.DeleteUpload(ctx, "foobar")
 	if err != nil {
 		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
@@ -68,7 +67,7 @@ func TestGetAttachment(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	attachment, err := client.GetAttachment(ctx.Background(), 123)
+	attachment, err := client.GetAttachment(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get attachment: %s", err)
 	}
