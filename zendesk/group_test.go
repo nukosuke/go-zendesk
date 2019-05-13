@@ -11,7 +11,7 @@ func TestGetGroups(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	groups, _, err := client.GetGroups()
+	groups, _, err := client.GetGroups(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get groups: %s", err)
 	}
@@ -26,7 +26,7 @@ func TestCreateGroup(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateGroup(Group{})
+	_, err := client.CreateGroup(ctx, Group{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create group: %s", err)
 	}
@@ -37,7 +37,7 @@ func TestGetGroup(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	group, err := client.GetGroup(123)
+	group, err := client.GetGroup(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get group: %s", err)
 	}
@@ -53,7 +53,7 @@ func TestUpdateGroup(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	updatedGroup, err := client.UpdateGroup(int64(1234), Group{})
+	updatedGroup, err := client.UpdateGroup(ctx, int64(1234), Group{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create group: %s", err)
 	}
@@ -71,7 +71,7 @@ func TestDeleteGroup(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteGroup(1234)
+	err := c.DeleteGroup(ctx, 1234)
 	if err != nil {
 		t.Fatalf("Failed to delete group: %s", err)
 	}
