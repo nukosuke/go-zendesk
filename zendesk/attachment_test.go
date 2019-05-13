@@ -27,7 +27,8 @@ func TestWrite(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	w := c.UploadAttachment("foo", "bar")
+	w := c.UploadAttachment(ctx, "foo", "bar")
+
 	_, err := io.Copy(w, r)
 	if err != nil {
 		t.Fatal("Received an error from write")
@@ -55,7 +56,7 @@ func TestDeleteUpload(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteUpload("foobar")
+	err := c.DeleteUpload(ctx, "foobar")
 	if err != nil {
 		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
@@ -66,7 +67,7 @@ func TestGetAttachment(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	attachment, err := client.GetAttachment(123)
+	attachment, err := client.GetAttachment(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get attachment: %s", err)
 	}

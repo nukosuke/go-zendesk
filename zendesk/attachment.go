@@ -57,6 +57,7 @@ type writer struct {
 	filename string
 	token    string
 	c        chan result
+	ctx context.Context
 }
 
 func (wr *writer) open() error {
@@ -70,7 +71,7 @@ func (wr *writer) open() error {
 		return err
 	}
 
-	wr.prepareRequest(context.Background(), req)
+	wr.prepareRequest(wr.ctx, req)
 	req.Header.Set("Content-Type", "application/binary")
 
 	q := req.URL.Query()
@@ -154,35 +155,36 @@ func (wr *writer) Close() (Upload, error) {
 
 // AttachmentAPI an interface containing all of the attachment related zendesk methods
 type AttachmentAPI interface {
-	UploadAttachment(filename string, token string) UploadWriter
-	DeleteUpload(token string) error
-	GetAttachment(id int64) (Attachment, error)
+	UploadAttachment(ctx context.Context, filename string, token string) UploadWriter
+	DeleteUpload(ctx context.Context, token string) error
+	GetAttachment(ctx context.Context, id int64) (Attachment, error)
 }
 
 // UploadAttachment returns a writer that can be used to create a zendesk attachment
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#upload-files
-func (z *Client) UploadAttachment(filename string, token string) UploadWriter {
+func (z *Client) UploadAttachment(ctx context.Context, filename string, token string) UploadWriter {
 	return &writer{
 		Client:   z,
 		filename: filename,
-		token:    token,
+		token: token,
+		ctx: ctx,
 	}
 }
 
 // DeleteUpload deletes a previously uploaded file
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#delete-upload
-func (z *Client) DeleteUpload(token string) error {
-	return z.Delete(fmt.Sprintf("/uploads/%s.json", token))
+func (z *Client) DeleteUpload(ctx context.Context, token string) error {
+	return z.delete(ctx, fmt.Sprintf("/uploads/%s.json", token))
 }
 
 // GetAttachment returns the current state of an uploaded attachment
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#show-attachment
-func (z *Client) GetAttachment(id int64) (Attachment, error) {
+func (z *Client) GetAttachment(ctx context.Context, id int64) (Attachment, error) {
 	var result struct {
 		Attachment Attachment `json:"attachment"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/attachments/%d.json", id))
+	body, err := z.get(ctx, fmt.Sprintf("/attachments/%d.json", id))
 	if err != nil {
 		return Attachment{}, err
 	}
