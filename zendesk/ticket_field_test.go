@@ -11,7 +11,7 @@ func TestGetTicketFields(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	ticketFields, _, err := client.GetTicketFields()
+	ticketFields, _, err := client.GetTicketFields(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get ticket fields: %s", err)
 	}
@@ -26,7 +26,7 @@ func TestGetTicketField(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	ticketField, err := client.GetTicketField(123)
+	ticketField, err := client.GetTicketField(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get ticket fields: %s", err)
 	}
@@ -42,7 +42,7 @@ func TestCreateTicketField(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateTicketField(TicketField{})
+	_, err := client.CreateTicketField(ctx, TicketField{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create ticket field: %s", err)
 	}
@@ -53,7 +53,7 @@ func TestUpdateTicketField(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	updatedField, err := client.UpdateTicketField(int64(1234), TicketField{})
+	updatedField, err := client.UpdateTicketField(ctx, int64(1234), TicketField{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create ticket field: %s", err)
 	}
@@ -71,7 +71,7 @@ func TestDeleteTicketField(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteTicketField(1234)
+	err := c.DeleteTicketField(ctx, 1234)
 	if err != nil {
 		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
