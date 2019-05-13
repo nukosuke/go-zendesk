@@ -65,6 +65,10 @@ func (z *Client) GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error) 
 		Page
 	}
 
+	if opts == nil {
+		return []Trigger{}, Page{}, &OptionsError{opts}
+	}
+
 	u, err := addOptions("/triggers.json", opts)
 	if err != nil {
 		return []Trigger{}, Page{}, err

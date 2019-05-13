@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"reflect"
 	"regexp"
 	"strings"
 
@@ -278,11 +277,6 @@ func (z *Client) includeHeaders(req *http.Request) {
 
 // addOptions build query string
 func addOptions(s string, opts interface{}) (string, error) {
-	v := reflect.ValueOf(opts)
-	if v.Kind() == reflect.Ptr && v.IsNil() {
-		return s, nil
-	}
-
 	u, err := url.Parse(s)
 	if err != nil {
 		return s, err

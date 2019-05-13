@@ -21,6 +21,21 @@ func TestGetTriggers(t *testing.T) {
 	}
 }
 
+func TestGetTriggersWithNil(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "triggers.json")
+	client := newTestClient(mockAPI)
+
+	_, _, err := client.GetTriggers(nil)
+	if err == nil {
+		t.Fatal("expected an OptionsError, but no error")
+	}
+
+	_, ok := err.(*OptionsError)
+	if !ok {
+		t.Fatalf("unexpected error type: %v", err)
+	}
+}
+
 func TestCreateTrigger(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "triggers.json", http.StatusCreated)
 	client := newTestClient(mockAPI)
