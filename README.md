@@ -22,6 +22,8 @@ $ go get github.com/nukosuke/go-zendesk
 package main
 
 import (
+    "context"
+
     "github.com/nukosuke/go-zendesk/zendesk"
 )
 
@@ -39,7 +41,7 @@ func main() {
     client.SetCredential(zendesk.NewBasicAuthCredential("john.doe@example.com", "password"))
 
     // Create resource
-    client.CreateGroup(zendesk.Group{
+    client.CreateGroup(context.Background(), zendesk.Group{
         Name: "support team",
     })
 }
