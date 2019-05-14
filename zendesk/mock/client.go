@@ -125,18 +125,18 @@ func (mr *ClientMockRecorder) CreateTrigger(arg0 interface{}) *gomock.Call {
 }
 
 // CreateUser mocks base method
-func (m *Client) CreateUser(arg0 zendesk.User) (zendesk.User, error) {
+func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateUser", arg0)
+	ret := m.ctrl.Call(m, "CreateUser", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // CreateUser indicates an expected call of CreateUser
-func (mr *ClientMockRecorder) CreateUser(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0, arg1)
 }
 
 // DeleteBrand mocks base method
@@ -409,9 +409,9 @@ func (mr *ClientMockRecorder) GetTriggers() *gomock.Call {
 }
 
 // GetUsers mocks base method
-func (m *Client) GetUsers() ([]zendesk.User, zendesk.Page, error) {
+func (m *Client) GetUsers(arg0 context.Context) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUsers")
+	ret := m.ctrl.Call(m, "GetUsers", arg0)
 	ret0, _ := ret[0].([]zendesk.User)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
@@ -419,9 +419,9 @@ func (m *Client) GetUsers() ([]zendesk.User, zendesk.Page, error) {
 }
 
 // GetUsers indicates an expected call of GetUsers
-func (mr *ClientMockRecorder) GetUsers() *gomock.Call {
+func (mr *ClientMockRecorder) GetUsers(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0)
 }
 
 // UpdateBrand mocks base method

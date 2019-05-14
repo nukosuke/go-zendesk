@@ -18,7 +18,7 @@ func TestGetUsers(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	users, _, err := client.GetUsers()
+	users, _, err := client.GetUsers(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get users: %s", err)
 	}
@@ -33,7 +33,7 @@ func TestCreateUser(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	user, err := client.CreateUser(User{
+	user, err := client.CreateUser(ctx, User{
 		Email: "test@example.com",
 		Name:  "testuser",
 	})
