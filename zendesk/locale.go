@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 )
@@ -18,17 +19,17 @@ type Locale struct {
 
 // LocaleAPI an interface containing all of the local related zendesk methods
 type LocaleAPI interface {
-	GetLocales() ([]Locale, error)
+	GetLocales(ctx context.Context) ([]Locale, error)
 }
 
 // GetLocales lists the translation locales available for the account.
 // https://developer.zendesk.com/rest_api/docs/support/locales#list-locales
-func (z *Client) GetLocales() ([]Locale, error) {
+func (z *Client) GetLocales(ctx context.Context) ([]Locale, error) {
 	var data struct {
 		Locales []Locale `json:"locales"`
 	}
 
-	body, err := z.Get("/locales.json")
+	body, err := z.get(ctx, "/locales.json")
 	if err != nil {
 		return nil, err
 	}
