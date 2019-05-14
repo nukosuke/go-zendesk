@@ -49,6 +49,21 @@ func (mr *ClientMockRecorder) CreateBrand(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0, arg1)
 }
 
+// CreateDynamicContentItem mocks base method
+func (m *Client) CreateDynamicContentItem(arg0 context.Context, arg1 zendesk.DynamicContentItem) (zendesk.DynamicContentItem, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateDynamicContentItem", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateDynamicContentItem indicates an expected call of CreateDynamicContentItem
+func (mr *ClientMockRecorder) CreateDynamicContentItem(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateDynamicContentItem", reflect.TypeOf((*Client)(nil).CreateDynamicContentItem), arg0, arg1)
+}
+
 // CreateGroup mocks base method
 func (m *Client) CreateGroup(arg0 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
@@ -236,6 +251,22 @@ func (m *Client) GetBrand(arg0 context.Context, arg1 int64) (zendesk.Brand, erro
 func (mr *ClientMockRecorder) GetBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0, arg1)
+}
+
+// GetDynamicContentItems mocks base method
+func (m *Client) GetDynamicContentItems(arg0 context.Context) ([]zendesk.DynamicContentItem, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDynamicContentItems", arg0)
+	ret0, _ := ret[0].([]zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetDynamicContentItems indicates an expected call of GetDynamicContentItems
+func (mr *ClientMockRecorder) GetDynamicContentItems(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItems", reflect.TypeOf((*Client)(nil).GetDynamicContentItems), arg0)
 }
 
 // GetGroup mocks base method
