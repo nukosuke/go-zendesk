@@ -270,18 +270,18 @@ func (mr *ClientMockRecorder) GetGroups() *gomock.Call {
 }
 
 // GetLocales mocks base method
-func (m *Client) GetLocales() ([]zendesk.Locale, error) {
+func (m *Client) GetLocales(arg0 context.Context) ([]zendesk.Locale, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetLocales")
+	ret := m.ctrl.Call(m, "GetLocales", arg0)
 	ret0, _ := ret[0].([]zendesk.Locale)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetLocales indicates an expected call of GetLocales
-func (mr *ClientMockRecorder) GetLocales() *gomock.Call {
+func (mr *ClientMockRecorder) GetLocales(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLocales", reflect.TypeOf((*Client)(nil).GetLocales))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLocales", reflect.TypeOf((*Client)(nil).GetLocales), arg0)
 }
 
 // GetTicketField mocks base method

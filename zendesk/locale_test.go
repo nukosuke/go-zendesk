@@ -10,7 +10,7 @@ func TestGetLocales(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	locales, err := client.GetLocales()
+	locales, err := client.GetLocales(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get locales: %s", err)
 	}
