@@ -1,11 +1,19 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 )
 
+// DynamicContentAPI an interface containing all methods associated with zendesk dynamic content
+type DynamicContentAPI interface {
+	GetDynamicContentItems(ctx context.Context) ([]DynamicContentItem, Page, error)
+	CreateDynamicContentItem(ctx context.Context, item DynamicContentItem) (DynamicContentItem, error)
+}
+
 // DynamicContentItem is zendesk dynamic content item JSON payload format
+//
 // https://developer.zendesk.com/rest_api/docs/support/users
 type DynamicContentItem struct {
 	ID              int64                   `json:"id,omitempty"`
@@ -20,6 +28,7 @@ type DynamicContentItem struct {
 }
 
 // DynamicContentVariant is zendesk dynamic content variant JSON payload format
+//
 // https://developer.zendesk.com/rest_api/docs/support/dynamic_content#json-format-for-variants
 type DynamicContentVariant struct {
 	ID        int64     `json:"id,omitempty"`
@@ -34,14 +43,15 @@ type DynamicContentVariant struct {
 }
 
 // GetDynamicContentItems fetches dynamic content item list
+//
 // https://developer.zendesk.com/rest_api/docs/support/dynamic_content#list-items
-func (z *Client) GetDynamicContentItems() ([]DynamicContentItem, Page, error) {
+func (z *Client) GetDynamicContentItems(ctx context.Context) ([]DynamicContentItem, Page, error) {
 	var data struct {
 		Items []DynamicContentItem `json:"items"`
 		Page
 	}
 
-	body, err := z.Get("/dynamic_content/items.json")
+	body, err := z.get(ctx, "/dynamic_content/items.json")
 	if err != nil {
 		return []DynamicContentItem{}, Page{}, err
 	}
@@ -54,14 +64,15 @@ func (z *Client) GetDynamicContentItems() ([]DynamicContentItem, Page, error) {
 }
 
 // CreateDynamicContentItem creates new dynamic content item
+//
 // https://developer.zendesk.com/rest_api/docs/support/dynamic_content#create-item
-func (z *Client) CreateDynamicContentItem(item DynamicContentItem) (DynamicContentItem, error) {
+func (z *Client) CreateDynamicContentItem(ctx context.Context, item DynamicContentItem) (DynamicContentItem, error) {
 	var data, result struct {
 		Item DynamicContentItem `json:"item"`
 	}
 	data.Item = item
 
-	body, err := z.Post("/groups.json", data)
+	body, err := z.post(ctx, "/groups.json", data)
 	if err != nil {
 		return DynamicContentItem{}, err
 	}
