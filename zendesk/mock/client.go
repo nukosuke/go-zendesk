@@ -65,18 +65,18 @@ func (mr *ClientMockRecorder) CreateDynamicContentItem(arg0, arg1 interface{}) *
 }
 
 // CreateGroup mocks base method
-func (m *Client) CreateGroup(arg0 zendesk.Group) (zendesk.Group, error) {
+func (m *Client) CreateGroup(arg0 context.Context, arg1 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateGroup", arg0)
+	ret := m.ctrl.Call(m, "CreateGroup", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.Group)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // CreateGroup indicates an expected call of CreateGroup
-func (mr *ClientMockRecorder) CreateGroup(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) CreateGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0, arg1)
 }
 
 // CreateTicketField mocks base method
@@ -154,17 +154,17 @@ func (mr *ClientMockRecorder) DeleteBrand(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // DeleteGroup mocks base method
-func (m *Client) DeleteGroup(arg0 int64) error {
+func (m *Client) DeleteGroup(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteGroup", arg0)
+	ret := m.ctrl.Call(m, "DeleteGroup", arg0, arg1)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // DeleteGroup indicates an expected call of DeleteGroup
-func (mr *ClientMockRecorder) DeleteGroup(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) DeleteGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGroup", reflect.TypeOf((*Client)(nil).DeleteGroup), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGroup", reflect.TypeOf((*Client)(nil).DeleteGroup), arg0, arg1)
 }
 
 // DeleteTicketField mocks base method
@@ -270,24 +270,24 @@ func (mr *ClientMockRecorder) GetDynamicContentItems(arg0 interface{}) *gomock.C
 }
 
 // GetGroup mocks base method
-func (m *Client) GetGroup(arg0 int64) (zendesk.Group, error) {
+func (m *Client) GetGroup(arg0 context.Context, arg1 int64) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetGroup", arg0)
+	ret := m.ctrl.Call(m, "GetGroup", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.Group)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetGroup indicates an expected call of GetGroup
-func (mr *ClientMockRecorder) GetGroup(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroup", reflect.TypeOf((*Client)(nil).GetGroup), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroup", reflect.TypeOf((*Client)(nil).GetGroup), arg0, arg1)
 }
 
 // GetGroups mocks base method
-func (m *Client) GetGroups() ([]zendesk.Group, zendesk.Page, error) {
+func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetGroups")
+	ret := m.ctrl.Call(m, "GetGroups", arg0)
 	ret0, _ := ret[0].([]zendesk.Group)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
@@ -295,9 +295,9 @@ func (m *Client) GetGroups() ([]zendesk.Group, zendesk.Page, error) {
 }
 
 // GetGroups indicates an expected call of GetGroups
-func (mr *ClientMockRecorder) GetGroups() *gomock.Call {
+func (mr *ClientMockRecorder) GetGroups(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroups", reflect.TypeOf((*Client)(nil).GetGroups))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroups", reflect.TypeOf((*Client)(nil).GetGroups), arg0)
 }
 
 // GetLocales mocks base method
@@ -440,18 +440,18 @@ func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1, arg2 interface{}) *gomock.
 }
 
 // UpdateGroup mocks base method
-func (m *Client) UpdateGroup(arg0 int64, arg1 zendesk.Group) (zendesk.Group, error) {
+func (m *Client) UpdateGroup(arg0 context.Context, arg1 int64, arg2 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateGroup", arg0, arg1)
+	ret := m.ctrl.Call(m, "UpdateGroup", arg0, arg1, arg2)
 	ret0, _ := ret[0].(zendesk.Group)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // UpdateGroup indicates an expected call of UpdateGroup
-func (mr *ClientMockRecorder) UpdateGroup(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) UpdateGroup(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGroup", reflect.TypeOf((*Client)(nil).UpdateGroup), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGroup", reflect.TypeOf((*Client)(nil).UpdateGroup), arg0, arg1, arg2)
 }
 
 // UpdateTicketField mocks base method

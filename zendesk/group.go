@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -19,22 +20,22 @@ type Group struct {
 
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
-	GetGroups() ([]Group, Page, error)
-	GetGroup(groupID int64) (Group, error)
-	CreateGroup(group Group) (Group, error)
-	UpdateGroup(groupID int64, group Group) (Group, error)
-	DeleteGroup(groupID int64) error
+	GetGroups(ctx context.Context) ([]Group, Page, error)
+	GetGroup(ctx context.Context, groupID int64) (Group, error)
+	CreateGroup(ctx context.Context, group Group) (Group, error)
+	UpdateGroup(ctx context.Context, groupID int64, group Group) (Group, error)
+	DeleteGroup(ctx context.Context, groupID int64) error
 }
 
 // GetGroups fetches group list
 // https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
-func (z *Client) GetGroups() ([]Group, Page, error) {
+func (z *Client) GetGroups(ctx context.Context) ([]Group, Page, error) {
 	var data struct {
 		Groups []Group `json:"groups"`
 		Page
 	}
 
-	body, err := z.Get("/groups.json")
+	body, err := z.get(ctx, "/groups.json")
 	if err != nil {
 		return []Group{}, Page{}, err
 	}
@@ -48,13 +49,13 @@ func (z *Client) GetGroups() ([]Group, Page, error) {
 
 // CreateGroup creates new group
 // https://developer.zendesk.com/rest_api/docs/support/groups#create-group
-func (z *Client) CreateGroup(group Group) (Group, error) {
+func (z *Client) CreateGroup(ctx context.Context, group Group) (Group, error) {
 	var data, result struct {
 		Group Group `json:"group"`
 	}
 	data.Group = group
 
-	body, err := z.Post("/groups.json", data)
+	body, err := z.post(ctx, "/groups.json", data)
 	if err != nil {
 		return Group{}, err
 	}
@@ -68,12 +69,12 @@ func (z *Client) CreateGroup(group Group) (Group, error) {
 
 // GetGroup gets a specified group
 // ref: https://developer.zendesk.com/rest_api/docs/support/groups#show-group
-func (z *Client) GetGroup(groupID int64) (Group, error) {
+func (z *Client) GetGroup(ctx context.Context, groupID int64) (Group, error) {
 	var result struct {
 		Group Group `json:"group"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/groups/%d.json", groupID))
+	body, err := z.get(ctx, fmt.Sprintf("/groups/%d.json", groupID))
 
 	if err != nil {
 		return Group{}, err
@@ -89,13 +90,13 @@ func (z *Client) GetGroup(groupID int64) (Group, error) {
 
 // UpdateGroup updates a group with the specified group
 // ref: https://developer.zendesk.com/rest_api/docs/support/groups#update-group
-func (z *Client) UpdateGroup(groupID int64, group Group) (Group, error) {
+func (z *Client) UpdateGroup(ctx context.Context, groupID int64, group Group) (Group, error) {
 	var result, data struct {
 		Group Group `json:"group"`
 	}
 	data.Group = group
 
-	body, err := z.Put(fmt.Sprintf("/groups/%d.json", groupID), data)
+	body, err := z.put(ctx, fmt.Sprintf("/groups/%d.json", groupID), data)
 
 	if err != nil {
 		return Group{}, err
@@ -111,8 +112,8 @@ func (z *Client) UpdateGroup(groupID int64, group Group) (Group, error) {
 
 // DeleteGroup deletes the specified group
 // ref: https://developer.zendesk.com/rest_api/docs/support/groups#delete-group
-func (z *Client) DeleteGroup(groupID int64) error {
-	err := z.Delete(fmt.Sprintf("/groups/%d.json", groupID))
+func (z *Client) DeleteGroup(ctx context.Context, groupID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/groups/%d.json", groupID))
 
 	if err != nil {
 		return err
