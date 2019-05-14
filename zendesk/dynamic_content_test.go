@@ -10,7 +10,7 @@ func TestGetDynamicContentItems(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	items, page, err := client.GetDynamicContentItems()
+	items, page, err := client.GetDynamicContentItems(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get dynamic content items: %s", err)
 	}
@@ -33,7 +33,7 @@ func TestCreateDynamicContentItem(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	item, err := client.CreateDynamicContentItem(DynamicContentItem{})
+	item, err := client.CreateDynamicContentItem(ctx, DynamicContentItem{})
 	if err != nil {
 		t.Fatalf("Failed to get valid response: %s", err)
 	}
