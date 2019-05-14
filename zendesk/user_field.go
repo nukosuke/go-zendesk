@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 )
@@ -26,12 +27,14 @@ type UserField struct {
 }
 
 // GetUserFields fetch trigger list
-func (z *Client) GetUserFields() ([]UserField, Page, error) {
+//
+// https://developer.zendesk.com/rest_api/docs/support/user_fields#list-user-fields
+func (z *Client) GetUserFields(ctx context.Context) ([]UserField, Page, error) {
 	var data struct {
 		UserFields []UserField `json:"user_fields"`
 		Page
 	}
-	body, err := z.Get("/user_fields.json")
+	body, err := z.get(ctx, "/user_fields.json")
 	if err != nil {
 		return nil, Page{}, err
 	}
