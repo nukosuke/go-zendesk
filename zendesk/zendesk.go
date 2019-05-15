@@ -116,11 +116,7 @@ func (z *Client) SetCredential(cred Credential) {
 	z.credential = cred
 }
 
-// Get Get JSON data from API and returns its body as []bytes
-func (z *Client) Get(path string) ([]byte, error) {
-	return z.get(context.Background(), path)
-}
-
+// get get JSON data from API and returns its body as []bytes
 func (z *Client) get(ctx context.Context, path string) ([]byte, error) {
 	req, err := http.NewRequest(http.MethodGet, z.baseURL.String()+path, nil)
 	if err != nil {
@@ -149,12 +145,7 @@ func (z *Client) get(ctx context.Context, path string) ([]byte, error) {
 	return body, nil
 }
 
-// Post send data to API and returns response body as []bytes
-func (z *Client) Post(path string, data interface{}) ([]byte, error) {
-	return z.post(context.Background(), path, data)
-}
-
-// Post send data to API and returns response body as []bytes
+// post send data to API and returns response body as []bytes
 func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
@@ -188,11 +179,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 	return body, nil
 }
 
-// Put sends data to API and returns response body as []bytes
-func (z *Client) Put(path string, data interface{}) ([]byte, error) {
-	return z.put(context.Background(), path, data)
-}
-
+// put sends data to API and returns response body as []bytes
 func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte, error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {
@@ -226,11 +213,7 @@ func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte
 	return body, nil
 }
 
-// Delete sends data to API and returns an error if unsuccessful
-func (z *Client) Delete(path string) error {
-	return z.delete(context.Background(), path)
-}
-
+// delete sends data to API and returns an error if unsuccessful
 func (z *Client) delete(ctx context.Context, path string) error {
 	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
 	if err != nil {
