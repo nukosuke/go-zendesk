@@ -11,7 +11,7 @@ func TestGetTriggers(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	triggers, _, err := client.GetTriggers()
+	triggers, _, err := client.GetTriggers(ctx)
 	if err != nil {
 		t.Fatalf("Failed to get triggers: %s", err)
 	}
@@ -26,7 +26,7 @@ func TestCreateTrigger(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateTrigger(Trigger{})
+	_, err := client.CreateTrigger(ctx, Trigger{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create trigger: %s", err)
 	}
@@ -37,7 +37,7 @@ func TestGetTrigger(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	trg, err := client.GetTrigger(123)
+	trg, err := client.GetTrigger(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get trigger: %s", err)
 	}
@@ -55,7 +55,7 @@ func TestGetTriggerFailure(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	_, err := c.GetTrigger(1234)
+	_, err := c.GetTrigger(ctx, 1234)
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
@@ -66,7 +66,7 @@ func TestUpdateTrigger(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	trg, err := client.UpdateTrigger(123, Trigger{})
+	trg, err := client.UpdateTrigger(ctx, 123, Trigger{})
 	if err != nil {
 		t.Fatalf("Failed to get trigger: %s", err)
 	}
@@ -84,7 +84,7 @@ func TestUpdateTriggerFailure(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	_, err := c.UpdateTrigger(1234, Trigger{})
+	_, err := c.UpdateTrigger(ctx, 1234, Trigger{})
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
@@ -97,7 +97,7 @@ func TestDeleteTrigger(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteTrigger(1234)
+	err := c.DeleteTrigger(ctx, 1234)
 	if err != nil {
 		t.Fatalf("Failed to delete trigger: %s", err)
 	}
@@ -110,7 +110,7 @@ func TestDeleteTriggerFailure(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteTrigger(1234)
+	err := c.DeleteTrigger(ctx, 1234)
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
