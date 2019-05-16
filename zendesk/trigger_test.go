@@ -25,7 +25,7 @@ func TestGetTriggersWithNil(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "triggers.json")
 	client := newTestClient(mockAPI)
 
-	_, _, err := client.GetTriggers(nil)
+	_, _, err := client.GetTriggers(ctx, nil)
 	if err == nil {
 		t.Fatal("expected an OptionsError, but no error")
 	}
