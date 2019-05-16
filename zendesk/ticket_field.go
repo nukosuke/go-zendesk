@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -47,22 +48,22 @@ type TicketField struct {
 
 // TicketFieldAPI an interface containing all of the ticket field related zendesk methods
 type TicketFieldAPI interface {
-	GetTicketFields() ([]TicketField, Page, error)
-	CreateTicketField(ticketField TicketField) (TicketField, error)
-	GetTicketField(ticketID int64) (TicketField, error)
-	UpdateTicketField(ticketID int64, field TicketField) (TicketField, error)
-	DeleteTicketField(ticketID int64) error
+	GetTicketFields(ctx context.Context) ([]TicketField, Page, error)
+	CreateTicketField(ctx context.Context, ticketField TicketField) (TicketField, error)
+	GetTicketField(ctx context.Context, ticketID int64) (TicketField, error)
+	UpdateTicketField(ctx context.Context, ticketID int64, field TicketField) (TicketField, error)
+	DeleteTicketField(ctx context.Context, ticketID int64) error
 }
 
 // GetTicketFields fetches ticket field list
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#list-ticket-fields
-func (z *Client) GetTicketFields() ([]TicketField, Page, error) {
+func (z *Client) GetTicketFields(ctx context.Context) ([]TicketField, Page, error) {
 	var data struct {
 		TicketFields []TicketField `json:"ticket_fields"`
 		Page
 	}
 
-	body, err := z.Get("/ticket_fields.json")
+	body, err := z.get(ctx, "/ticket_fields.json")
 	if err != nil {
 		return []TicketField{}, Page{}, err
 	}
@@ -76,13 +77,13 @@ func (z *Client) GetTicketFields() ([]TicketField, Page, error) {
 
 // CreateTicketField creates new ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/core/ticket_fields#create-ticket-field
-func (z *Client) CreateTicketField(ticketField TicketField) (TicketField, error) {
+func (z *Client) CreateTicketField(ctx context.Context, ticketField TicketField) (TicketField, error) {
 	var data, result struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
 	data.TicketField = ticketField
 
-	body, err := z.Post("/ticket_fields.json", data)
+	body, err := z.post(ctx, "/ticket_fields.json", data)
 	if err != nil {
 		return TicketField{}, err
 	}
@@ -96,12 +97,12 @@ func (z *Client) CreateTicketField(ticketField TicketField) (TicketField, error)
 
 // GetTicketField gets a specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#show-ticket-field
-func (z *Client) GetTicketField(ticketID int64) (TicketField, error) {
+func (z *Client) GetTicketField(ctx context.Context, ticketID int64) (TicketField, error) {
 	var result struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	body, err := z.get(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID))
 
 	if err != nil {
 		return TicketField{}, err
@@ -117,14 +118,14 @@ func (z *Client) GetTicketField(ticketID int64) (TicketField, error) {
 
 // UpdateTicketField updates a field with the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#update-ticket-field
-func (z *Client) UpdateTicketField(ticketID int64, field TicketField) (TicketField, error) {
+func (z *Client) UpdateTicketField(ctx context.Context, ticketID int64, field TicketField) (TicketField, error) {
 	var result, data struct {
 		TicketField TicketField `json:"ticket_field"`
 	}
 
 	data.TicketField = field
 
-	body, err := z.Put(fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
+	body, err := z.put(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
 
 	if err != nil {
 		return TicketField{}, err
@@ -140,8 +141,8 @@ func (z *Client) UpdateTicketField(ticketID int64, field TicketField) (TicketFie
 
 // DeleteTicketField deletes the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
-func (z *Client) DeleteTicketField(ticketID int64) error {
-	err := z.Delete(fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+func (z *Client) DeleteTicketField(ctx context.Context, ticketID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID))
 
 	if err != nil {
 		return err

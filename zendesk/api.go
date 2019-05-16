@@ -6,6 +6,7 @@ package zendesk
 type API interface {
 	AttachmentAPI
 	BrandAPI
+	DynamicContentAPI
 	GroupAPI
 	LocaleAPI
 	TicketFieldAPI

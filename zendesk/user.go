@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 )
@@ -69,18 +70,18 @@ func UserRoleText(role int) string {
 
 // UserAPI an interface containing all user related methods
 type UserAPI interface {
-	GetUsers() ([]User, Page, error)
-	CreateUser(user User) (User, error)
+	GetUsers(ctx context.Context) ([]User, Page, error)
+	CreateUser(ctx context.Context, user User) (User, error)
 }
 
 // GetUsers fetch user list
-func (z *Client) GetUsers() ([]User, Page, error) {
+func (z *Client) GetUsers(ctx context.Context) ([]User, Page, error) {
 	var data struct {
 		Users []User `json:"users"`
 		Page
 	}
 
-	body, err := z.Get("/users.json")
+	body, err := z.get(ctx, "/users.json")
 	if err != nil {
 		return nil, Page{}, err
 	}
@@ -96,13 +97,13 @@ func (z *Client) GetUsers() ([]User, Page, error) {
 
 // CreateUser creates new user
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
-func (z *Client) CreateUser(user User) (User, error) {
+func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
 	var data, result struct {
 		User User `json:"user"`
 	}
 	data.User = user
 
-	body, err := z.Post("/users.json", data)
+	body, err := z.post(ctx, "/users.json", data)
 	if err != nil {
 		return User{}, err
 	}

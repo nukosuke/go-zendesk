@@ -1,12 +1,14 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 )
 
 // TriggerCondition zendesk trigger condition
+//
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#conditions-reference
 type TriggerCondition struct {
 	Field    string `json:"field"`
@@ -15,6 +17,7 @@ type TriggerCondition struct {
 }
 
 // TriggerAction is zendesk trigger action
+//
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#actions
 type TriggerAction struct {
 	Field string      `json:"field"`
@@ -22,6 +25,7 @@ type TriggerAction struct {
 }
 
 // Trigger is zendesk trigger JSON payload format
+//
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#json-format
 type Trigger struct {
 	ID         int64  `json:"id,omitempty"`
@@ -50,16 +54,17 @@ type TriggerListOptions struct {
 
 // TriggerAPI an interface containing all trigger related methods
 type TriggerAPI interface {
-	GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error)
-	CreateTrigger(trigger Trigger) (Trigger, error)
-	GetTrigger(id int64) (Trigger, error)
-	UpdateTrigger(id int64, trigger Trigger) (Trigger, error)
-	DeleteTrigger(id int64) error
+	GetTriggers(ctx context.Context, opts *TriggerListOptions) ([]Trigger, Page, error)
+	CreateTrigger(ctx context.Context, trigger Trigger) (Trigger, error)
+	GetTrigger(ctx context.Context, id int64) (Trigger, error)
+	UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (Trigger, error)
+	DeleteTrigger(ctx context.Context, id int64) error
 }
 
 // GetTriggers fetch trigger list
+//
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
-func (z *Client) GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error) {
+func (z *Client) GetTriggers(ctx context.Context, opts *TriggerListOptions) ([]Trigger, Page, error) {
 	var data struct {
 		Triggers []Trigger `json:"triggers"`
 		Page
@@ -74,7 +79,7 @@ func (z *Client) GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error) 
 		return []Trigger{}, Page{}, err
 	}
 
-	body, err := z.Get(u)
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}
@@ -87,14 +92,15 @@ func (z *Client) GetTriggers(opts *TriggerListOptions) ([]Trigger, Page, error) 
 }
 
 // CreateTrigger creates new trigger
+//
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#create-trigger
-func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
+func (z *Client) CreateTrigger(ctx context.Context, trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 	data.Trigger = trigger
 
-	body, err := z.Post("/triggers.json", data)
+	body, err := z.post(ctx, "/triggers.json", data)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -107,13 +113,14 @@ func (z *Client) CreateTrigger(trigger Trigger) (Trigger, error) {
 }
 
 // GetTrigger returns the specified trigger
+//
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
-func (z *Client) GetTrigger(id int64) (Trigger, error) {
+func (z *Client) GetTrigger(ctx context.Context, id int64) (Trigger, error) {
 	var result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/triggers/%d.json", id))
+	body, err := z.get(ctx, fmt.Sprintf("/triggers/%d.json", id))
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -126,14 +133,15 @@ func (z *Client) GetTrigger(id int64) (Trigger, error) {
 }
 
 // UpdateTrigger updates the specified trigger and returns the updated one
+//
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#update-trigger
-func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
+func (z *Client) UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (Trigger, error) {
 	var data, result struct {
 		Trigger Trigger `json:"trigger"`
 	}
 
 	data.Trigger = trigger
-	body, err := z.Put(fmt.Sprintf("/triggers/%d.json", id), data)
+	body, err := z.put(ctx, fmt.Sprintf("/triggers/%d.json", id), data)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -147,9 +155,10 @@ func (z *Client) UpdateTrigger(id int64, trigger Trigger) (Trigger, error) {
 }
 
 // DeleteTrigger deletes the specified trigger
+//
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
-func (z *Client) DeleteTrigger(id int64) error {
-	err := z.Delete(fmt.Sprintf("/triggers/%d.json", id))
+func (z *Client) DeleteTrigger(ctx context.Context, id int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/triggers/%d.json", id))
 	if err != nil {
 		return err
 	}
