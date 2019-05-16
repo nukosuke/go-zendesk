@@ -7,6 +7,15 @@ type Page struct {
 	Count        int64   `json:"count"`
 }
 
+// PageOptions is options for list method of paginatable resources.
+// It's used to create query string.
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/introduction#pagination
+type PageOptions struct {
+	PerPage int `url:"per_page,omitempty"`
+	Page    int `url:"page,omitempty"`
+}
+
 // HasPrev checks if the Page has previous page
 func (p Page) HasPrev() bool {
 	return (p.PreviousPage != nil)

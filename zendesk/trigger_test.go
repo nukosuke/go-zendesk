@@ -11,13 +11,28 @@ func TestGetTriggers(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	triggers, _, err := client.GetTriggers(ctx)
+	triggers, _, err := client.GetTriggers(ctx, &TriggerListOptions{})
 	if err != nil {
 		t.Fatalf("Failed to get triggers: %s", err)
 	}
 
 	if len(triggers) != 8 {
 		t.Fatalf("expected length of triggers is , but got %d", len(triggers))
+	}
+}
+
+func TestGetTriggersWithNil(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "triggers.json")
+	client := newTestClient(mockAPI)
+
+	_, _, err := client.GetTriggers(ctx, nil)
+	if err == nil {
+		t.Fatal("expected an OptionsError, but no error")
+	}
+
+	_, ok := err.(*OptionsError)
+	if !ok {
+		t.Fatalf("unexpected error type: %v", err)
 	}
 }
 

@@ -1,16 +1,16 @@
 package zendesk
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
+
+	"github.com/google/go-querystring/query"
 )
 
 const (
@@ -22,37 +22,6 @@ const (
 var defaultHeaders = map[string]string{
 	"User-Agent":   "nukosuke/go-zendesk",
 	"Content-Type": "application/json",
-}
-
-// Error an error type containing the http response from zendesk
-type Error struct {
-	body []byte
-	resp *http.Response
-}
-
-// Error the error string for this error
-func (e Error) Error() string {
-	msg := string(e.body)
-	if msg == "" {
-		msg = http.StatusText(e.Status())
-	}
-
-	return fmt.Sprintf("%d: %s", e.resp.StatusCode, msg)
-}
-
-// Body is the Body of the HTTP response
-func (e Error) Body() io.ReadCloser {
-	return ioutil.NopCloser(bytes.NewBuffer(e.body))
-}
-
-// Headers the HTTP headers returned from zendesk
-func (e Error) Headers() http.Header {
-	return e.resp.Header
-}
-
-// Status the HTTP status code returned from zendesk
-func (e Error) Status() int {
-	return e.resp.StatusCode
 }
 
 var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
@@ -259,7 +228,6 @@ func (z *Client) delete(ctx context.Context, path string) error {
 	return nil
 }
 
-
 // prepare request sets common request variables such as authn and user agent
 func (z *Client) prepareRequest(ctx context.Context, req *http.Request) {
 	req.WithContext(ctx)
@@ -272,4 +240,20 @@ func (z *Client) includeHeaders(req *http.Request) {
 	for key, value := range z.headers {
 		req.Header.Set(key, value)
 	}
+}
+
+// addOptions build query string
+func addOptions(s string, opts interface{}) (string, error) {
+	u, err := url.Parse(s)
+	if err != nil {
+		return s, err
+	}
+
+	qs, err := query.Values(opts)
+	if err != nil {
+		return s, err
+	}
+
+	u.RawQuery = qs.Encode()
+	return u.String(), nil
 }

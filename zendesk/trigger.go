@@ -42,9 +42,19 @@ type Trigger struct {
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
 
+// TriggerListOptions is options for GetTriggers
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#list-triggers
+type TriggerListOptions struct {
+	PageOptions
+	Active    bool   `url:"active,omitempty"`
+	SortBy    string `url:"sort_by,omitempty"`
+	SortOrder string `url:"sort_order,omitempty"`
+}
+
 // TriggerAPI an interface containing all trigger related methods
 type TriggerAPI interface {
-	GetTriggers(ctx context.Context) ([]Trigger, Page, error)
+	GetTriggers(ctx context.Context, opts *TriggerListOptions) ([]Trigger, Page, error)
 	CreateTrigger(ctx context.Context, trigger Trigger) (Trigger, error)
 	GetTrigger(ctx context.Context, id int64) (Trigger, error)
 	UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (Trigger, error)
@@ -54,13 +64,22 @@ type TriggerAPI interface {
 // GetTriggers fetch trigger list
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
-func (z *Client) GetTriggers(ctx context.Context) ([]Trigger, Page, error) {
+func (z *Client) GetTriggers(ctx context.Context, opts *TriggerListOptions) ([]Trigger, Page, error) {
 	var data struct {
 		Triggers []Trigger `json:"triggers"`
 		Page
 	}
 
-	body, err := z.get(ctx, "/triggers.json")
+	if opts == nil {
+		return []Trigger{}, Page{}, &OptionsError{opts}
+	}
+
+	u, err := addOptions("/triggers.json", opts)
+	if err != nil {
+		return []Trigger{}, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return []Trigger{}, Page{}, err
 	}

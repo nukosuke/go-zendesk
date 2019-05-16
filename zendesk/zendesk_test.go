@@ -283,3 +283,24 @@ func TestIncludeHeaders(t *testing.T) {
 		}
 	}
 }
+
+func TestAddOptions(t *testing.T) {
+	ep := "/triggers.json"
+	ops := &TriggerListOptions{
+		PageOptions: PageOptions{
+			PerPage: 10,
+			Page:    2,
+		},
+		Active: true,
+	}
+	expected := "/triggers.json?active=true&page=2&per_page=10"
+
+	u, err := addOptions(ep, ops)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if u != expected {
+		t.Fatalf("\nExpect:\t%s\nGot:\t%s", expected, u)
+	}
+}
