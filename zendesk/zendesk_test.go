@@ -113,7 +113,7 @@ func TestGet(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	body, err := client.Get("/groups.json")
+	body, err := client.get(ctx, "/groups.json")
 	if err != nil {
 		t.Fatalf("Failed to send request: %s", err)
 	}
@@ -128,7 +128,7 @@ func TestGetFailure(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.Get("/groups.json")
+	_, err := client.get(ctx, "/groups.json")
 	if err == nil {
 		t.Fatal("Did not receive error from client")
 	}
@@ -143,7 +143,7 @@ func TestGetFailureCanReadErrorBody(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.Get("/groups.json")
+	_, err := client.get(ctx, "/groups.json")
 	if err == nil {
 		t.Fatal("Did not receive error from client")
 	}
@@ -170,7 +170,7 @@ func TestPost(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	body, err := client.Post("/groups.json", Group{})
+	body, err := client.post(ctx, "/groups.json", Group{})
 	if err != nil {
 		t.Fatalf("Failed to send request: %s", err)
 	}
@@ -185,7 +185,7 @@ func TestPostFailure(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.Post("/groups.json", Group{})
+	_, err := client.post(ctx, "/groups.json", Group{})
 	if err == nil {
 		t.Fatal("Did not receive error from client")
 	}
@@ -200,7 +200,7 @@ func TestPut(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	body, err := client.Put("/groups.json", Group{})
+	body, err := client.put(ctx, "/groups.json", Group{})
 	if err != nil {
 		t.Fatalf("Failed to send request: %s", err)
 	}
@@ -215,7 +215,7 @@ func TestPutFailure(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.Put("/groups.json", Group{})
+	_, err := client.put(ctx, "/groups.json", Group{})
 	if err == nil {
 		t.Fatal("Did not receive error from client")
 	}
@@ -232,7 +232,7 @@ func TestDelete(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.Delete("/foo/id")
+	err := c.delete(ctx, "/foo/id")
 	if err != nil {
 		t.Fatalf("Failed to send request: %s", err)
 	}
@@ -245,7 +245,7 @@ func TestDeleteFailure(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.Delete("/foo/id")
+	err := c.delete(ctx, "/foo/id")
 	if err == nil {
 		t.Fatalf("Failed to recieve error from Delete")
 	}
