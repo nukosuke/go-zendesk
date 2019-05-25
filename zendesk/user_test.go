@@ -2,6 +2,8 @@ package zendesk
 
 import (
 	"net/http"
+	"net/http/httptest"
+	"path/filepath"
 	"testing"
 )
 
@@ -25,6 +27,32 @@ func TestGetUsers(t *testing.T) {
 
 	if len(users) != 2 {
 		t.Fatalf("expected length of triggers is 2, but got %d", len(users))
+	}
+}
+
+func TestGetUsersRolesEncodeCorrectly(t *testing.T) {
+	expected := "role[]=admin&role[]=end-user"
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		queryString := r.URL.Query().Encode()
+		if queryString != expected {
+			t.Fatalf(`Did not get the expect query string: "%s". Was: "%s"`, expected, queryString)
+		}
+		w.Write(readFixture(filepath.Join(http.MethodGet, "users.json")))
+	}))
+
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	opts := UserListOptions{
+		Roles: []string{
+			"admin",
+			"end-user",
+		},
+	}
+
+	_, _, err := client.GetUsers(ctx, &opts)
+	if err != nil {
+		t.Fatalf("Failed to get users: %s", err)
 	}
 }
 
