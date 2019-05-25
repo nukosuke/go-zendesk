@@ -85,7 +85,7 @@ type UserAPI interface {
 }
 
 // GetUsers fetch user list
-func (z *Client) GetUsers(ctx context.Context) ([]User, Page, error) {
+func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error) {
 	var data struct {
 		Users []User `json:"users"`
 		Page
