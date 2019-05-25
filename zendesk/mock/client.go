@@ -409,9 +409,9 @@ func (mr *ClientMockRecorder) GetTriggers(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // GetUsers mocks base method
-func (m *Client) GetUsers(arg0 context.Context) ([]zendesk.User, zendesk.Page, error) {
+func (m *Client) GetUsers(arg0 context.Context, arg1 *zendesk.UserListOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUsers", arg0)
+	ret := m.ctrl.Call(m, "GetUsers", arg0, arg1)
 	ret0, _ := ret[0].([]zendesk.User)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
@@ -419,9 +419,9 @@ func (m *Client) GetUsers(arg0 context.Context) ([]zendesk.User, zendesk.Page, e
 }
 
 // GetUsers indicates an expected call of GetUsers
-func (mr *ClientMockRecorder) GetUsers(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetUsers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0, arg1)
 }
 
 // UpdateBrand mocks base method

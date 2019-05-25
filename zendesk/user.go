@@ -63,6 +63,16 @@ var userRoleText = map[int]string{
 	UserRoleAdmin:   "admin",
 }
 
+// UserListOptions is options for GetUsers
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/users#list-users
+type UserListOptions struct {
+	PageOptions
+	Role          string   `url:"role,omitempty"`
+	Roles         []string `url:"roles[],omitempty"`
+	PermissionSet int64    `url:"permission_set,omitempty"`
+}
+
 // UserRoleText takes role type and returns role name string
 func UserRoleText(role int) string {
 	return userRoleText[role]
@@ -70,7 +80,7 @@ func UserRoleText(role int) string {
 
 // UserAPI an interface containing all user related methods
 type UserAPI interface {
-	GetUsers(ctx context.Context) ([]User, Page, error)
+	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
 	CreateUser(ctx context.Context, user User) (User, error)
 }
 
