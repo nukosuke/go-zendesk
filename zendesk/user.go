@@ -69,7 +69,7 @@ var userRoleText = map[int]string{
 type UserListOptions struct {
 	PageOptions
 	Role          string   `url:"role,omitempty"`
-	Roles         []string `url:"roles[],omitempty"`
+	Roles         []string `url:"role[],omitempty"`
 	PermissionSet int64    `url:"permission_set,omitempty"`
 }
 
@@ -91,7 +91,18 @@ func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, P
 		Page
 	}
 
-	body, err := z.get(ctx, "/users.json")
+	tmp := opts
+	if tmp == nil {
+		tmp = &UserListOptions{}
+	}
+
+	u, err := addOptions("/users.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return nil, Page{}, err
 	}
