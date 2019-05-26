@@ -101,7 +101,6 @@ func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, P
 		return nil, Page{}, err
 	}
 
-
 	body, err := z.get(ctx, u)
 	if err != nil {
 		return nil, Page{}, err

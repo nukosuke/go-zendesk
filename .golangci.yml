@@ -1,0 +1,9 @@
+linters:
+  enable-all: true
+  disable:
+    - maligned
+    - prealloc
+    - gochecknoglobals
+
+run:
+  tests: false

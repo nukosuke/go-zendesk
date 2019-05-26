@@ -14,9 +14,7 @@ import (
 )
 
 const (
-	baseURLFormat       = "https://%s.zendesk.com/api/v2"
-	headerRateLimit     = "X-RateLimit-Limit"
-	headerRateRemaining = "X-RateLimit-Remaining"
+	baseURLFormat = "https://%s.zendesk.com/api/v2"
 )
 
 var defaultHeaders = map[string]string{
@@ -213,7 +211,7 @@ func (z *Client) delete(ctx context.Context, path string) error {
 
 // prepare request sets common request variables such as authn and user agent
 func (z *Client) prepareRequest(ctx context.Context, req *http.Request) {
-	req.WithContext(ctx)
+	req = req.WithContext(ctx)
 	z.includeHeaders(req)
 	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
 }
