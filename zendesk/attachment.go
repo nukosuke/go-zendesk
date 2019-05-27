@@ -57,7 +57,7 @@ type writer struct {
 	filename string
 	token    string
 	c        chan result
-	ctx context.Context
+	ctx      context.Context
 }
 
 func (wr *writer) open() error {
@@ -166,8 +166,8 @@ func (z *Client) UploadAttachment(ctx context.Context, filename string, token st
 	return &writer{
 		Client:   z,
 		filename: filename,
-		token: token,
-		ctx: ctx,
+		token:    token,
+		ctx:      ctx,
 	}
 }
 
