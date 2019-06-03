@@ -315,6 +315,21 @@ func (mr *ClientMockRecorder) GetLocales(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLocales", reflect.TypeOf((*Client)(nil).GetLocales), arg0)
 }
 
+// GetTicket mocks base method
+func (m *Client) GetTicket(arg0 context.Context, arg1 int64) (zendesk.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicket", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicket indicates an expected call of GetTicket
+func (mr *ClientMockRecorder) GetTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*Client)(nil).GetTicket), arg0, arg1)
+}
+
 // GetTicketField mocks base method
 func (m *Client) GetTicketField(arg0 context.Context, arg1 int64) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()

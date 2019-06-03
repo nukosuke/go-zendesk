@@ -10,6 +10,7 @@ type API interface {
 	DynamicContentAPI
 	GroupAPI
 	LocaleAPI
+	TicketAPI
 	TicketFieldAPI
 	TicketFormAPI
 	TriggerAPI
