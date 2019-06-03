@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -54,15 +55,20 @@ type Ticket struct {
 	UpdatedAt           time.Time `json:"updated_at,omitempty"`
 }
 
+// TicketAPI an interface containing all ticket related methods
+type TicketAPI interface {
+	GetTicket(ctx context.Context, id int64) (Ticket, error)
+}
+
 // GetTicket gets a specified ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#show-ticket
-func (z *Client) GetTicket(ticketID int64) (Ticket, error) {
+func (z *Client) GetTicket(ctx context.Context, ticketID int64) (Ticket, error) {
 	var result struct {
 		Ticket Ticket `json:"ticket"`
 	}
 
-	body, err := z.Get(fmt.Sprintf("/tickets/%d.json", ticketID))
+	body, err := z.get(ctx, fmt.Sprintf("/tickets/%d.json", ticketID))
 	if err != nil {
 		return Ticket{}, err
 	}
