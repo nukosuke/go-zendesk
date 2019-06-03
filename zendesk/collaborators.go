@@ -6,23 +6,32 @@ import (
 	"reflect"
 )
 
+// Collaborator is user information for collaborator field value
 type Collaborator struct {
 	Name string `json:"name,omitempty"`
 	Email string `json:"email,omitempty"`
 }
 
+// Collaborators hold array of interface which can take Collaborator
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#setting-collaborators
 type Collaborators struct {
 	collaborators []interface{}
 }
 
+// String return string formatted for 
 func (c *Collaborators) String() string {
 	return fmt.Sprintf("%v", c.collaborators)
 }
 
+// List return internal array in Collaborators
 func (c *Collaborators) List() []interface{} {
 	return c.collaborators
 }
 
+// Append add any type of collaborator data payload to Collaborators.
+// The type can be string, int64, Collaborator or map[string]interface{}
+// which must include "name" and "email" field
 func (c *Collaborators) Append(i interface{}) error  {
 	switch e := i.(type) {
 	case string:
@@ -61,10 +70,12 @@ func (c *Collaborators) Append(i interface{}) error  {
 	return nil
 }
 
+// MarshalJSON is marshaller for Collaborators
 func (c *Collaborators) MarshalJSON() ([]byte, error) {
 	return json.Marshal(c.collaborators)
 }
 
+// UnmarshalJSON is unmarshaller for Collaborators
 func (c *Collaborators)  UnmarshalJSON(b []byte) error  {
 	var tmpCollaborators []interface{}
 	newCollaborators := Collaborators{}
@@ -86,7 +97,6 @@ func (c *Collaborators)  UnmarshalJSON(b []byte) error  {
 			 return err
 		}
 	}
-
 
 	// possibly validate that there aren't unexpected types in the slice
 	c.collaborators = newCollaborators.List()
