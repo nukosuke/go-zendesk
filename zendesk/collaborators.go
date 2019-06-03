@@ -8,7 +8,7 @@ import (
 
 // Collaborator is user information for collaborator field value
 type Collaborator struct {
-	Name string `json:"name,omitempty"`
+	Name  string `json:"name,omitempty"`
 	Email string `json:"email,omitempty"`
 }
 
@@ -19,7 +19,7 @@ type Collaborators struct {
 	collaborators []interface{}
 }
 
-// String return string formatted for 
+// String return string formatted for
 func (c *Collaborators) String() string {
 	return fmt.Sprintf("%v", c.collaborators)
 }
@@ -32,7 +32,7 @@ func (c *Collaborators) List() []interface{} {
 // Append add any type of collaborator data payload to Collaborators.
 // The type can be string, int64, Collaborator or map[string]interface{}
 // which must include "name" and "email" field
-func (c *Collaborators) Append(i interface{}) error  {
+func (c *Collaborators) Append(i interface{}) error {
 	switch e := i.(type) {
 	case string:
 		c.collaborators = append(c.collaborators, e)
@@ -76,10 +76,10 @@ func (c *Collaborators) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON is unmarshaller for Collaborators
-func (c *Collaborators)  UnmarshalJSON(b []byte) error  {
+func (c *Collaborators) UnmarshalJSON(b []byte) error {
 	var tmpCollaborators []interface{}
 	newCollaborators := Collaborators{}
-	err :=  json.Unmarshal(b, &tmpCollaborators)
+	err := json.Unmarshal(b, &tmpCollaborators)
 	if err != nil {
 		return err
 	}
@@ -93,8 +93,8 @@ func (c *Collaborators)  UnmarshalJSON(b []byte) error  {
 			err = newCollaborators.Append(i)
 		}
 
-		if err !=  nil {
-			 return err
+		if err != nil {
+			return err
 		}
 	}
 

@@ -7,7 +7,7 @@ import (
 
 const collaboratorListJson = `[562,"someone@example.com",{"name":"SomeoneElse","email":"else@example.com"}]`
 
-func TestCanBeUnmarshalled(t *testing.T)  {
+func TestCanBeUnmarshalled(t *testing.T) {
 	c := &Collaborators{}
 	err := c.UnmarshalJSON([]byte(collaboratorListJson))
 	if err != nil {
