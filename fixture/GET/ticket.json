@@ -18,7 +18,7 @@
       }
     },
     "created_at": "2019-06-03T02:23:47Z",
-    "updated_at": "2019-06-03T02:25:28Z",
+    "updated_at": "2019-06-05T01:13:24Z",
     "type": null,
     "subject": "Mail to create fixture ticket for testing",
     "raw_subject": "Mail to create fixture ticket for testing",
@@ -31,8 +31,12 @@
     "assignee_id": 377922500012,
     "organization_id": 360363695492,
     "group_id": 360004077472,
-    "collaborator_ids": [],
-    "follower_ids": [],
+    "collaborator_ids": [
+      377922500012
+    ],
+    "follower_ids": [
+      377922500012
+    ],
     "email_cc_ids": [],
     "forum_topic_id": null,
     "problem_id": null,
