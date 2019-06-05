@@ -41,7 +41,6 @@ func (c *Collaborators) Append(i interface{}) error {
 	case int64:
 		c.collaborators = append(c.collaborators, e)
 	case map[string]interface{}:
-		// This might be better suited in UnmarshalJSON
 		collab := Collaborator{}
 		name, ok := e["name"]
 		if !ok {
@@ -98,7 +97,6 @@ func (c *Collaborators) UnmarshalJSON(b []byte) error {
 		}
 	}
 
-	// possibly validate that there aren't unexpected types in the slice
 	c.collaborators = newCollaborators.List()
 	return nil
 }
