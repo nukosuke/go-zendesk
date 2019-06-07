@@ -1,0 +1,214 @@
+{
+  "ticket": {
+    "url": "https://d3v-terraform-provider.zendesk.com/api/v2/tickets/4.json",
+    "id": 4,
+    "external_id": null,
+    "via": {
+      "channel": "api",
+      "source": {
+        "from": {},
+        "to": {},
+        "rel": null
+      }
+    },
+    "created_at": "2019-06-06T10:02:04Z",
+    "updated_at": "2019-06-06T10:02:04Z",
+    "type": null,
+    "subject": "nyanyanyanya",
+    "raw_subject": "nyanyanyanya",
+    "description": "(●ↀ ω ↀ )",
+    "priority": "urgent",
+    "status": "new",
+    "recipient": null,
+    "requester_id": 377922500012,
+    "submitter_id": 377922500012,
+    "assignee_id": null,
+    "organization_id": 360363695492,
+    "group_id": 360004077472,
+    "collaborator_ids": [
+      377922500012
+    ],
+    "follower_ids": [
+      377922500012
+    ],
+    "email_cc_ids": [],
+    "forum_topic_id": null,
+    "problem_id": null,
+    "has_incidents": false,
+    "is_public": true,
+    "due_at": null,
+    "tags": [],
+    "custom_fields": [],
+    "satisfaction_rating": null,
+    "sharing_agreement_ids": [],
+    "fields": [],
+    "followup_ids": [],
+    "ticket_form_id": 360000389592,
+    "brand_id": 360002256672,
+    "satisfaction_probability": null,
+    "allow_channelback": false,
+    "allow_attachments": true
+  },
+  "audit": {
+    "id": 653915434212,
+    "ticket_id": 4,
+    "created_at": "2019-06-06T10:02:04Z",
+    "author_id": 377922500012,
+    "metadata": {
+      "system": {
+        "client": "curl/7.54.0",
+        "ip_address": "202.32.29.8",
+        "location": "Setagaya, 40, Japan",
+        "latitude": 35.63329999999999,
+        "longitude": 139.64999999999998
+      },
+      "custom": {}
+    },
+    "events": [
+      {
+        "id": 653915434312,
+        "type": "Comment",
+        "author_id": 377922500012,
+        "body": "(●ↀ ω ↀ )",
+        "html_body": "<div class=\"zd-comment\" dir=\"auto\"><p dir=\"auto\">(●ↀ ω ↀ )</p></div>",
+        "plain_body": "(●ↀ ω ↀ )",
+        "public": true,
+        "attachments": [],
+        "audit_id": 653915434212
+      },
+      {
+        "id": 653915434392,
+        "type": "Create",
+        "value": "nyanyanyanya",
+        "field_name": "subject"
+      },
+      {
+        "id": 653915434432,
+        "type": "Create",
+        "value": "urgent",
+        "field_name": "priority"
+      },
+      {
+        "id": 653915434452,
+        "type": "Create",
+        "value": "Yosuke Tamura <nukosuke@lavabit.com>",
+        "field_name": "current_collaborators"
+      },
+      {
+        "id": 653915434472,
+        "type": "Create",
+        "value": "377922500012",
+        "field_name": "requester_id"
+      },
+      {
+        "id": 653915434532,
+        "type": "Create",
+        "value": "new",
+        "field_name": "status"
+      },
+      {
+        "id": 653915434632,
+        "type": "Create",
+        "value": null,
+        "field_name": "type"
+      },
+      {
+        "id": 653915434692,
+        "type": "Create",
+        "value": "360004077472",
+        "field_name": "group_id"
+      },
+      {
+        "id": 653915434752,
+        "type": "Create",
+        "value": "360363695492",
+        "field_name": "organization_id"
+      },
+      {
+        "id": 653915434812,
+        "type": "Create",
+        "value": "360002256672",
+        "field_name": "brand_id"
+      },
+      {
+        "id": 653915434872,
+        "type": "Create",
+        "value": "360000389592",
+        "field_name": "ticket_form_id"
+      },
+      {
+        "id": 653915434932,
+        "type": "Notification",
+        "via": {
+          "channel": "rule",
+          "source": {
+            "from": {
+              "deleted": false,
+              "title": "Notify requester of received request",
+              "id": 360086157152,
+              "revision_id": 6
+            },
+            "rel": "trigger"
+          }
+        },
+        "subject": "[Request received]",
+        "body": "Your request ({{ticket.id}}) has been received and is being reviewed by our support staff.\n\nTo add additional comments, reply to this email.\n\n{{ticket.comments_formatted}}",
+        "recipients": [
+          377922500012
+        ]
+      },
+      {
+        "id": 653915435052,
+        "type": "Notification",
+        "via": {
+          "channel": "rule",
+          "source": {
+            "from": {
+              "deleted": false,
+              "title": "Notify group of assignment",
+              "id": 360086157252,
+              "revision_id": 2
+            },
+            "rel": "trigger"
+          }
+        },
+        "subject": "[{{ticket.account}}] \"{{ticket.group.name}}\" assignment:  {{ticket.title}}",
+        "body": "This ticket (#{{ticket.id}}) has been assigned to group '{{ticket.group.name}}', of which you are a member.\n\n{{ticket.comments_formatted}}",
+        "recipients": [
+          378533709912,
+          377922500012
+        ]
+      },
+      {
+        "id": 653915435192,
+        "type": "Notification",
+        "via": {
+          "channel": "rule",
+          "source": {
+            "from": {
+              "deleted": false,
+              "title": "Notify all agents of received request",
+              "id": 360086157272,
+              "revision_id": 4
+            },
+            "rel": "trigger"
+          }
+        },
+        "subject": "[{{ticket.account}}] {{ticket.title}}",
+        "body": "A ticket (#{{ticket.id}}) by {{ticket.requester.name}} has been received. It is unassigned.\n\n{{ticket.comments_formatted}}",
+        "recipients": [
+          378533709912,
+          377922500012
+        ]
+      }
+    ],
+    "via": {
+      "channel": "api",
+      "source": {
+        "from": {},
+        "to": {},
+        "rel": null
+      }
+    }
+  }
+}
