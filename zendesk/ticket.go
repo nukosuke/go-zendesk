@@ -59,10 +59,10 @@ type Ticket struct {
 	// Comment is POST only and required
 	Comment TicketComment `json:"comment,omitempty"`
 
-	// TODO: TicketAudit (POST only)
+	// TODO: TicketAudit (POST only) #126
 }
 
-// TODO: This is temporary struct for ticket support.
+// TODO: This is temporary struct for ticket support. #125
 //       Need to make it into correct TicketComment structure.
 //       https://developer.zendesk.com/rest_api/docs/support/ticket_comments
 type TicketComment struct {
