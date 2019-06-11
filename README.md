@@ -5,6 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/nukosuke/go-zendesk/badge.svg?branch=master)](https://coveralls.io/github/nukosuke/go-zendesk?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/nukosuke/go-zendesk)](https://goreportcard.com/report/github.com/nukosuke/go-zendesk)
 [![GoDoc](https://godoc.org/github.com/zenform/go-zendesk?status.svg)](https://godoc.org/github.com/zenform/go-zendesk)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnukosuke%2Fgo-zendesk.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnukosuke%2Fgo-zendesk?ref=badge_shield)
 
 Zendesk API client library for Go
 
@@ -56,3 +57,6 @@ func main() {
 MIT License.
 
 See the file [LICENSE](./LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnukosuke%2Fgo-zendesk.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnukosuke%2Fgo-zendesk?ref=badge_large)
