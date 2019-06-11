@@ -18,7 +18,7 @@ type Brand struct {
 	Active            bool       `json:"active,omitempty"`
 	Default           bool       `json:"default,omitempty"`
 	Logo              Attachment `json:"logo,omitempty"`
-	TicketFieldIDs    []int64    `json:"ticket_field_ids,omitempty"`
+	TicketFormIDs     []int64    `json:"ticket_form_ids,omitempty"`
 	Subdomain         string     `json:"subdomain"`
 	HostMapping       string     `json:"host_mapping,omitempty"`
 	SignatureTemplate string     `json:"signature_template"`
