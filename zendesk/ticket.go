@@ -69,9 +69,53 @@ type TicketComment struct {
 	Body string `json:"body"`
 }
 
+type TicketListOptions struct {
+	PageOptions
+
+	// SortBy can take "assignee", "assignee.name", "created_at", "group", "id",
+	// "locale", "requester", "requester.name", "status", "subject", "updated_at"
+	SortBy string `url:"sort_by,omitempty"`
+
+	// SortOrder can take "asc" or "desc"
+	SortOrder string `url:"sort_order,omitempty"`
+}
+
 // TicketAPI an interface containing all ticket related methods
 type TicketAPI interface {
+	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
+	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
+}
+
+// GetTickets get ticket list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
+func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error) {
+	var data struct {
+		Tickets []Ticket `json:"tickets"`
+		Page
+	}
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &TicketListOptions{}
+	}
+
+	u, err := addOptions("/tickets.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, Page{}, err
+	}
+	return data.Tickets, data.Page, nil
 }
 
 // GetTicket gets a specified ticket
