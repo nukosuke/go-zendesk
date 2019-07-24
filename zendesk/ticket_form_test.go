@@ -11,7 +11,7 @@ func TestGetTicketForms(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	ticketForms, _, err := client.GetTicketForms(ctx)
+	ticketForms, _, err := client.GetTicketForms(ctx, nil)
 	if err != nil {
 		t.Fatalf("Failed to get ticket forms: %s", err)
 	}
