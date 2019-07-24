@@ -25,7 +25,7 @@ type TicketForm struct {
 
 // TicketFormList is options for GetTicketForms
 //
-// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#list-triggers
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#available-parameters
 type TicketFormListOptions struct {
 	PageOptions
 	Active            bool `url:"active,omitempty"`
