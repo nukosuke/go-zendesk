@@ -23,9 +23,20 @@ type TicketForm struct {
 	RestrictedBrandIDs []int64 `json:"restricted_brand_ids,omitempty"`
 }
 
+// TicketFormList is options for GetTicketForms
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#available-parameters
+type TicketFormListOptions struct {
+	PageOptions
+	Active            bool `url:"active,omitempty"`
+	EndUserVisible    bool `url:"end_user_visible,omitempty"`
+	FallbackToDefault bool `url:"fallback_to_default,omitempty"`
+	AssociatedToBrand bool `url:"associated_to_brand,omitempty"`
+}
+
 // TicketFormAPI an interface containing all ticket form related methods
 type TicketFormAPI interface {
-	GetTicketForms(ctx context.Context) ([]TicketForm, Page, error)
+	GetTicketForms(ctx context.Context, options *TicketFormListOptions) ([]TicketForm, Page, error)
 	CreateTicketForm(ctx context.Context, ticketForm TicketForm) (TicketForm, error)
 	DeleteTicketForm(ctx context.Context, id int64) error
 	UpdateTicketForm(ctx context.Context, id int64, form TicketForm) (TicketForm, error)
@@ -34,13 +45,23 @@ type TicketFormAPI interface {
 
 // GetTicketForms fetches ticket forms
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#list-ticket-forms
-func (z *Client) GetTicketForms(ctx context.Context) ([]TicketForm, Page, error) {
+func (z *Client) GetTicketForms(ctx context.Context, options *TicketFormListOptions) ([]TicketForm, Page, error) {
 	var data struct {
 		TicketForms []TicketForm `json:"ticket_forms"`
 		Page
 	}
 
-	body, err := z.get(ctx, "/ticket_forms.json")
+	tmp := options
+	if tmp == nil {
+		tmp = &TicketFormListOptions{}
+	}
+
+	u, err := addOptions("/ticket_forms.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return []TicketForm{}, Page{}, err
 	}
