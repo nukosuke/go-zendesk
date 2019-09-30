@@ -44,6 +44,22 @@ func TestGetTicket(t *testing.T) {
 	}
 }
 
+func TestGetMultipleTicket(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "ticket_show_many.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	tickets, err := client.GetMultipleTickets(ctx, []int64{2, 3})
+	if err != nil {
+		t.Fatalf("Failed to get ticket: %s", err)
+	}
+
+	expectedLen := 2
+	if len(tickets) != expectedLen {
+		t.Fatalf("Returned tickets does not have the length %d. Length is %d", expectedLen, len(tickets))
+	}
+}
+
 func TestCreateTicket(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "ticket.json", http.StatusCreated)
 	client := newTestClient(mockAPI)
