@@ -86,6 +86,7 @@ type TicketListOptions struct {
 type TicketAPI interface {
 	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
+	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
 }
 
