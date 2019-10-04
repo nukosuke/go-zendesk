@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -84,6 +86,7 @@ type TicketListOptions struct {
 type TicketAPI interface {
 	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
+	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
 }
 
@@ -137,6 +140,40 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64) (Ticket, error) 
 	}
 
 	return result.Ticket, err
+}
+
+// GetMultipleTickets gets multiple specified tickets
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#show-multiple-tickets
+func (z *Client) GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error) {
+	var result struct {
+		Tickets []Ticket `json:"tickets"`
+	}
+
+	var req struct {
+		IDs string `url:"ids,omitempty"`
+	}
+	idStrs := make([]string, len(ticketIDs))
+	for i := 0; i < len(ticketIDs); i++ {
+		idStrs[i] = strconv.FormatInt(ticketIDs[i], 10)
+	}
+	req.IDs = strings.Join(idStrs, ",")
+
+	u, err := addOptions("/tickets/show_many.json", req)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Tickets, nil
 }
 
 // CreateTicket create a new ticket
