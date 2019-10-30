@@ -22,7 +22,7 @@ var defaultHeaders = map[string]string{
 	"Content-Type": "application/json",
 }
 
-var subdomainRegexp = regexp.MustCompile("^[a-z][a-z0-9-]+[a-z0-9]$")
+var subdomainRegexp = regexp.MustCompile("^[a-z0-9][a-z0-9-]+[a-z0-9]$")
 
 // Client of Zendesk API
 type Client struct {
