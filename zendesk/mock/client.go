@@ -79,6 +79,21 @@ func (mr *ClientMockRecorder) CreateGroup(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0, arg1)
 }
 
+// CreateOrganization mocks base method
+func (m *Client) CreateOrganization(arg0 context.Context, arg1 zendesk.Organization) (zendesk.Organization, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrganization", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Organization)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrganization indicates an expected call of CreateOrganization
+func (mr *ClientMockRecorder) CreateOrganization(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*Client)(nil).CreateOrganization), arg0, arg1)
+}
+
 // CreateTarget mocks base method
 func (m *Client) CreateTarget(arg0 context.Context, arg1 zendesk.Target) (zendesk.Target, error) {
 	m.ctrl.T.Helper()
@@ -195,6 +210,20 @@ func (m *Client) DeleteGroup(arg0 context.Context, arg1 int64) error {
 func (mr *ClientMockRecorder) DeleteGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGroup", reflect.TypeOf((*Client)(nil).DeleteGroup), arg0, arg1)
+}
+
+// DeleteOrganization mocks base method
+func (m *Client) DeleteOrganization(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteOrganization", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteOrganization indicates an expected call of DeleteOrganization
+func (mr *ClientMockRecorder) DeleteOrganization(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrganization", reflect.TypeOf((*Client)(nil).DeleteOrganization), arg0, arg1)
 }
 
 // DeleteTarget mocks base method
@@ -372,6 +401,21 @@ func (m *Client) GetMultipleTickets(arg0 context.Context, arg1 []int64) ([]zende
 func (mr *ClientMockRecorder) GetMultipleTickets(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMultipleTickets", reflect.TypeOf((*Client)(nil).GetMultipleTickets), arg0, arg1)
+}
+
+// GetOrganization mocks base method
+func (m *Client) GetOrganization(arg0 context.Context, arg1 int64) (zendesk.Organization, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganization", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Organization)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrganization indicates an expected call of GetOrganization
+func (mr *ClientMockRecorder) GetOrganization(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganization", reflect.TypeOf((*Client)(nil).GetOrganization), arg0, arg1)
 }
 
 // GetTarget mocks base method
@@ -573,6 +617,21 @@ func (m *Client) UpdateGroup(arg0 context.Context, arg1 int64, arg2 zendesk.Grou
 func (mr *ClientMockRecorder) UpdateGroup(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGroup", reflect.TypeOf((*Client)(nil).UpdateGroup), arg0, arg1, arg2)
+}
+
+// UpdateOrganization mocks base method
+func (m *Client) UpdateOrganization(arg0 context.Context, arg1 int64, arg2 zendesk.Organization) (zendesk.Organization, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOrganization", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.Organization)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateOrganization indicates an expected call of UpdateOrganization
+func (mr *ClientMockRecorder) UpdateOrganization(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrganization", reflect.TypeOf((*Client)(nil).UpdateOrganization), arg0, arg1, arg2)
 }
 
 // UpdateTarget mocks base method

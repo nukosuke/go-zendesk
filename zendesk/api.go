@@ -16,6 +16,7 @@ type API interface {
 	TriggerAPI
 	TargetAPI
 	UserAPI
+	OrganizationAPI
 }
 
 var _ API = (*Client)(nil)
