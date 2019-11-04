@@ -1,0 +1,30 @@
+{
+    "targets": [
+        {
+            "url": "https://example.zendesk.com/api/v2/targets/360000217438.json",
+            "id": 360000217438,
+            "created_at": "2019-09-29T08:11:03Z",
+            "type": "http_target",
+            "title": "target :: http :: postbin",
+            "active": true,
+            "method": "post",
+            "username": "",
+            "password": null,
+            "content_type": "application/json",
+            "target_url": "https://postb.in/WERcssi2"
+        },
+        {
+            "url": "https://example.zendesk.com/api/v2/targets/360000217439.json",
+            "id": 360000217439,
+            "created_at": "2019-09-29T08:11:03Z",
+            "type": "email_target",
+            "title": "target :: email :: john.doe@example.com",
+            "active": true,
+            "email": "john.doe@example.com",
+            "subject": "New ticket created"
+        }
+    ],
+    "next_page": null,
+    "previous_page": null,
+    "count": 2
+}

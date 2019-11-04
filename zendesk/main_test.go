@@ -2,4 +2,4 @@ package zendesk
 
 import "context"
 
-var ctx  = context.Background()
+var ctx = context.Background()

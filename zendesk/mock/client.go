@@ -79,6 +79,21 @@ func (mr *ClientMockRecorder) CreateGroup(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0, arg1)
 }
 
+// CreateTarget mocks base method
+func (m *Client) CreateTarget(arg0 context.Context, arg1 zendesk.Target) (zendesk.Target, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTarget", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Target)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateTarget indicates an expected call of CreateTarget
+func (mr *ClientMockRecorder) CreateTarget(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTarget", reflect.TypeOf((*Client)(nil).CreateTarget), arg0, arg1)
+}
+
 // CreateTicket mocks base method
 func (m *Client) CreateTicket(arg0 context.Context, arg1 zendesk.Ticket) (zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
@@ -180,6 +195,20 @@ func (m *Client) DeleteGroup(arg0 context.Context, arg1 int64) error {
 func (mr *ClientMockRecorder) DeleteGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGroup", reflect.TypeOf((*Client)(nil).DeleteGroup), arg0, arg1)
+}
+
+// DeleteTarget mocks base method
+func (m *Client) DeleteTarget(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTarget", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTarget indicates an expected call of DeleteTarget
+func (mr *ClientMockRecorder) DeleteTarget(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTarget", reflect.TypeOf((*Client)(nil).DeleteTarget), arg0, arg1)
 }
 
 // DeleteTicketField mocks base method
@@ -343,6 +372,37 @@ func (m *Client) GetMultipleTickets(arg0 context.Context, arg1 []int64) ([]zende
 func (mr *ClientMockRecorder) GetMultipleTickets(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMultipleTickets", reflect.TypeOf((*Client)(nil).GetMultipleTickets), arg0, arg1)
+}
+
+// GetTarget mocks base method
+func (m *Client) GetTarget(arg0 context.Context, arg1 int64) (zendesk.Target, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTarget", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Target)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTarget indicates an expected call of GetTarget
+func (mr *ClientMockRecorder) GetTarget(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTarget", reflect.TypeOf((*Client)(nil).GetTarget), arg0, arg1)
+}
+
+// GetTargets mocks base method
+func (m *Client) GetTargets(arg0 context.Context) ([]zendesk.Target, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTargets", arg0)
+	ret0, _ := ret[0].([]zendesk.Target)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTargets indicates an expected call of GetTargets
+func (mr *ClientMockRecorder) GetTargets(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTargets", reflect.TypeOf((*Client)(nil).GetTargets), arg0)
 }
 
 // GetTicket mocks base method
@@ -513,6 +573,21 @@ func (m *Client) UpdateGroup(arg0 context.Context, arg1 int64, arg2 zendesk.Grou
 func (mr *ClientMockRecorder) UpdateGroup(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGroup", reflect.TypeOf((*Client)(nil).UpdateGroup), arg0, arg1, arg2)
+}
+
+// UpdateTarget mocks base method
+func (m *Client) UpdateTarget(arg0 context.Context, arg1 int64, arg2 zendesk.Target) (zendesk.Target, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTarget", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.Target)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTarget indicates an expected call of UpdateTarget
+func (mr *ClientMockRecorder) UpdateTarget(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTarget", reflect.TypeOf((*Client)(nil).UpdateTarget), arg0, arg1, arg2)
 }
 
 // UpdateTicketField mocks base method
