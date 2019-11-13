@@ -9,33 +9,71 @@ import (
 	"time"
 )
 
+type CustomField struct {
+	ID int64 `json:"id"`
+	// Valid types are string or []string.
+	Value interface{} `json:"value"`
+}
+
+// Custom Unmarshal function required because a custom field's value can be
+// a string or array of strings.
+func (cf *CustomField) UnmarshalJSON(data []byte) error {
+	var temp map[string]interface{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	cf.ID = int64(temp["id"].(float64))
+
+	switch v := temp["value"].(type) {
+	case string:
+		cf.Value = v
+	case []interface{}:
+		var list []string
+
+		for _, v := range temp["value"].([]interface{}) {
+			if s, ok := v.(string); ok {
+				list = append(list, s)
+			} else {
+				return fmt.Errorf("%T is an invalid type for custom field value", v)
+			}
+		}
+
+		cf.Value = list
+	default:
+		return fmt.Errorf("%T is an invalid type for custom field value", v)
+	}
+
+	return nil
+}
+
 type Ticket struct {
-	ID              int64     `json:"id,omitempty"`
-	URL             string    `json:"url,omitempty"`
-	ExternalID      string    `json:"external_id,omitempty"`
-	Type            string    `json:"type,omitempty"`
-	Subject         string    `json:"subject,omitempty"`
-	RawSubject      string    `json:"raw_subject,omitempty"`
-	Description     string    `json:"description,omitempty"`
-	Priority        string    `json:"priority,omitempty"`
-	Status          string    `json:"status,omitempty"`
-	Recipient       string    `json:"recipient,omitempty"`
-	RequesterID     int64     `json:"requester_id,omitempty"`
-	SubmitterID     int64     `json:"submitter_id,omitempty"`
-	AssigneeID      int64     `json:"assignee_id,omitempty"`
-	OrganizationID  int64     `json:"organization_id,omitempty"`
-	GroupID         int64     `json:"group_id,omitempty"`
-	CollaboratorIDs []int64   `json:"collaborator_ids,omitempty"`
-	FollowerIDs     []int64   `json:"follower_ids,omitempty"`
-	EmailCCIDs      []int64   `json:"email_cc_ids,omitempty"`
-	ForumTopicID    int64     `json:"forum_topic_id,omitempty"`
-	ProblemID       int64     `json:"problem_id,omitempty"`
-	HasIncidents    bool      `json:"has_incidents,omitempty"`
-	DueAt           time.Time `json:"due_at,omitempty"`
-	Tags            []string  `json:"tags,omitempty"`
+	ID              int64         `json:"id,omitempty"`
+	URL             string        `json:"url,omitempty"`
+	ExternalID      string        `json:"external_id,omitempty"`
+	Type            string        `json:"type,omitempty"`
+	Subject         string        `json:"subject,omitempty"`
+	RawSubject      string        `json:"raw_subject,omitempty"`
+	Description     string        `json:"description,omitempty"`
+	Priority        string        `json:"priority,omitempty"`
+	Status          string        `json:"status,omitempty"`
+	Recipient       string        `json:"recipient,omitempty"`
+	RequesterID     int64         `json:"requester_id,omitempty"`
+	SubmitterID     int64         `json:"submitter_id,omitempty"`
+	AssigneeID      int64         `json:"assignee_id,omitempty"`
+	OrganizationID  int64         `json:"organization_id,omitempty"`
+	GroupID         int64         `json:"group_id,omitempty"`
+	CollaboratorIDs []int64       `json:"collaborator_ids,omitempty"`
+	FollowerIDs     []int64       `json:"follower_ids,omitempty"`
+	EmailCCIDs      []int64       `json:"email_cc_ids,omitempty"`
+	ForumTopicID    int64         `json:"forum_topic_id,omitempty"`
+	ProblemID       int64         `json:"problem_id,omitempty"`
+	HasIncidents    bool          `json:"has_incidents,omitempty"`
+	DueAt           time.Time     `json:"due_at,omitempty"`
+	Tags            []string      `json:"tags,omitempty"`
+	CustomFields    []CustomField `json:"custom_fields,omitempty"`
 
 	// TODO: Via          #123
-	// TODO: CustomFields #122
 
 	SatisfactionRating struct {
 		ID      int64  `json:"id"`
