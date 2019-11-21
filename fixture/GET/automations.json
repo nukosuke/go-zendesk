@@ -1,0 +1,108 @@
+{
+  "automations": [
+    {
+      "url": "https://example.zendesk.com/api/v2/automations/360017421099.json",
+      "id": 360017421099,
+      "title": "Close ticket 4 days after status is set to solved",
+      "active": true,
+      "updated_at": "2019-09-17T21:22:20Z",
+      "created_at": "2019-09-17T21:22:20Z",
+      "actions": [
+        {
+          "field": "status",
+          "value": "closed"
+        }
+      ],
+      "conditions": {
+        "all": [
+          {
+            "field": "status",
+            "operator": "is",
+            "value": "solved"
+          },
+          {
+            "field": "SOLVED",
+            "operator": "greater_than",
+            "value": "96"
+          }
+        ],
+        "any": []
+      },
+      "position": 0,
+      "raw_title": "Close ticket 4 days after status is set to solved"
+    },
+    {
+      "url": "https://example.zendesk.com/api/v2/automations/360017421119.json",
+      "id": 360017421119,
+      "title": "Pending notification 24 hours",
+      "active": false,
+      "updated_at": "2019-09-17T21:22:20Z",
+      "created_at": "2019-09-17T21:22:20Z",
+      "actions": [
+        {
+          "field": "notification_user",
+          "value": [
+            "requester_and_ccs",
+            "[{{ticket.account}}] Pending request: {{ticket.title}}",
+            "This is an email to remind you that your request (#{{ticket.id}}) is pending and awaits your feedback.\n\n{{ticket.comments_formatted}}"
+          ]
+        }
+      ],
+      "conditions": {
+        "all": [
+          {
+            "field": "PENDING",
+            "operator": "is",
+            "value": "24"
+          },
+          {
+            "field": "ticket_is_public",
+            "operator": "is",
+            "value": "public"
+          }
+        ],
+        "any": []
+      },
+      "position": 9998,
+      "raw_title": "Pending notification 24 hours"
+    },
+    {
+      "url": "https://example.zendesk.com/api/v2/automations/360017421139.json",
+      "id": 360017421139,
+      "title": "Pending notification 5 days",
+      "active": false,
+      "updated_at": "2019-09-17T21:22:20Z",
+      "created_at": "2019-09-17T21:22:20Z",
+      "actions": [
+        {
+          "field": "notification_user",
+          "value": [
+            "requester_and_ccs",
+            "[{{ticket.account}}] Pending request: {{ticket.title}}",
+            "This is an email to remind you that your request (#{{ticket.id}}) has been pending for 5 days and awaits your feedback.\n\n{{ticket.comments_formatted}}"
+          ]
+        }
+      ],
+      "conditions": {
+        "all": [
+          {
+            "field": "PENDING",
+            "operator": "is",
+            "value": "120"
+          },
+          {
+            "field": "ticket_is_public",
+            "operator": "is",
+            "value": "public"
+          }
+        ],
+        "any": []
+      },
+      "position": 9999,
+      "raw_title": "Pending notification 5 days"
+    }
+  ],
+  "next_page": null,
+  "previous_page": null,
+  "count": 3
+}
