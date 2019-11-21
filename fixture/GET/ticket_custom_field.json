@@ -42,6 +42,14 @@
       {
         "id": 360005657121,
         "value": ["list", "of", "values"]
+      },
+      {
+        "id": 360005657122,
+        "value": null
+      },
+      {
+        "id": 360005657123,
+        "value": true
       }
     ],
     "satisfaction_rating": null,

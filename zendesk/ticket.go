@@ -26,7 +26,7 @@ func (cf *CustomField) UnmarshalJSON(data []byte) error {
 	cf.ID = int64(temp["id"].(float64))
 
 	switch v := temp["value"].(type) {
-	case string:
+	case string, nil, bool:
 		cf.Value = v
 	case []interface{}:
 		var list []string

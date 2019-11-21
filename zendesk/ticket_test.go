@@ -102,6 +102,12 @@ func TestGetTicketWithCustomFields(t *testing.T) {
 					t.Fatalf("Expected to find %s in custom fields", v)
 				}
 			}
+		case nil:
+			/* Do nothing */
+		case bool:
+			if !cf.Value.(bool) {
+				t.Fatal("Expected to find true in custom fields")
+			}
 		default:
 			t.Fatalf("Invalid value type in custom field:  %v.", cf)
 		}
