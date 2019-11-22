@@ -88,6 +88,7 @@ func (z *Client) GetAutomations(ctx context.Context, opts *AutomationListOptions
 	if err != nil {
 		return []Automation{}, Page{}, err
 	}
+
 	return data.Automations, data.Page, nil
 }
 
@@ -109,6 +110,7 @@ func (z *Client) CreateAutomation(ctx context.Context, automation Automation) (A
 	if err != nil {
 		return Automation{}, err
 	}
+
 	return result.Automation, nil
 }
 
@@ -129,6 +131,7 @@ func (z *Client) GetAutomation(ctx context.Context, id int64) (Automation, error
 	if err != nil {
 		return Automation{}, err
 	}
+
 	return result.Automation, nil
 }
 
