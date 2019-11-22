@@ -99,9 +99,10 @@ func (z *Client) CreateAutomation(ctx context.Context, automation Automation) (A
 	var data, result struct {
 		Automation Automation `json:"automation"`
 	}
-	data.Automation = automation
 
+	data.Automation = automation
 	body, err := z.post(ctx, "/automations.json", data)
+
 	if err != nil {
 		return Automation{}, err
 	}
@@ -145,6 +146,7 @@ func (z *Client) UpdateAutomation(ctx context.Context, id int64, automation Auto
 
 	data.Automation = automation
 	body, err := z.put(ctx, fmt.Sprintf("/automations/%d.json", id), data)
+
 	if err != nil {
 		return Automation{}, err
 	}
