@@ -16,6 +16,7 @@ type API interface {
 	TriggerAPI
 	TargetAPI
 	UserAPI
+	UserFieldAPI
 	OrganizationAPI
 }
 
