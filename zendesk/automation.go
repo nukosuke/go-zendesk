@@ -36,10 +36,10 @@ type Automation struct {
 		All []AutomationCondition `json:"all"`
 		Any []AutomationCondition `json:"any"`
 	} `json:"conditions"`
-	Actions     []AutomationAction `json:"actions"`
-	RawTitle	string			`json:"raw_title,omitempty"`
-	CreatedAt   *time.Time      `json:"created_at,omitempty"`
-	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
+	Actions   []AutomationAction `json:"actions"`
+	RawTitle  string             `json:"raw_title,omitempty"`
+	CreatedAt *time.Time         `json:"created_at,omitempty"`
+	UpdatedAt *time.Time         `json:"updated_at,omitempty"`
 }
 
 // AutomationListOptions is options for GetAutomations

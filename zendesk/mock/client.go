@@ -34,6 +34,21 @@ func (m *Client) EXPECT() *ClientMockRecorder {
 	return m.recorder
 }
 
+// CreateAutomation mocks base method
+func (m *Client) CreateAutomation(arg0 context.Context, arg1 zendesk.Automation) (zendesk.Automation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAutomation", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Automation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAutomation indicates an expected call of CreateAutomation
+func (mr *ClientMockRecorder) CreateAutomation(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomation", reflect.TypeOf((*Client)(nil).CreateAutomation), arg0, arg1)
+}
+
 // CreateBrand mocks base method
 func (m *Client) CreateBrand(arg0 context.Context, arg1 zendesk.Brand) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
@@ -184,6 +199,20 @@ func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0, arg1)
 }
 
+// DeleteAutomation mocks base method
+func (m *Client) DeleteAutomation(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteAutomation", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteAutomation indicates an expected call of DeleteAutomation
+func (mr *ClientMockRecorder) DeleteAutomation(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAutomation", reflect.TypeOf((*Client)(nil).DeleteAutomation), arg0, arg1)
+}
+
 // DeleteBrand mocks base method
 func (m *Client) DeleteBrand(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
@@ -309,6 +338,37 @@ func (m *Client) GetAttachment(arg0 context.Context, arg1 int64) (zendesk.Attach
 func (mr *ClientMockRecorder) GetAttachment(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAttachment", reflect.TypeOf((*Client)(nil).GetAttachment), arg0, arg1)
+}
+
+// GetAutomation mocks base method
+func (m *Client) GetAutomation(arg0 context.Context, arg1 int64) (zendesk.Automation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAutomation", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Automation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAutomation indicates an expected call of GetAutomation
+func (mr *ClientMockRecorder) GetAutomation(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomation", reflect.TypeOf((*Client)(nil).GetAutomation), arg0, arg1)
+}
+
+// GetAutomations mocks base method
+func (m *Client) GetAutomations(arg0 context.Context, arg1 *zendesk.AutomationListOptions) ([]zendesk.Automation, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAutomations", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.Automation)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutomations indicates an expected call of GetAutomations
+func (mr *ClientMockRecorder) GetAutomations(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomations", reflect.TypeOf((*Client)(nil).GetAutomations), arg0, arg1)
 }
 
 // GetBrand mocks base method
@@ -587,6 +647,21 @@ func (m *Client) GetUsers(arg0 context.Context, arg1 *zendesk.UserListOptions) (
 func (mr *ClientMockRecorder) GetUsers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0, arg1)
+}
+
+// UpdateAutomation mocks base method
+func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk.Automation) (zendesk.Automation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateAutomation", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.Automation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAutomation indicates an expected call of UpdateAutomation
+func (mr *ClientMockRecorder) UpdateAutomation(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomation", reflect.TypeOf((*Client)(nil).UpdateAutomation), arg0, arg1, arg2)
 }
 
 // UpdateBrand mocks base method
