@@ -26,15 +26,34 @@ type UserField struct {
 	UpdatedAt           time.Time           `json:"updated_at,omitempty"`
 }
 
+type UserFieldListOptions struct {
+	PageOptions
+}
+
+type UserFieldAPI interface {
+	GetUserFields(ctx context.Context, opts *UserFieldListOptions) ([]UserField, Page, error)
+}
+
 // GetUserFields fetch trigger list
 //
 // https://developer.zendesk.com/rest_api/docs/support/user_fields#list-user-fields
-func (z *Client) GetUserFields(ctx context.Context) ([]UserField, Page, error) {
+func (z *Client) GetUserFields(ctx context.Context, opts *UserFieldListOptions) ([]UserField, Page, error) {
 	var data struct {
 		UserFields []UserField `json:"user_fields"`
 		Page
 	}
-	body, err := z.get(ctx, "/user_fields.json")
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &UserFieldListOptions{}
+	}
+
+	u, err := addOptions("/user_fields.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return nil, Page{}, err
 	}
