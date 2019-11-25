@@ -1,0 +1,33 @@
+{
+  "automation": {
+    "url": "https://example.zendesk.com/api/v2/automations/360017421099.json",
+    "id": 360017421099,
+    "title": "Close ticket 4 days after status is set to solved",
+    "active": true,
+    "updated_at": "2019-09-17T21:22:20Z",
+    "created_at": "2019-09-17T21:22:20Z",
+    "actions": [
+      {
+        "field": "status",
+        "value": "closed"
+      }
+    ],
+    "conditions": {
+      "all": [
+        {
+          "field": "status",
+          "operator": "is",
+          "value": "solved"
+        },
+        {
+          "field": "SOLVED",
+          "operator": "greater_than",
+          "value": "96"
+        }
+      ],
+      "any": []
+    },
+    "position": 0,
+    "raw_title": "Close ticket 4 days after status is set to solved"
+  }
+}
