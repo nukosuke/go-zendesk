@@ -20,23 +20,23 @@ type SlaPolicyFilter struct {
 //
 // ref: https://developer.zendesk.com/rest_api/docs/core/slas/policies#json-format
 type SlaPolicy struct {
-	ID         int64  `json:"id,omitempty"`
-	Title      string `json:"title"`
-	Description string          `json:"description,omitempty"`
-	Position   int64  `json:"position,omitempty"`
-	Active     bool   `json:"active,omitempty"`
-	Filter struct {
+	ID          int64  `json:"id,omitempty"`
+	Title       string `json:"title"`
+	Description string `json:"description,omitempty"`
+	Position    int64  `json:"position,omitempty"`
+	Active      bool   `json:"active,omitempty"`
+	Filter      struct {
 		All []SlaPolicyFilter `json:"all"`
 		Any []SlaPolicyFilter `json:"any"`
 	} `json:"filter"`
-	PolicyMetric	struct{
+	PolicyMetric struct {
 		Priority      string `json:"priority"`
 		Metric        string `json:"metric"`
 		Target        int    `json:"target"`
 		BusinessHours bool   `json:"business_hours"`
 	} `json:"policy_metric"`
-	CreatedAt   *time.Time      `json:"created_at,omitempty"`
-	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // SlaPolicyListOptions is options for GetSlaPolicies

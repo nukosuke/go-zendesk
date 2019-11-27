@@ -109,6 +109,21 @@ func (mr *ClientMockRecorder) CreateOrganization(arg0, arg1 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*Client)(nil).CreateOrganization), arg0, arg1)
 }
 
+// CreateSlaPolicy mocks base method
+func (m *Client) CreateSlaPolicy(arg0 context.Context, arg1 zendesk.SlaPolicy) (zendesk.SlaPolicy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateSlaPolicy", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.SlaPolicy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSlaPolicy indicates an expected call of CreateSlaPolicy
+func (mr *ClientMockRecorder) CreateSlaPolicy(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSlaPolicy", reflect.TypeOf((*Client)(nil).CreateSlaPolicy), arg0, arg1)
+}
+
 // CreateTarget mocks base method
 func (m *Client) CreateTarget(arg0 context.Context, arg1 zendesk.Target) (zendesk.Target, error) {
 	m.ctrl.T.Helper()
@@ -253,6 +268,20 @@ func (m *Client) DeleteOrganization(arg0 context.Context, arg1 int64) error {
 func (mr *ClientMockRecorder) DeleteOrganization(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrganization", reflect.TypeOf((*Client)(nil).DeleteOrganization), arg0, arg1)
+}
+
+// DeleteSlaPolicy mocks base method
+func (m *Client) DeleteSlaPolicy(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteSlaPolicy", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteSlaPolicy indicates an expected call of DeleteSlaPolicy
+func (mr *ClientMockRecorder) DeleteSlaPolicy(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSlaPolicy", reflect.TypeOf((*Client)(nil).DeleteSlaPolicy), arg0, arg1)
 }
 
 // DeleteTarget mocks base method
@@ -476,6 +505,37 @@ func (m *Client) GetOrganization(arg0 context.Context, arg1 int64) (zendesk.Orga
 func (mr *ClientMockRecorder) GetOrganization(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganization", reflect.TypeOf((*Client)(nil).GetOrganization), arg0, arg1)
+}
+
+// GetSlaPolicies mocks base method
+func (m *Client) GetSlaPolicies(arg0 context.Context, arg1 *zendesk.SlaPolicyListOptions) ([]zendesk.SlaPolicy, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSlaPolicies", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.SlaPolicy)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSlaPolicies indicates an expected call of GetSlaPolicies
+func (mr *ClientMockRecorder) GetSlaPolicies(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSlaPolicies", reflect.TypeOf((*Client)(nil).GetSlaPolicies), arg0, arg1)
+}
+
+// GetSlaPolicy mocks base method
+func (m *Client) GetSlaPolicy(arg0 context.Context, arg1 int64) (zendesk.SlaPolicy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSlaPolicy", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.SlaPolicy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSlaPolicy indicates an expected call of GetSlaPolicy
+func (mr *ClientMockRecorder) GetSlaPolicy(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSlaPolicy", reflect.TypeOf((*Client)(nil).GetSlaPolicy), arg0, arg1)
 }
 
 // GetTarget mocks base method
@@ -723,6 +783,21 @@ func (m *Client) UpdateOrganization(arg0 context.Context, arg1 int64, arg2 zende
 func (mr *ClientMockRecorder) UpdateOrganization(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrganization", reflect.TypeOf((*Client)(nil).UpdateOrganization), arg0, arg1, arg2)
+}
+
+// UpdateSlaPolicy mocks base method
+func (m *Client) UpdateSlaPolicy(arg0 context.Context, arg1 int64, arg2 zendesk.SlaPolicy) (zendesk.SlaPolicy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateSlaPolicy", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.SlaPolicy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSlaPolicy indicates an expected call of UpdateSlaPolicy
+func (mr *ClientMockRecorder) UpdateSlaPolicy(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSlaPolicy", reflect.TypeOf((*Client)(nil).UpdateSlaPolicy), arg0, arg1, arg2)
 }
 
 // UpdateTarget mocks base method
