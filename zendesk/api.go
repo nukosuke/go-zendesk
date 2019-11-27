@@ -19,6 +19,7 @@ type API interface {
 	UserAPI
 	UserFieldAPI
 	OrganizationAPI
+	SlaPolicyAPI
 }
 
 var _ API = (*Client)(nil)

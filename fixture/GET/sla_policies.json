@@ -1,0 +1,166 @@
+{
+  "sla_policies": [
+    {
+      "id": 36000643450,
+      "title": "Incidents",
+      "description": "For urgent incidents, we will respond to tickets in 10 minutes",
+      "position": 3,
+      "filter": {
+        "all": [
+          {
+            "field": "type",
+            "operator": "is",
+            "value": "incident"
+          }
+        ],
+        "any": []
+      },
+      "policy_metrics": [
+        {
+          "priority": "normal",
+          "metric": "first_reply_time",
+          "target": 30,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "first_reply_time",
+          "target": 10,
+          "business_hours": false
+        },
+        {
+          "priority": "low",
+          "metric": "requester_wait_time",
+          "target": 180,
+          "business_hours": false
+        },
+        {
+          "priority": "normal",
+          "metric": "requester_wait_time",
+          "target": 160,
+          "business_hours": false
+        },
+        {
+          "priority": "high",
+          "metric": "requester_wait_time",
+          "target": 140,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "requester_wait_time",
+          "target": 120,
+          "business_hours": false
+        }
+      ]
+    },
+    {
+      "id": 36000032063,
+      "title": "Incidents",
+      "description": "For urgent incidents, we will respond to tickets in 10 minutes",
+      "position": 3,
+      "filter": {
+        "all": [
+          {
+            "field": "type",
+            "operator": "is",
+            "value": "incident"
+          }
+        ],
+        "any": []
+      },
+      "policy_metrics": [
+        {
+          "priority": "normal",
+          "metric": "first_reply_time",
+          "target": 30,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "first_reply_time",
+          "target": 10,
+          "business_hours": false
+        },
+        {
+          "priority": "low",
+          "metric": "requester_wait_time",
+          "target": 180,
+          "business_hours": false
+        },
+        {
+          "priority": "normal",
+          "metric": "requester_wait_time",
+          "target": 160,
+          "business_hours": false
+        },
+        {
+          "priority": "high",
+          "metric": "requester_wait_time",
+          "target": 140,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "requester_wait_time",
+          "target": 120,
+          "business_hours": false
+        }
+      ]
+    },
+    {
+      "id": 360000068060,
+      "title": "Incidents",
+      "description": "For urgent incidents, we will respond to tickets in 10 minutes",
+      "position": 3,
+      "filter": {
+        "all": [
+          {
+            "field": "type",
+            "operator": "is",
+            "value": "incident"
+          }
+        ],
+        "any": []
+      },
+      "policy_metrics": [
+        {
+          "priority": "normal",
+          "metric": "first_reply_time",
+          "target": 30,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "first_reply_time",
+          "target": 10,
+          "business_hours": false
+        },
+        {
+          "priority": "low",
+          "metric": "requester_wait_time",
+          "target": 180,
+          "business_hours": false
+        },
+        {
+          "priority": "normal",
+          "metric": "requester_wait_time",
+          "target": 160,
+          "business_hours": false
+        },
+        {
+          "priority": "high",
+          "metric": "requester_wait_time",
+          "target": 140,
+          "business_hours": false
+        },
+        {
+          "priority": "urgent",
+          "metric": "requester_wait_time",
+          "target": 120,
+          "business_hours": false
+        }
+      ]
+    }
+  ]
+}
