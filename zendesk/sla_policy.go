@@ -37,8 +37,8 @@ type SLAPolicy struct {
 		Any []SLAPolicyFilter `json:"any"`
 	} `json:"filter"`
 	PolicyMetrics []SLAPolicyMetric `json:"policy_metric"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	CreatedAt     *time.Time        `json:"created_at,omitempty"`
+	UpdatedAt     *time.Time        `json:"updated_at,omitempty"`
 }
 
 // SLAPolicyListOptions is options for GetSLAPolicies
@@ -87,6 +87,7 @@ func (z *Client) GetSLAPolicies(ctx context.Context, opts *SLAPolicyListOptions)
 	if err != nil {
 		return []SLAPolicy{}, Page{}, err
 	}
+
 	return data.SLAPolicies, data.Page, nil
 }
 
