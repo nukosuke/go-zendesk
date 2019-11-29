@@ -16,6 +16,13 @@ type SlaPolicyFilter struct {
 	Value    string `json:"value"`
 }
 
+type SlaPolicyMetric struct {
+	Priority      string `json:"priority"`
+	Metric        string `json:"metric"`
+	Target        int    `json:"target"`
+	BusinessHours bool   `json:"business_hours"`
+}
+
 // SlaPolicy is zendesk slaPolicy JSON payload format
 //
 // ref: https://developer.zendesk.com/rest_api/docs/core/slas/policies#json-format
@@ -29,12 +36,7 @@ type SlaPolicy struct {
 		All []SlaPolicyFilter `json:"all"`
 		Any []SlaPolicyFilter `json:"any"`
 	} `json:"filter"`
-	PolicyMetric struct {
-		Priority      string `json:"priority"`
-		Metric        string `json:"metric"`
-		Target        int    `json:"target"`
-		BusinessHours bool   `json:"business_hours"`
-	} `json:"policy_metric"`
+	PolicyMetrics []SlaPolicyMetric `json:"policy_metric"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
