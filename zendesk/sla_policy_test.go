@@ -6,12 +6,12 @@ import (
 	"testing"
 )
 
-func TestGetSlaPolicies(t *testing.T) {
+func TestGetSLAPolicies(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "sla_policies.json")
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	slaPolicies, _, err := client.GetSlaPolicies(ctx, &SlaPolicyListOptions{})
+	slaPolicies, _, err := client.GetSLAPolicies(ctx, &SLAPolicyListOptions{})
 	if err != nil {
 		t.Fatalf("Failed to get sla policies: %s", err)
 	}
@@ -21,11 +21,11 @@ func TestGetSlaPolicies(t *testing.T) {
 	}
 }
 
-func TestGetSlaPoliciesWithNil(t *testing.T) {
+func TestGetSLAPoliciesWithNil(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "sla_policies.json")
 	client := newTestClient(mockAPI)
 
-	_, _, err := client.GetSlaPolicies(ctx, nil)
+	_, _, err := client.GetSLAPolicies(ctx, nil)
 	if err == nil {
 		t.Fatal("expected an OptionsError, but no error")
 	}
@@ -36,23 +36,23 @@ func TestGetSlaPoliciesWithNil(t *testing.T) {
 	}
 }
 
-func TestCreateSlaPolicy(t *testing.T) {
+func TestCreateSLAPolicy(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPost, "sla_policies.json", http.StatusCreated)
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateSlaPolicy(ctx, SlaPolicy{})
+	_, err := client.CreateSLAPolicy(ctx, SLAPolicy{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create sla policy: %s", err)
 	}
 }
 
-func TestGetSlaPolicy(t *testing.T) {
+func TestGetSLAPolicy(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "sla_policy.json")
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	sla, err := client.GetSlaPolicy(ctx, 123)
+	sla, err := client.GetSLAPolicy(ctx, 123)
 	if err != nil {
 		t.Fatalf("Failed to get sla policy: %s", err)
 	}
@@ -63,25 +63,25 @@ func TestGetSlaPolicy(t *testing.T) {
 	}
 }
 
-func TestGetSlaPolicyFailure(t *testing.T) {
+func TestGetSLAPolicyFailure(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write(nil)
 	}))
 
 	c := newTestClient(mockAPI)
-	_, err := c.GetSlaPolicy(ctx, 1234)
+	_, err := c.GetSLAPolicy(ctx, 1234)
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
 }
 
-func TestUpdateSlaPolicy(t *testing.T) {
+func TestUpdateSLAPolicy(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPut, "sla_policies.json", http.StatusOK)
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	sla, err := client.UpdateSlaPolicy(ctx, 123, SlaPolicy{})
+	sla, err := client.UpdateSLAPolicy(ctx, 123, SLAPolicy{})
 	if err != nil {
 		t.Fatalf("Failed to get sla policy: %s", err)
 	}
@@ -92,40 +92,40 @@ func TestUpdateSlaPolicy(t *testing.T) {
 	}
 }
 
-func TestUpdateSlaPolicyFailure(t *testing.T) {
+func TestUpdateSLAPolicyFailure(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write(nil)
 	}))
 
 	c := newTestClient(mockAPI)
-	_, err := c.UpdateSlaPolicy(ctx, 1234, SlaPolicy{})
+	_, err := c.UpdateSLAPolicy(ctx, 1234, SLAPolicy{})
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
 }
 
-func TestDeleteSlaPolicy(t *testing.T) {
+func TestDeleteSLAPolicy(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNoContent)
 		w.Write(nil)
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteSlaPolicy(ctx, 1234)
+	err := c.DeleteSLAPolicy(ctx, 1234)
 	if err != nil {
 		t.Fatalf("Failed to delete sla policy: %s", err)
 	}
 }
 
-func TestDeleteSlaPolicyFailure(t *testing.T) {
+func TestDeleteSLAPolicyFailure(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write(nil)
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.DeleteSlaPolicy(ctx, 1234)
+	err := c.DeleteSLAPolicy(ctx, 1234)
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
