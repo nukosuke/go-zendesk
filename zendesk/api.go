@@ -19,6 +19,7 @@ type API interface {
 	UserAPI
 	UserFieldAPI
 	OrganizationAPI
+	SearchAPI
 	SLAPolicyAPI
 }
 
