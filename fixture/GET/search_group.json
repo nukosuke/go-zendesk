@@ -1,0 +1,18 @@
+{
+  "results": [
+    {
+      "url": "https://d3v-terraform-provider.zendesk.com/api/v2/groups/360007194452.json",
+      "id": 360007194452,
+      "name": "nyan",
+      "description": "",
+      "deleted": false,
+      "created_at": "2019-12-09T02:40:11Z",
+      "updated_at": "2019-12-09T02:40:11Z",
+      "result_type": "group"
+    }
+  ],
+  "facets": null,
+  "next_page": null,
+  "previous_page": null,
+  "count": 1
+}

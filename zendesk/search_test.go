@@ -1,0 +1,56 @@
+package zendesk
+
+import (
+	"net/http"
+	"testing"
+)
+
+func TestSearchTickets(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "search_ticket.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	results, _, err := client.Search(ctx, &SearchOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get search results: %s", err)
+	}
+
+	list := results.List()
+	if len(list) != 1 {
+		t.Fatalf("expected length of sla policies is , but got %d", len(list))
+	}
+
+	ticket, ok := list[0].(Ticket)
+	if !ok {
+		t.Fatalf("Cannot assert %v as a ticket", list[0])
+	}
+
+	if ticket.ID != 4 {
+		t.Fatalf("Ticket did not have the expected id %v", ticket)
+	}
+}
+
+func TestSearchGroup(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "search_group.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	results, _, err := client.Search(ctx, &SearchOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get search results: %s", err)
+	}
+
+	list := results.List()
+	if len(list) != 1 {
+		t.Fatalf("expected length of sla policies is , but got %d", len(list))
+	}
+
+	ticket, ok := list[0].(Group)
+	if !ok {
+		t.Fatalf("Cannot assert %v as a group", list[0])
+	}
+
+	if ticket.ID != 360007194452 {
+		t.Fatalf("Group did not have the expected id %v", ticket)
+	}
+}
