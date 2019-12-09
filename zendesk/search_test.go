@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"encoding/json"
 	"net/http"
 	"testing"
 )
@@ -27,6 +28,17 @@ func TestSearchTickets(t *testing.T) {
 
 	if ticket.ID != 4 {
 		t.Fatalf("Ticket did not have the expected id %v", ticket)
+	}
+}
+
+func BenchmarkUnmarshalSearchResults(b *testing.B) {
+	file := readFixture("ticket_result.json")
+	for i := 0; i < b.N; i++ {
+		var result SearchResults
+		err := json.Unmarshal(file, &result)
+		if err != nil {
+			b.Fatalf("Recieved error when unmarshalling. %v", err)
+		}
 	}
 }
 
