@@ -57,12 +57,37 @@ func TestSearchGroup(t *testing.T) {
 		t.Fatalf("expected length of sla policies is , but got %d", len(list))
 	}
 
-	ticket, ok := list[0].(Group)
+	result, ok := list[0].(Group)
 	if !ok {
 		t.Fatalf("Cannot assert %v as a group", list[0])
 	}
 
-	if ticket.ID != 360007194452 {
-		t.Fatalf("Group did not have the expected id %v", ticket)
+	if result.ID != 360007194452 {
+		t.Fatalf("Group did not have the expected id %v", result)
+	}
+}
+
+func TestSearchUser(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "search_user.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	results, _, err := client.Search(ctx, &SearchOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get search results: %s", err)
+	}
+
+	list := results.List()
+	if len(list) != 1 {
+		t.Fatalf("expected length of sla policies is , but got %d", len(list))
+	}
+
+	result, ok := list[0].(User)
+	if !ok {
+		t.Fatalf("Cannot assert %v as a group", list[0])
+	}
+
+	if result.ID != 1234 {
+		t.Fatalf("Group did not have the expected id %v", result)
 	}
 }
