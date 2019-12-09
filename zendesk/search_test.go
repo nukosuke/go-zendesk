@@ -3,6 +3,8 @@ package zendesk
 import (
 	"encoding/json"
 	"net/http"
+	"net/http/httptest"
+	"path/filepath"
 	"testing"
 )
 
@@ -89,5 +91,32 @@ func TestSearchUser(t *testing.T) {
 
 	if result.ID != 1234 {
 		t.Fatalf("Group did not have the expected id %v", result)
+	}
+}
+
+func TestSearchQueryParam(t *testing.T) {
+	expected := "query string"
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		queryString := r.URL.Query().Get("query")
+		if queryString != expected {
+			t.Fatalf(`Did not get the expect query string: "%s". Was: "%s"`, expected, queryString)
+		}
+		w.Write(readFixture(filepath.Join(http.MethodGet, "search_user.json")))
+	}))
+
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	opts := SearchOptions{
+		PageOptions: PageOptions{
+			Page:    1,
+			PerPage: 2,
+		},
+		Query: expected,
+	}
+
+	_, _, err := client.Search(ctx, &opts)
+	if err != nil {
+		t.Fatalf("Received error from search api")
 	}
 }
