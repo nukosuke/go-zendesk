@@ -66,6 +66,7 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 			var o Organization
 			err = json.Unmarshal(v, &o)
 			value = o
+			// TODO: Handle topics
 		default:
 			err = fmt.Errorf("value of result was an unsupported type %s", t)
 		}
