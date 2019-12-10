@@ -24,7 +24,7 @@ type SearchResults struct {
 	results []interface{}
 }
 
-func (r *SearchResults) MarshalJSON() ([]byte, error)  {
+func (r *SearchResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.results)
 }
 
