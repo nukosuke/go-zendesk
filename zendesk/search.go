@@ -29,8 +29,11 @@ func (r *SearchResults) MarshalJSON() ([]byte, error)  {
 }
 
 func (r *SearchResults) UnmarshalJSON(b []byte) error  {
-	var results []interface{}
-	var tmp []json.RawMessage
+	var (
+		results []interface{}
+		tmp []json.RawMessage
+	)
+
 	err := json.Unmarshal(b, &tmp)
 	if err != nil {
 		return err
