@@ -50,6 +50,7 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 		}
 
 		var value interface{}
+
 		switch t {
 		case "group":
 			var g Group
