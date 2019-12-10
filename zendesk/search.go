@@ -113,6 +113,7 @@ func (z *Client) Search(ctx context.Context, opts *SearchOptions) (SearchResults
 	if err != nil {
 		return SearchResults{}, Page{}, err
 	}
+
 	return data.Results, data.Page, nil
 }
 
