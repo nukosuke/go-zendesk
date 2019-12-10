@@ -49,7 +49,7 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 
 		t, ok := m["result_type"].(string)
 		if !ok {
-			fmt.Errorf("could not assert result type to string. json was: %v", v)
+			return fmt.Errorf("could not assert result type to string. json was: %v", v)
 		}
 
 		var value interface{}
