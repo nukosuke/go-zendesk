@@ -5,7 +5,7 @@ import "time"
 type Topic struct {
 	ID            int64     `json:"id"`
 	URL           string    `json:"url"`
-	HtmlURL       string    `json:"html_url"`
+	HTMLURL       string    `json:"html_url"`
 	Name          string    `json:"name"`
 	Description   string    `json:"description"`
 	Position      int       `json:"position"`
