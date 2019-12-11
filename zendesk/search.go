@@ -31,7 +31,7 @@ func (r *SearchResults) MarshalJSON() ([]byte, error) {
 func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 	var (
 		results []interface{}
-		tmp []json.RawMessage
+		tmp     []json.RawMessage
 	)
 
 	err := json.Unmarshal(b, &tmp)
