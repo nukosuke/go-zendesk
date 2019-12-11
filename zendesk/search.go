@@ -42,6 +42,7 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 	for _, v := range tmp {
 		// TODO: check with @nukosuke to see if we should try to speed this up using github.com/tidwall/gjson
 		m := make(map[string]interface{})
+
 		err := json.Unmarshal(v, &m)
 		if err != nil {
 			return err
@@ -87,6 +88,7 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 	}
 
 	r.results = results
+
 	return nil
 }
 
