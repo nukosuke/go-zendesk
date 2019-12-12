@@ -40,56 +40,64 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 	}
 
 	for _, v := range tmp {
-		// TODO: check with @nukosuke to see if we should try to speed this up using github.com/tidwall/gjson
-		m := make(map[string]interface{})
 
-		err := json.Unmarshal(v, &m)
+		value, err := r.getObject(v)
 		if err != nil {
 			return err
 		}
 
-		t, ok := m["result_type"].(string)
-		if !ok {
-			return fmt.Errorf("could not assert result type to string. json was: %v", v)
-		}
-
-		var value interface{}
-
-		switch t {
-		case "group":
-			var g Group
-			err = json.Unmarshal(v, &g)
-			value = g
-		case "ticket":
-			var t Ticket
-			err = json.Unmarshal(v, &t)
-			value = t
-		case "user":
-			var u User
-			err = json.Unmarshal(v, &u)
-			value = u
-		case "organization":
-			var o Organization
-			err = json.Unmarshal(v, &o)
-			value = o
-		case "topic":
-			var t Topic
-			err = json.Unmarshal(v, &t)
-			value = t
-		default:
-			err = fmt.Errorf("value of result was an unsupported type %s", t)
-		}
-
-		if err != nil {
-			return err
-		}
-
-		results= append(results, value)
+		results = append(results, value)
 	}
 
 	r.results = results
 
 	return nil
+}
+
+func (r *SearchResults) getObject(blob json.RawMessage) (interface{}, error) {
+	m := make(map[string]interface{})
+
+	err := json.Unmarshal(blob, &m)
+	if err != nil {
+		return nil, err
+	}
+
+	t, ok := m["result_type"].(string)
+	if !ok {
+		return nil, fmt.Errorf("could not assert result type to string. json was: %v", blob)
+	}
+
+	var value interface{}
+	switch t {
+	case "group":
+		var g Group
+		err = json.Unmarshal(blob, &g)
+		value = g
+	case "ticket":
+		var t Ticket
+		err = json.Unmarshal(blob, &t)
+		value = t
+	case "user":
+		var u User
+		err = json.Unmarshal(blob, &u)
+		value = u
+	case "organization":
+		var o Organization
+		err = json.Unmarshal(blob, &o)
+		value = o
+	case "topic":
+		var t Topic
+		err = json.Unmarshal(blob, &t)
+		value = t
+	default:
+		err = fmt.Errorf("value of result was an unsupported type %s", t)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return value, nil
 }
 
 // GetTriggers fetch trigger list
