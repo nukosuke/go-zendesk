@@ -110,9 +110,9 @@ func (r *SearchResults) List() []interface{} {
 	return r.results
 }
 
-// GetTriggers fetch trigger list
+// Search allows users to query zendesk's unified search api.
 //
-// ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
+// ref: https://developer.zendesk.com/rest_api/docs/support/search
 func (z *Client) Search(ctx context.Context, opts *SearchOptions) (SearchResults, Page, error) {
 	var data struct {
 		Results SearchResults `json:"results"`
