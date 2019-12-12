@@ -100,6 +100,16 @@ func (r *SearchResults) getObject(blob json.RawMessage) (interface{}, error) {
 	return value, nil
 }
 
+// String return string formatted for Search results
+func (r *SearchResults) String() string {
+	return fmt.Sprintf("%v", r.results)
+}
+
+// List return internal array in Search Results
+func (r *SearchResults) List() []interface{} {
+	return r.results
+}
+
 // GetTriggers fetch trigger list
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#getting-triggers
@@ -129,14 +139,4 @@ func (z *Client) Search(ctx context.Context, opts *SearchOptions) (SearchResults
 	}
 
 	return data.Results, data.Page, nil
-}
-
-// String return string formatted for Search results
-func (r *SearchResults) String() string {
-	return fmt.Sprintf("%v", r.results)
-}
-
-// List return internal array in Search Results
-func (r *SearchResults) List() []interface{} {
-	return r.results
 }
