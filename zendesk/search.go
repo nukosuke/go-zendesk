@@ -28,7 +28,7 @@ func (r *SearchResults) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.results)
 }
 
-func (r *SearchResults) UnmarshalJSON(b []byte) error  {
+func (r *SearchResults) UnmarshalJSON(b []byte) error {
 	var (
 		results []interface{}
 		tmp     []json.RawMessage
