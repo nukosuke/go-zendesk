@@ -40,7 +40,6 @@ func (r *SearchResults) UnmarshalJSON(b []byte) error  {
 	}
 
 	for _, v := range tmp {
-
 		value, err := r.getObject(v)
 		if err != nil {
 			return err
@@ -68,6 +67,7 @@ func (r *SearchResults) getObject(blob json.RawMessage) (interface{}, error) {
 	}
 
 	var value interface{}
+
 	switch t {
 	case "group":
 		var g Group
