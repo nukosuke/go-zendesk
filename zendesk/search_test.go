@@ -86,7 +86,7 @@ func TestSearchUser(t *testing.T) {
 
 	result, ok := list[0].(User)
 	if !ok {
-		t.Fatalf("Cannot assert %v as a group", list[0])
+		t.Fatalf("Cannot assert %v as a user", list[0])
 	}
 
 	if result.ID != 1234 {
