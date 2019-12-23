@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/nukosuke/go-zendesk/zendesk/sideload"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -123,7 +125,7 @@ type TicketListOptions struct {
 // TicketAPI an interface containing all ticket related methods
 type TicketAPI interface {
 	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
-	GetTicket(ctx context.Context, id int64) (Ticket, error)
+	GetTicket(ctx context.Context, id int64, sideload ...sideload.SideLoader) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
 }
@@ -162,22 +164,53 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 // GetTicket gets a specified ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#show-ticket
-func (z *Client) GetTicket(ctx context.Context, ticketID int64) (Ticket, error) {
-	var result struct {
-		Ticket Ticket `json:"ticket"`
+func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...sideload.SideLoader) (Ticket, error) {
+	resultFields := []reflect.StructField{
+		{
+			Name: "Ticket",
+			Type: reflect.TypeOf(Ticket{}),
+			Tag:  "json:ticket",
+		},
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/tickets/%d.json", ticketID))
+	var builder includeBuilder
+	var objectLoaders []sideload.ExtraObjectSideloader
+	for _, v := range sideLoad {
+		builder.addKey(v.Key())
+		objectLoader, ok := v.(sideload.ExtraObjectSideloader)
+		if ok {
+			objectLoaders = append(objectLoaders, objectLoader)
+			if !objectLoader.IsAssignable() {
+				return Ticket{}, fmt.Errorf("sideload %s is not a pointer", v.Key())
+			}
+
+			resultFields = objectLoader.AppendToStruct(resultFields)
+		}
+	}
+
+	resultStruct := reflect.StructOf(resultFields)
+	result := reflect.New(resultStruct)
+
+	for _, sideLoad := range objectLoaders {
+		sideLoad.SetValue(result)
+	}
+
+	u, err  := builder.path(fmt.Sprintf("/tickets/%d.json", ticketID))
 	if err != nil {
 		return Ticket{}, err
 	}
 
-	err = json.Unmarshal(body, &result)
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return Ticket{}, err
 	}
 
-	return result.Ticket, err
+	err = json.Unmarshal(body, result.Interface())
+	if err != nil {
+		return Ticket{}, err
+	}
+
+	return result.Elem().FieldByName("Ticket").Interface().(Ticket), nil
 }
 
 // GetMultipleTickets gets multiple specified tickets

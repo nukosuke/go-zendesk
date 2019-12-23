@@ -8,6 +8,7 @@ import (
 	context "context"
 	gomock "github.com/golang/mock/gomock"
 	zendesk "github.com/nukosuke/go-zendesk/zendesk"
+	sideload "github.com/nukosuke/go-zendesk/zendesk/sideload"
 	reflect "reflect"
 )
 
@@ -570,18 +571,23 @@ func (mr *ClientMockRecorder) GetTargets(arg0 interface{}) *gomock.Call {
 }
 
 // GetTicket mocks base method
-func (m *Client) GetTicket(arg0 context.Context, arg1 int64) (zendesk.Ticket, error) {
+func (m *Client) GetTicket(arg0 context.Context, arg1 int64, arg2 ...sideload.SideLoader) (zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetTicket", arg0, arg1)
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetTicket", varargs...)
 	ret0, _ := ret[0].(zendesk.Ticket)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetTicket indicates an expected call of GetTicket
-func (mr *ClientMockRecorder) GetTicket(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetTicket(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*Client)(nil).GetTicket), arg0, arg1)
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*Client)(nil).GetTicket), varargs...)
 }
 
 // GetTicketField mocks base method
