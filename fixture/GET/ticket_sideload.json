@@ -1,0 +1,145 @@
+{
+  "ticket": {
+    "url": "https://d3v-terraform-provider.zendesk.com/api/v2/tickets/4.json",
+    "id": 4,
+    "external_id": null,
+    "via": {
+      "channel": "api",
+      "source": {
+        "from": {},
+        "to": {},
+        "rel": null
+      }
+    },
+    "created_at": "2019-06-06T10:02:04Z",
+    "updated_at": "2019-06-06T10:02:04Z",
+    "type": null,
+    "subject": "nyanyanyanya",
+    "raw_subject": "nyanyanyanya",
+    "description": "(●ↀ ω ↀ )",
+    "priority": "urgent",
+    "status": "new",
+    "recipient": null,
+    "requester_id": 377922500012,
+    "submitter_id": 377922500012,
+    "assignee_id": null,
+    "organization_id": 360363695492,
+    "group_id": 360004077472,
+    "collaborator_ids": [
+      377922500012
+    ],
+    "follower_ids": [
+      377922500012
+    ],
+    "email_cc_ids": [],
+    "forum_topic_id": null,
+    "problem_id": null,
+    "has_incidents": false,
+    "is_public": true,
+    "due_at": null,
+    "tags": [],
+    "custom_fields": [],
+    "satisfaction_rating": null,
+    "sharing_agreement_ids": [],
+    "fields": [],
+    "followup_ids": [],
+    "ticket_form_id": 360000389592,
+    "brand_id": 360002256672,
+    "satisfaction_probability": null,
+    "dates": {
+      "assignee_updated_at": null,
+      "requester_updated_at": "2019-06-06T10:02:04Z",
+      "status_updated_at": "2019-06-06T10:02:04Z",
+      "initially_assigned_at": null,
+      "assigned_at": null,
+      "solved_at": null,
+      "latest_comment_added_at": "2019-06-06T10:02:04Z"
+    },
+    "allow_channelback": false,
+    "allow_attachments": true
+  },
+  "users": [
+    {
+      "id": 377922500012,
+      "url": "https://d3v-terraform-provider.zendesk.com/api/v2/users/377922500012.json",
+      "name": "Yosuke Tamura",
+      "email": "nukosuke@lavabit.com",
+      "created_at": "2019-03-14T15:25:14Z",
+      "updated_at": "2019-11-25T07:47:43Z",
+      "time_zone": "Tokyo",
+      "iana_time_zone": "Asia/Tokyo",
+      "phone": null,
+      "shared_phone_number": null,
+      "photo": {
+        "url": "https://d3v-terraform-provider.zendesk.com/api/v2/attachments/360212811912.json",
+        "id": 360212811912,
+        "file_name": "profile_image_377922500012_9184218.png",
+        "content_url": "https://d3v-terraform-provider.zendesk.com/system/photos/3602/1281/1912/profile_image_377922500012_9184218.png",
+        "mapped_content_url": "https://d3v-terraform-provider.zendesk.com/system/photos/3602/1281/1912/profile_image_377922500012_9184218.png",
+        "content_type": "image/png",
+        "size": 4465,
+        "width": 80,
+        "height": 80,
+        "inline": false,
+        "deleted": false,
+        "thumbnails": [
+          {
+            "url": "https://d3v-terraform-provider.zendesk.com/api/v2/attachments/360212811932.json",
+            "id": 360212811932,
+            "file_name": "profile_image_377922500012_9184218_thumb.png",
+            "content_url": "https://d3v-terraform-provider.zendesk.com/system/photos/3602/1281/1912/profile_image_377922500012_9184218_thumb.png",
+            "mapped_content_url": "https://d3v-terraform-provider.zendesk.com/system/photos/3602/1281/1912/profile_image_377922500012_9184218_thumb.png",
+            "content_type": "image/png",
+            "size": 1105,
+            "width": 32,
+            "height": 32,
+            "inline": false,
+            "deleted": false
+          }
+        ]
+      },
+      "locale_id": 67,
+      "locale": "ja",
+      "organization_id": 360363695492,
+      "role": "admin",
+      "verified": true,
+      "external_id": null,
+      "tags": [],
+      "alias": "",
+      "active": true,
+      "shared": false,
+      "shared_agent": false,
+      "last_login_at": "2019-11-25T07:47:43Z",
+      "two_factor_auth_enabled": null,
+      "signature": "",
+      "details": "",
+      "notes": "",
+      "role_type": null,
+      "custom_role_id": null,
+      "moderator": true,
+      "ticket_restriction": null,
+      "only_private_comments": false,
+      "restricted_agent": false,
+      "suspended": false,
+      "chat_only": false,
+      "default_group_id": 360004077472,
+      "report_csv": true,
+      "user_fields": {
+        "github_profile": null,
+        "nickname": null,
+        "twitter_account": null
+      }
+    }
+  ],
+  "groups": [
+    {
+      "url": "https://d3v-terraform-provider.zendesk.com/api/v2/groups/360004077472.json",
+      "id": 360004077472,
+      "name": "Support",
+      "description": "",
+      "deleted": false,
+      "created_at": "2019-03-14T15:25:14Z",
+      "updated_at": "2019-03-15T05:15:49Z"
+    }
+  ]
+}

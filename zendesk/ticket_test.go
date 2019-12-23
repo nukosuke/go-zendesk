@@ -3,7 +3,10 @@ package zendesk
 import (
 	"context"
 	"encoding/json"
+	"github.com/nukosuke/go-zendesk/zendesk/sideload"
 	"net/http"
+	"net/http/httptest"
+	"path/filepath"
 	"sort"
 	"testing"
 )
@@ -56,6 +59,70 @@ func TestGetTicketCanceledContext(t *testing.T) {
 	_, err := client.GetTicket(canceled, 2)
 	if err == nil {
 		t.Fatal("Did not get error when calling with cancelled context")
+	}
+}
+
+func TestGetTicketSideloaded(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		q := r.URL.Query()
+		expectedQuery := `users,groups,dates`
+		actual := q.Get("include")
+		if actual != expectedQuery {
+			t.Fatalf(`Actual query did not match expected. Was "%s" expected "%s"`, actual, expectedQuery)
+		}
+		w.Write(readFixture(filepath.Join(http.MethodGet, "ticket_sideload.json")))
+	}))
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	var users []User
+	var groups []Group
+	ticket, err := client.GetTicket(
+		ctx,
+		4,
+		sideload.IncludeObject("users", &users),
+		sideload.IncludeObject("groups", &groups),
+		sideload.Include("dates"),
+	)
+
+	if err != nil {
+		t.Fatalf("Failed to get ticket: %s", err)
+	}
+
+	expectedID := int64(4)
+	if ticket.ID != expectedID {
+		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
+	}
+
+	if len(users) != 1 {
+		t.Fatalf("Did not have the expected number of users")
+	}
+
+	userID := int64(377922500012)
+	if users[0].ID != userID {
+		t.Fatalf("User did not have the expected userID %d. User was: %v", userID, users[0])
+	}
+
+	if len(groups) != 1 {
+		t.Fatalf("Did not have the expected number of groups")
+	}
+
+	groupID := int64(360004077472)
+	if groups[0].ID != groupID {
+		t.Fatalf("Group did not have expected group id %d", groupID)
+	}
+}
+
+func TestTicketSideloadReturnsErrorIfNotPassedPointer(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "ticket_sideload.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	var users []User
+	_, err := client.GetTicket(ctx, 4, sideload.IncludeObject("users", users))
+
+	if err == nil {
+		t.Fatalf("Did not recieve error from error when passing list by copy")
 	}
 }
 
