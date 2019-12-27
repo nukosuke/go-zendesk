@@ -169,6 +169,7 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 
 	var builder includeBuilder
 	var objectLoaders []sideload.ExtraObjectSideloader
+
 	for _, v := range sideLoad {
 		builder.addKey(v.Key())
 		objectLoader, ok := v.(sideload.ExtraObjectSideloader)
