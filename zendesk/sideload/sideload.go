@@ -5,6 +5,7 @@ package sideload
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/tidwall/gjson"
 )
 
@@ -14,8 +15,8 @@ type SideLoader interface {
 }
 
 type sideLoader struct {
-	value interface{}
-	key string
+	value    interface{}
+	key      string
 	jsonPath string
 }
 
@@ -40,8 +41,8 @@ func IncludeObject(key string, v interface{}) SideLoader {
 
 func Include(key string, path string, v interface{}) SideLoader {
 	return &sideLoader{
-		value: v,
-		key:   key,
+		value:    v,
+		key:      key,
 		jsonPath: path,
 	}
 }
