@@ -158,6 +158,9 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#show-ticket
 func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...sideload.SideLoader) (Ticket, error) {
+	var result struct {
+		Ticket Ticket `json:"ticket"`
+	}
 
 	var builder includeBuilder
 
@@ -173,10 +176,6 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 	body, err := z.get(ctx, u)
 	if err != nil {
 		return Ticket{}, err
-	}
-
-	var result struct {
-		Ticket Ticket `json:"ticket"`
 	}
 
 	err = json.Unmarshal(body, &result)
