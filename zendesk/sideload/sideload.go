@@ -4,8 +4,9 @@ package sideload
 
 import (
 	"fmt"
-	"github.com/iancoleman/strcase"
 	"reflect"
+
+	"github.com/iancoleman/strcase"
 )
 
 type SideLoader interface {
@@ -27,13 +28,13 @@ func (s simpleInclude) Key() string {
 
 // In some instances sideloading results in extra fields being added to the main object returned by the api
 // The Include sideloader should be used in such cases
-func Include(key string) SideLoader  {
+func Include(key string) SideLoader {
 	return simpleInclude(key)
 }
 
 type sideLoader struct {
 	value interface{}
-	key string
+	key   string
 }
 
 func (s *sideLoader) Key() string {
@@ -64,6 +65,3 @@ func IncludeObject(key string, v interface{}) SideLoader {
 		key:   key,
 	}
 }
-
-
-
