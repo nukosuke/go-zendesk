@@ -113,7 +113,6 @@ func TestGetTicketSideloaded(t *testing.T) {
 		t.Fatalf("Group did not have expected group id %d", groupID)
 	}
 
-	//"requester_updated_at": "2019-06-06T10:02:04Z",
 	if ticketDates.RequesterUpdatedAt.Year() != 2019 && ticketDates.RequesterUpdatedAt.Month() != 6 {
 		t.Fatalf("Ticket dates did not have expected value. Was %v", ticketDates)
 	}
