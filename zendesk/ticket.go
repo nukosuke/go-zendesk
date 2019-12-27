@@ -4,11 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/nukosuke/go-zendesk/zendesk/sideload"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/nukosuke/go-zendesk/zendesk/sideload"
 )
 
 type CustomField struct {
@@ -188,7 +189,7 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 		sideLoad.SetValue(result)
 	}
 
-	u, err  := builder.path(fmt.Sprintf("/tickets/%d.json", ticketID))
+	u, err := builder.path(fmt.Sprintf("/tickets/%d.json", ticketID))
 	if err != nil {
 		return Ticket{}, err
 	}
