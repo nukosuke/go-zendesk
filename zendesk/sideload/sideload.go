@@ -24,11 +24,11 @@ func (s *sideLoader) Key() string {
 }
 
 func (s *sideLoader) Unmarshal(b []byte) error {
-	v := gjson.Get(s.jsonPath, string(b))
+	v := gjson.ParseBytes(b).Get(s.jsonPath)
 	if !v.Exists() {
 		return fmt.Errorf("could not find %s in result %s", s.jsonPath, string(b))
 	}
-	fmt.Println(v.Str)
+
 	return json.Unmarshal([]byte(v.Raw), s.value)
 }
 

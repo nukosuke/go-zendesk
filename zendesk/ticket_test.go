@@ -65,7 +65,7 @@ func TestGetTicketCanceledContext(t *testing.T) {
 func TestGetTicketSideloaded(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		q := r.URL.Query()
-		expectedQuery := `users,groups`
+		expectedQuery := `users,groups,dates`
 		actual := q.Get("include")
 		if actual != expectedQuery {
 			t.Fatalf(`Actual query did not match expected. Was "%s" expected "%s"`, actual, expectedQuery)
@@ -77,11 +77,13 @@ func TestGetTicketSideloaded(t *testing.T) {
 
 	var users []User
 	var groups []Group
+	var ticketDates sideload.TicketDates
 	ticket, err := client.GetTicket(
 		ctx,
 		4,
 		sideload.IncludeObject("users", &users),
 		sideload.IncludeObject("groups", &groups),
+		sideload.Include("dates", "ticket.dates", &ticketDates),
 	)
 
 	if err != nil {
@@ -109,6 +111,11 @@ func TestGetTicketSideloaded(t *testing.T) {
 	groupID := int64(360004077472)
 	if groups[0].ID != groupID {
 		t.Fatalf("Group did not have expected group id %d", groupID)
+	}
+
+	//"requester_updated_at": "2019-06-06T10:02:04Z",
+	if ticketDates.RequesterUpdatedAt.Year() != 2019 && ticketDates.RequesterUpdatedAt.Month() != 6 {
+		t.Fatalf("Ticket dates did not have expected value. Was %v", ticketDates)
 	}
 }
 
