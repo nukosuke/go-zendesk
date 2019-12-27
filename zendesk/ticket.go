@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -159,35 +158,11 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#show-ticket
 func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...sideload.SideLoader) (Ticket, error) {
-	resultFields := []reflect.StructField{
-		{
-			Name: "Ticket",
-			Type: reflect.TypeOf(Ticket{}),
-			Tag:  "json:ticket",
-		},
-	}
 
 	var builder includeBuilder
-	var objectLoaders []sideload.ExtraObjectSideloader
 
 	for _, v := range sideLoad {
 		builder.addKey(v.Key())
-		objectLoader, ok := v.(sideload.ExtraObjectSideloader)
-		if ok {
-			objectLoaders = append(objectLoaders, objectLoader)
-			if !objectLoader.IsAssignable() {
-				return Ticket{}, fmt.Errorf("sideload %s is not a pointer", v.Key())
-			}
-
-			resultFields = objectLoader.AppendToStruct(resultFields)
-		}
-	}
-
-	resultStruct := reflect.StructOf(resultFields)
-	result := reflect.New(resultStruct)
-
-	for _, sideLoad := range objectLoaders {
-		sideLoad.SetValue(result)
 	}
 
 	u, err := builder.path(fmt.Sprintf("/tickets/%d.json", ticketID))
@@ -200,12 +175,23 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 		return Ticket{}, err
 	}
 
-	err = json.Unmarshal(body, result.Interface())
+	var result struct {
+		Ticket Ticket `json:"ticket"`
+	}
+
+	err = json.Unmarshal(body, &result)
 	if err != nil {
 		return Ticket{}, err
 	}
 
-	return result.Elem().FieldByName("Ticket").Interface().(Ticket), nil
+	for _, sideLoader := range sideLoad {
+		err = sideLoader.Unmarshal(body)
+		if err != nil {
+			return Ticket{}, err
+		}
+	}
+
+	return result.Ticket, nil
 }
 
 // GetMultipleTickets gets multiple specified tickets

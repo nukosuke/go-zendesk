@@ -65,7 +65,7 @@ func TestGetTicketCanceledContext(t *testing.T) {
 func TestGetTicketSideloaded(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		q := r.URL.Query()
-		expectedQuery := `users,groups,dates`
+		expectedQuery := `users,groups`
 		actual := q.Get("include")
 		if actual != expectedQuery {
 			t.Fatalf(`Actual query did not match expected. Was "%s" expected "%s"`, actual, expectedQuery)
@@ -82,7 +82,6 @@ func TestGetTicketSideloaded(t *testing.T) {
 		4,
 		sideload.IncludeObject("users", &users),
 		sideload.IncludeObject("groups", &groups),
-		sideload.Include("dates"),
 	)
 
 	if err != nil {
