@@ -83,7 +83,7 @@ func TestGetTicketSideloaded(t *testing.T) {
 		4,
 		sideload.IncludeObject("users", &users),
 		sideload.IncludeObject("groups", &groups),
-		sideload.Include("dates", "ticket.dates", &ticketDates),
+		sideload.IncludeTicketDates(&ticketDates),
 	)
 
 	if err != nil {

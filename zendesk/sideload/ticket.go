@@ -11,3 +11,7 @@ type TicketDates struct {
 	SolvedAt *time.Time `json:"solved_at"`
 	LatestCommentAddedAt *time.Time `json:"latest_comment_added_at"`
 }
+
+func IncludeTicketDates(dates *TicketDates) SideLoader {
+	return Include("dates", "ticket.dates", dates)
+}
