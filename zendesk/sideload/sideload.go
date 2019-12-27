@@ -39,6 +39,11 @@ func IncludeObject(key string, v interface{}) SideLoader {
 	return Include(key, key, v)
 }
 
+// Include is a function used to initialize a Sideloader.
+// it takes 3 parameters
+// key: the string to be included in the query string
+// path: where the object can be found in the result body for more information see https://github.com/tidwall/gjson
+// v: an object that the result can be unmarshalled into.
 func Include(key string, path string, v interface{}) SideLoader {
 	return &sideLoader{
 		value:    v,
