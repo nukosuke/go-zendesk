@@ -15,13 +15,14 @@ func (b *includeBuilder) addKey(s string) *includeBuilder {
 
 func (b *includeBuilder) toInterface() (interface{}, error) {
 	var csl strings.Builder
-	for i, key := range b.keys	{
+
+	for i, key := range b.keys {
 		_, err := csl.WriteString(key)
 		if err != nil {
 			return nil, err
 		}
 
-		if i < len(b.keys) - 1 {
+		if i < len(b.keys)-1 {
 			_, err := csl.WriteString(",")
 			if err != nil {
 				return nil, err
@@ -34,11 +35,12 @@ func (b *includeBuilder) toInterface() (interface{}, error) {
 	}
 
 	data.Include = csl.String()
+
 	return data, nil
 }
 
 func (b *includeBuilder) path(basePath string) (string, error) {
-	opts, err  := b.toInterface()
+	opts, err := b.toInterface()
 	if err != nil {
 		return "", err
 	}
