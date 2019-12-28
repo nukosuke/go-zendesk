@@ -175,7 +175,7 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 	}
 
 	var (
-		builder includeBuilder
+		builder       includeBuilder
 		objectLoaders []sideload.ExtraObjectSideloader
 	)
 
