@@ -174,14 +174,18 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64, sideLoad ...side
 		},
 	}
 
-	var builder includeBuilder
-	var objectLoaders []sideload.ExtraObjectSideloader
+	var (
+		builder includeBuilder
+		objectLoaders []sideload.ExtraObjectSideloader
+	)
 
 	for _, v := range sideLoad {
 		builder.addKey(v.Key())
 		objectLoader, ok := v.(sideload.ExtraObjectSideloader)
+
 		if ok {
 			objectLoaders = append(objectLoaders, objectLoader)
+
 			if !objectLoader.IsAssignable() {
 				return Ticket{}, fmt.Errorf("sideload %s is not a pointer", v.Key())
 			}
