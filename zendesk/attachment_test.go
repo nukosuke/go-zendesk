@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"bytes"
+	"context"
 	"crypto/sha1"
 	"io"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 )
 
 func TestWrite(t *testing.T) {
-	file := readFixture(filepath.Join("POST", "upload.json"))
+	file := readFixture(filepath.Join(http.MethodPost, "upload.json"))
 	h := sha1.New()
 	h.Write(file)
 	expectedSum := h.Sum(nil)
@@ -46,6 +47,32 @@ func TestWrite(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedSum, attachmentSum) {
 		t.Fatalf("Check sum of the written file does not match the expected checksum")
+	}
+}
+
+func TestWriteCancelledContext(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "ticket.json",  201)
+	defer mockAPI.Close()
+
+	client := newTestClient(mockAPI)
+
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+	w := client.UploadAttachment(canceled, "foo", "bar")
+
+	file := []byte("body")
+	r := bytes.NewBuffer(file)
+
+	_, err := io.Copy(w, r)
+	if err != nil {
+		t.Fatal("Received an error from write")
+	}
+
+	_, err = w.Close()
+	if err == nil {
+		t.Fatal("Did not receive error when closing writer")
+	} else if err != context.Canceled {
+		t.Fatalf("did not receive expected error was: %v", err)
 	}
 }
 
