@@ -123,6 +123,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 	if err != nil {
 		return nil, err
 	}
+
 	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
@@ -157,6 +158,7 @@ func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte
 	if err != nil {
 		return nil, err
 	}
+
 	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
@@ -186,6 +188,7 @@ func (z *Client) delete(ctx context.Context, path string) error {
 	if err != nil {
 		return err
 	}
+
 	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
@@ -214,6 +217,7 @@ func (z *Client) prepareRequest(ctx context.Context, req *http.Request) *http.Re
 	out := req.WithContext(ctx)
 	z.includeHeaders(out)
 	out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+
 	return out
 }
 
