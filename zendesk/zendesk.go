@@ -90,7 +90,7 @@ func (z *Client) get(ctx context.Context, path string) ([]byte, error) {
 		return nil, err
 	}
 
-	z.prepareRequest(ctx, req)
+	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -123,7 +123,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 	if err != nil {
 		return nil, err
 	}
-	z.prepareRequest(ctx, req)
+	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -157,7 +157,7 @@ func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte
 	if err != nil {
 		return nil, err
 	}
-	z.prepareRequest(ctx, req)
+	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -186,7 +186,7 @@ func (z *Client) delete(ctx context.Context, path string) error {
 	if err != nil {
 		return err
 	}
-	z.prepareRequest(ctx, req)
+	req = z.prepareRequest(ctx, req)
 
 	resp, err := z.httpClient.Do(req)
 	if err != nil {
@@ -210,10 +210,11 @@ func (z *Client) delete(ctx context.Context, path string) error {
 }
 
 // prepare request sets common request variables such as authn and user agent
-func (z *Client) prepareRequest(ctx context.Context, req *http.Request) {
-	req = req.WithContext(ctx)
-	z.includeHeaders(req)
-	req.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+func (z *Client) prepareRequest(ctx context.Context, req *http.Request) *http.Request {
+	out := req.WithContext(ctx)
+	z.includeHeaders(out)
+	out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+	return out
 }
 
 // includeHeaders set HTTP headers from client.headers to *http.Request
