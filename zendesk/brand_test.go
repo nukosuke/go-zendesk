@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -46,6 +47,19 @@ func TestUpdateBrand(t *testing.T) {
 	expectedID := int64(360002143133)
 	if updatedBrand.ID != expectedID {
 		t.Fatalf("Updated brand %v did not have expected id %d", updatedBrand, expectedID)
+	}
+}
+
+func TestUpdateBrandCanceledContext(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "brands.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+	_, err := client.UpdateBrand(canceled, int64(1234), Brand{})
+	if err == nil {
+		t.Fatalf("did not get expected error")
 	}
 }
 
