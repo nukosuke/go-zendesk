@@ -18,6 +18,20 @@ func TestCreateBrand(t *testing.T) {
 	}
 }
 
+func TestCreateBrandCanceledContext(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "brands.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+
+	_, err := client.CreateBrand(canceled, Brand{})
+	if err == nil {
+		t.Fatalf("did not get expected error")
+	}
+}
+
 func TestGetBrand(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "brand.json")
 	client := newTestClient(mockAPI)
