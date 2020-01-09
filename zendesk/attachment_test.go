@@ -64,15 +64,13 @@ func TestWriteCancelledContext(t *testing.T) {
 	r := bytes.NewBuffer(file)
 
 	_, err := io.Copy(w, r)
-	if err != nil {
-		t.Fatal("Received an error from write")
+	if err == nil {
+		t.Fatalf("did not recieve expected error")
 	}
 
 	_, err = w.Close()
 	if err == nil {
 		t.Fatal("Did not receive error when closing writer")
-	} else if err != context.Canceled {
-		t.Fatalf("did not receive expected error was: %v", err)
 	}
 }
 
