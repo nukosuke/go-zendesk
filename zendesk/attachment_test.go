@@ -89,6 +89,22 @@ func TestDeleteUpload(t *testing.T) {
 	}
 }
 
+func TestDeleteUploadCanceledContext(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+
+	err := c.DeleteUpload(canceled, "foobar")
+	if err == nil {
+		t.Fatal("did not get expected error")
+	}
+}
+
 func TestGetAttachment(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "attachment.json")
 	client := newTestClient(mockAPI)
