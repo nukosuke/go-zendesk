@@ -71,7 +71,7 @@ func (wr *writer) open() error {
 		return err
 	}
 
-	wr.prepareRequest(wr.ctx, req)
+	req = wr.prepareRequest(wr.ctx, req)
 	req.Header.Set("Content-Type", "application/binary")
 
 	q := req.URL.Query()

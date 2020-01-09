@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"sort"
@@ -43,6 +44,18 @@ func TestGetTicket(t *testing.T) {
 	expectedID := int64(2)
 	if ticket.ID != expectedID {
 		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
+	}
+}
+
+func TestGetTicketCanceledContext(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "ticket.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+	_, err := client.GetTicket(canceled, 2)
+	if err == nil {
+		t.Fatal("Did not get error when calling with cancelled context")
 	}
 }
 

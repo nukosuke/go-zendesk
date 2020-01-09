@@ -2,6 +2,7 @@ package zendesk
 
 import (
 	"bytes"
+	"context"
 	"crypto/sha1"
 	"io"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 )
 
 func TestWrite(t *testing.T) {
-	file := readFixture(filepath.Join("POST", "upload.json"))
+	file := readFixture(filepath.Join(http.MethodPost, "upload.json"))
 	h := sha1.New()
 	h.Write(file)
 	expectedSum := h.Sum(nil)
@@ -49,6 +50,30 @@ func TestWrite(t *testing.T) {
 	}
 }
 
+func TestWriteCancelledContext(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "ticket.json",  201)
+	defer mockAPI.Close()
+
+	client := newTestClient(mockAPI)
+
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+	w := client.UploadAttachment(canceled, "foo", "bar")
+
+	file := []byte("body")
+	r := bytes.NewBuffer(file)
+
+	_, err := io.Copy(w, r)
+	if err == nil {
+		t.Fatalf("did not recieve expected error")
+	}
+
+	_, err = w.Close()
+	if err == nil {
+		t.Fatal("Did not receive error when closing writer")
+	}
+}
+
 func TestDeleteUpload(t *testing.T) {
 	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNoContent)
@@ -59,6 +84,22 @@ func TestDeleteUpload(t *testing.T) {
 	err := c.DeleteUpload(ctx, "foobar")
 	if err != nil {
 		t.Fatalf("Failed to delete ticket field: %s", err)
+	}
+}
+
+func TestDeleteUploadCanceledContext(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	canceled, cancelFunc := context.WithCancel(ctx)
+	cancelFunc()
+
+	err := c.DeleteUpload(canceled, "foobar")
+	if err == nil {
+		t.Fatal("did not get expected error")
 	}
 }
 
