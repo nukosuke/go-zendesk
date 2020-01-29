@@ -102,13 +102,6 @@ type Ticket struct {
 	// TODO: TicketAudit (POST only) #126
 }
 
-// TODO: This is temporary struct for ticket support. #125
-//       Need to make it into correct TicketComment structure.
-//       https://developer.zendesk.com/rest_api/docs/support/ticket_comments
-type TicketComment struct {
-	Body string `json:"body"`
-}
-
 type TicketListOptions struct {
 	PageOptions
 
