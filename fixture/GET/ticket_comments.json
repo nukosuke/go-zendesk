@@ -1,0 +1,26 @@
+{
+  "comments": [
+	  {
+		  "id": 2,
+		  "type": "Comment",
+		  "body": "Mail to create fixture ticket for testing",
+		  "html_body": "",
+		  "plain_body": "",
+		  "public": true,
+		  "author_id": 377922500012,
+		  "attachments": [],
+		  "created_at": "2019-06-03T01:23:47Z"
+	  },
+	  {
+		  "id": 3,
+		  "type": "Comment",
+		  "body": "Mail to create fixture ticket for testing",
+		  "html_body": "",
+		  "plain_body": "",
+		  "public": true,
+		  "author_id": 377922500012,
+		  "attachments": [],
+		  "created_at": "2019-06-03T02:23:47Z"
+	  }
+  ]
+}
