@@ -23,7 +23,7 @@ type TicketForm struct {
 	RestrictedBrandIDs []int64 `json:"restricted_brand_ids,omitempty"`
 }
 
-// TicketFormList is options for GetTicketForms
+// TicketFormListOptions is options for GetTicketForms
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#available-parameters
 type TicketFormListOptions struct {

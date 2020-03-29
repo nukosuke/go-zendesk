@@ -10,16 +10,17 @@ import (
 // Organization is struct for organization payload
 // https://developer.zendesk.com/rest_api/docs/support/organizations
 type Organization struct {
-	ID             int64     `json:"id,omitempty"`
-	URL            string    `json:"url,omitempty"`
-	Name           string    `json:"name"`
-	DomainNames    []string  `json:"domain_names"`
-	GroupID        int64     `json:"group_id"`
-	SharedTickets  bool      `json:"shared_tickets"`
-	SharedComments bool      `json:"shared_comments"`
-	Tags           []string  `json:"tags"`
-	CreatedAt      time.Time `json:"created_at,omitempty"`
-	UpdatedAt      time.Time `json:"updated_at,omitempty"`
+	ID                int64                  `json:"id,omitempty"`
+	URL               string                 `json:"url,omitempty"`
+	Name              string                 `json:"name"`
+	DomainNames       []string               `json:"domain_names"`
+	GroupID           int64                  `json:"group_id"`
+	SharedTickets     bool                   `json:"shared_tickets"`
+	SharedComments    bool                   `json:"shared_comments"`
+	Tags              []string               `json:"tags"`
+	CreatedAt         time.Time              `json:"created_at,omitempty"`
+	UpdatedAt         time.Time              `json:"updated_at,omitempty"`
+	Organizationields map[string]interface{} `json:"organization_fields,omitempty"`
 }
 
 // OrganizationAPI an interface containing all methods associated with zendesk organizations

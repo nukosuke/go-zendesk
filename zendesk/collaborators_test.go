@@ -5,11 +5,11 @@ import (
 	"testing"
 )
 
-const collaboratorListJson = `[562,"someone@example.com",{"name":"SomeoneElse","email":"else@example.com"}]`
+const collaboratorListJSON = `[562,"someone@example.com",{"name":"SomeoneElse","email":"else@example.com"}]`
 
 func TestCanBeUnmarshalled(t *testing.T) {
 	c := &Collaborators{}
-	err := c.UnmarshalJSON([]byte(collaboratorListJson))
+	err := c.UnmarshalJSON([]byte(collaboratorListJSON))
 	if err != nil {
 		t.Fatalf("Unmarshal returned an error %v", err)
 	}
@@ -33,7 +33,7 @@ func TestCanBeUnmarshalled(t *testing.T) {
 
 func TestCanBeMarshalled(t *testing.T) {
 	c := &Collaborators{}
-	err := c.UnmarshalJSON([]byte(collaboratorListJson))
+	err := c.UnmarshalJSON([]byte(collaboratorListJSON))
 	if err != nil {
 		t.Fatalf("Unmarshal returned an error %v", err)
 	}
@@ -43,7 +43,7 @@ func TestCanBeMarshalled(t *testing.T) {
 		t.Fatalf("Marshal returned an error %v", err)
 	}
 
-	if string(out) != collaboratorListJson {
-		t.Fatalf("Json output %s did not match expected output %s", out, collaboratorListJson)
+	if string(out) != collaboratorListJSON {
+		t.Fatalf("Json output %s did not match expected output %s", out, collaboratorListJSON)
 	}
 }

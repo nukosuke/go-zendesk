@@ -22,7 +22,7 @@ type TicketComment struct {
 	CreatedAt   time.Time    `json:"created_at,omitempty"`
 }
 
-// NewPublicComment generates and returns a new TicketComment
+// NewPublicTicketComment generates and returns a new TicketComment
 func NewPublicTicketComment(body string, authorID int64) TicketComment {
 	public := true
 
@@ -33,7 +33,7 @@ func NewPublicTicketComment(body string, authorID int64) TicketComment {
 	}
 }
 
-// NewPrivateComment generates and returns a new private TicketComment
+// NewPrivateTicketComment generates and returns a new private TicketComment
 func NewPrivateTicketComment(body string, authorID int64) TicketComment {
 	public := false
 
