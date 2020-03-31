@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"github.com/chrisjoyce911/go-zendesk/zendesk"
+	"github.com/nukosuke/go-zendesk/zendesk"
 )
 
 var _ zendesk.API = (*Client)(nil)
