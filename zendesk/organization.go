@@ -20,7 +20,7 @@ type Organization struct {
 	Tags              []string               `json:"tags"`
 	CreatedAt         time.Time              `json:"created_at,omitempty"`
 	UpdatedAt         time.Time              `json:"updated_at,omitempty"`
-	Organizationields map[string]interface{} `json:"organization_fields,omitempty"`
+	OrganizationFields map[string]interface{} `json:"organization_fields,omitempty"`
 }
 
 // OrganizationAPI an interface containing all methods associated with zendesk organizations
