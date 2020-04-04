@@ -16,6 +16,18 @@ type SLAPolicyFilter struct {
 	Value    string `json:"value"`
 }
 
+// SLA Policy metric values
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/sla_policies#metrics
+const (
+	AgentWorkTimeMetric = "agent_work_time"
+	FirstReplyTimeMetric = "first_reply_time"
+	NextReplyTimeMetric = "next_reply_time"
+	PausableUpdateTimeMetric = "pausable_update_time"
+	PeriodicUpdateTimeMetric = "periodic_update_time"
+	RequesterWaitTimeMetric = "requester_wait_time"
+)
+
 type SLAPolicyMetric struct {
 	Priority      string `json:"priority"`
 	Metric        string `json:"metric"`
@@ -36,7 +48,7 @@ type SLAPolicy struct {
 		All []SLAPolicyFilter `json:"all"`
 		Any []SLAPolicyFilter `json:"any"`
 	} `json:"filter"`
-	PolicyMetrics []SLAPolicyMetric `json:"policy_metric"`
+	PolicyMetrics []SLAPolicyMetric `json:"policy_metrics,omitempty"`
 	CreatedAt     *time.Time        `json:"created_at,omitempty"`
 	UpdatedAt     *time.Time        `json:"updated_at,omitempty"`
 }
