@@ -20,12 +20,12 @@ type SLAPolicyFilter struct {
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/sla_policies#metrics
 const (
-	AgentWorkTimeMetric = "agent_work_time"
-	FirstReplyTimeMetric = "first_reply_time"
-	NextReplyTimeMetric = "next_reply_time"
+	AgentWorkTimeMetric      = "agent_work_time"
+	FirstReplyTimeMetric     = "first_reply_time"
+	NextReplyTimeMetric      = "next_reply_time"
 	PausableUpdateTimeMetric = "pausable_update_time"
 	PeriodicUpdateTimeMetric = "periodic_update_time"
-	RequesterWaitTimeMetric = "requester_wait_time"
+	RequesterWaitTimeMetric  = "requester_wait_time"
 )
 
 type SLAPolicyMetric struct {
