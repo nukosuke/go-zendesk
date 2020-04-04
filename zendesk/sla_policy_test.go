@@ -41,9 +41,13 @@ func TestCreateSLAPolicy(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateSLAPolicy(ctx, SLAPolicy{})
+	policy, err := client.CreateSLAPolicy(ctx, SLAPolicy{})
 	if err != nil {
 		t.Fatalf("Failed to send request to create sla policy: %s", err)
+	}
+
+	if len(policy.PolicyMetrics) == 0 {
+		t.Fatal("Failed to set the policy metrics from the json response")
 	}
 }
 
