@@ -135,4 +135,25 @@ func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
 	return result.User, nil
 }
 
+// CreateOrUpdateUser creates new user
+// ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
+func (z *Client) CreateOrUpdateUser(ctx context.Context, user User) (User, error) {
+    var data, result struct {
+        User User `json:"user"`
+    }
+    data.User = user
+
+    body, err := z.post(ctx, "/users/create_or_update.json", data)
+    if err != nil {
+        return User{}, err
+    }
+
+    err = json.Unmarshal(body, &result)
+    if err != nil {
+        return User{}, err
+    }
+
+    return result.User, nil
+}
+
 // TODO: CreateOrUpdateManyUsers(users []User)
