@@ -72,3 +72,20 @@ func TestCreateUser(t *testing.T) {
 		t.Fatal("Failed to create user")
 	}
 }
+
+func TestCreateUOrUpdateUser(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "users.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	user, err := client.CreateUser(ctx, User{
+		Email: "test@example.com",
+		Name:  "testuser",
+	})
+	if err != nil {
+		t.Fatalf("Failed to get valid response: %s", err)
+	}
+	if user.ID == 0 {
+		t.Fatal("Failed to create user")
+	}
+}
