@@ -237,7 +237,9 @@ func (z *Client) UpdateTicket(ctx context.Context, id int64, ticket Ticket) (Tic
 	}
 
 	data.Ticket = ticket
-	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", id), data)
+	path := fmt.Sprintf("/tickets/%d.json", id)
+	body, err := z.put(ctx, path, data)
+
 	if err != nil {
 		return Ticket{}, err
 	}
