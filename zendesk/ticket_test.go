@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
 	"sort"
 	"testing"
 )
@@ -178,18 +177,5 @@ func TestUpdateTicket(t *testing.T) {
 	expectedID := int64(2)
 	if trg.ID != expectedID {
 		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, trg.ID)
-	}
-}
-
-func TestUpdateTicketFailure(t *testing.T) {
-	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write(nil)
-	}))
-
-	c := newTestClient(mockAPI)
-	_, err := c.UpdateTicket(ctx, 360005657120, Ticket{})
-	if err == nil {
-		t.Fatal("Client did not return error when api failed")
 	}
 }
