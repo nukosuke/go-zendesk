@@ -119,7 +119,7 @@ type TicketAPI interface {
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
-	UpdateTicket(ctx context.Context, ticketId int64, ticket Ticket) (Ticket, error)
+	UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error)
 }
 
 // GetTickets get ticket list
