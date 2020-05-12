@@ -231,13 +231,13 @@ func (z *Client) CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error
 
 // UpdateTicket update an existing ticket
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#update-ticket
-func (z *Client) UpdateTicket(ctx context.Context, ticketId int64, ticket Ticket) (Ticket, error) {
+func (z *Client) UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error) {
 	var data, result struct {
 		Ticket Ticket `json:"ticket"`
 	}
 	data.Ticket = ticket
 
-	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketId), data)
+	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
 	if err != nil {
 		return Ticket{}, err
 	}
