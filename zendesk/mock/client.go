@@ -831,6 +831,21 @@ func (mr *ClientMockRecorder) UpdateTarget(arg0, arg1, arg2 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTarget", reflect.TypeOf((*Client)(nil).UpdateTarget), arg0, arg1, arg2)
 }
 
+// UpdateTicket mocks base method
+func (m *Client) UpdateTicket(arg0 context.Context, arg1 int64, arg2 zendesk.Ticket) (zendesk.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTicket", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTicket indicates an expected call of UpdateTicket
+func (mr *ClientMockRecorder) UpdateTicket(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicket", reflect.TypeOf((*Client)(nil).UpdateTicket), arg0, arg1, arg2)
+}
+
 // UpdateTicketField mocks base method
 func (m *Client) UpdateTicketField(arg0 context.Context, arg1 int64, arg2 zendesk.TicketField) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
