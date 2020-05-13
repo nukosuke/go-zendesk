@@ -26,7 +26,34 @@ func TestGetUsers(t *testing.T) {
 	}
 
 	if len(users) != 2 {
-		t.Fatalf("expected length of triggers is 2, but got %d", len(users))
+		t.Fatalf("expected length of userss is 2, but got %d", len(users))
+	}
+}
+
+func TestGetUser(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodGet, "user.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	user, err := client.GetUser(ctx, 369531345753)
+	if err != nil {
+		t.Fatalf("Failed to get user: %s", err)
+	}
+
+	expectedID := int64(369531345753)
+	if user.ID != expectedID {
+		t.Fatalf("Returned user does not have the expected ID %d. User id is %d", expectedID, user.ID)
+	}
+}
+
+func TestGetUserFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodGet, "user.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.GetUser(ctx, 369531345753)
+	if err == nil {
+		t.Fatal("Client did not return error when api failed")
 	}
 }
 
@@ -70,5 +97,32 @@ func TestCreateUser(t *testing.T) {
 	}
 	if user.ID == 0 {
 		t.Fatal("Failed to create user")
+	}
+}
+
+func TestUpdateUser(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "user.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	user, err := client.UpdateUser(ctx, 369531345753, User{})
+	if err != nil {
+		t.Fatalf("Failed to update user: %s", err)
+	}
+
+	expectedID := int64(369531345753)
+	if user.ID != expectedID {
+		t.Fatalf("Returned user does not have the expected ID %d. User id is %d", expectedID, user.ID)
+	}
+}
+
+func TestUpdateUserFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "user.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.UpdateUser(ctx, 369531345753, User{})
+	if err == nil {
+		t.Fatal("Client did not return error when api failed")
 	}
 }

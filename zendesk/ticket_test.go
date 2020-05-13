@@ -163,3 +163,30 @@ func TestCreateTicket(t *testing.T) {
 		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
 	}
 }
+
+func TestUpdateTicket(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "ticket.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	ticket, err := client.UpdateTicket(ctx, 2, Ticket{})
+	if err != nil {
+		t.Fatalf("Failed to update ticket: %s", err)
+	}
+
+	expectedID := int64(2)
+	if ticket.ID != expectedID {
+		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
+	}
+}
+
+func TestUpdateTicketFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "ticket.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.UpdateTicket(ctx, 2, Ticket{})
+	if err == nil {
+		t.Fatal("Client did not return error when api failed")
+	}
+}
