@@ -73,7 +73,14 @@ type Ticket struct {
 	Tags            []string      `json:"tags,omitempty"`
 	CustomFields    []CustomField `json:"custom_fields,omitempty"`
 
-	// TODO: Via          #123
+	Via struct {
+		Channel string `json:"channel"`
+		Source  struct {
+			From map[string]interface{} `json:"from"`
+			To   map[string]interface{} `json:"to"`
+			Rel  string                 `json:"rel"`
+		} `json:"source"`
+	} `json:"via"`
 
 	SatisfactionRating struct {
 		ID      int64  `json:"id"`
