@@ -119,6 +119,7 @@ type TicketAPI interface {
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
+	UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error)
 }
 
 // GetTickets get ticket list
@@ -228,6 +229,7 @@ func (z *Client) CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error
 	return result.Ticket, nil
 }
 
+
 // UpdateTicket updates the specified ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#update-ticket
@@ -240,6 +242,16 @@ func (z *Client) UpdateTicket(ctx context.Context, id int64, ticket Ticket) (Tic
 	path := fmt.Sprintf("/tickets/%d.json", id)
 	body, err := z.put(ctx, path, data)
 
+
+// UpdateTicket update an existing ticket
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#update-ticket
+func (z *Client) UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error) {
+	var data, result struct {
+		Ticket Ticket `json:"ticket"`
+	}
+	data.Ticket = ticket
+
+	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
 	if err != nil {
 		return Ticket{}, err
 	}

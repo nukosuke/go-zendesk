@@ -3,6 +3,7 @@ package zendesk
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -81,7 +82,9 @@ func UserRoleText(role int) string {
 // UserAPI an interface containing all user related methods
 type UserAPI interface {
 	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
+	GetUser(ctx context.Context, userID int64) (User, error)
 	CreateUser(ctx context.Context, user User) (User, error)
+	UpdateUser(ctx context.Context, userID int64, user User) (User, error)
 }
 
 // GetUsers fetch user list
@@ -136,3 +139,42 @@ func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
 }
 
 // TODO: CreateOrUpdateManyUsers(users []User)
+
+// GetUser get an existing user
+// ref: https://developer.zendesk.com/rest_api/docs/support/users#show-user
+func (z *Client) GetUser(ctx context.Context, userID int64) (User, error) {
+	var result struct {
+		User User `json:"user"`
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/users/%d.json", userID))
+	if err != nil {
+		return User{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return User{}, err
+	}
+	return result.User, nil
+}
+
+// UpdateUser update an existing user
+// ref: https://developer.zendesk.com/rest_api/docs/support/users#update-user
+func (z *Client) UpdateUser(ctx context.Context, userID int64, user User) (User, error) {
+	var data, result struct {
+		User User `json:"user"`
+	}
+	data.User = user
+
+	body, err := z.put(ctx, fmt.Sprintf("/users/%d.json", userID), data)
+	if err != nil {
+		return User{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return User{}, err
+	}
+	return result.User, nil
+}
