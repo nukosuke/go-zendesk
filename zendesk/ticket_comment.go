@@ -20,6 +20,7 @@ type TicketComment struct {
 	AuthorID    int64        `json:"author_id,omitempty"`
 	Attachments []Attachment `json:"attachments,omitempty"`
 	CreatedAt   time.Time    `json:"created_at,omitempty"`
+	Uploads     []string     `json:"uploads"`
 }
 
 // NewPublicComment generates and returns a new TicketComment
