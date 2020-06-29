@@ -100,7 +100,8 @@ func (z *Client) GetTicketForm(ctx context.Context, id int64) (TicketForm, error
 		TicketForm TicketForm `json:"ticket_form"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/ticket_forms/%d.json", id))
+	path := fmt.Sprintf("/ticket_forms/%d.json", id)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return TicketForm{}, err
 	}
@@ -120,7 +121,8 @@ func (z *Client) UpdateTicketForm(ctx context.Context, id int64, form TicketForm
 	}
 
 	data.TicketForm = form
-	body, err := z.put(ctx, fmt.Sprintf("/ticket_forms/%d.json", id), data)
+	path := fmt.Sprintf("/ticket_forms/%d.json", id)
+	body, err := z.put(ctx, path, data)
 	if err != nil {
 		return TicketForm{}, err
 	}
@@ -136,7 +138,8 @@ func (z *Client) UpdateTicketForm(ctx context.Context, id int64, form TicketForm
 // DeleteTicketForm deletes the specified ticket form
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#delete-ticket-form
 func (z *Client) DeleteTicketForm(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/ticket_forms/%d.json", id))
+	path := fmt.Sprintf("/ticket_forms/%d.json", id)
+	err := z.delete(ctx, path)
 	if err != nil {
 		return err
 	}

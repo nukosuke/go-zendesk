@@ -134,7 +134,8 @@ func (z *Client) GetSLAPolicy(ctx context.Context, id int64) (SLAPolicy, error) 
 		SLAPolicy SLAPolicy `json:"sla_policy"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/slas/policies/%d.json", id))
+	path := fmt.Sprintf("/slas/policies/%d.json", id)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return SLAPolicy{}, err
 	}
@@ -157,7 +158,8 @@ func (z *Client) UpdateSLAPolicy(ctx context.Context, id int64, slaPolicy SLAPol
 
 	data.SLAPolicy = slaPolicy
 
-	body, err := z.put(ctx, fmt.Sprintf("/slas/policies/%d.json", id), data)
+	path := fmt.Sprintf("/slas/policies/%d.json", id)
+	body, err := z.put(ctx, path, data)
 	if err != nil {
 		return SLAPolicy{}, err
 	}
@@ -174,7 +176,8 @@ func (z *Client) UpdateSLAPolicy(ctx context.Context, id int64, slaPolicy SLAPol
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/slas/policies#delete-slaPolicy
 func (z *Client) DeleteSLAPolicy(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/slas/policies/%d.json", id))
+	path := fmt.Sprintf("/slas/policies/%d.json", id)
+	err := z.delete(ctx, path)
 	if err != nil {
 		return err
 	}

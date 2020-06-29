@@ -174,7 +174,9 @@ func (z *Client) UploadAttachment(ctx context.Context, filename string, token st
 // DeleteUpload deletes a previously uploaded file
 // ref: https://developer.zendesk.com/rest_api/docs/support/attachments#delete-upload
 func (z *Client) DeleteUpload(ctx context.Context, token string) error {
-	return z.delete(ctx, fmt.Sprintf("/uploads/%s.json", token))
+
+	path := fmt.Sprintf("/uploads/%s.json", token)
+	return z.delete(ctx, path)
 }
 
 // GetAttachment returns the current state of an uploaded attachment
@@ -184,7 +186,8 @@ func (z *Client) GetAttachment(ctx context.Context, id int64) (Attachment, error
 		Attachment Attachment `json:"attachment"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/attachments/%d.json", id))
+	path := fmt.Sprintf("/attachments/%d.json", id)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return Attachment{}, err
 	}

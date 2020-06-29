@@ -74,7 +74,8 @@ func (z *Client) GetGroup(ctx context.Context, groupID int64) (Group, error) {
 		Group Group `json:"group"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/groups/%d.json", groupID))
+	path := fmt.Sprintf("/groups/%d.json", groupID)
+	body, err := z.get(ctx, path)
 
 	if err != nil {
 		return Group{}, err
@@ -96,7 +97,8 @@ func (z *Client) UpdateGroup(ctx context.Context, groupID int64, group Group) (G
 	}
 	data.Group = group
 
-	body, err := z.put(ctx, fmt.Sprintf("/groups/%d.json", groupID), data)
+	path := fmt.Sprintf("/groups/%d.json", groupID)
+	body, err := z.put(ctx, path, data)
 
 	if err != nil {
 		return Group{}, err
@@ -113,7 +115,9 @@ func (z *Client) UpdateGroup(ctx context.Context, groupID int64, group Group) (G
 // DeleteGroup deletes the specified group
 // ref: https://developer.zendesk.com/rest_api/docs/support/groups#delete-group
 func (z *Client) DeleteGroup(ctx context.Context, groupID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/groups/%d.json", groupID))
+
+	path := fmt.Sprintf("/groups/%d.json", groupID)
+	err := z.delete(ctx, path)
 
 	if err != nil {
 		return err

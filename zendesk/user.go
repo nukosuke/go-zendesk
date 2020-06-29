@@ -147,7 +147,8 @@ func (z *Client) GetUser(ctx context.Context, userID int64) (User, error) {
 		User User `json:"user"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/users/%d.json", userID))
+	path := fmt.Sprintf("/users/%d.json", userID)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return User{}, err
 	}
@@ -167,7 +168,8 @@ func (z *Client) UpdateUser(ctx context.Context, userID int64, user User) (User,
 	}
 	data.User = user
 
-	body, err := z.put(ctx, fmt.Sprintf("/users/%d.json", userID), data)
+	path := fmt.Sprintf("/users/%d.json", userID)
+	body, err := z.put(ctx, path, data)
 	if err != nil {
 		return User{}, err
 	}

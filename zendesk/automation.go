@@ -123,7 +123,8 @@ func (z *Client) GetAutomation(ctx context.Context, id int64) (Automation, error
 		Automation Automation `json:"automation"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/automations/%d.json", id))
+	path := fmt.Sprintf("/automations/%d.json", id)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return Automation{}, err
 	}
@@ -145,7 +146,8 @@ func (z *Client) UpdateAutomation(ctx context.Context, id int64, automation Auto
 	}
 
 	data.Automation = automation
-	body, err := z.put(ctx, fmt.Sprintf("/automations/%d.json", id), data)
+	path := fmt.Sprintf("/automations/%d.json", id)
+	body, err := z.put(ctx, path, data)
 
 	if err != nil {
 		return Automation{}, err
@@ -163,7 +165,8 @@ func (z *Client) UpdateAutomation(ctx context.Context, id int64, automation Auto
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/automations#delete-automation
 func (z *Client) DeleteAutomation(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/automations/%d.json", id))
+	path := fmt.Sprintf("/automations/%d.json", id)
+	err := z.delete(ctx, path)
 	if err != nil {
 		return err
 	}

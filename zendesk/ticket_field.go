@@ -102,7 +102,8 @@ func (z *Client) GetTicketField(ctx context.Context, ticketID int64) (TicketFiel
 		TicketField TicketField `json:"ticket_field"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	path := fmt.Sprintf("/ticket_fields/%d.json", ticketID)
+	body, err := z.get(ctx, path)
 
 	if err != nil {
 		return TicketField{}, err
@@ -125,7 +126,8 @@ func (z *Client) UpdateTicketField(ctx context.Context, ticketID int64, field Ti
 
 	data.TicketField = field
 
-	body, err := z.put(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID), data)
+	path := fmt.Sprintf("/ticket_fields/%d.json", ticketID)
+	body, err := z.put(ctx, path, data)
 
 	if err != nil {
 		return TicketField{}, err
@@ -142,7 +144,8 @@ func (z *Client) UpdateTicketField(ctx context.Context, ticketID int64, field Ti
 // DeleteTicketField deletes the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
 func (z *Client) DeleteTicketField(ctx context.Context, ticketID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	path := fmt.Sprintf("/ticket_fields/%d.json", ticketID)
+	err := z.delete(ctx, path)
 
 	if err != nil {
 		return err

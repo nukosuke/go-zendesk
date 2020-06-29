@@ -168,7 +168,8 @@ func (z *Client) GetTicket(ctx context.Context, ticketID int64) (Ticket, error) 
 		Ticket Ticket `json:"ticket"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/tickets/%d.json", ticketID))
+	path := fmt.Sprintf("/tickets/%d.json", ticketID)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return Ticket{}, err
 	}

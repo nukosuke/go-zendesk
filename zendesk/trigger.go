@@ -120,7 +120,8 @@ func (z *Client) GetTrigger(ctx context.Context, id int64) (Trigger, error) {
 		Trigger Trigger `json:"trigger"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/triggers/%d.json", id))
+	path := fmt.Sprintf("/triggers/%d.json", id)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -141,7 +142,8 @@ func (z *Client) UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (
 	}
 
 	data.Trigger = trigger
-	body, err := z.put(ctx, fmt.Sprintf("/triggers/%d.json", id), data)
+	path := fmt.Sprintf("/triggers/%d.json", id)
+	body, err := z.put(ctx, path, data)
 	if err != nil {
 		return Trigger{}, err
 	}
@@ -158,7 +160,8 @@ func (z *Client) UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
 func (z *Client) DeleteTrigger(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/triggers/%d.json", id))
+	path := fmt.Sprintf("/triggers/%d.json", id)
+	err := z.delete(ctx, path)
 	if err != nil {
 		return err
 	}

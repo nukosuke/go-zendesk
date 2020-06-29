@@ -58,7 +58,8 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	data := &comment{}
 	data.Ticket.TicketComment = ticketComment
 
-	_, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
+	path := fmt.Sprintf("/tickets/%d.json", ticketID)
+	_, err := z.put(ctx, path, data)
 	if err != nil {
 		return err
 	}
@@ -74,7 +75,8 @@ func (z *Client) ListTicketComments(ctx context.Context, ticketID int64) ([]Tick
 		TicketComments []TicketComment `json:"comments"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/tickets/%d/comments.json", ticketID))
+	path := fmt.Sprintf("/tickets/%d/comments.json", ticketID)
+	body, err := z.get(ctx, path)
 	if err != nil {
 		return []TicketComment{}, err
 	}

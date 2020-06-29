@@ -85,7 +85,8 @@ func (z *Client) GetTarget(ctx context.Context, targetID int64) (Target, error) 
 		Target Target `json:"target"`
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/targets/%d.json", targetID))
+	path := fmt.Sprintf("/targets/%d.json", targetID)
+	body, err := z.get(ctx, path)
 
 	if err != nil {
 		return Target{}, err
@@ -107,8 +108,8 @@ func (z *Client) UpdateTarget(ctx context.Context, targetID int64, field Target)
 	}
 
 	data.Target = field
-
-	body, err := z.put(ctx, fmt.Sprintf("/targets/%d.json", targetID), data)
+	path := fmt.Sprintf("/targets/%d.json", targetID)
+	body, err := z.put(ctx, path, data)
 
 	if err != nil {
 		return Target{}, err
@@ -125,7 +126,9 @@ func (z *Client) UpdateTarget(ctx context.Context, targetID int64, field Target)
 // DeleteTarget deletes the specified target
 // ref: https://developer.zendesk.com/rest_api/docs/support/targets#delete-target
 func (z *Client) DeleteTarget(ctx context.Context, targetID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/targets/%d.json", targetID))
+
+	path := fmt.Sprintf("/targets/%d.json", targetID)
+	err := z.delete(ctx, path)
 
 	if err != nil {
 		return err
