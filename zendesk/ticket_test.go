@@ -3,7 +3,9 @@ package zendesk
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"reflect"
 	"sort"
 	"testing"
 )
@@ -44,6 +46,36 @@ func TestGetTicket(t *testing.T) {
 	expectedID := int64(2)
 	if ticket.ID != expectedID {
 		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
+	}
+
+	expectedVia := struct {
+		Channel string `json:"channel"`
+		Source  struct {
+			From map[string]interface{} `json:"from"`
+			To   map[string]interface{} `json:"to"`
+			Rel  string                 `json:"rel"`
+		} `json:"source"`
+	}{
+		Channel: "email",
+		Source: struct {
+			From map[string]interface{} `json:"from"`
+			To   map[string]interface{} `json:"to"`
+			Rel  string                 `json:"rel"`
+		}{
+			From: map[string]interface{}{
+				"address": "nukosuke@lavabit.com",
+				"name":    "Yosuke Tamura",
+			},
+			To: map[string]interface{}{
+				"name":    "Terraform Zendesk provider",
+				"address": "support@d3v-terraform-provider.zendesk.com",
+			},
+			Rel: "",
+		},
+	}
+
+	if !reflect.DeepEqual(ticket.Via, expectedVia) {
+		t.Fatal(fmt.Sprintf("Expected ticket via object to be %v but got %v", expectedVia, ticket.Via))
 	}
 }
 
