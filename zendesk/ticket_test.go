@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/http/httptest"
 	"reflect"
 	"sort"
 	"testing"
@@ -220,5 +221,18 @@ func TestUpdateTicketFailure(t *testing.T) {
 	_, err := client.UpdateTicket(ctx, 2, Ticket{})
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
+	}
+}
+
+func TestDeleteTicket(t *testing.T) {
+	mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+		w.Write(nil)
+	}))
+
+	c := newTestClient(mockAPI)
+	err := c.DeleteTicket(ctx, 437)
+	if err != nil {
+		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
 }

@@ -127,6 +127,7 @@ type TicketAPI interface {
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
 	UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error)
+	DeleteTicket(ctx context.Context, ticketID int64) error
 }
 
 // GetTickets get ticket list
@@ -254,4 +255,16 @@ func (z *Client) UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket
 		return Ticket{}, err
 	}
 	return result.Ticket, nil
+}
+
+// DeleteTicket deletes the specified ticket
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#delete-ticket
+func (z *Client) DeleteTicket(ctx context.Context, ticketID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/tickets/%d.json", ticketID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
