@@ -26,7 +26,7 @@ type Target struct {
 	ContentType string `json:"content_type,omitempty"`
 }
 
-// Target an interface containing all of the target related zendesk methods
+// TargetAPI an interface containing all of the target related zendesk methods
 type TargetAPI interface {
 	GetTargets(ctx context.Context) ([]Target, Page, error)
 	CreateTarget(ctx context.Context, ticketField Target) (Target, error)
@@ -35,7 +35,7 @@ type TargetAPI interface {
 	DeleteTarget(ctx context.Context, ticketID int64) error
 }
 
-// Target fetches target list
+// GetTargets fetches target list
 // ref: https://developer.zendesk.com/rest_api/docs/core/targets#list-targets
 func (z *Client) GetTargets(ctx context.Context) ([]Target, Page, error) {
 	var data struct {

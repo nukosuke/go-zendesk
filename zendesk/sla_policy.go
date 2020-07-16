@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// SLAPolicyCondition zendesk slaPolicy condition
+// SLAPolicyFilter zendesk slaPolicy condition
 //
 // ref: https://developer.zendesk.com/rest_api/docs/core/slas/policies#conditions-reference
 type SLAPolicyFilter struct {

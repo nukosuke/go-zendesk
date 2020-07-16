@@ -15,7 +15,7 @@ type CustomField struct {
 	Value interface{} `json:"value"`
 }
 
-// Custom Unmarshal function required because a custom field's value can be
+// UnmarshalJSON Custom Unmarshal function required because a custom field's value can be
 // a string or array of strings.
 func (cf *CustomField) UnmarshalJSON(data []byte) error {
 	var temp map[string]interface{}
@@ -244,7 +244,8 @@ func (z *Client) UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket
 	}
 	data.Ticket = ticket
 
-	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
+	path := fmt.Sprintf("/tickets/%d.json", ticketID)
+	body, err := z.put(ctx, path, data)
 	if err != nil {
 		return Ticket{}, err
 	}
@@ -253,5 +254,6 @@ func (z *Client) UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket
 	if err != nil {
 		return Ticket{}, err
 	}
+
 	return result.Ticket, nil
 }

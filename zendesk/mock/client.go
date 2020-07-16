@@ -6,9 +6,10 @@ package mock
 
 import (
 	context "context"
+	reflect "reflect"
+
 	gomock "github.com/golang/mock/gomock"
 	zendesk "github.com/nukosuke/go-zendesk/zendesk"
-	reflect "reflect"
 )
 
 // Client is a mock of API interface
