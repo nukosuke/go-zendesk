@@ -299,6 +299,20 @@ func (mr *ClientMockRecorder) DeleteTarget(arg0, arg1 interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTarget", reflect.TypeOf((*Client)(nil).DeleteTarget), arg0, arg1)
 }
 
+// DeleteTicket mocks base method
+func (m *Client) DeleteTicket(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTicket", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTicket indicates an expected call of DeleteTicket
+func (mr *ClientMockRecorder) DeleteTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicket", reflect.TypeOf((*Client)(nil).DeleteTicket), arg0, arg1)
+}
+
 // DeleteTicketField mocks base method
 func (m *Client) DeleteTicketField(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
