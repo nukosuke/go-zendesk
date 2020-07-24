@@ -11,9 +11,9 @@ import (
 //
 // ref: https://developer.zendesk.com/rest_api/docs/core/triggers#conditions-reference
 type TriggerCondition struct {
-	Field    string `json:"field"`
-	Operator string `json:"operator"`
-	Value    string `json:"value"`
+	Field    string      `json:"field"`
+	Operator string      `json:"operator"`
+	Value    interface{} `json:"value"`
 }
 
 // TriggerAction is zendesk trigger action
