@@ -6,9 +6,9 @@ import (
 )
 
 func TestGetTicketTags(t *testing.T) {
-	mockApi := newMockAPI(http.MethodGet, "tags.json")
-	client := newTestClient(mockApi)
-	defer mockApi.Close()
+	mockAPI := newMockAPI(http.MethodGet, "tags.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
 
 	tags, err := client.GetTicketTags(ctx, int64(2))
 	if err != nil {
@@ -22,9 +22,9 @@ func TestGetTicketTags(t *testing.T) {
 }
 
 func TestGetOrganizationTags(t *testing.T) {
-	mockApi := newMockAPI(http.MethodGet, "tags.json")
-	client := newTestClient(mockApi)
-	defer mockApi.Close()
+	mockAPI := newMockAPI(http.MethodGet, "tags.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
 
 	tags, err := client.GetOrganizationTags(ctx, int64(2))
 	if err != nil {
@@ -38,9 +38,9 @@ func TestGetOrganizationTags(t *testing.T) {
 }
 
 func TestGetUserTags(t *testing.T) {
-	mockApi := newMockAPI(http.MethodGet, "tags.json")
-	client := newTestClient(mockApi)
-	defer mockApi.Close()
+	mockAPI := newMockAPI(http.MethodGet, "tags.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
 
 	tags, err := client.GetUserTags(ctx, int64(2))
 	if err != nil {

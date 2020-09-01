@@ -8,6 +8,7 @@ import (
 
 type Tag string
 
+// TagApi an interface containing all tag related methods
 type TagApi interface {
 	GetTicketTags(ctx context.Context, ticketID int64) ([]Tag, error)
 	GetOrganizationTags(ctx context.Context, organizationID int64) ([]Tag, error)
@@ -17,6 +18,9 @@ type TagApi interface {
 	AddUserTags(ctx context.Context, userID int64, tags []Tag) ([]Tag, error)
 }
 
+// GetTicketTags get ticket tag list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#show-tags
 func (z *Client) GetTicketTags(ctx context.Context, ticketID int64) ([]Tag, error) {
 	var result struct {
 		Tags []Tag `json:"tags"`
@@ -35,6 +39,9 @@ func (z *Client) GetTicketTags(ctx context.Context, ticketID int64) ([]Tag, erro
 	return result.Tags, err
 }
 
+// GetOrganizationTags get organization tag list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#show-tags
 func (z *Client) GetOrganizationTags(ctx context.Context, organizationID int64) ([]Tag, error) {
 	var result struct {
 		Tags []Tag `json:"tags"`
@@ -53,6 +60,9 @@ func (z *Client) GetOrganizationTags(ctx context.Context, organizationID int64) 
 	return result.Tags, err
 }
 
+// GetUserTags get user tag list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#show-tags
 func (z *Client) GetUserTags(ctx context.Context, userID int64) ([]Tag, error) {
 	var result struct {
 		Tags []Tag `json:"tags"`
@@ -71,6 +81,9 @@ func (z *Client) GetUserTags(ctx context.Context, userID int64) ([]Tag, error) {
 	return result.Tags, err
 }
 
+// AddTicketTags add tags to ticket
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#add-tags
 func (z *Client) AddTicketTags(ctx context.Context, ticketID int64, tags []Tag) ([]Tag, error) {
 	var data, result struct {
 		Tags []Tag `json:"tags"`
@@ -89,6 +102,9 @@ func (z *Client) AddTicketTags(ctx context.Context, ticketID int64, tags []Tag) 
 	return result.Tags, nil
 }
 
+// AddOrganizationTags add tags to organization
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#add-tags
 func (z *Client) AddOrganizationTags(ctx context.Context, organizationID int64, tags []Tag) ([]Tag, error) {
 	var data, result struct {
 		Tags []Tag `json:"tags"`
@@ -107,6 +123,9 @@ func (z *Client) AddOrganizationTags(ctx context.Context, organizationID int64, 
 	return result.Tags, nil
 }
 
+// AddUserTags add tags to user
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#add-tags
 func (z *Client) AddUserTags(ctx context.Context, userID int64, tags []Tag) ([]Tag, error) {
 	var data, result struct {
 		Tags []Tag `json:"tags"`
