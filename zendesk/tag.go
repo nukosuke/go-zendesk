@@ -8,8 +8,8 @@ import (
 
 type Tag string
 
-// TagApi an interface containing all tag related methods
-type TagApi interface {
+// TagAPI an interface containing all tag related methods
+type TagAPI interface {
 	GetTicketTags(ctx context.Context, ticketID int64) ([]Tag, error)
 	GetOrganizationTags(ctx context.Context, organizationID int64) ([]Tag, error)
 	GetUserTags(ctx context.Context, userID int64) ([]Tag, error)

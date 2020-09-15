@@ -21,7 +21,7 @@ type API interface {
 	OrganizationAPI
 	SearchAPI
 	SLAPolicyAPI
-	TagApi
+	TagAPI
 }
 
 var _ API = (*Client)(nil)
