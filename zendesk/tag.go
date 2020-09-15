@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-// Alias of string type
+// Tag is an alias for string
 type Tag string
 
 // TagAPI an interface containing all tag related methods
