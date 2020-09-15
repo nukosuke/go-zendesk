@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// Alias of string type
 type Tag string
 
 // TagAPI an interface containing all tag related methods
