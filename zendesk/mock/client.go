@@ -413,6 +413,22 @@ func (mr *ClientMockRecorder) DeleteUpload(arg0, arg1 interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUpload", reflect.TypeOf((*Client)(nil).DeleteUpload), arg0, arg1)
 }
 
+// GetAllTicketAudits mocks base method.
+func (m *Client) GetAllTicketAudits(arg0 context.Context, arg1 zendesk.CursorOption) ([]zendesk.TicketAudit, zendesk.Cursor, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllTicketAudits", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.TicketAudit)
+	ret1, _ := ret[1].(zendesk.Cursor)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAllTicketAudits indicates an expected call of GetAllTicketAudits.
+func (mr *ClientMockRecorder) GetAllTicketAudits(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllTicketAudits", reflect.TypeOf((*Client)(nil).GetAllTicketAudits), arg0, arg1)
+}
+
 // GetAttachment mocks base method.
 func (m *Client) GetAttachment(arg0 context.Context, arg1 int64) (zendesk.Attachment, error) {
 	m.ctrl.T.Helper()
@@ -656,6 +672,37 @@ func (m *Client) GetTicket(arg0 context.Context, arg1 int64) (zendesk.Ticket, er
 func (mr *ClientMockRecorder) GetTicket(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*Client)(nil).GetTicket), arg0, arg1)
+}
+
+// GetTicketAudit mocks base method.
+func (m *Client) GetTicketAudit(arg0 context.Context, arg1, arg2 int64) (zendesk.TicketAudit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketAudit", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.TicketAudit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicketAudit indicates an expected call of GetTicketAudit.
+func (mr *ClientMockRecorder) GetTicketAudit(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAudit", reflect.TypeOf((*Client)(nil).GetTicketAudit), arg0, arg1, arg2)
+}
+
+// GetTicketAudits mocks base method.
+func (m *Client) GetTicketAudits(arg0 context.Context, arg1 int64, arg2 zendesk.PageOptions) ([]zendesk.TicketAudit, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketAudits", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]zendesk.TicketAudit)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketAudits indicates an expected call of GetTicketAudits.
+func (mr *ClientMockRecorder) GetTicketAudits(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAudits", reflect.TypeOf((*Client)(nil).GetTicketAudits), arg0, arg1, arg2)
 }
 
 // GetTicketField mocks base method.
