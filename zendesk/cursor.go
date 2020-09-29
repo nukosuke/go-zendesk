@@ -2,9 +2,9 @@ package zendesk
 
 // Cursor is struct for cursor-based pagination
 type Cursor struct {
-	AfterUrl     string `json:"after_url"`
+	AfterURL     string `json:"after_url"`
 	AfterCursor  string `json:"after_cursor"`
-	BeforeUrl    string `json:"before_url"`
+	BeforeURL    string `json:"before_url"`
 	BeforeCursor string `json:"before_cursor"`
 }
 
