@@ -22,6 +22,7 @@ type API interface {
 	SearchAPI
 	SLAPolicyAPI
 	TagAPI
+	TicketAuditAPI
 }
 
 var _ API = (*Client)(nil)
