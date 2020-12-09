@@ -7,6 +7,12 @@ import (
 	"time"
 )
 
+// TicketCommentAPI is an interface containing all ticket comment related API methods
+type TicketCommentAPI interface {
+	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) error
+	ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error)
+}
+
 // TicketComment is a struct for ticket comment payload
 // Via and Metadata are currently unused
 // https://developer.zendesk.com/rest_api/docs/support/ticket_comments

@@ -199,7 +199,21 @@ func (mr *ClientMockRecorder) CreateTicket(arg0, arg1 interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicket", reflect.TypeOf((*Client)(nil).CreateTicket), arg0, arg1)
 }
 
-// CreateTicketField mocks base method.
+// CreateTicketComment mocks base method
+func (m *Client) CreateTicketComment(arg0 context.Context, arg1 int64, arg2 zendesk.TicketComment) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTicketComment", arg0, arg1, arg2)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateTicketComment indicates an expected call of CreateTicketComment
+func (mr *ClientMockRecorder) CreateTicketComment(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicketComment", reflect.TypeOf((*Client)(nil).CreateTicketComment), arg0, arg1, arg2)
+}
+
+// CreateTicketField mocks base method
 func (m *Client) CreateTicketField(arg0 context.Context, arg1 zendesk.TicketField) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicketField", arg0, arg1)
@@ -891,7 +905,22 @@ func (mr *ClientMockRecorder) GetUsers(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0, arg1)
 }
 
-// Search mocks base method.
+// ListTicketComments mocks base method
+func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListTicketComments", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.TicketComment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTicketComments indicates an expected call of ListTicketComments
+func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1)
+}
+
+// Search mocks base method
 func (m *Client) Search(arg0 context.Context, arg1 *zendesk.SearchOptions) (zendesk.SearchResults, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
