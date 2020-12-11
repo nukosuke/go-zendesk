@@ -597,6 +597,22 @@ func (mr *ClientMockRecorder) GetOrganizationTags(arg0, arg1 interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTags", reflect.TypeOf((*Client)(nil).GetOrganizationTags), arg0, arg1)
 }
 
+// GetOrganizations mocks base method.
+func (m *Client) GetOrganizations(arg0 context.Context, arg1 *zendesk.OrganizationListOptions) ([]zendesk.Organization, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizations", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.Organization)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizations indicates an expected call of GetOrganizations.
+func (mr *ClientMockRecorder) GetOrganizations(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizations", reflect.TypeOf((*Client)(nil).GetOrganizations), arg0, arg1)
+}
+
 // GetSLAPolicies mocks base method.
 func (m *Client) GetSLAPolicies(arg0 context.Context, arg1 *zendesk.SLAPolicyListOptions) ([]zendesk.SLAPolicy, zendesk.Page, error) {
 	m.ctrl.T.Helper()
