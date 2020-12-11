@@ -23,6 +23,7 @@ type API interface {
 	SLAPolicyAPI
 	TagAPI
 	TicketAuditAPI
+	TicketCommentAPI
 }
 
 var _ API = (*Client)(nil)
