@@ -23,12 +23,51 @@ type Organization struct {
 	OrganizationFields map[string]interface{} `json:"organization_fields,omitempty"`
 }
 
+// OrganizationListOptions is options for GetOrganizations
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/organizations#list-organizations
+type OrganizationListOptions struct {
+	PageOptions
+}
+
 // OrganizationAPI an interface containing all methods associated with zendesk organizations
 type OrganizationAPI interface {
+	GetOrganizations(ctx context.Context, opts *OrganizationListOptions) ([]Organization, Page, error)
 	CreateOrganization(ctx context.Context, org Organization) (Organization, error)
 	GetOrganization(ctx context.Context, orgID int64) (Organization, error)
 	UpdateOrganization(ctx context.Context, orgID int64, org Organization) (Organization, error)
 	DeleteOrganization(ctx context.Context, orgID int64) error
+}
+
+// GetOrganizations fetch organization list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/organizations#getting-organizations
+func (z *Client) GetOrganizations(ctx context.Context, opts *OrganizationListOptions) ([]Organization, Page, error) {
+	var data struct {
+		Organizations []Organization `json:"organizations"`
+		Page
+	}
+
+	if opts == nil {
+		return []Organization{}, Page{}, &OptionsError{opts}
+	}
+
+	u, err := addOptions("/organizations.json", opts)
+	if err != nil {
+		return []Organization{}, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return []Organization{}, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return []Organization{}, Page{}, err
+	}
+
+	return data.Organizations, data.Page, nil
 }
 
 // CreateOrganization creates new organization

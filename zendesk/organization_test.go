@@ -33,6 +33,21 @@ func TestGetOrganization(t *testing.T) {
 	}
 }
 
+func TestGetOrganizations(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "organizations.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	orgs, _, err := client.GetOrganizations(ctx, &OrganizationListOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get organizations: %s", err)
+	}
+
+	if len(orgs) != 2 {
+		t.Fatalf("expected length of organizations is , but got %d", len(orgs))
+	}
+}
+
 func TestUpdateOrganization(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPut, "organization.json", http.StatusOK)
 	client := newTestClient(mockAPI)
