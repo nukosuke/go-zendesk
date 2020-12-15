@@ -29,4 +29,11 @@ jobs:
       run: go mod download
 
     - name: Test
-      run: go test -v ./...
+      run: go test -v -coverprofile=profile.cov ./...
+
+    - name: Send coverage
+      uses: shogo82148/actions-goveralls@v1
+      with:
+        path-to-profile: profile.cov
+        flag-name: Go-${{ matrix.go-version }}
+        ignore: zendesk/mock/client.go
