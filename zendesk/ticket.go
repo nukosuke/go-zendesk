@@ -80,7 +80,7 @@ type Ticket struct {
 			To   map[string]interface{} `json:"to"`
 			Rel  string                 `json:"rel"`
 		} `json:"source"`
-	} `json:"via"`
+	} `json:"via,omitempty"`
 
 	SatisfactionRating struct {
 		ID      int64  `json:"id"`
