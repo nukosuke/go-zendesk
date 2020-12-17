@@ -36,7 +36,7 @@ type TicketComment struct {
 			To   map[string]interface{} `json:"to"`
 			Rel  string                 `json:"rel"`
 		} `json:"source"`
-	} `json:"via"`
+	} `json:"via,omitempty"`
 }
 
 // NewPublicTicketComment generates and returns a new TicketComment
