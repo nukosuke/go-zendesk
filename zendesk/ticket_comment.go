@@ -17,16 +17,26 @@ type TicketCommentAPI interface {
 // Via and Metadata are currently unused
 // https://developer.zendesk.com/rest_api/docs/support/ticket_comments
 type TicketComment struct {
-	ID          int64        `json:"id,omitempty"`
-	Type        string       `json:"type,omitempty"`
-	Body        string       `json:"body,omitempty"`
-	HTMLBody    string       `json:"html_body,omitempty"`
-	PlainBody   string       `json:"plain_body,omitempty"`
-	Public      *bool        `json:"public,omitempty"`
-	AuthorID    int64        `json:"author_id,omitempty"`
-	Attachments []Attachment `json:"attachments,omitempty"`
-	CreatedAt   time.Time    `json:"created_at,omitempty"`
-	Uploads     []string     `json:"uploads,omitempty"`
+	ID          int64                  `json:"id,omitempty"`
+	Type        string                 `json:"type,omitempty"`
+	Body        string                 `json:"body,omitempty"`
+	HTMLBody    string                 `json:"html_body,omitempty"`
+	PlainBody   string                 `json:"plain_body,omitempty"`
+	Public      *bool                  `json:"public,omitempty"`
+	AuthorID    int64                  `json:"author_id,omitempty"`
+	Attachments []Attachment           `json:"attachments,omitempty"`
+	CreatedAt   time.Time              `json:"created_at,omitempty"`
+	Uploads     []string               `json:"uploads,omitempty"`
+	Metadata    map[string]interface{} `json:"metadata,omitempty"`
+
+	Via struct {
+		Channel string `json:"channel"`
+		Source  struct {
+			From map[string]interface{} `json:"from"`
+			To   map[string]interface{} `json:"to"`
+			Rel  string                 `json:"rel"`
+		} `json:"source"`
+	} `json:"via"`
 }
 
 // NewPublicTicketComment generates and returns a new TicketComment
