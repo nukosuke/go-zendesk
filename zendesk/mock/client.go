@@ -200,11 +200,12 @@ func (mr *ClientMockRecorder) CreateTicket(arg0, arg1 interface{}) *gomock.Call 
 }
 
 // CreateTicketComment mocks base method
-func (m *Client) CreateTicketComment(arg0 context.Context, arg1 int64, arg2 zendesk.TicketComment) error {
+func (m *Client) CreateTicketComment(arg0 context.Context, arg1 int64, arg2 zendesk.TicketComment) (zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicketComment", arg0, arg1, arg2)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(zendesk.TicketComment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // CreateTicketComment indicates an expected call of CreateTicketComment

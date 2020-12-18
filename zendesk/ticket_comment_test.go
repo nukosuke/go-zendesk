@@ -30,7 +30,7 @@ func TestCreateTicketComment(t *testing.T) {
 
 	publicComment := NewPublicTicketComment("public comment", 12345)
 
-	err := client.CreateTicketComment(ctx, 2, publicComment)
+	_, err := client.CreateTicketComment(ctx, 2, publicComment)
 	if err != nil {
 		t.Fatalf("Failed to create ticket comment: %s", err)
 	}
