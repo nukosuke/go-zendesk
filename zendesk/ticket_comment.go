@@ -9,7 +9,7 @@ import (
 
 // TicketCommentAPI is an interface containing all ticket comment related API methods
 type TicketCommentAPI interface {
-	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) error
+	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error)
 	ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error)
 }
 
@@ -64,7 +64,7 @@ func NewPrivateTicketComment(body string, authorID int64) TicketComment {
 // CreateTicketComment creates a comment on a ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_comments#create-ticket-comment
-func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) error {
+func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error) {
 	type comment struct {
 		Ticket struct {
 			TicketComment TicketComment `json:"comment"`
@@ -74,12 +74,18 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	data := &comment{}
 	data.Ticket.TicketComment = ticketComment
 
-	_, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
+	body, err := z.put(ctx, fmt.Sprintf("/tickets/%d.json", ticketID), data)
 	if err != nil {
-		return err
+		return TicketComment{}, err
 	}
 
-	return nil
+	result := TicketComment{}
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return TicketComment{}, err
+	}
+
+	return result, err
 }
 
 // ListTicketComments gets a list of comment for a specified ticket
