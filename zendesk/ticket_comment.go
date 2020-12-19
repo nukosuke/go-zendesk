@@ -29,14 +29,7 @@ type TicketComment struct {
 	Uploads     []string               `json:"uploads,omitempty"`
 	Metadata    map[string]interface{} `json:"metadata,omitempty"`
 
-	Via struct {
-		Channel string `json:"channel"`
-		Source  struct {
-			From map[string]interface{} `json:"from"`
-			To   map[string]interface{} `json:"to"`
-			Rel  string                 `json:"rel"`
-		} `json:"source"`
-	} `json:"via,omitempty"`
+	Via *Via `json:"via,omitempty"`
 }
 
 // NewPublicTicketComment generates and returns a new TicketComment

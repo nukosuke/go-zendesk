@@ -49,14 +49,7 @@ func TestGetTicket(t *testing.T) {
 		t.Fatalf("Returned ticket does not have the expected ID %d. Ticket id is %d", expectedID, ticket.ID)
 	}
 
-	expectedVia := struct {
-		Channel string `json:"channel"`
-		Source  struct {
-			From map[string]interface{} `json:"from"`
-			To   map[string]interface{} `json:"to"`
-			Rel  string                 `json:"rel"`
-		} `json:"source"`
-	}{
+	expectedVia := &Via{
 		Channel: "email",
 		Source: struct {
 			From map[string]interface{} `json:"from"`
