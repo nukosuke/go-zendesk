@@ -50,5 +50,3 @@ func TestGetTicketAudit(t *testing.T) {
 		t.Fatalf("Returned ticket audit does not have the expected ID %d. Ticket audit id is %d", expectedID, ticketAudit.ID)
 	}
 }
-
-
