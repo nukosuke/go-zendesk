@@ -73,14 +73,7 @@ type Ticket struct {
 	Tags            []string      `json:"tags,omitempty"`
 	CustomFields    []CustomField `json:"custom_fields,omitempty"`
 
-	Via struct {
-		Channel string `json:"channel"`
-		Source  struct {
-			From map[string]interface{} `json:"from"`
-			To   map[string]interface{} `json:"to"`
-			Rel  string                 `json:"rel"`
-		} `json:"source"`
-	} `json:"via,omitempty"`
+	Via *Via `json:"via,omitempty"`
 
 	SatisfactionRating struct {
 		ID      int64  `json:"id"`
@@ -107,6 +100,16 @@ type Ticket struct {
 	Comment TicketComment `json:"comment,omitempty"`
 
 	// TODO: TicketAudit (POST only) #126
+}
+
+// Via is information about source of Ticket or TicketComment
+type Via struct {
+	Channel string `json:"channel"`
+	Source  struct {
+		From map[string]interface{} `json:"from"`
+		To   map[string]interface{} `json:"to"`
+		Rel  string                 `json:"rel"`
+	} `json:"source"`
 }
 
 type TicketListOptions struct {
