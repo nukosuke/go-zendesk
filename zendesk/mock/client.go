@@ -953,6 +953,22 @@ func (mr *ClientMockRecorder) Search(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*Client)(nil).Search), arg0, arg1)
 }
 
+// SearchCount mocks base method
+func (m *Client) SearchCount(ctx context.Context, opts *zendesk.CountOptions) (int, error) {
+  m.ctrl.T.Helper()
+  ret := m.ctrl.Call(m, "SearchCount", ctx, opts)
+  ret0, _ := ret[0].(int)
+  ret1, _ := ret[1].(error)
+  return ret0, ret1
+}
+
+// SearchCount indicates an expected call of SearchCount
+func (mr *ClientMockRecorder) SearchCount(ctx, opts interface{}) *gomock.Call {
+  mr.mock.ctrl.T.Helper()
+  return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchCount", reflect.TypeOf((*Client)(nil).SearchCount), ctx,
+    opts)
+}
+
 // UpdateAutomation mocks base method.
 func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
