@@ -38,7 +38,7 @@ func TestCountTickets(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	count, err := client.Count(ctx, &CountOptions{})
+	count, err := client.SearchCount(ctx, &CountOptions{})
 	if err != nil {
 		t.Fatalf("Failed to get count: %s", err)
 	}
