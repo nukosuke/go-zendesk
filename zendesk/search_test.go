@@ -33,6 +33,22 @@ func TestSearchTickets(t *testing.T) {
 	}
 }
 
+func TestCountTickets(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "search_count_ticket.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	count, err := client.Count(ctx, &CountOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get count: %s", err)
+	}
+
+	expected := 10
+	if count != expected {
+		t.Fatalf("expected count of tickets is %d, but got %d", expected, count)
+	}
+}
+
 func BenchmarkUnmarshalSearchResults(b *testing.B) {
 	file := readFixture("ticket_result.json")
 	for i := 0; i < b.N; i++ {

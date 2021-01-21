@@ -16,6 +16,7 @@ vendor/
 
 # coverage by go test
 coverage.txt
+profile.cov
 
 .idea
 *.iml
