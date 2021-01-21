@@ -149,7 +149,7 @@ func (z *Client) Search(ctx context.Context, opts *SearchOptions) (SearchResults
 	return data.Results, data.Page, nil
 }
 
-// Count allows users to get count of results of a query of zendesk's unified search api.
+// SearchCount allows users to get count of results of a query of zendesk's unified search api.
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/search#show-results-count
 func (z *Client) SearchCount(ctx context.Context, opts *CountOptions) (int, error) {
