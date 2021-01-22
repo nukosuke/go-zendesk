@@ -16,8 +16,16 @@ type SearchOptions struct {
 	SortOrder string `url:"sort_order,omitempty"`
 }
 
+// CountOptions are the options that can be provided to the search results count API
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/search#show-results-count
+type CountOptions struct {
+	Query string `url:"query"`
+}
+
 type SearchAPI interface {
 	Search(ctx context.Context, opts *SearchOptions) (SearchResults, Page, error)
+	SearchCount(ctx context.Context, opts *CountOptions) (int, error)
 }
 
 type SearchResults struct {
@@ -139,4 +147,34 @@ func (z *Client) Search(ctx context.Context, opts *SearchOptions) (SearchResults
 	}
 
 	return data.Results, data.Page, nil
+}
+
+// SearchCount allows users to get count of results of a query of zendesk's unified search api.
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/search#show-results-count
+func (z *Client) SearchCount(ctx context.Context, opts *CountOptions) (int, error) {
+	var data struct {
+		Count int `json:"count"`
+	}
+
+	if opts == nil {
+		return 0, &OptionsError{opts}
+	}
+
+	u, err := addOptions("/search/count.json", opts)
+	if err != nil {
+		return 0, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return 0, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return 0, err
+	}
+
+	return data.Count, nil
 }
