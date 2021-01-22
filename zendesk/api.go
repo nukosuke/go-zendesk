@@ -11,6 +11,7 @@ type API interface {
 	DynamicContentAPI
 	GroupAPI
 	LocaleAPI
+	MacroAPI
 	TicketAPI
 	TicketFieldAPI
 	TicketFormAPI
