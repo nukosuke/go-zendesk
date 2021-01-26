@@ -3,6 +3,7 @@ package zendesk
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -75,4 +76,80 @@ func (z *Client) GetMacros(ctx context.Context, opts *MacroListOptions) ([]Macro
 		return nil, Page{}, err
 	}
 	return data.Macros, data.Page, nil
+}
+
+// GetMacro gets a specified macro
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/macros#show-macro
+func (z *Client) GetMacro(ctx context.Context, macroID int64) (Macro, error) {
+	var result struct {
+		Macro Macro `json:"macro"`
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/macros/%d.json", macroID))
+	if err != nil {
+		return Macro{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Macro{}, err
+	}
+
+	return result.Macro, err
+}
+
+// CreateMacro create a new macro
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/macros#create-macro
+func (z *Client) CreateMacro(ctx context.Context, macro Macro) (Macro, error) {
+	var data, result struct {
+		Macro Macro `json:"macro"`
+	}
+	data.Macro = macro
+
+	body, err := z.post(ctx, "/macros.json", data)
+	if err != nil {
+		return Macro{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Macro{}, err
+	}
+	return result.Macro, nil
+}
+
+// UpdateMacro update an existing macro
+// ref: https://developer.zendesk.com/rest_api/docs/support/macros#update-macro
+func (z *Client) UpdateMacro(ctx context.Context, macroID int64, macro Macro) (Macro, error) {
+	var data, result struct {
+		Macro Macro `json:"macro"`
+	}
+	data.Macro = macro
+
+	path := fmt.Sprintf("/macros/%d.json", macroID)
+	body, err := z.put(ctx, path, data)
+	if err != nil {
+		return Macro{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return Macro{}, err
+	}
+
+	return result.Macro, nil
+}
+
+// DeleteMacro deletes the specified macro
+// ref: https://developer.zendesk.com/rest_api/docs/support/macros#delete-macro
+func (z *Client) DeleteMacro(ctx context.Context, macroID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/macros/%d.json", macroID))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
