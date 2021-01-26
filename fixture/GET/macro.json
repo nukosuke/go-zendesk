@@ -1,0 +1,39 @@
+{
+  "macro":{
+    "actions": [
+      {
+        "field": "status",
+        "value": "solved"
+      },
+      {
+        "field": "priority",
+        "value": "normal"
+      },
+      {
+        "field": "type",
+        "value": "incident"
+      },
+      {
+        "field": "assignee_id",
+        "value": "current_user"
+      },
+      {
+        "field": "group_id",
+        "value": "current_groups"
+      },
+      {
+        "field": "comment_value",
+        "value": "Thanks for your request. This issue you reported is a known issue. For more information, please visit our forums. "
+      }
+    ],
+    "active": true,
+    "created_at": "2019-09-16T02:17:38Z",
+    "description": null,
+    "id": 360111062754,
+    "position": 9999,
+    "restriction": null,
+    "title": "Close and redirect to topics",
+    "updated_at": "2019-09-16T02:17:38Z",
+    "url": "https://subdomain.zendesk.com/api/v2/macros/360111062754.json"
+  }
+}
