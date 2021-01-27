@@ -43,8 +43,13 @@ type MacroListOptions struct {
 	SortOrder string `url:"sort_order,omitempty"`
 }
 
+// MacroAPI an interface containing all macro related methods
 type MacroAPI interface {
 	GetMacros(ctx context.Context, opts *MacroListOptions) ([]Macro, Page, error)
+	GetMacro(ctx context.Context, macroID int64) (Macro, error)
+	CreateMacro(ctx context.Context, macro Macro) (Macro, error)
+	UpdateMacro(ctx context.Context, macroID int64, macro Macro) (Macro, error)
+	DeleteMacro(ctx context.Context, macroID int64) error
 }
 
 // GetMacros get macro list
