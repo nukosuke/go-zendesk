@@ -7,29 +7,34 @@ import (
 	"time"
 )
 
+// Macro is information about zendesk macro
 type Macro struct {
-	Actions     []Actions   `json:"actions"`
-	Active      bool        `json:"active"`
-	CreatedAt   time.Time   `json:"created_at"`
-	Description interface{} `json:"description"`
-	ID          int64       `json:"id"`
-	Position    int         `json:"position"`
-	Restriction interface{} `json:"restriction"`
-	Title       string      `json:"title"`
-	UpdatedAt   time.Time   `json:"updated_at"`
-	URL         string      `json:"url"`
+	Actions     []MacroAction `json:"actions"`
+	Active      bool          `json:"active"`
+	CreatedAt   time.Time     `json:"created_at"`
+	Description interface{}   `json:"description"`
+	ID          int64         `json:"id"`
+	Position    int           `json:"position"`
+	Restriction interface{}   `json:"restriction"`
+	Title       string        `json:"title"`
+	UpdatedAt   time.Time     `json:"updated_at"`
+	URL         string        `json:"url"`
 }
 
-type Actions struct {
+// MacroAction is definition of what the macro does to the ticket
+//
+// ref: https://develop.zendesk.com/hc/en-us/articles/360056760874-Support-API-Actions-reference
+type MacroAction struct {
 	Field string `json:"field"`
 	Value string `json:"value"`
 }
 
+// MacroListOptions is parameters used of GetMacros
 type MacroListOptions struct {
 	Access       string `json:"access"`
 	Active       string `json:"active"`
 	Category     int    `json:"category"`
-	GroupId      int    `json:"group_id"`
+	GroupID      int    `json:"group_id"`
 	Include      string `json:"include"`
 	OnlyViewable bool   `json:"only_viewable"`
 
