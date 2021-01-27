@@ -6,9 +6,10 @@ package mock
 
 import (
 	context "context"
+	reflect "reflect"
+
 	gomock "github.com/golang/mock/gomock"
 	zendesk "github.com/nukosuke/go-zendesk/zendesk"
-	reflect "reflect"
 )
 
 // Client is a mock of API interface.
@@ -259,6 +260,21 @@ func (mr *ClientMockRecorder) CreateTrigger(arg0, arg1 interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTrigger", reflect.TypeOf((*Client)(nil).CreateTrigger), arg0, arg1)
 }
 
+// CreateMacro mocks base method.
+func (m *Client) CreateMacro(arg0 context.Context, arg1 zendesk.Macro) (zendesk.Macro, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateMacro", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Macro)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateMacro indicates an expected call of CreateMacro.
+func (mr *ClientMockRecorder) CreateMacro(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMacro", reflect.TypeOf((*Client)(nil).CreateMacro), arg0, arg1)
+}
+
 // CreateUser mocks base method.
 func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
@@ -412,6 +428,19 @@ func (m *Client) DeleteTrigger(arg0 context.Context, arg1 int64) error {
 func (mr *ClientMockRecorder) DeleteTrigger(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTrigger", reflect.TypeOf((*Client)(nil).DeleteTrigger), arg0, arg1)
+}
+
+func (m *Client) DeleteMacro(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteMacro", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteMacro indicates an expected call of DeleteMacro.
+func (mr *ClientMockRecorder) DeleteMacro(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMacro", reflect.TypeOf((*Client)(nil).DeleteMacro), arg0, arg1)
 }
 
 // DeleteUpload mocks base method.
@@ -860,6 +889,37 @@ func (mr *ClientMockRecorder) GetTriggers(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggers", reflect.TypeOf((*Client)(nil).GetTriggers), arg0, arg1)
 }
 
+// GetMacro mocks base method.
+func (m *Client) GetMacro(arg0 context.Context, arg1 int64) (zendesk.Macro, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMacro", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.Macro)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMacro indicates an expected call of GetMacro.
+func (mr *ClientMockRecorder) GetMacro(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacro", reflect.TypeOf((*Client)(nil).GetMacro), arg0, arg1)
+}
+
+// GetMacros mocks base method.
+func (m *Client) GetMacros(arg0 context.Context, arg1 *zendesk.MacroListOptions) ([]zendesk.Macro, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMacros", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.Macro)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetMacros indicates an expected call of GetMacros.
+func (mr *ClientMockRecorder) GetMacros(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacros", reflect.TypeOf((*Client)(nil).GetMacros), arg0, arg1)
+}
+
 // GetUser mocks base method.
 func (m *Client) GetUser(arg0 context.Context, arg1 int64) (zendesk.User, error) {
 	m.ctrl.T.Helper()
@@ -1101,6 +1161,21 @@ func (m *Client) UpdateTrigger(arg0 context.Context, arg1 int64, arg2 zendesk.Tr
 func (mr *ClientMockRecorder) UpdateTrigger(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTrigger", reflect.TypeOf((*Client)(nil).UpdateTrigger), arg0, arg1, arg2)
+}
+
+// UpdateMacro mocks base method.
+func (m *Client) UpdateMacro(arg0 context.Context, arg1 int64, arg2 zendesk.Macro) (zendesk.Macro, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateMacro", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.Macro)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateMacro indicates an expected call of UpdateMacro.
+func (mr *ClientMockRecorder) UpdateMacro(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMacro", reflect.TypeOf((*Client)(nil).UpdateMacro), arg0, arg1, arg2)
 }
 
 // UpdateUser mocks base method.
