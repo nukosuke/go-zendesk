@@ -1,0 +1,16 @@
+{
+  "macro": {
+    "actions": [
+      {
+        "field": "status",
+        "value": "solved"
+      }
+    ],
+    "active": true,
+    "description": "Sets the ticket status to `solved`",
+    "id": 2,
+    "position": 42,
+    "restriction": {},
+    "title": "Close and Save"
+  }
+}

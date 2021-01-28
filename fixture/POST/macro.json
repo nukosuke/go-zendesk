@@ -1,0 +1,13 @@
+{
+  "macro": {
+    "actions": [
+      {
+        "field": "status",
+        "value": "solved"
+      }
+    ],
+    "id": 4,
+    "restriction": {},
+    "title": "Roger Wilco"
+  }
+}

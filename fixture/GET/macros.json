@@ -1,0 +1,24 @@
+{
+  "count": 2,
+  "macros": [
+    {
+      "actions": [],
+      "active": true,
+      "description": "Sets the ticket status to `solved`",
+      "id": 25,
+      "position": 42,
+      "restriction": {},
+      "title": "Close and Save"
+    },
+    {
+      "actions": [],
+      "active": false,
+      "description": "Adds a `priority` tag to the ticket",
+      "id": 26,
+      "restriction": {},
+      "title": "Assign priority tag"
+    }
+  ],
+  "next_page": null,
+  "previous_page": null
+}
