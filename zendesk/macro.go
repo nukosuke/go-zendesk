@@ -11,14 +11,14 @@ import (
 type Macro struct {
 	Actions     []MacroAction `json:"actions"`
 	Active      bool          `json:"active"`
-	CreatedAt   time.Time     `json:"created_at"`
+	CreatedAt   time.Time     `json:"created_at,omitempty"`
 	Description interface{}   `json:"description"`
-	ID          int64         `json:"id"`
-	Position    int           `json:"position"`
+	ID          int64         `json:"id,omitempty"`
+	Position    int           `json:"position,omitempty"`
 	Restriction interface{}   `json:"restriction"`
 	Title       string        `json:"title"`
-	UpdatedAt   time.Time     `json:"updated_at"`
-	URL         string        `json:"url"`
+	UpdatedAt   time.Time     `json:"updated_at,omitempty"`
+	URL         string        `json:"url,omitempty"`
 }
 
 // MacroAction is definition of what the macro does to the ticket
