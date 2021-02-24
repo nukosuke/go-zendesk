@@ -216,7 +216,9 @@ func (z *Client) delete(ctx context.Context, path string) error {
 func (z *Client) prepareRequest(ctx context.Context, req *http.Request) *http.Request {
 	out := req.WithContext(ctx)
 	z.includeHeaders(out)
-	out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+	if z.credential != nil {
+		out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+	}
 
 	return out
 }
