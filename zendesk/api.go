@@ -12,11 +12,12 @@ type API interface {
 	GroupAPI
 	LocaleAPI
 	MacroAPI
+	TargetAPI
+	ThemeAPI
 	TicketAPI
 	TicketFieldAPI
 	TicketFormAPI
 	TriggerAPI
-	TargetAPI
 	UserAPI
 	UserFieldAPI
 	OrganizationAPI
