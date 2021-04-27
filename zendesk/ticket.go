@@ -98,8 +98,19 @@ type Ticket struct {
 
 	// Comment is POST only and required
 	Comment TicketComment `json:"comment,omitempty"`
+	
+	// Requester is POST only and can be used to create a ticket for a nonexistent requester
+	Requester Requester `json:"requester,omitempty"`
 
 	// TODO: TicketAudit (POST only) #126
+}
+
+// Requester is the struct that can be passed to create a new requester on ticket creation
+// https://develop.zendesk.com/hc/en-us/articles/360059146153#creating-a-ticket-with-a-new-requester
+type Requester struct {
+	Name     string `json:"name,omitempty"`
+	Email    string `json:"email,omitempty"`
+	LocaleID string `json:"locale_id,omitempty"`
 }
 
 // Via is information about source of Ticket or TicketComment
