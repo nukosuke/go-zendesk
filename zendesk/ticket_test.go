@@ -229,3 +229,22 @@ func TestDeleteTicket(t *testing.T) {
 		t.Fatalf("Failed to delete ticket field: %s", err)
 	}
 }
+
+func TestTicketMarshalling(t *testing.T) {
+	var src, dst Ticket
+
+	marshalled, err := json.Marshal(src)
+	if err != nil {
+		t.Fatalf("Failed to json-marshal ticket: %v", err)
+	}
+
+	err = json.Unmarshal(marshalled, &dst)
+	if err != nil {
+		t.Fatalf("Failed to json-unmarshal ticket: %v", err)
+	}
+
+	if !reflect.DeepEqual(src, dst) {
+		t.Fatalf("remarshalling is inconsistent")
+	}
+
+}
