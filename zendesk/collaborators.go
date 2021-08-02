@@ -70,7 +70,7 @@ func (c *Collaborators) Append(i interface{}) error {
 }
 
 // MarshalJSON is marshaller for Collaborators
-func (c *Collaborators) MarshalJSON() ([]byte, error) {
+func (c Collaborators) MarshalJSON() ([]byte, error) {
 	return json.Marshal(c.collaborators)
 }
 

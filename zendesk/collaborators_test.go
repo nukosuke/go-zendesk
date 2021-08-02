@@ -1,6 +1,7 @@
 package zendesk
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 )
@@ -45,5 +46,21 @@ func TestCanBeMarshalled(t *testing.T) {
 
 	if string(out) != collaboratorListJSON {
 		t.Fatalf("Json output %s did not match expected output %s", out, collaboratorListJSON)
+	}
+}
+
+func TestCanBeRemarshalled(t *testing.T) {
+	var src, dst Collaborators
+	marshalled, err := json.Marshal(src)
+	if err != nil {
+		t.Fatalf("Marshalling returned an error %v", err)
+	}
+	err = json.Unmarshal(marshalled, &dst)
+	if err != nil {
+		t.Fatalf("Unmarshal returned an error %v", err)
+	}
+
+	if !reflect.DeepEqual(src, dst) {
+		t.Fatalf("remarshalling is inconsistent")
 	}
 }
