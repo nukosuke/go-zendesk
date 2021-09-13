@@ -4,6 +4,7 @@ package zendesk
 type Credential interface {
 	Email() string
 	Secret() string
+	Type() string
 }
 
 // BasicAuthCredential is type of credential for Basic authentication
@@ -30,6 +31,11 @@ func (c BasicAuthCredential) Secret() string {
 	return c.password
 }
 
+// Type is accessor which returns the type
+func (c BasicAuthCredential) Type() string {
+	return "Basic"
+}
+
 // APITokenCredential is type of credential for API token authentication
 type APITokenCredential struct {
 	email    string
@@ -52,4 +58,36 @@ func (c APITokenCredential) Email() string {
 // Secret is accessor which returns API token
 func (c APITokenCredential) Secret() string {
 	return c.apiToken
+}
+
+// Type is accessor which returns the type
+func (c APITokenCredential) Type() string {
+	return "API"
+}
+
+// BearerTokenCredential is type of credential for Bearer token authentication
+type BearerTokenCredential struct {
+	bearerToken string
+}
+
+// NewBearerTokenCredential creates BearerTokenCredential and returns its pointer
+func NewBearerTokenCredential(bearerToken string) *BearerTokenCredential {
+	return &BearerTokenCredential{
+		bearerToken: bearerToken,
+	}
+}
+
+// Email is accessor which returns email address
+func (c BearerTokenCredential) Email() string {
+	return ""
+}
+
+// Secret is accessor which returns Bearer token
+func (c BearerTokenCredential) Secret() string {
+	return c.bearerToken
+}
+
+// Type is accessor which returns the type
+func (c BearerTokenCredential) Type() string {
+	return "Bearer"
 }
