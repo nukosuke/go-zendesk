@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+type UserFields map[string]interface{}
+
 // User is zendesk user JSON payload format
 // https://developer.zendesk.com/rest_api/docs/support/users
 type User struct {
@@ -42,12 +44,12 @@ type User struct {
 	TicketRestriction    string     `json:"ticket_restriction,omitempty"`
 	Timezone             string     `json:"time_zone,omitempty"`
 	TwoFactorAuthEnabled bool       `json:"two_factor_auth_enabled,omitempty"`
-	//TODO: UserFields UserFields
-	Verified    bool      `json:"verified,omitempty"`
-	ReportCSV   bool      `json:"report_csv,omitempty"`
-	LastLoginAt time.Time `json:"last_login_at,omitempty"`
-	CreatedAt   time.Time `json:"created_at,omitempty"`
-	UpdatedAt   time.Time `json:"updated_at,omitempty"`
+	UserFields           UserFields `json:"user_fields"`
+	Verified             bool       `json:"verified,omitempty"`
+	ReportCSV            bool       `json:"report_csv,omitempty"`
+	LastLoginAt          time.Time  `json:"last_login_at,omitempty"`
+	CreatedAt            time.Time  `json:"created_at,omitempty"`
+	UpdatedAt            time.Time  `json:"updated_at,omitempty"`
 }
 
 const (
