@@ -18,23 +18,24 @@ type User struct {
 	Alias                string     `json:"alias,omitempty"`
 	ChatOnly             bool       `json:"chat_only,omitempty"`
 	CustomRoleID         int64      `json:"custom_role_id,omitempty"`
-	RoleType             int64      `json:"role_type,omitempty"`
+	DefaultGroupID       int64      `json:"default_group_id,omitempty"`
 	Details              string     `json:"details,omitempty"`
 	ExternalID           string     `json:"external_id,omitempty"`
+	IanaTimezone         string     `json:"iana_time_zone,omitempty"`
 	Locale               string     `json:"locale,omitempty"`
 	LocaleID             int64      `json:"locale_id,omitempty"`
 	Moderator            bool       `json:"moderator,omitempty"`
 	Notes                string     `json:"notes,omitempty"`
 	OnlyPrivateComments  bool       `json:"only_private_comments,omitempty"`
 	OrganizationID       int64      `json:"organization_id,omitempty"`
-	DefaultGroupID       int64      `json:"default_group_id,omitempty"`
 	Phone                string     `json:"phone,omitempty"`
-	SharedPhoneNumber    bool       `json:"shared_phone_number,omitempty"`
 	Photo                Attachment `json:"photo,omitempty"`
 	RestrictedAgent      bool       `json:"restricted_agent,omitempty"`
 	Role                 string     `json:"role,omitempty"`
+	RoleType             int64      `json:"role_type,omitempty"`
 	Shared               bool       `json:"shared,omitempty"`
 	SharedAgent          bool       `json:"shared_agent,omitempty"`
+	SharedPhoneNumber    bool       `json:"shared_phone_number,omitempty"`
 	Signature            string     `json:"signature,omitempty"`
 	Suspended            bool       `json:"suspended,omitempty"`
 	Tags                 []string   `json:"tags,omitempty"`
