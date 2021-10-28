@@ -10,6 +10,7 @@ type API interface {
 	BrandAPI
 	DynamicContentAPI
 	GroupAPI
+	GroupMembershipAPI
 	LocaleAPI
 	MacroAPI
 	TicketAPI

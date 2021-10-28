@@ -1,0 +1,25 @@
+{
+    "group_memberships": [
+        {
+            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/group_memberships/360002440594.json",
+            "id": 360002440594,
+            "user_id": 15439980,
+            "group_id": 98907558,
+            "default": false,
+            "created_at": "2018-11-23T16:05:12Z",
+            "updated_at": "2018-11-23T16:05:15Z"
+        },
+        {
+            "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/group_memberships/360002440595.json",
+            "id": 360002440595,
+            "user_id": 15439981,
+            "group_id": 98907557,
+            "default": false,
+            "created_at": "2018-11-23T16:05:12Z",
+            "updated_at": "2018-11-23T16:05:15Z"
+        }
+    ],
+    "next_page": null,
+    "previous_page": null,
+    "count": 1
+}

@@ -566,6 +566,22 @@ func (mr *ClientMockRecorder) GetGroup(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroup", reflect.TypeOf((*Client)(nil).GetGroup), arg0, arg1)
 }
 
+// GetGroupMemberships mocks base method.
+func (m *Client) GetGroupMemberships(arg0 context.Context, arg1 *zendesk.GroupMembershipListOptions) ([]zendesk.GroupMembership, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupMemberships", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.GroupMembership)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGroupMemberships indicates an expected call of GetGroupMemberships.
+func (mr *ClientMockRecorder) GetGroupMemberships(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMemberships", reflect.TypeOf((*Client)(nil).GetGroupMemberships), arg0, arg1)
+}
+
 // GetGroups mocks base method.
 func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page, error) {
 	m.ctrl.T.Helper()
