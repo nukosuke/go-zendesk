@@ -20,12 +20,15 @@ type (
 		UpdatedAt time.Time `json:"updated_at,omitempty"`
 	}
 
+	// GroupMembershipListOptions is a struct for options for group membership list
+	// ref: https://developer.zendesk.com/api-reference/ticketing/groups/group_memberships/
 	GroupMembershipListOptions struct {
 		PageOptions
 		GroupID int64 `json:"group_id,omitempty" url:"group_id,omitempty"`
 		UserID  int64 `json:"user_id,omitempty" url:"user_id,omitempty"`
 	}
 
+	// GroupMembershipAPI is an interface containing group membership related methods
 	GroupMembershipAPI interface {
 		GetGroupMemberships(context.Context, *GroupMembershipListOptions) ([]GroupMembership, Page, error)
 	}

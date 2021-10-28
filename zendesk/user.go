@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// UserFields is a dictionary of custom user related fields
 type UserFields map[string]interface{}
 
 // User is zendesk user JSON payload format

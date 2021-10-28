@@ -24,6 +24,7 @@ type (
 		// Restriction Restriction
 	}
 
+	// ViewAPI encapsulates methods on view
 	ViewAPI interface {
 		GetView(context.Context, int64) (View, error)
 		GetViews(context.Context) ([]View, Page, error)
@@ -31,7 +32,7 @@ type (
 	}
 )
 
-// GetViews gets the memberships of the specified group
+// GetViews gets all views
 // ref: https://developer.zendesk.com/api-reference/ticketing/business-rules/views/#list-views
 func (z *Client) GetViews(ctx context.Context) ([]View, Page, error) {
 	var result struct {
@@ -52,7 +53,7 @@ func (z *Client) GetViews(ctx context.Context) ([]View, Page, error) {
 	return result.Views, result.Page, nil
 }
 
-// GetView gets the memberships of the specified group
+// GetView gets a given view
 // ref: https://developer.zendesk.com/api-reference/ticketing/business-rules/views/#show-view
 func (z *Client) GetView(ctx context.Context, viewID int64) (View, error) {
 	var result struct {
@@ -72,7 +73,7 @@ func (z *Client) GetView(ctx context.Context, viewID int64) (View, error) {
 	return result.View, nil
 }
 
-// GetView gets the memberships of the specified group
+// GetTicketsFromView gets the tickets of the specified view
 // ref: https://developer.zendesk.com/api-reference/ticketing/business-rules/views/#list-tickets-from-a-view
 func (z *Client) GetTicketsFromView(ctx context.Context, viewID int64) ([]Ticket, error) {
 	var result struct {
