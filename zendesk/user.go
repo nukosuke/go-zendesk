@@ -91,6 +91,16 @@ type GetManyUsersOptions struct {
 	IDs         string `json:"ids,omitempty" url:"ids,omitempty"`
 }
 
+// UserRelated contains user related data
+//
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#show-user-related-information
+type UserRelated struct {
+	AssignedTickets           int64 `json:"assigned_tickets"`
+	RequestedTickets          int64 `json:"requested_tickets"`
+	CCDTickets                int64 `json:"ccd_tickets"`
+	OrganizationSubscriptions int64 `json:"organization_subscriptions"`
+}
+
 // UserAPI an interface containing all user related methods
 type UserAPI interface {
 	GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([]User, Page, error)
@@ -98,6 +108,7 @@ type UserAPI interface {
 	GetUser(ctx context.Context, userID int64) (User, error)
 	CreateUser(ctx context.Context, user User) (User, error)
 	UpdateUser(ctx context.Context, userID int64, user User) (User, error)
+	GetUserRelated(ctx context.Context, userID int64) (UserRelated, error)
 }
 
 // GetUsers fetch user list
@@ -222,4 +233,23 @@ func (z *Client) UpdateUser(ctx context.Context, userID int64, user User) (User,
 		return User{}, err
 	}
 	return result.User, nil
+}
+
+// GetUserRelated retrieves user related user information
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#show-user-related-information
+func (z *Client) GetUserRelated(ctx context.Context, userID int64) (UserRelated, error) {
+	var data struct {
+		UserRelated UserRelated `json:"user_related"`
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/users/%d/related.json", userID))
+	if err != nil {
+		return UserRelated{}, err
+	}
+
+	if err := json.Unmarshal(body, &data); err != nil {
+		return UserRelated{}, err
+	}
+
+	return data.UserRelated, nil
 }

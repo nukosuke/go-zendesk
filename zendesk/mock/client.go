@@ -999,6 +999,21 @@ func (mr *ClientMockRecorder) GetUserFields(arg0, arg1 interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFields", reflect.TypeOf((*Client)(nil).GetUserFields), arg0, arg1)
 }
 
+// GetUserRelated mocks base method.
+func (m *Client) GetUserRelated(arg0 context.Context, arg1 int64) (zendesk.UserRelated, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserRelated", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.UserRelated)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserRelated indicates an expected call of GetUserRelated.
+func (mr *ClientMockRecorder) GetUserRelated(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserRelated", reflect.TypeOf((*Client)(nil).GetUserRelated), arg0, arg1)
+}
+
 // GetUserTags mocks base method.
 func (m *Client) GetUserTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()

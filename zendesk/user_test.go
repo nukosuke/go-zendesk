@@ -141,3 +141,19 @@ func TestUpdateUserFailure(t *testing.T) {
 		t.Fatal("Client did not return error when api failed")
 	}
 }
+
+func TestGetUserRelated(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodGet, "user_related.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	userRelated, err := client.GetUserRelated(ctx, 369531345753)
+	if err != nil {
+		t.Fatalf("Failed to get user related information: %s", err)
+	}
+
+	expectedAssignedTickets := int64(5)
+	if userRelated.AssignedTickets != expectedAssignedTickets {
+		t.Fatalf("Returned user does not have the expected assigned tickets %d. It is %d", expectedAssignedTickets, userRelated.AssignedTickets)
+	}
+}
