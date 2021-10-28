@@ -644,6 +644,22 @@ func (mr *ClientMockRecorder) GetMacros(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacros", reflect.TypeOf((*Client)(nil).GetMacros), arg0, arg1)
 }
 
+// GetManyUsers mocks base method.
+func (m *Client) GetManyUsers(arg0 context.Context, arg1 *zendesk.GetManyUsersOptions) ([]zendesk.User, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetManyUsers", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetManyUsers indicates an expected call of GetManyUsers.
+func (mr *ClientMockRecorder) GetManyUsers(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetManyUsers", reflect.TypeOf((*Client)(nil).GetManyUsers), arg0, arg1)
+}
+
 // GetMultipleTickets mocks base method.
 func (m *Client) GetMultipleTickets(arg0 context.Context, arg1 []int64) ([]zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
@@ -904,6 +920,21 @@ func (m *Client) GetTickets(arg0 context.Context, arg1 *zendesk.TicketListOption
 func (mr *ClientMockRecorder) GetTickets(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTickets", reflect.TypeOf((*Client)(nil).GetTickets), arg0, arg1)
+}
+
+// GetTicketsFromView mocks base method.
+func (m *Client) GetTicketsFromView(arg0 context.Context, arg1 int64) ([]zendesk.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsFromView", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicketsFromView indicates an expected call of GetTicketsFromView.
+func (mr *ClientMockRecorder) GetTicketsFromView(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromView", reflect.TypeOf((*Client)(nil).GetTicketsFromView), arg0, arg1)
 }
 
 // GetTrigger mocks base method.

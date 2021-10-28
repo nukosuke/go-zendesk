@@ -26,7 +26,22 @@ func TestGetUsers(t *testing.T) {
 	}
 
 	if len(users) != 2 {
-		t.Fatalf("expected length of userss is 2, but got %d", len(users))
+		t.Fatalf("expected length of users is 2, but got %d", len(users))
+	}
+}
+
+func TestGetManyUsers(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "users.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	users, _, err := client.GetManyUsers(ctx, nil)
+	if err != nil {
+		t.Fatalf("Failed to get many users: %s", err)
+	}
+
+	if len(users) != 2 {
+		t.Fatalf("expected length of many users is 2, but got %d", len(users))
 	}
 }
 
