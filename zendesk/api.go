@@ -26,6 +26,7 @@ type API interface {
 	TagAPI
 	TicketAuditAPI
 	TicketCommentAPI
+	ViewAPI
 }
 
 var _ API = (*Client)(nil)

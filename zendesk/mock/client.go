@@ -999,6 +999,37 @@ func (mr *ClientMockRecorder) GetUsers(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0, arg1)
 }
 
+// GetView mocks base method.
+func (m *Client) GetView(arg0 context.Context, arg1 int64) (zendesk.View, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetView", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.View)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetView indicates an expected call of GetView.
+func (mr *ClientMockRecorder) GetView(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetView", reflect.TypeOf((*Client)(nil).GetView), arg0, arg1)
+}
+
+// GetViews mocks base method.
+func (m *Client) GetViews(arg0 context.Context) ([]zendesk.View, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetViews", arg0)
+	ret0, _ := ret[0].([]zendesk.View)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetViews indicates an expected call of GetViews.
+func (mr *ClientMockRecorder) GetViews(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViews", reflect.TypeOf((*Client)(nil).GetViews), arg0)
+}
+
 // ListTicketComments mocks base method.
 func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
