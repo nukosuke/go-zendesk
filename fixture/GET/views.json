@@ -1,0 +1,185 @@
+{
+  "views": [
+    {
+      "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/views/360002440595.json",
+      "id": 360002440595,
+      "title": "Wonderful tickets",
+      "active": true,
+      "created_at": "2018-11-23T16:05:12Z",
+      "updated_at": "2018-11-23T16:05:15Z",
+      "position": 0,
+      "description": "This is a wonderful view of your tickets",
+      "execution": {
+        "group_by": "status",
+        "group_order": "asc",
+        "sort_by": "nice_id",
+        "sort_order": "desc",
+        "group": {
+          "id": "status",
+          "title": "Status",
+          "order": "asc"
+        },
+        "sort": {
+          "id": "ticket_id",
+          "title": "ID",
+          "order": "desc"
+        },
+        "columns": [
+          {
+            "id": "subject",
+            "title": "Subject"
+          },
+          {
+            "id": "requester",
+            "title": "Requester"
+          },
+          {
+            "id": "created",
+            "title": "Requested"
+          },
+          {
+            "id": "type",
+            "title": "Type"
+          },
+          {
+            "id": "priority",
+            "title": "Priority"
+          }
+        ],
+        "fields": [
+          {
+            "id": "subject",
+            "title": "Subject"
+          },
+          {
+            "id": "requester",
+            "title": "Requester"
+          },
+          {
+            "id": "created",
+            "title": "Requested"
+          },
+          {
+            "id": "type",
+            "title": "Type"
+          },
+          {
+            "id": "priority",
+            "title": "Priority"
+          }
+        ],
+        "custom_fields": []
+      },
+      "conditions": {
+        "all": [
+          {
+            "field": "status",
+            "operator": "less_than",
+            "value": "solved"
+          },
+          {
+            "field": "assignee_id",
+            "operator": "is",
+            "value": "current_user"
+          }
+        ],
+        "any": []
+      },
+      "restriction": null,
+      "watchable": true,
+      "raw_title": "{{zd.your_wonderful_tickets}}"
+    },
+    {
+      "url": "https://terraform-provider-zendesk.zendesk.com/api/v2/views/360002440594.json",
+      "id": 360002440594,
+      "title": "OK tickets",
+      "active": true,
+      "created_at": "2018-11-23T16:05:12Z",
+      "updated_at": "2018-11-23T16:05:15Z",
+      "position": 0,
+      "description": "This is an ok view of your tickets",
+      "execution": {
+        "group_by": "status",
+        "group_order": "asc",
+        "sort_by": "nice_id",
+        "sort_order": "desc",
+        "group": {
+          "id": "status",
+          "title": "Status",
+          "order": "asc"
+        },
+        "sort": {
+          "id": "ticket_id",
+          "title": "ID",
+          "order": "desc"
+        },
+        "columns": [
+          {
+            "id": "subject",
+            "title": "Subject"
+          },
+          {
+            "id": "requester",
+            "title": "Requester"
+          },
+          {
+            "id": "created",
+            "title": "Requested"
+          },
+          {
+            "id": "type",
+            "title": "Type"
+          },
+          {
+            "id": "priority",
+            "title": "Priority"
+          }
+        ],
+        "fields": [
+          {
+            "id": "subject",
+            "title": "Subject"
+          },
+          {
+            "id": "requester",
+            "title": "Requester"
+          },
+          {
+            "id": "created",
+            "title": "Requested"
+          },
+          {
+            "id": "type",
+            "title": "Type"
+          },
+          {
+            "id": "priority",
+            "title": "Priority"
+          }
+        ],
+        "custom_fields": []
+      },
+      "conditions": {
+        "all": [
+          {
+            "field": "status",
+            "operator": "less_than",
+            "value": "solved"
+          },
+          {
+            "field": "assignee_id",
+            "operator": "is",
+            "value": "current_user"
+          }
+        ],
+        "any": []
+      },
+      "restriction": null,
+      "watchable": true,
+      "raw_title": "{{zd.your_ok_tickets}}"
+    }
+  ],
+  "next_page": null,
+  "previous_page": null,
+  "count": 2
+}

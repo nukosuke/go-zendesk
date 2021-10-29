@@ -10,6 +10,7 @@ type API interface {
 	BrandAPI
 	DynamicContentAPI
 	GroupAPI
+	GroupMembershipAPI
 	LocaleAPI
 	MacroAPI
 	TicketAPI
@@ -25,6 +26,7 @@ type API interface {
 	TagAPI
 	TicketAuditAPI
 	TicketCommentAPI
+	ViewAPI
 }
 
 var _ API = (*Client)(nil)

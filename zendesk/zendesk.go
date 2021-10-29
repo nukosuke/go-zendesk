@@ -245,3 +245,13 @@ func addOptions(s string, opts interface{}) (string, error) {
 	u.RawQuery = qs.Encode()
 	return u.String(), nil
 }
+
+// Get allows users to send requests not yet implemented
+func (z *Client) Get(ctx context.Context, path string) ([]byte, error) {
+	return z.get(ctx, path)
+}
+
+// Post allows users to send requests not yet implemented
+func (z *Client) Post(ctx context.Context, path string, data interface{}) ([]byte, error) {
+	return z.post(ctx, path, data)
+}
