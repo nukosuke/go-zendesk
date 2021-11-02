@@ -458,6 +458,21 @@ func (mr *ClientMockRecorder) DeleteUpload(arg0, arg1 interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUpload", reflect.TypeOf((*Client)(nil).DeleteUpload), arg0, arg1)
 }
 
+// Get mocks base method.
+func (m *Client) Get(arg0 context.Context, arg1 string) ([]byte, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Get", arg0, arg1)
+	ret0, _ := ret[0].([]byte)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Get indicates an expected call of Get.
+func (mr *ClientMockRecorder) Get(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*Client)(nil).Get), arg0, arg1)
+}
+
 // GetAllTicketAudits mocks base method.
 func (m *Client) GetAllTicketAudits(arg0 context.Context, arg1 zendesk.CursorOption) ([]zendesk.TicketAudit, zendesk.Cursor, error) {
 	m.ctrl.T.Helper()
@@ -1089,6 +1104,21 @@ func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk
 func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1)
+}
+
+// Post mocks base method.
+func (m *Client) Post(arg0 context.Context, arg1 string, arg2 interface{}) ([]byte, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Post", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]byte)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Post indicates an expected call of Post.
+func (mr *ClientMockRecorder) Post(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Post", reflect.TypeOf((*Client)(nil).Post), arg0, arg1, arg2)
 }
 
 // Search mocks base method.
