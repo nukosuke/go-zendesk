@@ -7,6 +7,7 @@ package zendesk
 type API interface {
 	AutomationAPI
 	AttachmentAPI
+	BaseAPI
 	BrandAPI
 	DynamicContentAPI
 	GroupAPI

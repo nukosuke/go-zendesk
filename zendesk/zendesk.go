@@ -24,13 +24,21 @@ var defaultHeaders = map[string]string{
 
 var subdomainRegexp = regexp.MustCompile("^[a-z0-9][a-z0-9-]+[a-z0-9]$")
 
-// Client of Zendesk API
-type Client struct {
-	baseURL    *url.URL
-	httpClient *http.Client
-	credential Credential
-	headers    map[string]string
-}
+type (
+	// Client of Zendesk API
+	Client struct {
+		baseURL    *url.URL
+		httpClient *http.Client
+		credential Credential
+		headers    map[string]string
+	}
+
+	// BaseAPI encapsulates base methods for zendesk client
+	BaseAPI interface {
+		Get(ctx context.Context, path string) ([]byte, error)
+		Post(ctx context.Context, path string, data interface{}) ([]byte, error)
+	}
+)
 
 // NewClient creates new Zendesk API client
 func NewClient(httpClient *http.Client) (*Client, error) {
