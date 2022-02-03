@@ -69,7 +69,7 @@ type Ticket struct {
 	ForumTopicID    int64         `json:"forum_topic_id,omitempty"`
 	ProblemID       int64         `json:"problem_id,omitempty"`
 	HasIncidents    bool          `json:"has_incidents,omitempty"`
-	DueAt           time.Time     `json:"due_at,omitempty"`
+	DueAt           *time.Time    `json:"due_at,omitempty"`
 	Tags            []string      `json:"tags,omitempty"`
 	CustomFields    []CustomField `json:"custom_fields,omitempty"`
 
