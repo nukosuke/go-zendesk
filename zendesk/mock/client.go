@@ -284,6 +284,15 @@ func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.Us
 	return ret0, ret1
 }
 
+// CreateOrUpdateUser mocks base method.
+func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrUpdateUser", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
 // CreateUser indicates an expected call of CreateUser.
 func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
