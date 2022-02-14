@@ -155,6 +155,21 @@ func (mr *ClientMockRecorder) CreateMacro(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMacro", reflect.TypeOf((*Client)(nil).CreateMacro), arg0, arg1)
 }
 
+// CreateOrUpdateUser mocks base method.
+func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrUpdateUser", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrUpdateUser indicates an expected call of CreateOrUpdateUser.
+func (mr *ClientMockRecorder) CreateOrUpdateUser(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrUpdateUser", reflect.TypeOf((*Client)(nil).CreateOrUpdateUser), arg0, arg1)
+}
+
 // CreateOrganization mocks base method.
 func (m *Client) CreateOrganization(arg0 context.Context, arg1 zendesk.Organization) (zendesk.Organization, error) {
 	m.ctrl.T.Helper()
@@ -279,15 +294,6 @@ func (mr *ClientMockRecorder) CreateTrigger(arg0, arg1 interface{}) *gomock.Call
 func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateUser", arg0, arg1)
-	ret0, _ := ret[0].(zendesk.User)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateOrUpdateUser mocks base method.
-func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateOrUpdateUser", arg0, arg1)
 	ret0, _ := ret[0].(zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
