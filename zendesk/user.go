@@ -107,6 +107,7 @@ type UserAPI interface {
 	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
 	GetUser(ctx context.Context, userID int64) (User, error)
 	CreateUser(ctx context.Context, user User) (User, error)
+	CreateOrUpdateUser(ctx context.Context, user User) (User, error)
 	UpdateUser(ctx context.Context, userID int64, user User) (User, error)
 	GetUserRelated(ctx context.Context, userID int64) (UserRelated, error)
 }
@@ -175,7 +176,7 @@ func (z *Client) GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([
 //TODO: GetUsersByGroupID, GetUsersByOrganizationID
 
 // CreateUser creates new user
-// ref: https://developer.zendesk.com/rest_api/docs/core/triggers#create-trigger
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#create-user
 func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
 	var data, result struct {
 		User User `json:"user"`
@@ -183,6 +184,26 @@ func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
 	data.User = user
 
 	body, err := z.post(ctx, "/users.json", data)
+	if err != nil {
+		return User{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return User{}, err
+	}
+	return result.User, nil
+}
+
+// CreateOrUpdateUser creates new user or updates a matching user
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#create-or-update-user
+func (z *Client) CreateOrUpdateUser(ctx context.Context, user User) (User, error) {
+	var data, result struct {
+		User User `json:"user"`
+	}
+	data.User = user
+
+	body, err := z.post(ctx, "/users/create_or_update.json", data)
 	if err != nil {
 		return User{}, err
 	}

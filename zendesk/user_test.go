@@ -115,6 +115,52 @@ func TestCreateUser(t *testing.T) {
 	}
 }
 
+func TestCreateOrUpdateUserCreated(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "users.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	user, err := client.CreateOrUpdateUser(ctx, User{
+		Email: "test@example.com",
+		Name:  "testuser",
+	})
+	if err != nil {
+		t.Fatalf("Failed to get valid response: %s", err)
+	}
+	if user.ID == 0 {
+		t.Fatal("Failed to create or update user")
+	}
+}
+
+func TestCreateOrUpdateUserUpdated(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "users.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	user, err := client.CreateOrUpdateUser(ctx, User{
+		Email: "test@example.com",
+		Name:  "testuser",
+	})
+	if err != nil {
+		t.Fatalf("Failed to get valid response: %s", err)
+	}
+	if user.ID == 0 {
+		t.Fatal("Failed to create or update user")
+	}
+}
+
+func TestCreateOrUpdateUserFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "users.json", http.StatusInternalServerError)
+
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.CreateOrUpdateUser(ctx, User{})
+	if err == nil {
+		t.Fatal("Client did not return error when api failed")
+	}
+}
+
 func TestUpdateUser(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodPut, "user.json", http.StatusOK)
 	client := newTestClient(mockAPI)

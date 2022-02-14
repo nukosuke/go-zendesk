@@ -145,7 +145,7 @@ func (z *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusCreated {
+	if !(resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusCreated) {
 		return nil, Error{
 			body: body,
 			resp: resp,
