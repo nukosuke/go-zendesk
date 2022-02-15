@@ -13,41 +13,41 @@ type UserFields map[string]interface{}
 // User is zendesk user JSON payload format
 // https://developer.zendesk.com/rest_api/docs/support/users
 type User struct {
-	ID                   int64      `json:"id,omitempty"`
+	ID                   *int64     `json:"id,omitempty"`
 	URL                  string     `json:"url,omitempty"`
 	Email                string     `json:"email,omitempty"`
 	Name                 string     `json:"name"`
-	Active               bool       `json:"active,omitempty"`
+	Active               *bool      `json:"active,omitempty"`
 	Alias                string     `json:"alias,omitempty"`
-	ChatOnly             bool       `json:"chat_only,omitempty"`
-	CustomRoleID         int64      `json:"custom_role_id,omitempty"`
-	DefaultGroupID       int64      `json:"default_group_id,omitempty"`
+	ChatOnly             *bool      `json:"chat_only,omitempty"`
+	CustomRoleID         *int64     `json:"custom_role_id,omitempty"`
+	DefaultGroupID       *int64     `json:"default_group_id,omitempty"`
 	Details              string     `json:"details,omitempty"`
 	ExternalID           string     `json:"external_id,omitempty"`
 	IanaTimezone         string     `json:"iana_time_zone,omitempty"`
 	Locale               string     `json:"locale,omitempty"`
-	LocaleID             int64      `json:"locale_id,omitempty"`
-	Moderator            bool       `json:"moderator,omitempty"`
+	LocaleID             *int64     `json:"locale_id,omitempty"`
+	Moderator            *bool      `json:"moderator,omitempty"`
 	Notes                string     `json:"notes,omitempty"`
-	OnlyPrivateComments  bool       `json:"only_private_comments,omitempty"`
-	OrganizationID       int64      `json:"organization_id,omitempty"`
+	OnlyPrivateComments  *bool      `json:"only_private_comments,omitempty"`
+	OrganizationID       *int64     `json:"organization_id,omitempty"`
 	Phone                string     `json:"phone,omitempty"`
 	Photo                Attachment `json:"photo,omitempty"`
-	RestrictedAgent      bool       `json:"restricted_agent,omitempty"`
+	RestrictedAgent      *bool      `json:"restricted_agent,omitempty"`
 	Role                 string     `json:"role,omitempty"`
-	RoleType             int64      `json:"role_type,omitempty"`
-	Shared               bool       `json:"shared,omitempty"`
-	SharedAgent          bool       `json:"shared_agent,omitempty"`
-	SharedPhoneNumber    bool       `json:"shared_phone_number,omitempty"`
+	RoleType             *int64     `json:"role_type,omitempty"`
+	Shared               *bool      `json:"shared,omitempty"`
+	SharedAgent          *bool      `json:"shared_agent,omitempty"`
+	SharedPhoneNumber    *bool      `json:"shared_phone_number,omitempty"`
 	Signature            string     `json:"signature,omitempty"`
-	Suspended            bool       `json:"suspended,omitempty"`
+	Suspended            *bool      `json:"suspended,omitempty"`
 	Tags                 []string   `json:"tags,omitempty"`
 	TicketRestriction    string     `json:"ticket_restriction,omitempty"`
 	Timezone             string     `json:"time_zone,omitempty"`
-	TwoFactorAuthEnabled bool       `json:"two_factor_auth_enabled,omitempty"`
+	TwoFactorAuthEnabled *bool      `json:"two_factor_auth_enabled,omitempty"`
 	UserFields           UserFields `json:"user_fields"`
-	Verified             bool       `json:"verified,omitempty"`
-	ReportCSV            bool       `json:"report_csv,omitempty"`
+	Verified             *bool      `json:"verified,omitempty"`
+	ReportCSV            *bool      `json:"report_csv,omitempty"`
 	LastLoginAt          time.Time  `json:"last_login_at,omitempty"`
 	CreatedAt            time.Time  `json:"created_at,omitempty"`
 	UpdatedAt            time.Time  `json:"updated_at,omitempty"`
