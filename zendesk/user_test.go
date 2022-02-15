@@ -56,7 +56,7 @@ func TestGetUser(t *testing.T) {
 	}
 
 	expectedID := int64(369531345753)
-	if user.ID != expectedID {
+	if *user.ID != expectedID {
 		t.Fatalf("Returned user does not have the expected ID %d. User id is %d", expectedID, user.ID)
 	}
 }
@@ -110,7 +110,7 @@ func TestCreateUser(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to get valid response: %s", err)
 	}
-	if user.ID == 0 {
+	if *user.ID == 0 {
 		t.Fatal("Failed to create user")
 	}
 }
@@ -127,7 +127,7 @@ func TestCreateOrUpdateUserCreated(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to get valid response: %s", err)
 	}
-	if user.ID == 0 {
+	if *user.ID == 0 {
 		t.Fatal("Failed to create or update user")
 	}
 }
@@ -144,7 +144,7 @@ func TestCreateOrUpdateUserUpdated(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to get valid response: %s", err)
 	}
-	if user.ID == 0 {
+	if *user.ID == 0 {
 		t.Fatal("Failed to create or update user")
 	}
 }
@@ -172,7 +172,7 @@ func TestUpdateUser(t *testing.T) {
 	}
 
 	expectedID := int64(369531345753)
-	if user.ID != expectedID {
+	if *user.ID != expectedID {
 		t.Fatalf("Returned user does not have the expected ID %d. User id is %d", expectedID, user.ID)
 	}
 }
