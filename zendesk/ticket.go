@@ -75,32 +75,32 @@ type Ticket struct {
 
 	Via *Via `json:"via,omitempty"`
 
-	SatisfactionRating struct {
+	SatisfactionRating *struct {
 		ID      int64  `json:"id"`
 		Score   string `json:"score"`
 		Comment string `json:"comment"`
 	} `json:"satisfaction_rating,omitempty"`
 
-	SharingAgreementIDs []int64   `json:"sharing_agreement_ids,omitempty"`
-	FollowupIDs         []int64   `json:"followup_ids,omitempty"`
-	ViaFollowupSourceID int64     `json:"via_followup_source_id,omitempty"`
-	MacroIDs            []int64   `json:"macro_ids,omitempty"`
-	TicketFormID        int64     `json:"ticket_form_id,omitempty"`
-	BrandID             int64     `json:"brand_id,omitempty"`
-	AllowChannelback    bool      `json:"allow_channelback,omitempty"`
-	AllowAttachments    bool      `json:"allow_attachments,omitempty"`
-	IsPublic            bool      `json:"is_public,omitempty"`
-	CreatedAt           time.Time `json:"created_at,omitempty"`
-	UpdatedAt           time.Time `json:"updated_at,omitempty"`
+	SharingAgreementIDs []int64    `json:"sharing_agreement_ids,omitempty"`
+	FollowupIDs         []int64    `json:"followup_ids,omitempty"`
+	ViaFollowupSourceID int64      `json:"via_followup_source_id,omitempty"`
+	MacroIDs            []int64    `json:"macro_ids,omitempty"`
+	TicketFormID        int64      `json:"ticket_form_id,omitempty"`
+	BrandID             int64      `json:"brand_id,omitempty"`
+	AllowChannelback    bool       `json:"allow_channelback,omitempty"`
+	AllowAttachments    bool       `json:"allow_attachments,omitempty"`
+	IsPublic            bool       `json:"is_public,omitempty"`
+	CreatedAt           *time.Time `json:"created_at,omitempty"`
+	UpdatedAt           *time.Time `json:"updated_at,omitempty"`
 
 	// Collaborators is POST only
-	Collaborators Collaborators `json:"collaborators,omitempty"`
+	Collaborators *Collaborators `json:"collaborators,omitempty"`
 
 	// Comment is POST only and required
-	Comment TicketComment `json:"comment,omitempty"`
+	Comment *TicketComment `json:"comment,omitempty"`
 	
 	// Requester is POST only and can be used to create a ticket for a nonexistent requester
-	Requester Requester `json:"requester,omitempty"`
+	Requester *Requester `json:"requester,omitempty"`
 
 	// TODO: TicketAudit (POST only) #126
 }

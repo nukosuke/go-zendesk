@@ -176,7 +176,7 @@ func TestCreateTicket(t *testing.T) {
 
 	ticket, err := client.CreateTicket(ctx, Ticket{
 		Subject: "nyanyanyanya",
-		Comment: TicketComment{
+		Comment: &TicketComment{
 			Body: "(●ↀ ω ↀ )",
 		},
 	})
