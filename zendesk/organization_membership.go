@@ -30,7 +30,7 @@ type (
 
 	// OrganizationMembershipAPI is an interface containing organization membership related methods
 	OrganizationMembershipAPI interface {
-		GetorganizationMemberships(context.Context, *OrganizationMembershipListOptions) ([]OrganizationMembership, Page, error)
+		GetOrganizationMemberships(context.Context, *OrganizationMembershipListOptions) ([]OrganizationMembership, Page, error)
 	}
 )
 
