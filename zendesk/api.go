@@ -9,6 +9,7 @@ type API interface {
 	AttachmentAPI
 	BaseAPI
 	BrandAPI
+	CustomRoleAPI
 	DynamicContentAPI
 	GroupAPI
 	GroupMembershipAPI
