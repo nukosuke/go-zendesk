@@ -564,6 +564,22 @@ func (mr *ClientMockRecorder) GetBrand(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0, arg1)
 }
 
+
+// GetCustomRoles mocks base method
+func (m *Client) GetCustomRoles(arg0 context.Context) ([]zendesk.CustomRole, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomRoles", arg0)
+	ret0, _ := ret[0].([]zendesk.CustomRole)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomRoles indicates an expected call of GetCustomRoles
+func (mr *ClientMockRecorder) GetCustomRoles(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomRoles", reflect.TypeOf((*Client)(nil).GetCustomRoles), arg0)
+}
+
 // GetDynamicContentItems mocks base method
 func (m *Client) GetDynamicContentItems(arg0 context.Context) ([]zendesk.DynamicContentItem, zendesk.Page, error) {
 	m.ctrl.T.Helper()
