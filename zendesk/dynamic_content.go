@@ -113,7 +113,7 @@ func (z *Client) GetDynamicContentItem(ctx context.Context, id int64) (DynamicCo
 // ref: https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content/#update-item
 func (z *Client) UpdateDynamicContentItem(ctx context.Context, id int64, item DynamicContentItem) (DynamicContentItem, error) {
 	var data, result struct {
-		Item DynamicContentItem `json:"item`
+		Item DynamicContentItem `json:"item"`
 	}
 	data.Item = item
 
