@@ -6,35 +6,36 @@ package mock
 
 import (
 	context "context"
+	reflect "reflect"
+
 	gomock "github.com/golang/mock/gomock"
 	zendesk "github.com/nukosuke/go-zendesk/zendesk"
-	reflect "reflect"
 )
 
-// Client is a mock of API interface
+// Client is a mock of API interface.
 type Client struct {
 	ctrl     *gomock.Controller
 	recorder *ClientMockRecorder
 }
 
-// ClientMockRecorder is the mock recorder for Client
+// ClientMockRecorder is the mock recorder for Client.
 type ClientMockRecorder struct {
 	mock *Client
 }
 
-// NewClient creates a new mock instance
+// NewClient creates a new mock instance.
 func NewClient(ctrl *gomock.Controller) *Client {
 	mock := &Client{ctrl: ctrl}
 	mock.recorder = &ClientMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use
+// EXPECT returns an object that allows the caller to indicate expected use.
 func (m *Client) EXPECT() *ClientMockRecorder {
 	return m.recorder
 }
 
-// AddOrganizationTags mocks base method
+// AddOrganizationTags mocks base method.
 func (m *Client) AddOrganizationTags(arg0 context.Context, arg1 int64, arg2 []zendesk.Tag) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddOrganizationTags", arg0, arg1, arg2)
@@ -43,13 +44,13 @@ func (m *Client) AddOrganizationTags(arg0 context.Context, arg1 int64, arg2 []ze
 	return ret0, ret1
 }
 
-// AddOrganizationTags indicates an expected call of AddOrganizationTags
+// AddOrganizationTags indicates an expected call of AddOrganizationTags.
 func (mr *ClientMockRecorder) AddOrganizationTags(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddOrganizationTags", reflect.TypeOf((*Client)(nil).AddOrganizationTags), arg0, arg1, arg2)
 }
 
-// AddTicketTags mocks base method
+// AddTicketTags mocks base method.
 func (m *Client) AddTicketTags(arg0 context.Context, arg1 int64, arg2 []zendesk.Tag) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddTicketTags", arg0, arg1, arg2)
@@ -58,13 +59,13 @@ func (m *Client) AddTicketTags(arg0 context.Context, arg1 int64, arg2 []zendesk.
 	return ret0, ret1
 }
 
-// AddTicketTags indicates an expected call of AddTicketTags
+// AddTicketTags indicates an expected call of AddTicketTags.
 func (mr *ClientMockRecorder) AddTicketTags(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTicketTags", reflect.TypeOf((*Client)(nil).AddTicketTags), arg0, arg1, arg2)
 }
 
-// AddUserTags mocks base method
+// AddUserTags mocks base method.
 func (m *Client) AddUserTags(arg0 context.Context, arg1 int64, arg2 []zendesk.Tag) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddUserTags", arg0, arg1, arg2)
@@ -73,13 +74,13 @@ func (m *Client) AddUserTags(arg0 context.Context, arg1 int64, arg2 []zendesk.Ta
 	return ret0, ret1
 }
 
-// AddUserTags indicates an expected call of AddUserTags
+// AddUserTags indicates an expected call of AddUserTags.
 func (mr *ClientMockRecorder) AddUserTags(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUserTags", reflect.TypeOf((*Client)(nil).AddUserTags), arg0, arg1, arg2)
 }
 
-// CreateAutomation mocks base method
+// CreateAutomation mocks base method.
 func (m *Client) CreateAutomation(arg0 context.Context, arg1 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateAutomation", arg0, arg1)
@@ -88,13 +89,13 @@ func (m *Client) CreateAutomation(arg0 context.Context, arg1 zendesk.Automation)
 	return ret0, ret1
 }
 
-// CreateAutomation indicates an expected call of CreateAutomation
+// CreateAutomation indicates an expected call of CreateAutomation.
 func (mr *ClientMockRecorder) CreateAutomation(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAutomation", reflect.TypeOf((*Client)(nil).CreateAutomation), arg0, arg1)
 }
 
-// CreateBrand mocks base method
+// CreateBrand mocks base method.
 func (m *Client) CreateBrand(arg0 context.Context, arg1 zendesk.Brand) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateBrand", arg0, arg1)
@@ -103,13 +104,13 @@ func (m *Client) CreateBrand(arg0 context.Context, arg1 zendesk.Brand) (zendesk.
 	return ret0, ret1
 }
 
-// CreateBrand indicates an expected call of CreateBrand
+// CreateBrand indicates an expected call of CreateBrand.
 func (mr *ClientMockRecorder) CreateBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0, arg1)
 }
 
-// CreateDynamicContentItem mocks base method
+// CreateDynamicContentItem mocks base method.
 func (m *Client) CreateDynamicContentItem(arg0 context.Context, arg1 zendesk.DynamicContentItem) (zendesk.DynamicContentItem, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateDynamicContentItem", arg0, arg1)
@@ -118,13 +119,13 @@ func (m *Client) CreateDynamicContentItem(arg0 context.Context, arg1 zendesk.Dyn
 	return ret0, ret1
 }
 
-// CreateDynamicContentItem indicates an expected call of CreateDynamicContentItem
+// CreateDynamicContentItem indicates an expected call of CreateDynamicContentItem.
 func (mr *ClientMockRecorder) CreateDynamicContentItem(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateDynamicContentItem", reflect.TypeOf((*Client)(nil).CreateDynamicContentItem), arg0, arg1)
 }
 
-// CreateGroup mocks base method
+// CreateGroup mocks base method.
 func (m *Client) CreateGroup(arg0 context.Context, arg1 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateGroup", arg0, arg1)
@@ -133,13 +134,13 @@ func (m *Client) CreateGroup(arg0 context.Context, arg1 zendesk.Group) (zendesk.
 	return ret0, ret1
 }
 
-// CreateGroup indicates an expected call of CreateGroup
+// CreateGroup indicates an expected call of CreateGroup.
 func (mr *ClientMockRecorder) CreateGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGroup", reflect.TypeOf((*Client)(nil).CreateGroup), arg0, arg1)
 }
 
-// CreateMacro mocks base method
+// CreateMacro mocks base method.
 func (m *Client) CreateMacro(arg0 context.Context, arg1 zendesk.Macro) (zendesk.Macro, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateMacro", arg0, arg1)
@@ -148,13 +149,13 @@ func (m *Client) CreateMacro(arg0 context.Context, arg1 zendesk.Macro) (zendesk.
 	return ret0, ret1
 }
 
-// CreateMacro indicates an expected call of CreateMacro
+// CreateMacro indicates an expected call of CreateMacro.
 func (mr *ClientMockRecorder) CreateMacro(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMacro", reflect.TypeOf((*Client)(nil).CreateMacro), arg0, arg1)
 }
 
-// CreateOrUpdateUser mocks base method
+// CreateOrUpdateUser mocks base method.
 func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateOrUpdateUser", arg0, arg1)
@@ -163,13 +164,13 @@ func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (ze
 	return ret0, ret1
 }
 
-// CreateOrUpdateUser indicates an expected call of CreateOrUpdateUser
+// CreateOrUpdateUser indicates an expected call of CreateOrUpdateUser.
 func (mr *ClientMockRecorder) CreateOrUpdateUser(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrUpdateUser", reflect.TypeOf((*Client)(nil).CreateOrUpdateUser), arg0, arg1)
 }
 
-// CreateOrganization mocks base method
+// CreateOrganization mocks base method.
 func (m *Client) CreateOrganization(arg0 context.Context, arg1 zendesk.Organization) (zendesk.Organization, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateOrganization", arg0, arg1)
@@ -178,13 +179,13 @@ func (m *Client) CreateOrganization(arg0 context.Context, arg1 zendesk.Organizat
 	return ret0, ret1
 }
 
-// CreateOrganization indicates an expected call of CreateOrganization
+// CreateOrganization indicates an expected call of CreateOrganization.
 func (mr *ClientMockRecorder) CreateOrganization(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*Client)(nil).CreateOrganization), arg0, arg1)
 }
 
-// CreateSLAPolicy mocks base method
+// CreateSLAPolicy mocks base method.
 func (m *Client) CreateSLAPolicy(arg0 context.Context, arg1 zendesk.SLAPolicy) (zendesk.SLAPolicy, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateSLAPolicy", arg0, arg1)
@@ -193,13 +194,13 @@ func (m *Client) CreateSLAPolicy(arg0 context.Context, arg1 zendesk.SLAPolicy) (
 	return ret0, ret1
 }
 
-// CreateSLAPolicy indicates an expected call of CreateSLAPolicy
+// CreateSLAPolicy indicates an expected call of CreateSLAPolicy.
 func (mr *ClientMockRecorder) CreateSLAPolicy(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSLAPolicy", reflect.TypeOf((*Client)(nil).CreateSLAPolicy), arg0, arg1)
 }
 
-// CreateTarget mocks base method
+// CreateTarget mocks base method.
 func (m *Client) CreateTarget(arg0 context.Context, arg1 zendesk.Target) (zendesk.Target, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTarget", arg0, arg1)
@@ -208,13 +209,13 @@ func (m *Client) CreateTarget(arg0 context.Context, arg1 zendesk.Target) (zendes
 	return ret0, ret1
 }
 
-// CreateTarget indicates an expected call of CreateTarget
+// CreateTarget indicates an expected call of CreateTarget.
 func (mr *ClientMockRecorder) CreateTarget(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTarget", reflect.TypeOf((*Client)(nil).CreateTarget), arg0, arg1)
 }
 
-// CreateTicket mocks base method
+// CreateTicket mocks base method.
 func (m *Client) CreateTicket(arg0 context.Context, arg1 zendesk.Ticket) (zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicket", arg0, arg1)
@@ -223,13 +224,13 @@ func (m *Client) CreateTicket(arg0 context.Context, arg1 zendesk.Ticket) (zendes
 	return ret0, ret1
 }
 
-// CreateTicket indicates an expected call of CreateTicket
+// CreateTicket indicates an expected call of CreateTicket.
 func (mr *ClientMockRecorder) CreateTicket(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicket", reflect.TypeOf((*Client)(nil).CreateTicket), arg0, arg1)
 }
 
-// CreateTicketComment mocks base method
+// CreateTicketComment mocks base method.
 func (m *Client) CreateTicketComment(arg0 context.Context, arg1 int64, arg2 zendesk.TicketComment) (zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicketComment", arg0, arg1, arg2)
@@ -238,13 +239,13 @@ func (m *Client) CreateTicketComment(arg0 context.Context, arg1 int64, arg2 zend
 	return ret0, ret1
 }
 
-// CreateTicketComment indicates an expected call of CreateTicketComment
+// CreateTicketComment indicates an expected call of CreateTicketComment.
 func (mr *ClientMockRecorder) CreateTicketComment(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicketComment", reflect.TypeOf((*Client)(nil).CreateTicketComment), arg0, arg1, arg2)
 }
 
-// CreateTicketField mocks base method
+// CreateTicketField mocks base method.
 func (m *Client) CreateTicketField(arg0 context.Context, arg1 zendesk.TicketField) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicketField", arg0, arg1)
@@ -253,13 +254,13 @@ func (m *Client) CreateTicketField(arg0 context.Context, arg1 zendesk.TicketFiel
 	return ret0, ret1
 }
 
-// CreateTicketField indicates an expected call of CreateTicketField
+// CreateTicketField indicates an expected call of CreateTicketField.
 func (mr *ClientMockRecorder) CreateTicketField(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicketField", reflect.TypeOf((*Client)(nil).CreateTicketField), arg0, arg1)
 }
 
-// CreateTicketForm mocks base method
+// CreateTicketForm mocks base method.
 func (m *Client) CreateTicketForm(arg0 context.Context, arg1 zendesk.TicketForm) (zendesk.TicketForm, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTicketForm", arg0, arg1)
@@ -268,13 +269,13 @@ func (m *Client) CreateTicketForm(arg0 context.Context, arg1 zendesk.TicketForm)
 	return ret0, ret1
 }
 
-// CreateTicketForm indicates an expected call of CreateTicketForm
+// CreateTicketForm indicates an expected call of CreateTicketForm.
 func (mr *ClientMockRecorder) CreateTicketForm(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicketForm", reflect.TypeOf((*Client)(nil).CreateTicketForm), arg0, arg1)
 }
 
-// CreateTrigger mocks base method
+// CreateTrigger mocks base method.
 func (m *Client) CreateTrigger(arg0 context.Context, arg1 zendesk.Trigger) (zendesk.Trigger, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateTrigger", arg0, arg1)
@@ -283,13 +284,13 @@ func (m *Client) CreateTrigger(arg0 context.Context, arg1 zendesk.Trigger) (zend
 	return ret0, ret1
 }
 
-// CreateTrigger indicates an expected call of CreateTrigger
+// CreateTrigger indicates an expected call of CreateTrigger.
 func (mr *ClientMockRecorder) CreateTrigger(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTrigger", reflect.TypeOf((*Client)(nil).CreateTrigger), arg0, arg1)
 }
 
-// CreateUser mocks base method
+// CreateUser mocks base method.
 func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateUser", arg0, arg1)
@@ -298,13 +299,13 @@ func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.Us
 	return ret0, ret1
 }
 
-// CreateUser indicates an expected call of CreateUser
+// CreateUser indicates an expected call of CreateUser.
 func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0, arg1)
 }
 
-// DeleteAutomation mocks base method
+// DeleteAutomation mocks base method.
 func (m *Client) DeleteAutomation(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteAutomation", arg0, arg1)
@@ -312,13 +313,13 @@ func (m *Client) DeleteAutomation(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteAutomation indicates an expected call of DeleteAutomation
+// DeleteAutomation indicates an expected call of DeleteAutomation.
 func (mr *ClientMockRecorder) DeleteAutomation(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAutomation", reflect.TypeOf((*Client)(nil).DeleteAutomation), arg0, arg1)
 }
 
-// DeleteBrand mocks base method
+// DeleteBrand mocks base method.
 func (m *Client) DeleteBrand(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteBrand", arg0, arg1)
@@ -326,13 +327,27 @@ func (m *Client) DeleteBrand(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteBrand indicates an expected call of DeleteBrand
+// DeleteBrand indicates an expected call of DeleteBrand.
 func (mr *ClientMockRecorder) DeleteBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteBrand", reflect.TypeOf((*Client)(nil).DeleteBrand), arg0, arg1)
 }
 
-// DeleteGroup mocks base method
+// DeleteDynamicContentItem mocks base method.
+func (m *Client) DeleteDynamicContentItem(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteDynamicContentItem", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteDynamicContentItem indicates an expected call of DeleteDynamicContentItem.
+func (mr *ClientMockRecorder) DeleteDynamicContentItem(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteDynamicContentItem", reflect.TypeOf((*Client)(nil).DeleteDynamicContentItem), arg0, arg1)
+}
+
+// DeleteGroup mocks base method.
 func (m *Client) DeleteGroup(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteGroup", arg0, arg1)
@@ -340,13 +355,13 @@ func (m *Client) DeleteGroup(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteGroup indicates an expected call of DeleteGroup
+// DeleteGroup indicates an expected call of DeleteGroup.
 func (mr *ClientMockRecorder) DeleteGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGroup", reflect.TypeOf((*Client)(nil).DeleteGroup), arg0, arg1)
 }
 
-// DeleteMacro mocks base method
+// DeleteMacro mocks base method.
 func (m *Client) DeleteMacro(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteMacro", arg0, arg1)
@@ -354,13 +369,13 @@ func (m *Client) DeleteMacro(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteMacro indicates an expected call of DeleteMacro
+// DeleteMacro indicates an expected call of DeleteMacro.
 func (mr *ClientMockRecorder) DeleteMacro(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMacro", reflect.TypeOf((*Client)(nil).DeleteMacro), arg0, arg1)
 }
 
-// DeleteOrganization mocks base method
+// DeleteOrganization mocks base method.
 func (m *Client) DeleteOrganization(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteOrganization", arg0, arg1)
@@ -368,13 +383,13 @@ func (m *Client) DeleteOrganization(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteOrganization indicates an expected call of DeleteOrganization
+// DeleteOrganization indicates an expected call of DeleteOrganization.
 func (mr *ClientMockRecorder) DeleteOrganization(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrganization", reflect.TypeOf((*Client)(nil).DeleteOrganization), arg0, arg1)
 }
 
-// DeleteSLAPolicy mocks base method
+// DeleteSLAPolicy mocks base method.
 func (m *Client) DeleteSLAPolicy(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteSLAPolicy", arg0, arg1)
@@ -382,13 +397,13 @@ func (m *Client) DeleteSLAPolicy(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteSLAPolicy indicates an expected call of DeleteSLAPolicy
+// DeleteSLAPolicy indicates an expected call of DeleteSLAPolicy.
 func (mr *ClientMockRecorder) DeleteSLAPolicy(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSLAPolicy", reflect.TypeOf((*Client)(nil).DeleteSLAPolicy), arg0, arg1)
 }
 
-// DeleteTarget mocks base method
+// DeleteTarget mocks base method.
 func (m *Client) DeleteTarget(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteTarget", arg0, arg1)
@@ -396,13 +411,13 @@ func (m *Client) DeleteTarget(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteTarget indicates an expected call of DeleteTarget
+// DeleteTarget indicates an expected call of DeleteTarget.
 func (mr *ClientMockRecorder) DeleteTarget(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTarget", reflect.TypeOf((*Client)(nil).DeleteTarget), arg0, arg1)
 }
 
-// DeleteTicket mocks base method
+// DeleteTicket mocks base method.
 func (m *Client) DeleteTicket(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteTicket", arg0, arg1)
@@ -410,13 +425,13 @@ func (m *Client) DeleteTicket(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteTicket indicates an expected call of DeleteTicket
+// DeleteTicket indicates an expected call of DeleteTicket.
 func (mr *ClientMockRecorder) DeleteTicket(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicket", reflect.TypeOf((*Client)(nil).DeleteTicket), arg0, arg1)
 }
 
-// DeleteTicketField mocks base method
+// DeleteTicketField mocks base method.
 func (m *Client) DeleteTicketField(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteTicketField", arg0, arg1)
@@ -424,13 +439,13 @@ func (m *Client) DeleteTicketField(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteTicketField indicates an expected call of DeleteTicketField
+// DeleteTicketField indicates an expected call of DeleteTicketField.
 func (mr *ClientMockRecorder) DeleteTicketField(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketField", reflect.TypeOf((*Client)(nil).DeleteTicketField), arg0, arg1)
 }
 
-// DeleteTicketForm mocks base method
+// DeleteTicketForm mocks base method.
 func (m *Client) DeleteTicketForm(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteTicketForm", arg0, arg1)
@@ -438,13 +453,13 @@ func (m *Client) DeleteTicketForm(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteTicketForm indicates an expected call of DeleteTicketForm
+// DeleteTicketForm indicates an expected call of DeleteTicketForm.
 func (mr *ClientMockRecorder) DeleteTicketForm(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTicketForm", reflect.TypeOf((*Client)(nil).DeleteTicketForm), arg0, arg1)
 }
 
-// DeleteTrigger mocks base method
+// DeleteTrigger mocks base method.
 func (m *Client) DeleteTrigger(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteTrigger", arg0, arg1)
@@ -452,13 +467,13 @@ func (m *Client) DeleteTrigger(arg0 context.Context, arg1 int64) error {
 	return ret0
 }
 
-// DeleteTrigger indicates an expected call of DeleteTrigger
+// DeleteTrigger indicates an expected call of DeleteTrigger.
 func (mr *ClientMockRecorder) DeleteTrigger(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTrigger", reflect.TypeOf((*Client)(nil).DeleteTrigger), arg0, arg1)
 }
 
-// DeleteUpload mocks base method
+// DeleteUpload mocks base method.
 func (m *Client) DeleteUpload(arg0 context.Context, arg1 string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteUpload", arg0, arg1)
@@ -466,13 +481,13 @@ func (m *Client) DeleteUpload(arg0 context.Context, arg1 string) error {
 	return ret0
 }
 
-// DeleteUpload indicates an expected call of DeleteUpload
+// DeleteUpload indicates an expected call of DeleteUpload.
 func (mr *ClientMockRecorder) DeleteUpload(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUpload", reflect.TypeOf((*Client)(nil).DeleteUpload), arg0, arg1)
 }
 
-// Get mocks base method
+// Get mocks base method.
 func (m *Client) Get(arg0 context.Context, arg1 string) ([]byte, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", arg0, arg1)
@@ -481,13 +496,13 @@ func (m *Client) Get(arg0 context.Context, arg1 string) ([]byte, error) {
 	return ret0, ret1
 }
 
-// Get indicates an expected call of Get
+// Get indicates an expected call of Get.
 func (mr *ClientMockRecorder) Get(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*Client)(nil).Get), arg0, arg1)
 }
 
-// GetAllTicketAudits mocks base method
+// GetAllTicketAudits mocks base method.
 func (m *Client) GetAllTicketAudits(arg0 context.Context, arg1 zendesk.CursorOption) ([]zendesk.TicketAudit, zendesk.Cursor, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllTicketAudits", arg0, arg1)
@@ -497,13 +512,13 @@ func (m *Client) GetAllTicketAudits(arg0 context.Context, arg1 zendesk.CursorOpt
 	return ret0, ret1, ret2
 }
 
-// GetAllTicketAudits indicates an expected call of GetAllTicketAudits
+// GetAllTicketAudits indicates an expected call of GetAllTicketAudits.
 func (mr *ClientMockRecorder) GetAllTicketAudits(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllTicketAudits", reflect.TypeOf((*Client)(nil).GetAllTicketAudits), arg0, arg1)
 }
 
-// GetAttachment mocks base method
+// GetAttachment mocks base method.
 func (m *Client) GetAttachment(arg0 context.Context, arg1 int64) (zendesk.Attachment, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAttachment", arg0, arg1)
@@ -512,13 +527,13 @@ func (m *Client) GetAttachment(arg0 context.Context, arg1 int64) (zendesk.Attach
 	return ret0, ret1
 }
 
-// GetAttachment indicates an expected call of GetAttachment
+// GetAttachment indicates an expected call of GetAttachment.
 func (mr *ClientMockRecorder) GetAttachment(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAttachment", reflect.TypeOf((*Client)(nil).GetAttachment), arg0, arg1)
 }
 
-// GetAutomation mocks base method
+// GetAutomation mocks base method.
 func (m *Client) GetAutomation(arg0 context.Context, arg1 int64) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAutomation", arg0, arg1)
@@ -527,13 +542,13 @@ func (m *Client) GetAutomation(arg0 context.Context, arg1 int64) (zendesk.Automa
 	return ret0, ret1
 }
 
-// GetAutomation indicates an expected call of GetAutomation
+// GetAutomation indicates an expected call of GetAutomation.
 func (mr *ClientMockRecorder) GetAutomation(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomation", reflect.TypeOf((*Client)(nil).GetAutomation), arg0, arg1)
 }
 
-// GetAutomations mocks base method
+// GetAutomations mocks base method.
 func (m *Client) GetAutomations(arg0 context.Context, arg1 *zendesk.AutomationListOptions) ([]zendesk.Automation, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAutomations", arg0, arg1)
@@ -543,13 +558,13 @@ func (m *Client) GetAutomations(arg0 context.Context, arg1 *zendesk.AutomationLi
 	return ret0, ret1, ret2
 }
 
-// GetAutomations indicates an expected call of GetAutomations
+// GetAutomations indicates an expected call of GetAutomations.
 func (mr *ClientMockRecorder) GetAutomations(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomations", reflect.TypeOf((*Client)(nil).GetAutomations), arg0, arg1)
 }
 
-// GetBrand mocks base method
+// GetBrand mocks base method.
 func (m *Client) GetBrand(arg0 context.Context, arg1 int64) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBrand", arg0, arg1)
@@ -558,14 +573,13 @@ func (m *Client) GetBrand(arg0 context.Context, arg1 int64) (zendesk.Brand, erro
 	return ret0, ret1
 }
 
-// GetBrand indicates an expected call of GetBrand
+// GetBrand indicates an expected call of GetBrand.
 func (mr *ClientMockRecorder) GetBrand(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0, arg1)
 }
 
-
-// GetCustomRoles mocks base method
+// GetCustomRoles mocks base method.
 func (m *Client) GetCustomRoles(arg0 context.Context) ([]zendesk.CustomRole, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCustomRoles", arg0)
@@ -574,13 +588,28 @@ func (m *Client) GetCustomRoles(arg0 context.Context) ([]zendesk.CustomRole, err
 	return ret0, ret1
 }
 
-// GetCustomRoles indicates an expected call of GetCustomRoles
+// GetCustomRoles indicates an expected call of GetCustomRoles.
 func (mr *ClientMockRecorder) GetCustomRoles(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomRoles", reflect.TypeOf((*Client)(nil).GetCustomRoles), arg0)
 }
 
-// GetDynamicContentItems mocks base method
+// GetDynamicContentItem mocks base method.
+func (m *Client) GetDynamicContentItem(arg0 context.Context, arg1 int64) (zendesk.DynamicContentItem, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDynamicContentItem", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetDynamicContentItem indicates an expected call of GetDynamicContentItem.
+func (mr *ClientMockRecorder) GetDynamicContentItem(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItem", reflect.TypeOf((*Client)(nil).GetDynamicContentItem), arg0, arg1)
+}
+
+// GetDynamicContentItems mocks base method.
 func (m *Client) GetDynamicContentItems(arg0 context.Context) ([]zendesk.DynamicContentItem, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDynamicContentItems", arg0)
@@ -590,13 +619,13 @@ func (m *Client) GetDynamicContentItems(arg0 context.Context) ([]zendesk.Dynamic
 	return ret0, ret1, ret2
 }
 
-// GetDynamicContentItems indicates an expected call of GetDynamicContentItems
+// GetDynamicContentItems indicates an expected call of GetDynamicContentItems.
 func (mr *ClientMockRecorder) GetDynamicContentItems(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItems", reflect.TypeOf((*Client)(nil).GetDynamicContentItems), arg0)
 }
 
-// GetGroup mocks base method
+// GetGroup mocks base method.
 func (m *Client) GetGroup(arg0 context.Context, arg1 int64) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroup", arg0, arg1)
@@ -605,13 +634,13 @@ func (m *Client) GetGroup(arg0 context.Context, arg1 int64) (zendesk.Group, erro
 	return ret0, ret1
 }
 
-// GetGroup indicates an expected call of GetGroup
+// GetGroup indicates an expected call of GetGroup.
 func (mr *ClientMockRecorder) GetGroup(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroup", reflect.TypeOf((*Client)(nil).GetGroup), arg0, arg1)
 }
 
-// GetGroupMemberships mocks base method
+// GetGroupMemberships mocks base method.
 func (m *Client) GetGroupMemberships(arg0 context.Context, arg1 *zendesk.GroupMembershipListOptions) ([]zendesk.GroupMembership, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroupMemberships", arg0, arg1)
@@ -621,13 +650,13 @@ func (m *Client) GetGroupMemberships(arg0 context.Context, arg1 *zendesk.GroupMe
 	return ret0, ret1, ret2
 }
 
-// GetGroupMemberships indicates an expected call of GetGroupMemberships
+// GetGroupMemberships indicates an expected call of GetGroupMemberships.
 func (mr *ClientMockRecorder) GetGroupMemberships(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMemberships", reflect.TypeOf((*Client)(nil).GetGroupMemberships), arg0, arg1)
 }
 
-// GetGroups mocks base method
+// GetGroups mocks base method.
 func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroups", arg0)
@@ -637,13 +666,13 @@ func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page,
 	return ret0, ret1, ret2
 }
 
-// GetGroups indicates an expected call of GetGroups
+// GetGroups indicates an expected call of GetGroups.
 func (mr *ClientMockRecorder) GetGroups(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroups", reflect.TypeOf((*Client)(nil).GetGroups), arg0)
 }
 
-// GetLocales mocks base method
+// GetLocales mocks base method.
 func (m *Client) GetLocales(arg0 context.Context) ([]zendesk.Locale, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetLocales", arg0)
@@ -652,13 +681,13 @@ func (m *Client) GetLocales(arg0 context.Context) ([]zendesk.Locale, error) {
 	return ret0, ret1
 }
 
-// GetLocales indicates an expected call of GetLocales
+// GetLocales indicates an expected call of GetLocales.
 func (mr *ClientMockRecorder) GetLocales(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLocales", reflect.TypeOf((*Client)(nil).GetLocales), arg0)
 }
 
-// GetMacro mocks base method
+// GetMacro mocks base method.
 func (m *Client) GetMacro(arg0 context.Context, arg1 int64) (zendesk.Macro, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMacro", arg0, arg1)
@@ -667,13 +696,13 @@ func (m *Client) GetMacro(arg0 context.Context, arg1 int64) (zendesk.Macro, erro
 	return ret0, ret1
 }
 
-// GetMacro indicates an expected call of GetMacro
+// GetMacro indicates an expected call of GetMacro.
 func (mr *ClientMockRecorder) GetMacro(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacro", reflect.TypeOf((*Client)(nil).GetMacro), arg0, arg1)
 }
 
-// GetMacros mocks base method
+// GetMacros mocks base method.
 func (m *Client) GetMacros(arg0 context.Context, arg1 *zendesk.MacroListOptions) ([]zendesk.Macro, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMacros", arg0, arg1)
@@ -683,13 +712,13 @@ func (m *Client) GetMacros(arg0 context.Context, arg1 *zendesk.MacroListOptions)
 	return ret0, ret1, ret2
 }
 
-// GetMacros indicates an expected call of GetMacros
+// GetMacros indicates an expected call of GetMacros.
 func (mr *ClientMockRecorder) GetMacros(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacros", reflect.TypeOf((*Client)(nil).GetMacros), arg0, arg1)
 }
 
-// GetManyUsers mocks base method
+// GetManyUsers mocks base method.
 func (m *Client) GetManyUsers(arg0 context.Context, arg1 *zendesk.GetManyUsersOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetManyUsers", arg0, arg1)
@@ -699,13 +728,13 @@ func (m *Client) GetManyUsers(arg0 context.Context, arg1 *zendesk.GetManyUsersOp
 	return ret0, ret1, ret2
 }
 
-// GetManyUsers indicates an expected call of GetManyUsers
+// GetManyUsers indicates an expected call of GetManyUsers.
 func (mr *ClientMockRecorder) GetManyUsers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetManyUsers", reflect.TypeOf((*Client)(nil).GetManyUsers), arg0, arg1)
 }
 
-// GetMultipleTickets mocks base method
+// GetMultipleTickets mocks base method.
 func (m *Client) GetMultipleTickets(arg0 context.Context, arg1 []int64) ([]zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMultipleTickets", arg0, arg1)
@@ -714,13 +743,13 @@ func (m *Client) GetMultipleTickets(arg0 context.Context, arg1 []int64) ([]zende
 	return ret0, ret1
 }
 
-// GetMultipleTickets indicates an expected call of GetMultipleTickets
+// GetMultipleTickets indicates an expected call of GetMultipleTickets.
 func (mr *ClientMockRecorder) GetMultipleTickets(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMultipleTickets", reflect.TypeOf((*Client)(nil).GetMultipleTickets), arg0, arg1)
 }
 
-// GetOrganization mocks base method
+// GetOrganization mocks base method.
 func (m *Client) GetOrganization(arg0 context.Context, arg1 int64) (zendesk.Organization, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrganization", arg0, arg1)
@@ -729,13 +758,13 @@ func (m *Client) GetOrganization(arg0 context.Context, arg1 int64) (zendesk.Orga
 	return ret0, ret1
 }
 
-// GetOrganization indicates an expected call of GetOrganization
+// GetOrganization indicates an expected call of GetOrganization.
 func (mr *ClientMockRecorder) GetOrganization(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganization", reflect.TypeOf((*Client)(nil).GetOrganization), arg0, arg1)
 }
 
-// GetOrganizationMemberships mocks base method
+// GetOrganizationMemberships mocks base method.
 func (m *Client) GetOrganizationMemberships(arg0 context.Context, arg1 *zendesk.OrganizationMembershipListOptions) ([]zendesk.OrganizationMembership, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrganizationMemberships", arg0, arg1)
@@ -745,13 +774,13 @@ func (m *Client) GetOrganizationMemberships(arg0 context.Context, arg1 *zendesk.
 	return ret0, ret1, ret2
 }
 
-// GetOrganizationMemberships indicates an expected call of GetOrganizationMemberships
+// GetOrganizationMemberships indicates an expected call of GetOrganizationMemberships.
 func (mr *ClientMockRecorder) GetOrganizationMemberships(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationMemberships", reflect.TypeOf((*Client)(nil).GetOrganizationMemberships), arg0, arg1)
 }
 
-// GetOrganizationTags mocks base method
+// GetOrganizationTags mocks base method.
 func (m *Client) GetOrganizationTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrganizationTags", arg0, arg1)
@@ -760,13 +789,13 @@ func (m *Client) GetOrganizationTags(arg0 context.Context, arg1 int64) ([]zendes
 	return ret0, ret1
 }
 
-// GetOrganizationTags indicates an expected call of GetOrganizationTags
+// GetOrganizationTags indicates an expected call of GetOrganizationTags.
 func (mr *ClientMockRecorder) GetOrganizationTags(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTags", reflect.TypeOf((*Client)(nil).GetOrganizationTags), arg0, arg1)
 }
 
-// GetOrganizations mocks base method
+// GetOrganizations mocks base method.
 func (m *Client) GetOrganizations(arg0 context.Context, arg1 *zendesk.OrganizationListOptions) ([]zendesk.Organization, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrganizations", arg0, arg1)
@@ -776,13 +805,13 @@ func (m *Client) GetOrganizations(arg0 context.Context, arg1 *zendesk.Organizati
 	return ret0, ret1, ret2
 }
 
-// GetOrganizations indicates an expected call of GetOrganizations
+// GetOrganizations indicates an expected call of GetOrganizations.
 func (mr *ClientMockRecorder) GetOrganizations(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizations", reflect.TypeOf((*Client)(nil).GetOrganizations), arg0, arg1)
 }
 
-// GetSLAPolicies mocks base method
+// GetSLAPolicies mocks base method.
 func (m *Client) GetSLAPolicies(arg0 context.Context, arg1 *zendesk.SLAPolicyListOptions) ([]zendesk.SLAPolicy, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetSLAPolicies", arg0, arg1)
@@ -792,13 +821,13 @@ func (m *Client) GetSLAPolicies(arg0 context.Context, arg1 *zendesk.SLAPolicyLis
 	return ret0, ret1, ret2
 }
 
-// GetSLAPolicies indicates an expected call of GetSLAPolicies
+// GetSLAPolicies indicates an expected call of GetSLAPolicies.
 func (mr *ClientMockRecorder) GetSLAPolicies(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPolicies", reflect.TypeOf((*Client)(nil).GetSLAPolicies), arg0, arg1)
 }
 
-// GetSLAPolicy mocks base method
+// GetSLAPolicy mocks base method.
 func (m *Client) GetSLAPolicy(arg0 context.Context, arg1 int64) (zendesk.SLAPolicy, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetSLAPolicy", arg0, arg1)
@@ -807,13 +836,13 @@ func (m *Client) GetSLAPolicy(arg0 context.Context, arg1 int64) (zendesk.SLAPoli
 	return ret0, ret1
 }
 
-// GetSLAPolicy indicates an expected call of GetSLAPolicy
+// GetSLAPolicy indicates an expected call of GetSLAPolicy.
 func (mr *ClientMockRecorder) GetSLAPolicy(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPolicy", reflect.TypeOf((*Client)(nil).GetSLAPolicy), arg0, arg1)
 }
 
-// GetTarget mocks base method
+// GetTarget mocks base method.
 func (m *Client) GetTarget(arg0 context.Context, arg1 int64) (zendesk.Target, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTarget", arg0, arg1)
@@ -822,13 +851,13 @@ func (m *Client) GetTarget(arg0 context.Context, arg1 int64) (zendesk.Target, er
 	return ret0, ret1
 }
 
-// GetTarget indicates an expected call of GetTarget
+// GetTarget indicates an expected call of GetTarget.
 func (mr *ClientMockRecorder) GetTarget(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTarget", reflect.TypeOf((*Client)(nil).GetTarget), arg0, arg1)
 }
 
-// GetTargets mocks base method
+// GetTargets mocks base method.
 func (m *Client) GetTargets(arg0 context.Context) ([]zendesk.Target, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTargets", arg0)
@@ -838,13 +867,13 @@ func (m *Client) GetTargets(arg0 context.Context) ([]zendesk.Target, zendesk.Pag
 	return ret0, ret1, ret2
 }
 
-// GetTargets indicates an expected call of GetTargets
+// GetTargets indicates an expected call of GetTargets.
 func (mr *ClientMockRecorder) GetTargets(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTargets", reflect.TypeOf((*Client)(nil).GetTargets), arg0)
 }
 
-// GetTicket mocks base method
+// GetTicket mocks base method.
 func (m *Client) GetTicket(arg0 context.Context, arg1 int64) (zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicket", arg0, arg1)
@@ -853,13 +882,13 @@ func (m *Client) GetTicket(arg0 context.Context, arg1 int64) (zendesk.Ticket, er
 	return ret0, ret1
 }
 
-// GetTicket indicates an expected call of GetTicket
+// GetTicket indicates an expected call of GetTicket.
 func (mr *ClientMockRecorder) GetTicket(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*Client)(nil).GetTicket), arg0, arg1)
 }
 
-// GetTicketAudit mocks base method
+// GetTicketAudit mocks base method.
 func (m *Client) GetTicketAudit(arg0 context.Context, arg1, arg2 int64) (zendesk.TicketAudit, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketAudit", arg0, arg1, arg2)
@@ -868,13 +897,13 @@ func (m *Client) GetTicketAudit(arg0 context.Context, arg1, arg2 int64) (zendesk
 	return ret0, ret1
 }
 
-// GetTicketAudit indicates an expected call of GetTicketAudit
+// GetTicketAudit indicates an expected call of GetTicketAudit.
 func (mr *ClientMockRecorder) GetTicketAudit(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAudit", reflect.TypeOf((*Client)(nil).GetTicketAudit), arg0, arg1, arg2)
 }
 
-// GetTicketAudits mocks base method
+// GetTicketAudits mocks base method.
 func (m *Client) GetTicketAudits(arg0 context.Context, arg1 int64, arg2 zendesk.PageOptions) ([]zendesk.TicketAudit, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketAudits", arg0, arg1, arg2)
@@ -884,13 +913,13 @@ func (m *Client) GetTicketAudits(arg0 context.Context, arg1 int64, arg2 zendesk.
 	return ret0, ret1, ret2
 }
 
-// GetTicketAudits indicates an expected call of GetTicketAudits
+// GetTicketAudits indicates an expected call of GetTicketAudits.
 func (mr *ClientMockRecorder) GetTicketAudits(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAudits", reflect.TypeOf((*Client)(nil).GetTicketAudits), arg0, arg1, arg2)
 }
 
-// GetTicketField mocks base method
+// GetTicketField mocks base method.
 func (m *Client) GetTicketField(arg0 context.Context, arg1 int64) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketField", arg0, arg1)
@@ -899,13 +928,13 @@ func (m *Client) GetTicketField(arg0 context.Context, arg1 int64) (zendesk.Ticke
 	return ret0, ret1
 }
 
-// GetTicketField indicates an expected call of GetTicketField
+// GetTicketField indicates an expected call of GetTicketField.
 func (mr *ClientMockRecorder) GetTicketField(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketField", reflect.TypeOf((*Client)(nil).GetTicketField), arg0, arg1)
 }
 
-// GetTicketFields mocks base method
+// GetTicketFields mocks base method.
 func (m *Client) GetTicketFields(arg0 context.Context) ([]zendesk.TicketField, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketFields", arg0)
@@ -915,13 +944,13 @@ func (m *Client) GetTicketFields(arg0 context.Context) ([]zendesk.TicketField, z
 	return ret0, ret1, ret2
 }
 
-// GetTicketFields indicates an expected call of GetTicketFields
+// GetTicketFields indicates an expected call of GetTicketFields.
 func (mr *ClientMockRecorder) GetTicketFields(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFields", reflect.TypeOf((*Client)(nil).GetTicketFields), arg0)
 }
 
-// GetTicketForm mocks base method
+// GetTicketForm mocks base method.
 func (m *Client) GetTicketForm(arg0 context.Context, arg1 int64) (zendesk.TicketForm, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketForm", arg0, arg1)
@@ -930,13 +959,13 @@ func (m *Client) GetTicketForm(arg0 context.Context, arg1 int64) (zendesk.Ticket
 	return ret0, ret1
 }
 
-// GetTicketForm indicates an expected call of GetTicketForm
+// GetTicketForm indicates an expected call of GetTicketForm.
 func (mr *ClientMockRecorder) GetTicketForm(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketForm", reflect.TypeOf((*Client)(nil).GetTicketForm), arg0, arg1)
 }
 
-// GetTicketForms mocks base method
+// GetTicketForms mocks base method.
 func (m *Client) GetTicketForms(arg0 context.Context, arg1 *zendesk.TicketFormListOptions) ([]zendesk.TicketForm, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketForms", arg0, arg1)
@@ -946,13 +975,13 @@ func (m *Client) GetTicketForms(arg0 context.Context, arg1 *zendesk.TicketFormLi
 	return ret0, ret1, ret2
 }
 
-// GetTicketForms indicates an expected call of GetTicketForms
+// GetTicketForms indicates an expected call of GetTicketForms.
 func (mr *ClientMockRecorder) GetTicketForms(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketForms", reflect.TypeOf((*Client)(nil).GetTicketForms), arg0, arg1)
 }
 
-// GetTicketTags mocks base method
+// GetTicketTags mocks base method.
 func (m *Client) GetTicketTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketTags", arg0, arg1)
@@ -961,13 +990,13 @@ func (m *Client) GetTicketTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag,
 	return ret0, ret1
 }
 
-// GetTicketTags indicates an expected call of GetTicketTags
+// GetTicketTags indicates an expected call of GetTicketTags.
 func (mr *ClientMockRecorder) GetTicketTags(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketTags", reflect.TypeOf((*Client)(nil).GetTicketTags), arg0, arg1)
 }
 
-// GetTickets mocks base method
+// GetTickets mocks base method.
 func (m *Client) GetTickets(arg0 context.Context, arg1 *zendesk.TicketListOptions) ([]zendesk.Ticket, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTickets", arg0, arg1)
@@ -977,13 +1006,13 @@ func (m *Client) GetTickets(arg0 context.Context, arg1 *zendesk.TicketListOption
 	return ret0, ret1, ret2
 }
 
-// GetTickets indicates an expected call of GetTickets
+// GetTickets indicates an expected call of GetTickets.
 func (mr *ClientMockRecorder) GetTickets(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTickets", reflect.TypeOf((*Client)(nil).GetTickets), arg0, arg1)
 }
 
-// GetTicketsFromView mocks base method
+// GetTicketsFromView mocks base method.
 func (m *Client) GetTicketsFromView(arg0 context.Context, arg1 int64) ([]zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTicketsFromView", arg0, arg1)
@@ -992,13 +1021,13 @@ func (m *Client) GetTicketsFromView(arg0 context.Context, arg1 int64) ([]zendesk
 	return ret0, ret1
 }
 
-// GetTicketsFromView indicates an expected call of GetTicketsFromView
+// GetTicketsFromView indicates an expected call of GetTicketsFromView.
 func (mr *ClientMockRecorder) GetTicketsFromView(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromView", reflect.TypeOf((*Client)(nil).GetTicketsFromView), arg0, arg1)
 }
 
-// GetTrigger mocks base method
+// GetTrigger mocks base method.
 func (m *Client) GetTrigger(arg0 context.Context, arg1 int64) (zendesk.Trigger, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTrigger", arg0, arg1)
@@ -1007,13 +1036,13 @@ func (m *Client) GetTrigger(arg0 context.Context, arg1 int64) (zendesk.Trigger, 
 	return ret0, ret1
 }
 
-// GetTrigger indicates an expected call of GetTrigger
+// GetTrigger indicates an expected call of GetTrigger.
 func (mr *ClientMockRecorder) GetTrigger(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTrigger", reflect.TypeOf((*Client)(nil).GetTrigger), arg0, arg1)
 }
 
-// GetTriggers mocks base method
+// GetTriggers mocks base method.
 func (m *Client) GetTriggers(arg0 context.Context, arg1 *zendesk.TriggerListOptions) ([]zendesk.Trigger, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTriggers", arg0, arg1)
@@ -1023,13 +1052,13 @@ func (m *Client) GetTriggers(arg0 context.Context, arg1 *zendesk.TriggerListOpti
 	return ret0, ret1, ret2
 }
 
-// GetTriggers indicates an expected call of GetTriggers
+// GetTriggers indicates an expected call of GetTriggers.
 func (mr *ClientMockRecorder) GetTriggers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggers", reflect.TypeOf((*Client)(nil).GetTriggers), arg0, arg1)
 }
 
-// GetUser mocks base method
+// GetUser mocks base method.
 func (m *Client) GetUser(arg0 context.Context, arg1 int64) (zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUser", arg0, arg1)
@@ -1038,13 +1067,13 @@ func (m *Client) GetUser(arg0 context.Context, arg1 int64) (zendesk.User, error)
 	return ret0, ret1
 }
 
-// GetUser indicates an expected call of GetUser
+// GetUser indicates an expected call of GetUser.
 func (mr *ClientMockRecorder) GetUser(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*Client)(nil).GetUser), arg0, arg1)
 }
 
-// GetUserFields mocks base method
+// GetUserFields mocks base method.
 func (m *Client) GetUserFields(arg0 context.Context, arg1 *zendesk.UserFieldListOptions) ([]zendesk.UserField, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserFields", arg0, arg1)
@@ -1054,13 +1083,13 @@ func (m *Client) GetUserFields(arg0 context.Context, arg1 *zendesk.UserFieldList
 	return ret0, ret1, ret2
 }
 
-// GetUserFields indicates an expected call of GetUserFields
+// GetUserFields indicates an expected call of GetUserFields.
 func (mr *ClientMockRecorder) GetUserFields(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFields", reflect.TypeOf((*Client)(nil).GetUserFields), arg0, arg1)
 }
 
-// GetUserRelated mocks base method
+// GetUserRelated mocks base method.
 func (m *Client) GetUserRelated(arg0 context.Context, arg1 int64) (zendesk.UserRelated, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserRelated", arg0, arg1)
@@ -1069,13 +1098,13 @@ func (m *Client) GetUserRelated(arg0 context.Context, arg1 int64) (zendesk.UserR
 	return ret0, ret1
 }
 
-// GetUserRelated indicates an expected call of GetUserRelated
+// GetUserRelated indicates an expected call of GetUserRelated.
 func (mr *ClientMockRecorder) GetUserRelated(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserRelated", reflect.TypeOf((*Client)(nil).GetUserRelated), arg0, arg1)
 }
 
-// GetUserTags mocks base method
+// GetUserTags mocks base method.
 func (m *Client) GetUserTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserTags", arg0, arg1)
@@ -1084,13 +1113,13 @@ func (m *Client) GetUserTags(arg0 context.Context, arg1 int64) ([]zendesk.Tag, e
 	return ret0, ret1
 }
 
-// GetUserTags indicates an expected call of GetUserTags
+// GetUserTags indicates an expected call of GetUserTags.
 func (mr *ClientMockRecorder) GetUserTags(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserTags", reflect.TypeOf((*Client)(nil).GetUserTags), arg0, arg1)
 }
 
-// GetUsers mocks base method
+// GetUsers mocks base method.
 func (m *Client) GetUsers(arg0 context.Context, arg1 *zendesk.UserListOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUsers", arg0, arg1)
@@ -1100,13 +1129,13 @@ func (m *Client) GetUsers(arg0 context.Context, arg1 *zendesk.UserListOptions) (
 	return ret0, ret1, ret2
 }
 
-// GetUsers indicates an expected call of GetUsers
+// GetUsers indicates an expected call of GetUsers.
 func (mr *ClientMockRecorder) GetUsers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), arg0, arg1)
 }
 
-// GetView mocks base method
+// GetView mocks base method.
 func (m *Client) GetView(arg0 context.Context, arg1 int64) (zendesk.View, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetView", arg0, arg1)
@@ -1115,13 +1144,13 @@ func (m *Client) GetView(arg0 context.Context, arg1 int64) (zendesk.View, error)
 	return ret0, ret1
 }
 
-// GetView indicates an expected call of GetView
+// GetView indicates an expected call of GetView.
 func (mr *ClientMockRecorder) GetView(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetView", reflect.TypeOf((*Client)(nil).GetView), arg0, arg1)
 }
 
-// GetViews mocks base method
+// GetViews mocks base method.
 func (m *Client) GetViews(arg0 context.Context) ([]zendesk.View, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetViews", arg0)
@@ -1131,13 +1160,13 @@ func (m *Client) GetViews(arg0 context.Context) ([]zendesk.View, zendesk.Page, e
 	return ret0, ret1, ret2
 }
 
-// GetViews indicates an expected call of GetViews
+// GetViews indicates an expected call of GetViews.
 func (mr *ClientMockRecorder) GetViews(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViews", reflect.TypeOf((*Client)(nil).GetViews), arg0)
 }
 
-// ListTicketComments mocks base method
+// ListTicketComments mocks base method.
 func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTicketComments", arg0, arg1)
@@ -1146,13 +1175,13 @@ func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk
 	return ret0, ret1
 }
 
-// ListTicketComments indicates an expected call of ListTicketComments
+// ListTicketComments indicates an expected call of ListTicketComments.
 func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1)
 }
 
-// Post mocks base method
+// Post mocks base method.
 func (m *Client) Post(arg0 context.Context, arg1 string, arg2 interface{}) ([]byte, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Post", arg0, arg1, arg2)
@@ -1161,13 +1190,13 @@ func (m *Client) Post(arg0 context.Context, arg1 string, arg2 interface{}) ([]by
 	return ret0, ret1
 }
 
-// Post indicates an expected call of Post
+// Post indicates an expected call of Post.
 func (mr *ClientMockRecorder) Post(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Post", reflect.TypeOf((*Client)(nil).Post), arg0, arg1, arg2)
 }
 
-// Search mocks base method
+// Search mocks base method.
 func (m *Client) Search(arg0 context.Context, arg1 *zendesk.SearchOptions) (zendesk.SearchResults, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Search", arg0, arg1)
@@ -1177,13 +1206,13 @@ func (m *Client) Search(arg0 context.Context, arg1 *zendesk.SearchOptions) (zend
 	return ret0, ret1, ret2
 }
 
-// Search indicates an expected call of Search
+// Search indicates an expected call of Search.
 func (mr *ClientMockRecorder) Search(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Search", reflect.TypeOf((*Client)(nil).Search), arg0, arg1)
 }
 
-// SearchCount mocks base method
+// SearchCount mocks base method.
 func (m *Client) SearchCount(arg0 context.Context, arg1 *zendesk.CountOptions) (int, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchCount", arg0, arg1)
@@ -1192,13 +1221,13 @@ func (m *Client) SearchCount(arg0 context.Context, arg1 *zendesk.CountOptions) (
 	return ret0, ret1
 }
 
-// SearchCount indicates an expected call of SearchCount
+// SearchCount indicates an expected call of SearchCount.
 func (mr *ClientMockRecorder) SearchCount(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchCount", reflect.TypeOf((*Client)(nil).SearchCount), arg0, arg1)
 }
 
-// UpdateAutomation mocks base method
+// UpdateAutomation mocks base method.
 func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateAutomation", arg0, arg1, arg2)
@@ -1207,13 +1236,13 @@ func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk
 	return ret0, ret1
 }
 
-// UpdateAutomation indicates an expected call of UpdateAutomation
+// UpdateAutomation indicates an expected call of UpdateAutomation.
 func (mr *ClientMockRecorder) UpdateAutomation(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAutomation", reflect.TypeOf((*Client)(nil).UpdateAutomation), arg0, arg1, arg2)
 }
 
-// UpdateBrand mocks base method
+// UpdateBrand mocks base method.
 func (m *Client) UpdateBrand(arg0 context.Context, arg1 int64, arg2 zendesk.Brand) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateBrand", arg0, arg1, arg2)
@@ -1222,13 +1251,28 @@ func (m *Client) UpdateBrand(arg0 context.Context, arg1 int64, arg2 zendesk.Bran
 	return ret0, ret1
 }
 
-// UpdateBrand indicates an expected call of UpdateBrand
+// UpdateBrand indicates an expected call of UpdateBrand.
 func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBrand", reflect.TypeOf((*Client)(nil).UpdateBrand), arg0, arg1, arg2)
 }
 
-// UpdateGroup mocks base method
+// UpdateDynamicContentItem mocks base method.
+func (m *Client) UpdateDynamicContentItem(arg0 context.Context, arg1 int64, arg2 zendesk.DynamicContentItem) (zendesk.DynamicContentItem, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateDynamicContentItem", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateDynamicContentItem indicates an expected call of UpdateDynamicContentItem.
+func (mr *ClientMockRecorder) UpdateDynamicContentItem(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateDynamicContentItem", reflect.TypeOf((*Client)(nil).UpdateDynamicContentItem), arg0, arg1, arg2)
+}
+
+// UpdateGroup mocks base method.
 func (m *Client) UpdateGroup(arg0 context.Context, arg1 int64, arg2 zendesk.Group) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateGroup", arg0, arg1, arg2)
@@ -1237,13 +1281,13 @@ func (m *Client) UpdateGroup(arg0 context.Context, arg1 int64, arg2 zendesk.Grou
 	return ret0, ret1
 }
 
-// UpdateGroup indicates an expected call of UpdateGroup
+// UpdateGroup indicates an expected call of UpdateGroup.
 func (mr *ClientMockRecorder) UpdateGroup(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGroup", reflect.TypeOf((*Client)(nil).UpdateGroup), arg0, arg1, arg2)
 }
 
-// UpdateMacro mocks base method
+// UpdateMacro mocks base method.
 func (m *Client) UpdateMacro(arg0 context.Context, arg1 int64, arg2 zendesk.Macro) (zendesk.Macro, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateMacro", arg0, arg1, arg2)
@@ -1252,13 +1296,13 @@ func (m *Client) UpdateMacro(arg0 context.Context, arg1 int64, arg2 zendesk.Macr
 	return ret0, ret1
 }
 
-// UpdateMacro indicates an expected call of UpdateMacro
+// UpdateMacro indicates an expected call of UpdateMacro.
 func (mr *ClientMockRecorder) UpdateMacro(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMacro", reflect.TypeOf((*Client)(nil).UpdateMacro), arg0, arg1, arg2)
 }
 
-// UpdateOrganization mocks base method
+// UpdateOrganization mocks base method.
 func (m *Client) UpdateOrganization(arg0 context.Context, arg1 int64, arg2 zendesk.Organization) (zendesk.Organization, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateOrganization", arg0, arg1, arg2)
@@ -1267,13 +1311,13 @@ func (m *Client) UpdateOrganization(arg0 context.Context, arg1 int64, arg2 zende
 	return ret0, ret1
 }
 
-// UpdateOrganization indicates an expected call of UpdateOrganization
+// UpdateOrganization indicates an expected call of UpdateOrganization.
 func (mr *ClientMockRecorder) UpdateOrganization(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrganization", reflect.TypeOf((*Client)(nil).UpdateOrganization), arg0, arg1, arg2)
 }
 
-// UpdateSLAPolicy mocks base method
+// UpdateSLAPolicy mocks base method.
 func (m *Client) UpdateSLAPolicy(arg0 context.Context, arg1 int64, arg2 zendesk.SLAPolicy) (zendesk.SLAPolicy, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateSLAPolicy", arg0, arg1, arg2)
@@ -1282,13 +1326,13 @@ func (m *Client) UpdateSLAPolicy(arg0 context.Context, arg1 int64, arg2 zendesk.
 	return ret0, ret1
 }
 
-// UpdateSLAPolicy indicates an expected call of UpdateSLAPolicy
+// UpdateSLAPolicy indicates an expected call of UpdateSLAPolicy.
 func (mr *ClientMockRecorder) UpdateSLAPolicy(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSLAPolicy", reflect.TypeOf((*Client)(nil).UpdateSLAPolicy), arg0, arg1, arg2)
 }
 
-// UpdateTarget mocks base method
+// UpdateTarget mocks base method.
 func (m *Client) UpdateTarget(arg0 context.Context, arg1 int64, arg2 zendesk.Target) (zendesk.Target, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTarget", arg0, arg1, arg2)
@@ -1297,13 +1341,13 @@ func (m *Client) UpdateTarget(arg0 context.Context, arg1 int64, arg2 zendesk.Tar
 	return ret0, ret1
 }
 
-// UpdateTarget indicates an expected call of UpdateTarget
+// UpdateTarget indicates an expected call of UpdateTarget.
 func (mr *ClientMockRecorder) UpdateTarget(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTarget", reflect.TypeOf((*Client)(nil).UpdateTarget), arg0, arg1, arg2)
 }
 
-// UpdateTicket mocks base method
+// UpdateTicket mocks base method.
 func (m *Client) UpdateTicket(arg0 context.Context, arg1 int64, arg2 zendesk.Ticket) (zendesk.Ticket, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTicket", arg0, arg1, arg2)
@@ -1312,13 +1356,13 @@ func (m *Client) UpdateTicket(arg0 context.Context, arg1 int64, arg2 zendesk.Tic
 	return ret0, ret1
 }
 
-// UpdateTicket indicates an expected call of UpdateTicket
+// UpdateTicket indicates an expected call of UpdateTicket.
 func (mr *ClientMockRecorder) UpdateTicket(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicket", reflect.TypeOf((*Client)(nil).UpdateTicket), arg0, arg1, arg2)
 }
 
-// UpdateTicketField mocks base method
+// UpdateTicketField mocks base method.
 func (m *Client) UpdateTicketField(arg0 context.Context, arg1 int64, arg2 zendesk.TicketField) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTicketField", arg0, arg1, arg2)
@@ -1327,13 +1371,13 @@ func (m *Client) UpdateTicketField(arg0 context.Context, arg1 int64, arg2 zendes
 	return ret0, ret1
 }
 
-// UpdateTicketField indicates an expected call of UpdateTicketField
+// UpdateTicketField indicates an expected call of UpdateTicketField.
 func (mr *ClientMockRecorder) UpdateTicketField(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketField", reflect.TypeOf((*Client)(nil).UpdateTicketField), arg0, arg1, arg2)
 }
 
-// UpdateTicketForm mocks base method
+// UpdateTicketForm mocks base method.
 func (m *Client) UpdateTicketForm(arg0 context.Context, arg1 int64, arg2 zendesk.TicketForm) (zendesk.TicketForm, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTicketForm", arg0, arg1, arg2)
@@ -1342,13 +1386,13 @@ func (m *Client) UpdateTicketForm(arg0 context.Context, arg1 int64, arg2 zendesk
 	return ret0, ret1
 }
 
-// UpdateTicketForm indicates an expected call of UpdateTicketForm
+// UpdateTicketForm indicates an expected call of UpdateTicketForm.
 func (mr *ClientMockRecorder) UpdateTicketForm(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTicketForm", reflect.TypeOf((*Client)(nil).UpdateTicketForm), arg0, arg1, arg2)
 }
 
-// UpdateTrigger mocks base method
+// UpdateTrigger mocks base method.
 func (m *Client) UpdateTrigger(arg0 context.Context, arg1 int64, arg2 zendesk.Trigger) (zendesk.Trigger, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTrigger", arg0, arg1, arg2)
@@ -1357,13 +1401,13 @@ func (m *Client) UpdateTrigger(arg0 context.Context, arg1 int64, arg2 zendesk.Tr
 	return ret0, ret1
 }
 
-// UpdateTrigger indicates an expected call of UpdateTrigger
+// UpdateTrigger indicates an expected call of UpdateTrigger.
 func (mr *ClientMockRecorder) UpdateTrigger(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTrigger", reflect.TypeOf((*Client)(nil).UpdateTrigger), arg0, arg1, arg2)
 }
 
-// UpdateUser mocks base method
+// UpdateUser mocks base method.
 func (m *Client) UpdateUser(arg0 context.Context, arg1 int64, arg2 zendesk.User) (zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateUser", arg0, arg1, arg2)
@@ -1372,13 +1416,13 @@ func (m *Client) UpdateUser(arg0 context.Context, arg1 int64, arg2 zendesk.User)
 	return ret0, ret1
 }
 
-// UpdateUser indicates an expected call of UpdateUser
+// UpdateUser indicates an expected call of UpdateUser.
 func (mr *ClientMockRecorder) UpdateUser(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser", reflect.TypeOf((*Client)(nil).UpdateUser), arg0, arg1, arg2)
 }
 
-// UploadAttachment mocks base method
+// UploadAttachment mocks base method.
 func (m *Client) UploadAttachment(arg0 context.Context, arg1, arg2 string) zendesk.UploadWriter {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UploadAttachment", arg0, arg1, arg2)
@@ -1386,7 +1430,7 @@ func (m *Client) UploadAttachment(arg0 context.Context, arg1, arg2 string) zende
 	return ret0
 }
 
-// UploadAttachment indicates an expected call of UploadAttachment
+// UploadAttachment indicates an expected call of UploadAttachment.
 func (mr *ClientMockRecorder) UploadAttachment(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UploadAttachment", reflect.TypeOf((*Client)(nil).UploadAttachment), arg0, arg1, arg2)
