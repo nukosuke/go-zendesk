@@ -98,7 +98,7 @@ type Ticket struct {
 
 	// Comment is POST only and required
 	Comment *TicketComment `json:"comment,omitempty"`
-	
+
 	// Requester is POST only and can be used to create a ticket for a nonexistent requester
 	Requester *Requester `json:"requester,omitempty"`
 
