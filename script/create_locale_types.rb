@@ -10,7 +10,7 @@ require 'uri'
 require 'net/http'
 require 'erb'
 
-uri = URI.parse('https://terraform-provider-zendesk.zendesk.com/api/v2/locales/public.json')
+uri = URI.parse('https://d3v-terraform-provider.zendesk.com/api/v2/locales/public.json')
 req = Net::HTTP::Get.new(uri)
 res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
   http.request(req)
