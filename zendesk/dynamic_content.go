@@ -76,7 +76,7 @@ func (z *Client) CreateDynamicContentItem(ctx context.Context, item DynamicConte
 	}
 	data.Item = item
 
-	body, err := z.post(ctx, "/groups.json", data)
+	body, err := z.post(ctx, "/dynamic_content/items.json", data)
 	if err != nil {
 		return DynamicContentItem{}, err
 	}
