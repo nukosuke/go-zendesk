@@ -180,7 +180,8 @@ func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
+	// NOTE: some webhook mutation APIs return status No Content.
+	if !(resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusNoContent) {
 		return nil, Error{
 			body: body,
 			resp: resp,

@@ -1467,12 +1467,11 @@ func (mr *ClientMockRecorder) UpdateUser(arg0, arg1, arg2 interface{}) *gomock.C
 }
 
 // UpdateWebhook mocks base method.
-func (m *Client) UpdateWebhook(arg0 context.Context, arg1 string, arg2 *zendesk.Webhook) (*zendesk.Webhook, error) {
+func (m *Client) UpdateWebhook(arg0 context.Context, arg1 string, arg2 *zendesk.Webhook) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWebhook", arg0, arg1, arg2)
-	ret0, _ := ret[0].(*zendesk.Webhook)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // UpdateWebhook indicates an expected call of UpdateWebhook.
