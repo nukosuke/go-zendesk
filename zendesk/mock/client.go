@@ -305,6 +305,21 @@ func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0, arg1)
 }
 
+// CreateWebhook mocks base method.
+func (m *Client) CreateWebhook(arg0 context.Context, arg1 *zendesk.Webhook) (*zendesk.Webhook, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateWebhook", arg0, arg1)
+	ret0, _ := ret[0].(*zendesk.Webhook)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateWebhook indicates an expected call of CreateWebhook.
+func (mr *ClientMockRecorder) CreateWebhook(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWebhook", reflect.TypeOf((*Client)(nil).CreateWebhook), arg0, arg1)
+}
+
 // DeleteAutomation mocks base method.
 func (m *Client) DeleteAutomation(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
@@ -485,6 +500,20 @@ func (m *Client) DeleteUpload(arg0 context.Context, arg1 string) error {
 func (mr *ClientMockRecorder) DeleteUpload(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUpload", reflect.TypeOf((*Client)(nil).DeleteUpload), arg0, arg1)
+}
+
+// DeleteWebhook mocks base method.
+func (m *Client) DeleteWebhook(arg0 context.Context, arg1 string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteWebhook", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteWebhook indicates an expected call of DeleteWebhook.
+func (mr *ClientMockRecorder) DeleteWebhook(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteWebhook", reflect.TypeOf((*Client)(nil).DeleteWebhook), arg0, arg1)
 }
 
 // Get mocks base method.
@@ -1166,6 +1195,21 @@ func (mr *ClientMockRecorder) GetViews(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViews", reflect.TypeOf((*Client)(nil).GetViews), arg0)
 }
 
+// GetWebhook mocks base method.
+func (m *Client) GetWebhook(arg0 context.Context, arg1 string) (*zendesk.Webhook, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWebhook", arg0, arg1)
+	ret0, _ := ret[0].(*zendesk.Webhook)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWebhook indicates an expected call of GetWebhook.
+func (mr *ClientMockRecorder) GetWebhook(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWebhook", reflect.TypeOf((*Client)(nil).GetWebhook), arg0, arg1)
+}
+
 // ListTicketComments mocks base method.
 func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
@@ -1420,6 +1464,20 @@ func (m *Client) UpdateUser(arg0 context.Context, arg1 int64, arg2 zendesk.User)
 func (mr *ClientMockRecorder) UpdateUser(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser", reflect.TypeOf((*Client)(nil).UpdateUser), arg0, arg1, arg2)
+}
+
+// UpdateWebhook mocks base method.
+func (m *Client) UpdateWebhook(arg0 context.Context, arg1 string, arg2 *zendesk.Webhook) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateWebhook", arg0, arg1, arg2)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateWebhook indicates an expected call of UpdateWebhook.
+func (mr *ClientMockRecorder) UpdateWebhook(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWebhook", reflect.TypeOf((*Client)(nil).UpdateWebhook), arg0, arg1, arg2)
 }
 
 // UploadAttachment mocks base method.

@@ -15,21 +15,22 @@ type API interface {
 	GroupMembershipAPI
 	LocaleAPI
 	MacroAPI
+	OrganizationAPI
+	OrganizationMembershipAPI
+	SearchAPI
+	SLAPolicyAPI
+	TargetAPI
+	TagAPI
+	TicketAuditAPI
 	TicketAPI
+	TicketCommentAPI
 	TicketFieldAPI
 	TicketFormAPI
 	TriggerAPI
-	TargetAPI
 	UserAPI
 	UserFieldAPI
-	OrganizationAPI
-	SearchAPI
-	SLAPolicyAPI
-	TagAPI
-	TicketAuditAPI
-	TicketCommentAPI
 	ViewAPI
-	OrganizationMembershipAPI
+	WebhookAPI
 }
 
 var _ API = (*Client)(nil)
