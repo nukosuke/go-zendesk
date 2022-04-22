@@ -156,10 +156,10 @@ func (mr *ClientMockRecorder) CreateMacro(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // CreateOrUpdateUser mocks base method.
-func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
+func (m *Client) CreateOrUpdateUser(arg0 context.Context, arg1 *zendesk.User) (*zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateOrUpdateUser", arg0, arg1)
-	ret0, _ := ret[0].(zendesk.User)
+	ret0, _ := ret[0].(*zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -291,10 +291,10 @@ func (mr *ClientMockRecorder) CreateTrigger(arg0, arg1 interface{}) *gomock.Call
 }
 
 // CreateUser mocks base method.
-func (m *Client) CreateUser(arg0 context.Context, arg1 zendesk.User) (zendesk.User, error) {
+func (m *Client) CreateUser(arg0 context.Context, arg1 *zendesk.User) (*zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateUser", arg0, arg1)
-	ret0, _ := ret[0].(zendesk.User)
+	ret0, _ := ret[0].(*zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -1088,10 +1088,10 @@ func (mr *ClientMockRecorder) GetTriggers(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // GetUser mocks base method.
-func (m *Client) GetUser(arg0 context.Context, arg1 int64) (zendesk.User, error) {
+func (m *Client) GetUser(arg0 context.Context, arg1 int64) (*zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUser", arg0, arg1)
-	ret0, _ := ret[0].(zendesk.User)
+	ret0, _ := ret[0].(*zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -1119,10 +1119,10 @@ func (mr *ClientMockRecorder) GetUserFields(arg0, arg1 interface{}) *gomock.Call
 }
 
 // GetUserRelated mocks base method.
-func (m *Client) GetUserRelated(arg0 context.Context, arg1 int64) (zendesk.UserRelated, error) {
+func (m *Client) GetUserRelated(arg0 context.Context, arg1 int64) (*zendesk.UserRelated, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserRelated", arg0, arg1)
-	ret0, _ := ret[0].(zendesk.UserRelated)
+	ret0, _ := ret[0].(*zendesk.UserRelated)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -1452,10 +1452,10 @@ func (mr *ClientMockRecorder) UpdateTrigger(arg0, arg1, arg2 interface{}) *gomoc
 }
 
 // UpdateUser mocks base method.
-func (m *Client) UpdateUser(arg0 context.Context, arg1 int64, arg2 zendesk.User) (zendesk.User, error) {
+func (m *Client) UpdateUser(arg0 context.Context, arg1 int64, arg2 *zendesk.User) (*zendesk.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateUser", arg0, arg1, arg2)
-	ret0, _ := ret[0].(zendesk.User)
+	ret0, _ := ret[0].(*zendesk.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

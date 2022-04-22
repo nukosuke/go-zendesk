@@ -10,8 +10,9 @@ import (
 // UserFields is a dictionary of custom user related fields
 type UserFields map[string]interface{}
 
-// User is zendesk user JSON payload format
-// https://developer.zendesk.com/rest_api/docs/support/users
+// User is zendesk user JSON payload format.
+//
+// https://developer.zendesk.com/api-reference/ticketing/users/users/
 type User struct {
 	ID                   int64      `json:"id,omitempty"`
 	URL                  string     `json:"url,omitempty"`
@@ -105,11 +106,11 @@ type UserRelated struct {
 type UserAPI interface {
 	GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([]User, Page, error)
 	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
-	GetUser(ctx context.Context, userID int64) (User, error)
-	CreateUser(ctx context.Context, user User) (User, error)
-	CreateOrUpdateUser(ctx context.Context, user User) (User, error)
-	UpdateUser(ctx context.Context, userID int64, user User) (User, error)
-	GetUserRelated(ctx context.Context, userID int64) (UserRelated, error)
+	GetUser(ctx context.Context, userID int64) (*User, error)
+	CreateUser(ctx context.Context, user *User) (*User, error)
+	CreateOrUpdateUser(ctx context.Context, user *User) (*User, error)
+	UpdateUser(ctx context.Context, userID int64, user *User) (*User, error)
+	GetUserRelated(ctx context.Context, userID int64) (*UserRelated, error)
 }
 
 // GetUsers fetch user list
@@ -177,40 +178,40 @@ func (z *Client) GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([
 
 // CreateUser creates new user
 // ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#create-user
-func (z *Client) CreateUser(ctx context.Context, user User) (User, error) {
+func (z *Client) CreateUser(ctx context.Context, user *User) (*User, error) {
 	var data, result struct {
-		User User `json:"user"`
+		User *User `json:"user"`
 	}
 	data.User = user
 
 	body, err := z.post(ctx, "/users.json", data)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 	return result.User, nil
 }
 
 // CreateOrUpdateUser creates new user or updates a matching user
 // ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#create-or-update-user
-func (z *Client) CreateOrUpdateUser(ctx context.Context, user User) (User, error) {
+func (z *Client) CreateOrUpdateUser(ctx context.Context, user *User) (*User, error) {
 	var data, result struct {
-		User User `json:"user"`
+		User *User `json:"user"`
 	}
 	data.User = user
 
 	body, err := z.post(ctx, "/users/create_or_update.json", data)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 	return result.User, nil
 }
@@ -219,57 +220,57 @@ func (z *Client) CreateOrUpdateUser(ctx context.Context, user User) (User, error
 
 // GetUser get an existing user
 // ref: https://developer.zendesk.com/rest_api/docs/support/users#show-user
-func (z *Client) GetUser(ctx context.Context, userID int64) (User, error) {
+func (z *Client) GetUser(ctx context.Context, userID int64) (*User, error) {
 	var result struct {
-		User User `json:"user"`
+		User *User `json:"user"`
 	}
 
 	body, err := z.get(ctx, fmt.Sprintf("/users/%d.json", userID))
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 	return result.User, nil
 }
 
 // UpdateUser update an existing user
 // ref: https://developer.zendesk.com/rest_api/docs/support/users#update-user
-func (z *Client) UpdateUser(ctx context.Context, userID int64, user User) (User, error) {
+func (z *Client) UpdateUser(ctx context.Context, userID int64, user *User) (*User, error) {
 	var data, result struct {
-		User User `json:"user"`
+		User *User `json:"user"`
 	}
 	data.User = user
 
 	body, err := z.put(ctx, fmt.Sprintf("/users/%d.json", userID), data)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return User{}, err
+		return nil, err
 	}
 	return result.User, nil
 }
 
 // GetUserRelated retrieves user related user information
 // ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#show-user-related-information
-func (z *Client) GetUserRelated(ctx context.Context, userID int64) (UserRelated, error) {
+func (z *Client) GetUserRelated(ctx context.Context, userID int64) (*UserRelated, error) {
 	var data struct {
-		UserRelated UserRelated `json:"user_related"`
+		UserRelated *UserRelated `json:"user_related"`
 	}
 
 	body, err := z.get(ctx, fmt.Sprintf("/users/%d/related.json", userID))
 	if err != nil {
-		return UserRelated{}, err
+		return nil, err
 	}
 
 	if err := json.Unmarshal(body, &data); err != nil {
-		return UserRelated{}, err
+		return nil, err
 	}
 
 	return data.UserRelated, nil
