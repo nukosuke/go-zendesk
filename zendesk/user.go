@@ -110,6 +110,7 @@ type UserAPI interface {
 	CreateUser(ctx context.Context, user *User) (*User, error)
 	CreateOrUpdateUser(ctx context.Context, user *User) (*User, error)
 	UpdateUser(ctx context.Context, userID int64, user *User) (*User, error)
+	DeleteUser(ctx context.Context, userID int64) error
 	GetUserRelated(ctx context.Context, userID int64) (*UserRelated, error)
 }
 
@@ -255,6 +256,18 @@ func (z *Client) UpdateUser(ctx context.Context, userID int64, user *User) (*Use
 		return nil, err
 	}
 	return result.User, nil
+}
+
+// DeleteUser deletes an existing user.
+//
+// https://developer.zendesk.com/api-reference/ticketing/users/users/#delete-user
+func (z *Client) DeleteUser(ctx context.Context, userID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/users/%d.json", userID))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // GetUserRelated retrieves user related user information
