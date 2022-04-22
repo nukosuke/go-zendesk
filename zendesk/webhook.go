@@ -45,9 +45,9 @@ type WebhookAPI interface {
 	DeleteWebhook(ctx context.Context, webhookID string) error
 }
 
-// GetWebhook gets a specified webhook.
+// CreateWebhook creates new webhook.
 //
-// https://developer.zendesk.com/api-reference/event-connectors/webhooks/webhooks/#show-webhook
+// https://developer.zendesk.com/api-reference/event-connectors/webhooks/webhooks/#create-or-clone-webhook
 func (z *Client) CreateWebhook(ctx context.Context, hook *Webhook) (*Webhook, error) {
 	var data, result struct {
 		Webhook *Webhook `json:"webhook"`
@@ -66,6 +66,9 @@ func (z *Client) CreateWebhook(ctx context.Context, hook *Webhook) (*Webhook, er
 	return result.Webhook, nil
 }
 
+// GetWebhook gets a specified webhook.
+//
+// https://developer.zendesk.com/api-reference/event-connectors/webhooks/webhooks/#show-webhook
 func (z *Client) GetWebhook(ctx context.Context, webhookID string) (*Webhook, error) {
 	var result struct {
 		Webhook *Webhook `json:"webhook"`
