@@ -140,3 +140,77 @@ func (z *Client) DeleteDynamicContentItem(ctx context.Context, id int64) error {
 
 	return nil
 }
+
+// CreateDynamicContentItemVariant creates the specified dynamic content item variant.
+//
+// https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content_item_variants/#create-variant
+func (z *Client) CreateDynamicContentItemVariant(ctx context.Context, itemID int64, variant *DynamicContentVariant) (*DynamicContentVariant, error) {
+	var data, result struct {
+		Variant *DynamicContentVariant `json:"variant"`
+	}
+	data.Variant = variant
+
+	body, err := z.post(ctx, "/dynamic_content/items/%d/variants.json", data)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Variant, nil
+}
+
+// GetDynamicContentItem returns the specified dynamic content item variant.
+//
+// https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content_item_variants/#show-variant
+func (z *Client) GetDynamicContentItemVariant(ctx context.Context, itemID int64, variantID int64) (*DynamicContentVariant, error) {
+	var result struct {
+		Variant *DynamicContentVariant `json:"variant"`
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/dynamic_content/items/%d/variants/%d.json", itemID, variantID))
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+
+	return result.Variant, nil
+}
+
+// UpdateDynamicContentItemVariant updates the specified dynamic content item variant and returns the updated one
+//
+// https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content_item_variants/#update-variant
+func (z *Client) UpdateDynamicContentItemVariant(ctx context.Context, itemID int64, variantID int64, variant *DynamicContentVariant) (*DynamicContentVariant, error) {
+	var data, result struct {
+		Variant *DynamicContentVariant `json:"variant"`
+	}
+	data.Variant = variant
+
+	body, err := z.put(ctx, fmt.Sprintf("/dynamic_content/items/%d/variants/%d.json", itemID, variantID), data)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+
+	return result.Variant, nil
+}
+
+// DeleteDynamicContentItemVariant deletes the specified dynamic content item variant.
+//
+// https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content_item_variants/#delete-variant
+func (z *Client) DeleteDynamicContentItemVariant(ctx context.Context, itemID int64, variantID int64) error {
+	err := z.delete(ctx, fmt.Sprintf("/dynamic_content/items/%d/variants/%d.json", itemID, variantID))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
