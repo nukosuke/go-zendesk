@@ -103,7 +103,7 @@ func TestCreateUser(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	user, err := client.CreateUser(ctx, User{
+	user, err := client.CreateUser(ctx, &User{
 		Email: "test@example.com",
 		Name:  "testuser",
 	})
@@ -120,7 +120,7 @@ func TestCreateOrUpdateUserCreated(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	user, err := client.CreateOrUpdateUser(ctx, User{
+	user, err := client.CreateOrUpdateUser(ctx, &User{
 		Email: "test@example.com",
 		Name:  "testuser",
 	})
@@ -137,7 +137,7 @@ func TestCreateOrUpdateUserUpdated(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	user, err := client.CreateOrUpdateUser(ctx, User{
+	user, err := client.CreateOrUpdateUser(ctx, &User{
 		Email: "test@example.com",
 		Name:  "testuser",
 	})
@@ -155,7 +155,7 @@ func TestCreateOrUpdateUserFailure(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.CreateOrUpdateUser(ctx, User{})
+	_, err := client.CreateOrUpdateUser(ctx, &User{})
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
 	}
@@ -166,7 +166,7 @@ func TestUpdateUser(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	user, err := client.UpdateUser(ctx, 369531345753, User{})
+	user, err := client.UpdateUser(ctx, 369531345753, &User{})
 	if err != nil {
 		t.Fatalf("Failed to update user: %s", err)
 	}
@@ -182,9 +182,20 @@ func TestUpdateUserFailure(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	_, err := client.UpdateUser(ctx, 369531345753, User{})
+	_, err := client.UpdateUser(ctx, 369531345753, &User{})
 	if err == nil {
 		t.Fatal("Client did not return error when api failed")
+	}
+}
+
+func TestDeleteUser(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodDelete, "users.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	err := client.DeleteUser(ctx, 1234)
+	if err != nil {
+		t.Fatalf("Failed to delete user: %s", err)
 	}
 }
 

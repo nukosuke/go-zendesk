@@ -211,14 +211,15 @@ func (z *Client) delete(ctx context.Context, path string) error {
 		return err
 	}
 
-	if resp.StatusCode != http.StatusNoContent {
+	switch {
+	case http.StatusOK <= resp.StatusCode && resp.StatusCode < http.StatusBadRequest:
+		return nil
+	default:
 		return Error{
 			body: body,
 			resp: resp,
 		}
 	}
-
-	return nil
 }
 
 // prepare request sets common request variables such as authn and user agent
