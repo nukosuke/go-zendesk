@@ -320,6 +320,20 @@ func (mr *ClientMockRecorder) CreateWebhook(arg0, arg1 interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWebhook", reflect.TypeOf((*Client)(nil).CreateWebhook), arg0, arg1)
 }
 
+// Delete mocks base method.
+func (m *Client) Delete(arg0 context.Context, arg1 string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Delete", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Delete indicates an expected call of Delete.
+func (mr *ClientMockRecorder) Delete(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*Client)(nil).Delete), arg0, arg1)
+}
+
 // DeleteAutomation mocks base method.
 func (m *Client) DeleteAutomation(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
@@ -1238,6 +1252,21 @@ func (m *Client) Post(arg0 context.Context, arg1 string, arg2 interface{}) ([]by
 func (mr *ClientMockRecorder) Post(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Post", reflect.TypeOf((*Client)(nil).Post), arg0, arg1, arg2)
+}
+
+// Put mocks base method.
+func (m *Client) Put(arg0 context.Context, arg1 string, arg2 interface{}) ([]byte, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Put", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]byte)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Put indicates an expected call of Put.
+func (mr *ClientMockRecorder) Put(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Put", reflect.TypeOf((*Client)(nil).Put), arg0, arg1, arg2)
 }
 
 // Search mocks base method.

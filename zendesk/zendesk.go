@@ -37,6 +37,8 @@ type (
 	BaseAPI interface {
 		Get(ctx context.Context, path string) ([]byte, error)
 		Post(ctx context.Context, path string, data interface{}) ([]byte, error)
+		Put(ctx context.Context, path string, data interface{}) ([]byte, error)
+		Delete(ctx context.Context, path string) error
 	}
 )
 
@@ -263,4 +265,14 @@ func (z *Client) Get(ctx context.Context, path string) ([]byte, error) {
 // Post allows users to send requests not yet implemented
 func (z *Client) Post(ctx context.Context, path string, data interface{}) ([]byte, error) {
 	return z.post(ctx, path, data)
+}
+
+// Put allows users to send requests not yet implemented
+func (z *Client) Put(ctx context.Context, path string, data interface{}) ([]byte, error) {
+	return z.put(ctx, path, data)
+}
+
+// Delete allows users to send requests not yet implemented
+func (z *Client) Delete(ctx context.Context, path string) error {
+	return z.delete(ctx, path)
 }
