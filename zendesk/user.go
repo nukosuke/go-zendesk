@@ -101,8 +101,17 @@ type UserRelated struct {
 	OrganizationSubscriptions int64 `json:"organization_subscriptions"`
 }
 
+// SearchUsersOptions is options for SearchUsers
+//
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#search-users
+type SearchUsersOptions struct {
+	ExternalIDs string `json:"external_ids,omitempty" url:"external_ids,omitempty"`
+	Query       string `json:"query,omitempty" url:"query,omitempty"`
+}
+
 // UserAPI an interface containing all user related methods
 type UserAPI interface {
+	SearchUsers(ctx context.Context, opts *SearchUsersOptions) ([]User, Page, error)
 	GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([]User, Page, error)
 	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
 	GetUser(ctx context.Context, userID int64) (User, error)
@@ -113,6 +122,7 @@ type UserAPI interface {
 }
 
 // GetUsers fetch user list
+// https://developer.zendesk.com/api-reference/ticketing/users/users/#list-users
 func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error) {
 	var data struct {
 		Users []User `json:"users"`
@@ -125,6 +135,38 @@ func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, P
 	}
 
 	u, err := addOptions("/users.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, Page{}, err
+	}
+	return data.Users, data.Page, nil
+}
+
+// SearchUsers: Returns an array of users who meet the search criteria.
+// https://developer.zendesk.com/api-reference/ticketing/users/users/#search-users
+func (z *Client) SearchUsers(ctx context.Context, opts *SearchUsersOptions) ([]User, Page, error) {
+	var (
+		data struct {
+			Users []User `json:"users"`
+			Page
+		}
+	)
+
+	tmp := opts
+	if tmp == nil {
+		tmp = new(SearchUsersOptions)
+	}
+
+	u, err := addOptions("/users/search.json", tmp)
 	if err != nil {
 		return nil, Page{}, err
 	}

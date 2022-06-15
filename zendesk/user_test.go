@@ -45,6 +45,21 @@ func TestGetManyUsers(t *testing.T) {
 	}
 }
 
+func TestSearchUsers(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "users.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	users, _, err := client.SearchUsers(ctx, nil)
+	if err != nil {
+		t.Fatalf("Failed to get many users: %s", err)
+	}
+
+	if len(users) != 2 {
+		t.Fatalf("expected length of many users is 2, but got %d", len(users))
+	}
+}
+
 func TestGetUser(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodGet, "user.json", http.StatusOK)
 	client := newTestClient(mockAPI)
