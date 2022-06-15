@@ -151,7 +151,7 @@ func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, P
 	return data.Users, data.Page, nil
 }
 
-// SearchUsers: Returns an array of users who meet the search criteria.
+// SearchUsers Returns an array of users who meet the search criteria.
 // https://developer.zendesk.com/api-reference/ticketing/users/users/#search-users
 func (z *Client) SearchUsers(ctx context.Context, opts *SearchUsersOptions) ([]User, Page, error) {
 	var (
