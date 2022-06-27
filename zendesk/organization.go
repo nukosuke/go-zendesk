@@ -11,7 +11,7 @@ import (
 // https://developer.zendesk.com/rest_api/docs/support/organizations
 type Organization struct {
 	ID                 int64                  `json:"id,omitempty"`
-	ExternalId         string                 `json:"external_id,omitempty"`
+	ExternalID         string                 `json:"external_id,omitempty"`
 	URL                string                 `json:"url,omitempty"`
 	Name               string                 `json:"name"`
 	Details            string                 `json:"details,omitempty"`
