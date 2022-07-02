@@ -11,13 +11,16 @@ import (
 // https://developer.zendesk.com/rest_api/docs/support/organizations
 type Organization struct {
 	ID                 int64                  `json:"id,omitempty"`
+	ExternalID         string                 `json:"external_id,omitempty"`
 	URL                string                 `json:"url,omitempty"`
 	Name               string                 `json:"name"`
+	Details            string                 `json:"details,omitempty"`
 	DomainNames        []string               `json:"domain_names"`
 	GroupID            int64                  `json:"group_id"`
 	SharedTickets      bool                   `json:"shared_tickets"`
 	SharedComments     bool                   `json:"shared_comments"`
 	Tags               []string               `json:"tags"`
+	Notes              string                 `json:"notes,omitempty"`
 	CreatedAt          time.Time              `json:"created_at,omitempty"`
 	UpdatedAt          time.Time              `json:"updated_at,omitempty"`
 	OrganizationFields map[string]interface{} `json:"organization_fields,omitempty"`
