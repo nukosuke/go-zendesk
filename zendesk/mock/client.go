@@ -700,9 +700,9 @@ func (mr *ClientMockRecorder) GetGroupMemberships(arg0, arg1 interface{}) *gomoc
 }
 
 // GetGroups mocks base method.
-func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page, error) {
+func (m *Client) GetGroups(arg0 context.Context, arg1 *zendesk.GroupListOptions) ([]zendesk.Group, zendesk.Page, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetGroups", arg0)
+	ret := m.ctrl.Call(m, "GetGroups", arg0, arg1)
 	ret0, _ := ret[0].([]zendesk.Group)
 	ret1, _ := ret[1].(zendesk.Page)
 	ret2, _ := ret[2].(error)
@@ -710,9 +710,9 @@ func (m *Client) GetGroups(arg0 context.Context) ([]zendesk.Group, zendesk.Page,
 }
 
 // GetGroups indicates an expected call of GetGroups.
-func (mr *ClientMockRecorder) GetGroups(arg0 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetGroups(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroups", reflect.TypeOf((*Client)(nil).GetGroups), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroups", reflect.TypeOf((*Client)(nil).GetGroups), arg0, arg1)
 }
 
 // GetLocales mocks base method.
