@@ -20,9 +20,16 @@ type Group struct {
 	UpdatedAt   time.Time `json:"updated_at,omitempty"`
 }
 
+// GroupListOptions is options for GetGroups
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
+type GroupListOptions struct {
+	PageOptions
+}
+
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
-	GetGroups(ctx context.Context) ([]Group, Page, error)
+	GetGroups(ctx context.Context, opts *GroupListOptions) ([]Group, Page, error)
 	GetGroup(ctx context.Context, groupID int64) (Group, error)
 	CreateGroup(ctx context.Context, group Group) (Group, error)
 	UpdateGroup(ctx context.Context, groupID int64, group Group) (Group, error)
@@ -31,13 +38,23 @@ type GroupAPI interface {
 
 // GetGroups fetches group list
 // https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
-func (z *Client) GetGroups(ctx context.Context) ([]Group, Page, error) {
+func (z *Client) GetGroups(ctx context.Context, opts *GroupListOptions) ([]Group, Page, error) {
 	var data struct {
 		Groups []Group `json:"groups"`
 		Page
 	}
 
-	body, err := z.get(ctx, "/groups.json")
+	tmp := opts
+	if tmp == nil {
+		tmp = &GroupListOptions{}
+	}
+
+	u, err := addOptions("/groups.json", tmp)
+	if err != nil {
+		return []Group{}, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
 	if err != nil {
 		return []Group{}, Page{}, err
 	}
