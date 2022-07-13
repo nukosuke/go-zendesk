@@ -11,7 +11,7 @@ func TestGetGroups(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	groups, _, err := client.GetGroups(ctx)
+	groups, _, err := client.GetGroups(ctx, nil)
 	if err != nil {
 		t.Fatalf("Failed to get groups: %s", err)
 	}
