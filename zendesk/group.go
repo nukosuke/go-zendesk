@@ -10,12 +10,14 @@ import (
 // Group is struct for group payload
 // https://developer.zendesk.com/rest_api/docs/support/groups
 type Group struct {
-	ID        int64     `json:"id,omitempty"`
-	URL       string    `json:"url,omitempty"`
-	Name      string    `json:"name"`
-	Deleted   bool      `json:"deleted,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	ID          int64     `json:"id,omitempty"`
+	URL         string    `json:"url,omitempty"`
+	Name        string    `json:"name"`
+	Default     bool      `json:"default,omitempty"`
+	Deleted     bool      `json:"deleted,omitempty"`
+	Description string    `json:"description,omitempty"`
+	CreatedAt   time.Time `json:"created_at,omitempty"`
+	UpdatedAt   time.Time `json:"updated_at,omitempty"`
 }
 
 // GroupAPI an interface containing all methods associated with zendesk groups
