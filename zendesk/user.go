@@ -33,6 +33,7 @@ type User struct {
 	OrganizationID       int64      `json:"organization_id,omitempty"`
 	Phone                string     `json:"phone,omitempty"`
 	Photo                Attachment `json:"photo,omitempty"`
+	RemotePhotoURL       string     `json:"remote_photo_url,omitempty"`
 	RestrictedAgent      bool       `json:"restricted_agent,omitempty"`
 	Role                 string     `json:"role,omitempty"`
 	RoleType             int64      `json:"role_type,omitempty"`
