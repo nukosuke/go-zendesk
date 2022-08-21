@@ -55,9 +55,8 @@ You can simulate the response from Zendesk API with it.
 
 `go generate ./...`
 
-## Authors
+## Maintainer
 - [nukosuke](https://github.com/nukosuke)
-- [tamccall](https://github.com/tamccall)
 
 ## License
 
