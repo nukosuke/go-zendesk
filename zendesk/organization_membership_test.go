@@ -21,3 +21,14 @@ func TestGetOrganizationMemberships(t *testing.T) {
 		t.Fatalf("expected length of organization memberships is %d, but got %d", expectedOrgMemberships, len(orgMemberships))
 	}
 }
+
+func TestCreateOrganizationMembership(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "organization_membership.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	_, err := client.CreateOrganizationMembership(ctx, OrganizationMembershipOptions{})
+	if err != nil {
+		t.Fatalf("Failed to send request to create organization membership: %s", err)
+	}
+}

@@ -28,9 +28,17 @@ type (
 		UserID         int64 `json:"user_id,omitempty" url:"user_id,omitempty"`
 	}
 
+	// OrganizationMembershipOptions is a struct for options for organization membership
+	// https://developer.zendesk.com/api-reference/ticketing/organizations/organization_memberships/
+	OrganizationMembershipOptions struct {
+		OrganizationID int64 `json:"organization_id,omitempty"`
+		UserID         int64 `json:"user_id,omitempty"`
+	}
+
 	// OrganizationMembershipAPI is an interface containing organization membership related methods
 	OrganizationMembershipAPI interface {
 		GetOrganizationMemberships(context.Context, *OrganizationMembershipListOptions) ([]OrganizationMembership, Page, error)
+		CreateOrganizationMembership(context.Context, OrganizationMembershipOptions) (OrganizationMembership, error)
 	}
 )
 
@@ -62,4 +70,30 @@ func (z *Client) GetOrganizationMemberships(ctx context.Context, opts *Organizat
 	}
 
 	return result.OrganizationMemberships, result.Page, nil
+}
+
+// CreateOrganizationMembership creates an organization membership for an existing user and org
+// https://developer.zendesk.com/api-reference/ticketing/organizations/organization_memberships/#create-membership
+func (z *Client) CreateOrganizationMembership(ctx context.Context, opts OrganizationMembershipOptions) (OrganizationMembership, error) {
+	var data, result struct {
+		OrganizationMembership OrganizationMembership `json:"organization_membership"`
+	}
+
+	data.OrganizationMembership = OrganizationMembership{
+		UserID:         opts.UserID,
+		OrganizationID: opts.OrganizationID,
+	}
+
+	body, err := z.post(ctx, "/organization_memberships.json", data)
+
+	if err != nil {
+		return OrganizationMembership{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return OrganizationMembership{}, err
+	}
+
+	return result.OrganizationMembership, err
 }

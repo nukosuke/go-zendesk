@@ -185,6 +185,21 @@ func (mr *ClientMockRecorder) CreateOrganization(arg0, arg1 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*Client)(nil).CreateOrganization), arg0, arg1)
 }
 
+// CreateOrganizationMembership mocks base method.
+func (m *Client) CreateOrganizationMembership(arg0 context.Context, arg1 zendesk.OrganizationMembershipOptions) (zendesk.OrganizationMembership, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrganizationMembership", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.OrganizationMembership)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrganizationMembership indicates an expected call of CreateOrganizationMembership.
+func (mr *ClientMockRecorder) CreateOrganizationMembership(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganizationMembership", reflect.TypeOf((*Client)(nil).CreateOrganizationMembership), arg0, arg1)
+}
+
 // CreateSLAPolicy mocks base method.
 func (m *Client) CreateSLAPolicy(arg0 context.Context, arg1 zendesk.SLAPolicy) (zendesk.SLAPolicy, error) {
 	m.ctrl.T.Helper()
