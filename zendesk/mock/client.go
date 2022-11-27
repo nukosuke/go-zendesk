@@ -1331,6 +1331,21 @@ func (mr *ClientMockRecorder) SearchUsers(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUsers", reflect.TypeOf((*Client)(nil).SearchUsers), arg0, arg1)
 }
 
+// SetDefaultOrganization mocks base method.
+func (m *Client) SetDefaultOrganization(arg0 context.Context, arg1 zendesk.OrganizationMembershipOptions) (zendesk.OrganizationMembership, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetDefaultOrganization", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.OrganizationMembership)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetDefaultOrganization indicates an expected call of SetDefaultOrganization.
+func (mr *ClientMockRecorder) SetDefaultOrganization(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetDefaultOrganization", reflect.TypeOf((*Client)(nil).SetDefaultOrganization), arg0, arg1)
+}
+
 // UpdateAutomation mocks base method.
 func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()

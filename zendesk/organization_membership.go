@@ -3,6 +3,7 @@ package zendesk
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -39,6 +40,7 @@ type (
 	OrganizationMembershipAPI interface {
 		GetOrganizationMemberships(context.Context, *OrganizationMembershipListOptions) ([]OrganizationMembership, Page, error)
 		CreateOrganizationMembership(context.Context, OrganizationMembershipOptions) (OrganizationMembership, error)
+		SetDefaultOrganization(context.Context, OrganizationMembershipOptions) (OrganizationMembership, error)
 	}
 )
 
@@ -96,4 +98,23 @@ func (z *Client) CreateOrganizationMembership(ctx context.Context, opts Organiza
 	}
 
 	return result.OrganizationMembership, err
+}
+
+// SetDefaultOrganization sets the default organization for a user that has a membership in that org
+// https://developer.zendesk.com/api-reference/ticketing/organizations/organization_memberships/#set-organization-as-default
+func (z *Client) SetDefaultOrganization(ctx context.Context, opts OrganizationMembershipOptions) (OrganizationMembership, error) {
+	var result struct {
+		OrganizationMembership OrganizationMembership `json:"organization_membership"`
+	}
+
+	body, err := z.put(ctx, fmt.Sprintf("/users/%d/organizations/%d/make_default.json", opts.UserID, opts.OrganizationID), nil)
+	if err != nil {
+		return OrganizationMembership{}, err
+	}
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return OrganizationMembership{}, err
+	}
+
+	return result.OrganizationMembership, nil
 }

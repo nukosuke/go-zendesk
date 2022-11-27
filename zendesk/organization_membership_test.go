@@ -32,3 +32,19 @@ func TestCreateOrganizationMembership(t *testing.T) {
 		t.Fatalf("Failed to send request to create organization membership: %s", err)
 	}
 }
+
+func TestSetDefaultOrganization(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPut, "organization_membership.json", http.StatusOK)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	orgMembership, err := client.SetDefaultOrganization(ctx, OrganizationMembershipOptions{})
+	if err != nil {
+		t.Fatalf("Failed to set the default organization for user: %s", err)
+	}
+
+	expectedDefault := true
+	if orgMembership.Default != expectedDefault {
+		t.Fatalf("Returned org membership does not have the expected default status %v. It is %v", expectedDefault, orgMembership.Default)
+	}
+}
