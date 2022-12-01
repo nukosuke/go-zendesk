@@ -1,0 +1,10 @@
+{
+  "organization_membership": {
+    "created_at": "2009-05-13T00:07:08Z",
+    "default": true,
+    "id": 4,
+    "organization_id": 361898904439,
+    "updated_at": "2011-07-22T00:11:12Z",
+    "user_id": 369531345753
+  }
+}
