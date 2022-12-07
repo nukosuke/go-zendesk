@@ -2,7 +2,7 @@ package zendesk
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -23,7 +23,7 @@ func fixture(filename string) string {
 }
 
 func readFixture(filename string) []byte {
-	bytes, err := ioutil.ReadFile(fixture(filename))
+	bytes, err := os.ReadFile(fixture(filename))
 	if err != nil {
 		fmt.Printf("Failed to read fixture. Check the path: %s", err)
 		os.Exit(1)
@@ -108,6 +108,24 @@ func TestSetCredential(t *testing.T) {
 	}
 }
 
+func TestBearerAuthCredential(t *testing.T) {
+	client, _ := NewClient(nil)
+	cred := NewBearerTokenCredential("hello")
+	client.SetCredential(cred)
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		auth := r.Header.Get("Authorization")
+		if auth != "Bearer hello" {
+			t.Fatalf("unexpected auth header: " + auth)
+		}
+	}))
+	client.SetEndpointURL(server.URL)
+	defer server.Close()
+
+	// trigger request, assert in the server code
+	_, _ = client.get(ctx, "/groups.json")
+}
+
 func TestGet(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "groups.json")
 	client := newTestClient(mockAPI)
@@ -154,7 +172,7 @@ func TestGetFailureCanReadErrorBody(t *testing.T) {
 	}
 
 	body := clientErr.Body()
-	_, err = ioutil.ReadAll(body)
+	_, err = io.ReadAll(body)
 	if err != nil {
 		t.Fatal("Client received error while reading client body")
 	}

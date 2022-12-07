@@ -228,7 +228,11 @@ func (z *Client) prepareRequest(ctx context.Context, req *http.Request) *http.Re
 	out := req.WithContext(ctx)
 	z.includeHeaders(out)
 	if z.credential != nil {
-		out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+		if z.credential.Bearer() {
+			out.Header.Add("Authorization", "Bearer "+z.credential.Secret())
+		} else {
+			out.SetBasicAuth(z.credential.Email(), z.credential.Secret())
+		}
 	}
 
 	return out
