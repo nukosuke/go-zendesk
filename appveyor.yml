@@ -6,9 +6,10 @@ environment:
   GOPATH: c:\go119
   GO111MODULE: on
 
-cache:
-  - '%LocalAppData%\go-build'
-  - '%GOPATH%\pkg\mod'
+# temporarily clearing cache to get newer version of Go
+#cache:
+#  - '%LocalAppData%\go-build'
+#  - '%GOPATH%\pkg\mod'
 
 stack: go 1.19
 
