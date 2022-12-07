@@ -65,6 +65,7 @@ func (c APITokenCredential) Bearer() bool {
 	return false
 }
 
+// BearerTokenCredential can be used to authenticate OAuth tokens issued by Zendesk.
 type BearerTokenCredential struct {
 	token string
 }
