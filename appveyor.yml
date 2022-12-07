@@ -3,7 +3,7 @@ build: off
 clone_folder: c:\github.com\nukosuke\go-zendesk
 
 environment:
-  GOPATH: c:\gopath
+  GOPATH: c:\go119
   GO111MODULE: on
 
 cache:
