@@ -3,6 +3,7 @@ package zendesk
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -23,7 +24,7 @@ func fixture(filename string) string {
 }
 
 func readFixture(filename string) []byte {
-	bytes, err := os.ReadFile(fixture(filename))
+	bytes, err := ioutil.ReadFile(fixture(filename))
 	if err != nil {
 		fmt.Printf("Failed to read fixture. Check the path: %s", err)
 		os.Exit(1)
@@ -172,7 +173,7 @@ func TestGetFailureCanReadErrorBody(t *testing.T) {
 	}
 
 	body := clientErr.Body()
-	_, err = io.ReadAll(body)
+	_, err = ioutil.ReadAll(body)
 	if err != nil {
 		t.Fatal("Client received error while reading client body")
 	}

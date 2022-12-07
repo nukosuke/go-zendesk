@@ -3,13 +3,12 @@ build: off
 clone_folder: c:\github.com\nukosuke\go-zendesk
 
 environment:
-  GOPATH: c:\go119
+  GOPATH: c:\gopath
   GO111MODULE: on
 
-# temporarily clearing cache to get newer version of Go
-#cache:
-#  - '%LocalAppData%\go-build'
-#  - '%GOPATH%\pkg\mod'
+cache:
+  - '%LocalAppData%\go-build'
+  - '%GOPATH%\pkg\mod'
 
 stack: go 1.19
 
