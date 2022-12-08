@@ -62,12 +62,12 @@ func TestMakeCommentPrivate(t *testing.T) {
 		expectedErrStr string
 	}{
 		{
-			name:           "successful delete",
+			name:           "successfully made private",
 			apiReturn:      nil,
 			expectedErrStr: "",
 		},
 		{
-			name:           "error during delete",
+			name:           "error making private",
 			apiReturn:      errors.New(`{"error":"Couldn't authenticate you"}`),
 			expectedErrStr: `401: {"error":"Couldn't authenticate you"}`,
 		},
