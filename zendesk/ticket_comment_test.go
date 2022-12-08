@@ -1,7 +1,9 @@
 package zendesk
 
 import (
+	"errors"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -49,5 +51,52 @@ func TestListTicketComments(t *testing.T) {
 	expectedLength := 2
 	if len(ticketComments) != expectedLength {
 		t.Fatalf("Returned ticket comments does not have the expected length %d. Ticket comments length is %d", expectedLength, len(ticketComments))
+	}
+}
+
+func TestMakeCommentPrivate(t *testing.T) {
+	t.Parallel()
+	tests := []struct {
+		name           string
+		apiReturn      error
+		expectedErrStr string
+	}{
+		{
+			name:           "successful delete",
+			apiReturn:      nil,
+			expectedErrStr: "",
+		},
+		{
+			name:           "error during delete",
+			apiReturn:      errors.New(`{"error":"Couldn't authenticate you"}`),
+			expectedErrStr: `401: {"error":"Couldn't authenticate you"}`,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			mockAPI := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if test.apiReturn != nil {
+					w.WriteHeader(http.StatusUnauthorized)
+					_, _ = w.Write([]byte(test.apiReturn.Error()))
+				} else {
+					w.WriteHeader(http.StatusOK)
+					_, _ = w.Write(nil)
+				}
+			}))
+			defer mockAPI.Close()
+
+			client := newTestClient(mockAPI)
+			err := client.MakeCommentPrivate(ctx, 2, 12841284)
+			if err == nil {
+				if test.expectedErrStr != "" {
+					t.Fatalf("Expected error %s, did not get one", test.expectedErrStr)
+				}
+			} else {
+				if test.expectedErrStr != err.Error() {
+					t.Fatalf("Got %s, wanted %s", err.Error(), test.expectedErrStr)
+				}
+			}
+		})
 	}
 }
