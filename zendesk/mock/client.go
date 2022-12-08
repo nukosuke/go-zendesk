@@ -1254,6 +1254,20 @@ func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1)
 }
 
+// MakeCommentPrivate mocks base method.
+func (m *Client) MakeCommentPrivate(arg0 context.Context, arg1, arg2 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MakeCommentPrivate", arg0, arg1, arg2)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// MakeCommentPrivate indicates an expected call of MakeCommentPrivate.
+func (mr *ClientMockRecorder) MakeCommentPrivate(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MakeCommentPrivate", reflect.TypeOf((*Client)(nil).MakeCommentPrivate), arg0, arg1, arg2)
+}
+
 // Post mocks base method.
 func (m *Client) Post(arg0 context.Context, arg1 string, arg2 interface{}) ([]byte, error) {
 	m.ctrl.T.Helper()

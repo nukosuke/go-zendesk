@@ -11,6 +11,7 @@ import (
 type TicketCommentAPI interface {
 	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error)
 	ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error)
+	MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error
 }
 
 // TicketComment is a struct for ticket comment payload
