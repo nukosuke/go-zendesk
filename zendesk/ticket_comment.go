@@ -11,6 +11,7 @@ import (
 type TicketCommentAPI interface {
 	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error)
 	ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error)
+	MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error
 }
 
 // TicketComment is a struct for ticket comment payload
@@ -100,4 +101,13 @@ func (z *Client) ListTicketComments(ctx context.Context, ticketID int64) ([]Tick
 	}
 
 	return result.TicketComments, err
+}
+
+// MakeCommentPrivate converts an existing ticket comment to an internal note that is not publicly viewable.
+//
+// ref: https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/#make-comment-private
+func (z *Client) MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error {
+	path := fmt.Sprintf("/tickets/%d/comments/%d/make_private", ticketID, ticketCommentID)
+	_, err := z.put(ctx, path, nil)
+	return err
 }
