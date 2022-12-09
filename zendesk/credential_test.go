@@ -11,6 +11,9 @@ func TestNewBasicAuthCredential(t *testing.T) {
 	if cred.Secret() != "password" {
 		t.Fatalf("BasicAuthCredential: secret not match")
 	}
+	if cred.Bearer() {
+		t.Fatalf("BasicAuthCredential: not a bearer token")
+	}
 }
 
 func TestNewAPITokenCredential(t *testing.T) {
@@ -21,5 +24,22 @@ func TestNewAPITokenCredential(t *testing.T) {
 	}
 	if cred.Secret() != "apitoken" {
 		t.Fatalf("APITokenCredential: secret not match")
+	}
+	if cred.Bearer() {
+		t.Fatalf("APITokenCredential: not a bearer token")
+	}
+}
+
+func TestNewBearerTokenCredential(t *testing.T) {
+	cred := NewBearerTokenCredential("apitoken")
+
+	if cred.Email() != "" {
+		t.Fatalf("BearerTokenCredential: email not match")
+	}
+	if cred.Secret() != "apitoken" {
+		t.Fatalf("BearerTokenCredential: secret not match")
+	}
+	if !cred.Bearer() {
+		t.Fatalf("BearerTokenCredential: is a bearer token")
 	}
 }

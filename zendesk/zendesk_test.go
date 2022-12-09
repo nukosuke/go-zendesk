@@ -108,6 +108,24 @@ func TestSetCredential(t *testing.T) {
 	}
 }
 
+func TestBearerAuthCredential(t *testing.T) {
+	client, _ := NewClient(nil)
+	cred := NewBearerTokenCredential("hello")
+	client.SetCredential(cred)
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		auth := r.Header.Get("Authorization")
+		if auth != "Bearer hello" {
+			t.Fatalf("unexpected auth header: " + auth)
+		}
+	}))
+	client.SetEndpointURL(server.URL)
+	defer server.Close()
+
+	// trigger request, assert in the server code
+	_, _ = client.get(ctx, "/groups.json")
+}
+
 func TestGet(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "groups.json")
 	client := newTestClient(mockAPI)
