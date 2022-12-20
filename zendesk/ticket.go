@@ -102,6 +102,11 @@ type Ticket struct {
 	// Requester is POST only and can be used to create a ticket for a nonexistent requester
 	Requester *Requester `json:"requester,omitempty"`
 
+	// safe update fields
+	// https://developer.zendesk.com/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#protecting-against-ticket-update-collisions
+	UpdatedStamp *time.Time `json:"updated_stamp,omitempty"`
+	SafeUpdate   bool       `json:"safe_update,omitempty"`
+
 	// TODO: TicketAudit (POST only) #126
 }
 
