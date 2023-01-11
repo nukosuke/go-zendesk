@@ -2,29 +2,45 @@
   "installations": [
     {
       "id": 42,
-      "owner_id": 913,
-      "name": "Mystery App",
-      "author_name": "John Doe",
-      "author_email": "john@doe.me",
-      "short_description": "Does mysterious things",
+      "app_id": 913,
+      "product": "support",
+      "settings": {
+        "name": "Mystery App",
+        "title": "Mystery App"
+      },
+      "settings_objects": [
+        {
+          "name": "setting-one",
+          "value": "value-one"
+        },
+        {
+          "name": "setting-two",
+          "value": "value-two"
+        }
+      ],
       "enabled": true,
       "created_at": "2023-01-01T01:01:01Z",
       "updated_at": "2023-01-01T01:01:01Z",
-      "version": "v1.0.1",
-      "terms_conditions_url": "https://example.com/terms"
+      "paid": false
     },
     {
-      "id": 47,
-      "owner_id": 913,
-      "name": "Mystery App 2",
-      "author_name": "Jane Doe",
-      "author_email": "jane@doe.me",
-      "short_description": "Does *more* mysterious things",
+      "id": 42,
+      "app_id": 917,
+      "product": "support",
+      "settings": {
+        "name": "Mystery App 2",
+        "title": "Mystery App 2"
+      },
+      "settings_objects": [
+        {
+          "name": "foo",
+          "value": "bar"
+        }
+      ],
       "enabled": true,
       "created_at": "2023-02-02T02:02:02Z",
       "updated_at": "2023-02-02T02:02:02Z",
-      "version": "v1.0.2",
-      "terms_conditions_url": "https://example.com/terms"
+      "paid": false
     }
   ]
 }

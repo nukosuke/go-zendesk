@@ -18,32 +18,60 @@ func TestListAppInstallations(t *testing.T) {
 		t.Fatalf("Failed to send request to list app installations: %s", err)
 	}
 
-	expected := []App{
+	expected := []AppInstallation{
 		{
-			ID:                 42,
-			OwnerID:            913,
-			Name:               "Mystery App",
-			AuthorName:         "John Doe",
-			AuthorEmail:        "john@doe.me",
-			ShortDescription:   "Does mysterious things",
-			Enabled:            true,
-			CreatedAt:          time.Date(2023, 1, 1, 1, 1, 1, 0, time.UTC),
-			UpdatedAt:          time.Date(2023, 1, 1, 1, 1, 1, 0, time.UTC),
-			Version:            "v1.0.1",
-			TermsConditionsURL: "https://example.com/terms",
+			Id:      42,
+			AppId:   913,
+			Product: "support",
+			Settings: struct {
+				Name  string `json:"name"`
+				Title string `json:"title"`
+			}{
+				Name:  "Mystery App",
+				Title: "Mystery App",
+			},
+			SettingsObjects: []struct {
+				Name  string `json:"name"`
+				Value string `json:"value"`
+			}{
+				{
+					Name:  "setting-one",
+					Value: "value-one",
+				},
+				{
+					Name:  "setting-two",
+					Value: "value-two",
+				},
+			},
+			Enabled:   true,
+			Paid:      false,
+			UpdatedAt: time.Date(2023, 1, 1, 1, 1, 1, 0, time.UTC),
+			CreatedAt: time.Date(2023, 1, 1, 1, 1, 1, 0, time.UTC),
 		},
 		{
-			ID:                 47,
-			OwnerID:            913,
-			Name:               "Mystery App 2",
-			AuthorName:         "Jane Doe",
-			AuthorEmail:        "jane@doe.me",
-			ShortDescription:   "Does *more* mysterious things",
-			Enabled:            true,
-			CreatedAt:          time.Date(2023, 2, 2, 2, 2, 2, 0, time.UTC),
-			UpdatedAt:          time.Date(2023, 2, 2, 2, 2, 2, 0, time.UTC),
-			Version:            "v1.0.2",
-			TermsConditionsURL: "https://example.com/terms",
+			Id:      42,
+			AppId:   917,
+			Product: "support",
+			Settings: struct {
+				Name  string `json:"name"`
+				Title string `json:"title"`
+			}{
+				Name:  "Mystery App 2",
+				Title: "Mystery App 2",
+			},
+			SettingsObjects: []struct {
+				Name  string `json:"name"`
+				Value string `json:"value"`
+			}{
+				{
+					Name:  "foo",
+					Value: "bar",
+				},
+			},
+			Enabled:   true,
+			Paid:      false,
+			UpdatedAt: time.Date(2023, 2, 2, 2, 2, 2, 0, time.UTC),
+			CreatedAt: time.Date(2023, 2, 2, 2, 2, 2, 0, time.UTC),
 		},
 	}
 

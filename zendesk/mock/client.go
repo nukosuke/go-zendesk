@@ -1240,10 +1240,10 @@ func (mr *ClientMockRecorder) GetWebhook(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // ListInstallations mocks base method.
-func (m *Client) ListInstallations(arg0 context.Context) ([]zendesk.App, error) {
+func (m *Client) ListInstallations(arg0 context.Context) ([]zendesk.AppInstallation, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListInstallations", arg0)
-	ret0, _ := ret[0].([]zendesk.App)
+	ret0, _ := ret[0].([]zendesk.AppInstallation)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
