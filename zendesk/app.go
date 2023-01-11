@@ -9,8 +9,8 @@ import (
 // AppInstallation is a struct representing an app that has been installed from the Zendesk Marketplace.
 // https://developer.zendesk.com/api-reference/ticketing/apps/apps/#example-responses-11
 type AppInstallation struct {
-	Id       int64  `json:"id"`
-	AppId    int64  `json:"app_id"`
+	ID       int64  `json:"id"`
+	AppID    int64  `json:"app_id"`
 	Product  string `json:"product"`
 	Settings struct {
 		Name  string `json:"name"`

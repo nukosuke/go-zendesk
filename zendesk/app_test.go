@@ -20,8 +20,8 @@ func TestListAppInstallations(t *testing.T) {
 
 	expected := []AppInstallation{
 		{
-			Id:      42,
-			AppId:   913,
+			ID:      42,
+			AppID:   913,
 			Product: "support",
 			Settings: struct {
 				Name  string `json:"name"`
@@ -49,8 +49,8 @@ func TestListAppInstallations(t *testing.T) {
 			CreatedAt: time.Date(2023, 1, 1, 1, 1, 1, 0, time.UTC),
 		},
 		{
-			Id:      42,
-			AppId:   917,
+			ID:      42,
+			AppID:   917,
 			Product: "support",
 			Settings: struct {
 				Name  string `json:"name"`
