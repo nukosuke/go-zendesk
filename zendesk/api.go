@@ -5,8 +5,9 @@ package zendesk
 
 // API an interface containing all of the zendesk client methods
 type API interface {
-	AutomationAPI
+	AppAPI
 	AttachmentAPI
+	AutomationAPI
 	BaseAPI
 	BrandAPI
 	CustomRoleAPI
@@ -19,8 +20,8 @@ type API interface {
 	OrganizationMembershipAPI
 	SearchAPI
 	SLAPolicyAPI
-	TargetAPI
 	TagAPI
+	TargetAPI
 	TicketAuditAPI
 	TicketAPI
 	TicketCommentAPI

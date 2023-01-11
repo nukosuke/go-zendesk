@@ -1,0 +1,30 @@
+{
+  "installations": [
+    {
+      "id": 42,
+      "owner_id": 913,
+      "name": "Mystery App",
+      "author_name": "John Doe",
+      "author_email": "john@doe.me",
+      "short_description": "Does mysterious things",
+      "enabled": true,
+      "created_at": "2023-01-01T01:01:01Z",
+      "updated_at": "2023-01-01T01:01:01Z",
+      "version": "v1.0.1",
+      "terms_conditions_url": "https://example.com/terms"
+    },
+    {
+      "id": 47,
+      "owner_id": 913,
+      "name": "Mystery App 2",
+      "author_name": "Jane Doe",
+      "author_email": "jane@doe.me",
+      "short_description": "Does *more* mysterious things",
+      "enabled": true,
+      "created_at": "2023-02-02T02:02:02Z",
+      "updated_at": "2023-02-02T02:02:02Z",
+      "version": "v1.0.2",
+      "terms_conditions_url": "https://example.com/terms"
+    }
+  ]
+}
