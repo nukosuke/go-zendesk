@@ -1239,6 +1239,21 @@ func (mr *ClientMockRecorder) GetWebhook(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWebhook", reflect.TypeOf((*Client)(nil).GetWebhook), arg0, arg1)
 }
 
+// ListInstallations mocks base method.
+func (m *Client) ListInstallations(arg0 context.Context) ([]zendesk.AppInstallation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListInstallations", arg0)
+	ret0, _ := ret[0].([]zendesk.AppInstallation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListInstallations indicates an expected call of ListInstallations.
+func (mr *ClientMockRecorder) ListInstallations(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListInstallations", reflect.TypeOf((*Client)(nil).ListInstallations), arg0)
+}
+
 // ListTicketComments mocks base method.
 func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
 	m.ctrl.T.Helper()
