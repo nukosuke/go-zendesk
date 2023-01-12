@@ -38,6 +38,7 @@ type Trigger struct {
 	} `json:"conditions"`
 	Actions     []TriggerAction `json:"actions"`
 	Description string          `json:"description,omitempty"`
+	CategoryID  string          `json:"category_id,omitempty"`
 	CreatedAt   *time.Time      `json:"created_at,omitempty"`
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
@@ -47,9 +48,10 @@ type Trigger struct {
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#list-triggers
 type TriggerListOptions struct {
 	PageOptions
-	Active    bool   `url:"active,omitempty"`
-	SortBy    string `url:"sort_by,omitempty"`
-	SortOrder string `url:"sort_order,omitempty"`
+	Active     bool   `url:"active,omitempty"`
+	CategoryID string `url:"category_id,omitempty"`
+	SortBy     string `url:"sort_by,omitempty"`
+	SortOrder  string `url:"sort_order,omitempty"`
 }
 
 // TriggerAPI an interface containing all trigger related methods
