@@ -38,6 +38,7 @@ type Trigger struct {
 	} `json:"conditions"`
 	Actions     []TriggerAction `json:"actions"`
 	Description string          `json:"description,omitempty"`
+	CategoryID  string          `json:"category_id,omitempty"`
 	CreatedAt   *time.Time      `json:"created_at,omitempty"`
 	UpdatedAt   *time.Time      `json:"updated_at,omitempty"`
 }
