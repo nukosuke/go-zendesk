@@ -57,6 +57,7 @@ type Ticket struct {
 	Description     string        `json:"description,omitempty"`
 	Priority        string        `json:"priority,omitempty"`
 	Status          string        `json:"status,omitempty"`
+	CustomStatusID  int64         `json:"custom_status_id,omitempty"`
 	Recipient       string        `json:"recipient,omitempty"`
 	RequesterID     int64         `json:"requester_id,omitempty"`
 	SubmitterID     int64         `json:"submitter_id,omitempty"`

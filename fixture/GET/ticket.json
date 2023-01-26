@@ -25,6 +25,7 @@
     "description": "Mail to create fixture ticket for testing\n\nnukosuke (●ↀ ω ↀ●)",
     "priority": null,
     "status": "solved",
+    "custom_status_id": 12480498776781,
     "recipient": "support@d3v-terraform-provider.zendesk.com",
     "requester_id": 377922500012,
     "submitter_id": 377922500012,
