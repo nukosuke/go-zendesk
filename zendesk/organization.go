@@ -116,6 +116,28 @@ func (z *Client) GetOrganization(ctx context.Context, orgID int64) (Organization
 	return result.Organization, err
 }
 
+// GetOrganizationByExternalID gets a specified organization by external ID
+// ref: https://developer.zendesk.com/api-reference/ticketing/organizations/organizations/#search-organizations-by-external-id
+func (z *Client) GetOrganizationByExternalID(ctx context.Context, externalID string) ([]Organization, Page, error) {
+	var result struct {
+		Organizations []Organization `json:"organizations"`
+		Page
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/organizations/search?external_id=%s", externalID))
+
+	if err != nil {
+		return []Organization{}, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return []Organization{}, Page{}, err
+	}
+
+	return result.Organizations, result.Page, err
+}
+
 // UpdateOrganization updates a organization with the specified organization
 // ref: https://developer.zendesk.com/rest_api/docs/support/organizations#update-organization
 func (z *Client) UpdateOrganization(ctx context.Context, orgID int64, org Organization) (Organization, error) {
