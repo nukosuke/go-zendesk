@@ -43,6 +43,7 @@ type WebhookAPI interface {
 	GetWebhook(ctx context.Context, webhookID string) (*Webhook, error)
 	UpdateWebhook(ctx context.Context, webhookID string, hook *Webhook) error
 	DeleteWebhook(ctx context.Context, webhookID string) error
+	GetWebhookSigningSecret(ctx context.Context, webhookID string) (*WebhookSigningSecret, error)
 }
 
 // CreateWebhook creates new webhook.
@@ -114,4 +115,25 @@ func (z *Client) DeleteWebhook(ctx context.Context, webhookID string) error {
 	}
 
 	return nil
+}
+
+// GetWebhookSigningSecret gets the signing secret of specified webhook.
+//
+// https://developer.zendesk.com/api-reference/event-connectors/webhooks/webhooks/#show-webhook-signing-secret
+func (z *Client) GetWebhookSigningSecret(ctx context.Context, webhookID string) (*WebhookSigningSecret, error) {
+	var result struct {
+		SigningSecret *WebhookSigningSecret `json:"signing_secret"`
+	}
+
+	body, err := z.get(ctx, fmt.Sprintf("/webhooks/%s/signing_secret", webhookID))
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return nil, err
+	}
+
+	return result.SigningSecret, nil
 }
