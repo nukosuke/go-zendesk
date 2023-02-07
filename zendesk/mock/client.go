@@ -1239,6 +1239,21 @@ func (mr *ClientMockRecorder) GetWebhook(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWebhook", reflect.TypeOf((*Client)(nil).GetWebhook), arg0, arg1)
 }
 
+// GetWebhookSigningSecret mocks base method.
+func (m *Client) GetWebhookSigningSecret(arg0 context.Context, arg1 string) (*zendesk.WebhookSigningSecret, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWebhookSigningSecret", arg0, arg1)
+	ret0, _ := ret[0].(*zendesk.WebhookSigningSecret)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWebhookSigningSecret indicates an expected call of GetWebhookSigningSecret.
+func (mr *ClientMockRecorder) GetWebhookSigningSecret(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWebhookSigningSecret", reflect.TypeOf((*Client)(nil).GetWebhookSigningSecret), arg0, arg1)
+}
+
 // ListInstallations mocks base method.
 func (m *Client) ListInstallations(arg0 context.Context) ([]zendesk.AppInstallation, error) {
 	m.ctrl.T.Helper()
