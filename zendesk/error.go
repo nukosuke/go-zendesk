@@ -14,6 +14,16 @@ type Error struct {
 	resp *http.Response
 }
 
+// NewError is a function to initialize the Error type. This function will be useful
+// for unit testing and mocking purposes in the client side
+// to test their behavior by the API response.
+func NewError(body []byte, resp *http.Response) *Error {
+	return &Error{
+		body: body,
+		resp: resp,
+	}
+}
+
 // Error the error string for this error
 func (e Error) Error() string {
 	msg := string(e.body)
