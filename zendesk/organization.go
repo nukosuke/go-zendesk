@@ -38,6 +38,7 @@ type OrganizationAPI interface {
 	GetOrganizations(ctx context.Context, opts *OrganizationListOptions) ([]Organization, Page, error)
 	CreateOrganization(ctx context.Context, org Organization) (Organization, error)
 	GetOrganization(ctx context.Context, orgID int64) (Organization, error)
+	GetOrganizationByExternalID(ctx context.Context, externalID string) ([]Organization, Page, error)
 	UpdateOrganization(ctx context.Context, orgID int64, org Organization) (Organization, error)
 	DeleteOrganization(ctx context.Context, orgID int64) error
 }
@@ -103,7 +104,6 @@ func (z *Client) GetOrganization(ctx context.Context, orgID int64) (Organization
 	}
 
 	body, err := z.get(ctx, fmt.Sprintf("/organizations/%d.json", orgID))
-
 	if err != nil {
 		return Organization{}, err
 	}
@@ -125,7 +125,6 @@ func (z *Client) GetOrganizationByExternalID(ctx context.Context, externalID str
 	}
 
 	body, err := z.get(ctx, fmt.Sprintf("/organizations/search?external_id=%s", externalID))
-
 	if err != nil {
 		return []Organization{}, Page{}, err
 	}
@@ -148,7 +147,6 @@ func (z *Client) UpdateOrganization(ctx context.Context, orgID int64, org Organi
 	data.Organization = org
 
 	body, err := z.put(ctx, fmt.Sprintf("/organizations/%d.json", orgID), data)
-
 	if err != nil {
 		return Organization{}, err
 	}
@@ -165,7 +163,6 @@ func (z *Client) UpdateOrganization(ctx context.Context, orgID int64, org Organi
 // ref: https://developer.zendesk.com/rest_api/docs/support/organizations#delete-organization
 func (z *Client) DeleteOrganization(ctx context.Context, orgID int64) error {
 	err := z.delete(ctx, fmt.Sprintf("/organizations/%d.json", orgID))
-
 	if err != nil {
 		return err
 	}
