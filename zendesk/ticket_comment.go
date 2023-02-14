@@ -33,6 +33,7 @@ type TicketComment struct {
 	Via *Via `json:"via,omitempty"`
 }
 
+// Contains the body of the RedactTicketComment PUT request
 type RedactTicketCommentRequest struct {
 	TicketID               int64    `json:"ticket_id"` // Required
 	HTMLBody               string   `json:"html_body,omitempty"`
@@ -118,7 +119,7 @@ func (z *Client) MakeCommentPrivate(ctx context.Context, ticketID int64, ticketC
 	return err
 }
 
-// Redact Ticket Comment permanently removes words, strings, or attachments from a ticket comment
+// RedactTicketComment permanently removes words, strings, or attachments from a ticket comment
 //
 // ref: https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/#redact-ticket-comment-in-agent-workspace
 func (z *Client) RedactTicketComment(
