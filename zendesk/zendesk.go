@@ -46,20 +46,20 @@ type (
 	// it is more performant on large datasets.
 	OffsetPagination struct {
 		// Page is the page number to request.
-		Page int `url:"page",omitempty`
+		Page int `url:"page,omitempty"`
 
 		// PerPage is the number of results desired on each page.
 		// Most endpoints support up to 100 records per page.
-		PerPage int `url:"per_page",omitempty`
+		PerPage int `url:"per_page,omitempty"`
 	}
 
 	// OffsetPaginationMeta contains next and previous page pointers.
 	OffsetPaginationMeta struct {
 		// NextPage is a link to the next page of results, nil if none left.
-		NextPage string `json:"next_page",omitempty`
+		NextPage string `json:"next_page,omitempty"`
 
 		// PreviousPage is a link to the previous page of results, nil if on first page.
-		PreviousPage string `json:"previous_page",omitempty`
+		PreviousPage string `json:"previous_page,omitempty"`
 	}
 
 	// CursorPagination contains options for using cursor pagination.
@@ -67,26 +67,26 @@ type (
 	CursorPagination struct {
 		// PageSize sets the number of results per page.
 		// Most endpoints support up to 100 records per page.
-		PageSize int `url:"page[size]",omitempty`
+		PageSize int `url:"page[size],omitempty"`
 
 		// PageAfter provides the "next" cursor.
-		PageAfter string `url:"page[after]",omitempty`
+		PageAfter string `url:"page[after],omitempty"`
 
 		// PageBefore provides the "previous" cursor.
-		PageBefore string `url:"page[before]",omitempty`
+		PageBefore string `url:"page[before],omitempty"`
 	}
 
 	// CursorPaginationMeta contains information concerning how to fetch
 	// next and previous results, and if next results exist.
 	CursorPaginationMeta struct {
 		// HasMore is true if more results exist in the endpoint.
-		HasMore bool `json:"has_more",omitempty`
+		HasMore bool `json:"has_more,omitempty"`
 
 		// AfterCursor contains the cursor of the next result set.
-		AfterCursor string `json:"after_cursor",omitempty`
+		AfterCursor string `json:"after_cursor,omitempty"`
 
 		// BeforeCursor contains the cursor of the previous result set.
-		BeforeCursor string `json:"before_cursor",omitempty`
+		BeforeCursor string `json:"before_cursor,omitempty"`
 	}
 )
 
