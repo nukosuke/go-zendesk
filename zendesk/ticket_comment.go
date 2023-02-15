@@ -33,7 +33,7 @@ type TicketComment struct {
 	Via *Via `json:"via,omitempty"`
 }
 
-// Contains the body of the RedactTicketComment PUT request
+// RedactTicketCommentRequest contains the body of the RedactTicketComment PUT request
 type RedactTicketCommentRequest struct {
 	TicketID               int64    `json:"ticket_id"` // Required
 	HTMLBody               string   `json:"html_body,omitempty"`
