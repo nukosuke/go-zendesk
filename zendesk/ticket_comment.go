@@ -10,7 +10,7 @@ import (
 // TicketCommentAPI is an interface containing all ticket comment related API methods
 type TicketCommentAPI interface {
 	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error)
-	ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error)
+	ListTicketComments(ctx context.Context, ticketID int64, opts *CursorPagination) (*ListTicketCommentsResult, error)
 	MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error
 }
 
@@ -82,25 +82,37 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	return result, err
 }
 
+type ListTicketCommentsResult struct {
+	TicketComments []TicketComment      `json:"comments"`
+	Meta           CursorPaginationMeta `json:"meta"`
+}
+
 // ListTicketComments gets a list of comment for a specified ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_comments#list-comments
-func (z *Client) ListTicketComments(ctx context.Context, ticketID int64) ([]TicketComment, error) {
-	var result struct {
-		TicketComments []TicketComment `json:"comments"`
+func (z *Client) ListTicketComments(ctx context.Context, ticketID int64, opts *CursorPagination) (*ListTicketCommentsResult, error) {
+	url := fmt.Sprintf("/tickets/%d/comments.json", ticketID)
+
+	var err error
+	if opts != nil {
+		url, err = addOptions(url, opts)
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/tickets/%d/comments.json", ticketID))
+	body, err := z.get(ctx, url)
 	if err != nil {
-		return []TicketComment{}, err
+		return nil, err
 	}
 
+	var result ListTicketCommentsResult
 	err = json.Unmarshal(body, &result)
 	if err != nil {
-		return []TicketComment{}, err
+		return nil, err
 	}
 
-	return result.TicketComments, err
+	return &result, err
 }
 
 // MakeCommentPrivate converts an existing ticket comment to an internal note that is not publicly viewable.
