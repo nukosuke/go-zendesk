@@ -10,7 +10,7 @@ import (
 // TicketCommentAPI is an interface containing all ticket comment related API methods
 type TicketCommentAPI interface {
 	CreateTicketComment(ctx context.Context, ticketID int64, ticketComment TicketComment) (TicketComment, error)
-	ListTicketComments(ctx context.Context, ticketID int64, opts *CursorPagination) (*ListTicketCommentsResult, error)
+	ListTicketComments(ctx context.Context, ticketID int64, opts *ListTicketCommentsOptions) (*ListTicketCommentsResult, error)
 	MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error
 }
 
@@ -82,6 +82,22 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	return result, err
 }
 
+type ListTicketCommentsSort string
+
+const (
+	TICKET_COMMENT_CREATED_AT_ASC  ListTicketCommentsSort = "created_at"
+	TICKET_COMMENT_CREATED_AT_DESC ListTicketCommentsSort = "-created_at"
+)
+
+// ListTicketCommentOptions contains all the options supported by ListTicketComments endpoint.
+type ListTicketCommentsOptions struct {
+	CursorPagination
+
+	Include             string                 `url:"include,omitempty"`
+	IncludeInlineImages string                 `url:"include_inline_images,omitempty"`
+	Sort                ListTicketCommentsSort `url:"sort,omitempty"`
+}
+
 // ListTicketCommentsResult contains the resulting ticket comments
 // and cursor pagination metadata.
 type ListTicketCommentsResult struct {
@@ -92,7 +108,11 @@ type ListTicketCommentsResult struct {
 // ListTicketComments gets a list of comment for a specified ticket
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_comments#list-comments
-func (z *Client) ListTicketComments(ctx context.Context, ticketID int64, opts *CursorPagination) (*ListTicketCommentsResult, error) {
+func (z *Client) ListTicketComments(
+	ctx context.Context,
+	ticketID int64,
+	opts *ListTicketCommentsOptions,
+) (*ListTicketCommentsResult, error) {
 	url := fmt.Sprintf("/tickets/%d/comments.json", ticketID)
 
 	var err error

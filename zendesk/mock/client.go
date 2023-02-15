@@ -1286,7 +1286,7 @@ func (mr *ClientMockRecorder) ListInstallations(arg0 interface{}) *gomock.Call {
 }
 
 // ListTicketComments mocks base method.
-func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64, arg2 *zendesk.CursorPagination) (*zendesk.ListTicketCommentsResult, error) {
+func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64, arg2 *zendesk.ListTicketCommentsOptions) (*zendesk.ListTicketCommentsResult, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTicketComments", arg0, arg1, arg2)
 	ret0, _ := ret[0].(*zendesk.ListTicketCommentsResult)
