@@ -82,6 +82,8 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	return result, err
 }
 
+// ListTicketCommentResult contains the resulting ticket comments
+// and cursor pagination metadata.
 type ListTicketCommentsResult struct {
 	TicketComments []TicketComment      `json:"comments"`
 	Meta           CursorPaginationMeta `json:"meta"`
