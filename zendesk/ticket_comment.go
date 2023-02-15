@@ -92,7 +92,7 @@ const (
 	TicketCommentCreatedAtDesc listTicketCommentsSort = "-created_at"
 
 	// ListTicketCommentsMaxPageSize contains the max page size.
-	ListTicketCommentsMaxPageSize int64 = 100
+	ListTicketCommentsMaxPageSize int = 100
 )
 
 // ListTicketCommentOptions contains all the options supported by ListTicketComments endpoint.
