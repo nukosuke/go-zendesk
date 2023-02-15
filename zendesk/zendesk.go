@@ -41,27 +41,6 @@ type (
 		Delete(ctx context.Context, path string) error
 	}
 
-	// OffsetPagination contains options for using offset pagination.
-	// Many endpoints support cursor pagination, which is preferred as
-	// it is more performant on large datasets.
-	OffsetPagination struct {
-		// Page is the page number to request.
-		Page int `url:"page,omitempty"`
-
-		// PerPage is the number of results desired on each page.
-		// Most endpoints support up to 100 records per page.
-		PerPage int `url:"per_page,omitempty"`
-	}
-
-	// OffsetPaginationMeta contains next and previous page pointers.
-	OffsetPaginationMeta struct {
-		// NextPage is a link to the next page of results, nil if none left.
-		NextPage string `json:"next_page,omitempty"`
-
-		// PreviousPage is a link to the previous page of results, nil if on first page.
-		PreviousPage string `json:"previous_page,omitempty"`
-	}
-
 	// CursorPagination contains options for using cursor pagination.
 	// Cursor pagination is preferred where possible.
 	CursorPagination struct {
