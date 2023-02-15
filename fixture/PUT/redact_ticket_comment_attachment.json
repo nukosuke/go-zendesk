@@ -1,0 +1,11 @@
+{
+  "attachment": {
+    "content_type": "application/binary",
+    "content_url": "https://company.zendesk.com/attachments/myfile.dat",
+    "file_name": "myfile.dat",
+    "id": 498483,
+    "size": 2532,
+    "thumbnails": [],
+    "url": "https://company.zendesk.com/api/v2/attachments/498483.json"
+  }
+}

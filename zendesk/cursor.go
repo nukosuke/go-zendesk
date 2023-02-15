@@ -1,5 +1,8 @@
 package zendesk
 
+// DEPRECATED -- This file describes Zendesk API's "legacy" cursor pagination.
+// PLEASE USE CursorPagination IN zendesk.go INSTEAD!
+
 // Cursor is struct for cursor-based pagination
 type Cursor struct {
 	AfterURL     string `json:"after_url"`
