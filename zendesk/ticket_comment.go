@@ -82,11 +82,14 @@ func (z *Client) CreateTicketComment(ctx context.Context, ticketID int64, ticket
 	return result, err
 }
 
-type ListTicketCommentsSort string
+type listTicketCommentsSort string
 
 const (
-	TICKET_COMMENT_CREATED_AT_ASC  ListTicketCommentsSort = "created_at"
-	TICKET_COMMENT_CREATED_AT_DESC ListTicketCommentsSort = "-created_at"
+	// TicketCommentCreatedAtAsc defines ASC sort val.
+	TicketCommentCreatedAtAsc listTicketCommentsSort = "created_at"
+
+	// TicketCommentCreatedAtDesc defines DESC sort val.
+	TicketCommentCreatedAtDesc listTicketCommentsSort = "-created_at"
 )
 
 // ListTicketCommentOptions contains all the options supported by ListTicketComments endpoint.
@@ -95,7 +98,7 @@ type ListTicketCommentsOptions struct {
 
 	Include             string                 `url:"include,omitempty"`
 	IncludeInlineImages string                 `url:"include_inline_images,omitempty"`
-	Sort                ListTicketCommentsSort `url:"sort,omitempty"`
+	Sort                listTicketCommentsSort `url:"sort,omitempty"`
 }
 
 // ListTicketCommentsResult contains the resulting ticket comments
