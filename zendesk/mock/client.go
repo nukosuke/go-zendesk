@@ -320,6 +320,21 @@ func (mr *ClientMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*Client)(nil).CreateUser), arg0, arg1)
 }
 
+// CreateUserField mocks base method.
+func (m *Client) CreateUserField(arg0 context.Context, arg1 zendesk.UserField) (zendesk.UserField, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateUserField", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.UserField)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateUserField indicates an expected call of CreateUserField.
+func (mr *ClientMockRecorder) CreateUserField(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUserField", reflect.TypeOf((*Client)(nil).CreateUserField), arg0, arg1)
+}
+
 // CreateWebhook mocks base method.
 func (m *Client) CreateWebhook(arg0 context.Context, arg1 *zendesk.Webhook) (*zendesk.Webhook, error) {
 	m.ctrl.T.Helper()
