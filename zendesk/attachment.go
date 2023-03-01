@@ -196,3 +196,11 @@ func (z *Client) GetAttachment(ctx context.Context, id int64) (Attachment, error
 
 	return result.Attachment, nil
 }
+
+// RedactCommentAttachment deletes an attachment with attachmentID on comment with commentID for ticket with ticketID
+// https://developer.zendesk.com/api-reference/ticketing/tickets/ticket-attachments/#redact-comment-attachment
+func (z *Client) RedactCommentAttachment(ctx context.Context, ticketID, commentID, attachmentID int64) error {
+	path := fmt.Sprintf("/api/v2/tickets/%d/comments/%d/attachments/%d/redact", ticketID, commentID, attachmentID)
+	_, err := z.put(ctx, path, nil)
+	return err
+}
