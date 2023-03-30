@@ -36,13 +36,6 @@ type TicketComment struct {
 	Via *Via `json:"via,omitempty"`
 }
 
-// RedactTicketCommentRequest contains the body of the RedactTicketComment PUT request
-type RedactTicketCommentRequest struct {
-	TicketID               int64    `json:"ticket_id"` // Required
-	HTMLBody               string   `json:"html_body,omitempty"`
-	ExternalAttachmentUrls []string `json:"external_attachment_urls,omitempty"`
-}
-
 // NewPublicTicketComment generates and returns a new TicketComment
 func NewPublicTicketComment(body string, authorID int64) TicketComment {
 	public := true
@@ -160,18 +153,5 @@ func (z *Client) ListTicketComments(
 func (z *Client) MakeCommentPrivate(ctx context.Context, ticketID int64, ticketCommentID int64) error {
 	path := fmt.Sprintf("/tickets/%d/comments/%d/make_private", ticketID, ticketCommentID)
 	_, err := z.put(ctx, path, nil)
-	return err
-}
-
-// RedactTicketComment permanently removes words, strings, or attachments from a ticket comment
-//
-// ref: https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/#redact-ticket-comment-in-agent-workspace
-func (z *Client) RedactTicketComment(
-	ctx context.Context,
-	ticketCommentID int64,
-	body RedactTicketCommentRequest,
-) error {
-	path := fmt.Sprintf("/api/v2/comment_redactions/%d.json", ticketCommentID)
-	_, err := z.put(ctx, path, body)
 	return err
 }
