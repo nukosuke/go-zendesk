@@ -106,12 +106,15 @@ func TestRedactTicketComment(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
-	err := client.RedactTicketComment(ctx, 123, RedactTicketCommentRequest{
+	out, err := client.RedactTicketComment(ctx, 123, RedactTicketCommentRequest{
 		TicketID: 100,
 		HTMLBody: "<div class=\"zd-comment\" dir=\"auto\">My ID number is <redact>847564</redact>!</div>",
 	})
 
 	if err != nil {
 		t.Fatalf("Failed to redact ticket comment: %s", err)
+	}
+	if out == nil || out.ID != 123 {
+		t.Fatalf("incorrect response")
 	}
 }
