@@ -118,3 +118,15 @@ func TestGetAttachment(t *testing.T) {
 		t.Fatalf("Returned attachment does not have the expected ID %d. Attachment id is %d", expectedID, attachment.ID)
 	}
 }
+
+func TestRedactCommentAttachment(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodPut, "redact_ticket_comment_attachment.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	err := client.RedactCommentAttachment(ctx, 123, 456, 789)
+
+	if err != nil {
+		t.Fatalf("Failed to redact ticket comment attachment: %s", err)
+	}
+}
