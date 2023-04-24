@@ -18,7 +18,7 @@ type AppInstallation struct {
 	} `json:"settings"`
 	SettingsObjects []struct {
 		Name  string `json:"name"`
-		Value string `json:"value"`
+		Value any    `json:"value"`
 	} `json:"settings_objects"`
 	Enabled                   bool      `json:"enabled"`
 	Updated                   string    `json:"updated"`
