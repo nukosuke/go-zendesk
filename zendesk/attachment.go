@@ -13,13 +13,14 @@ import (
 // Attachment is struct for attachment payload
 // https://developer.zendesk.com/rest_api/docs/support/attachments.html
 type Attachment struct {
-	ID          int64   `json:"id,omitempty"`
-	FileName    string  `json:"file_name,omitempty"`
-	ContentURL  string  `json:"content_url,omitempty"`
-	ContentType string  `json:"content_type,omitempty"`
-	Size        int64   `json:"size,omitempty"`
-	Thumbnails  []Photo `json:"thumbnails,omitempty"`
-	Inline      bool    `json:"inline,omitempty"`
+	ID               int64   `json:"id,omitempty"`
+	FileName         string  `json:"file_name,omitempty"`
+	ContentURL       string  `json:"content_url,omitempty"`
+	MappedContentURL string  `json:"mapped_content_url,omitempty"`
+	ContentType      string  `json:"content_type,omitempty"`
+	Size             int64   `json:"size,omitempty"`
+	Thumbnails       []Photo `json:"thumbnails,omitempty"`
+	Inline           bool    `json:"inline,omitempty"`
 }
 
 // Photo is thumbnail which is included in attachment
