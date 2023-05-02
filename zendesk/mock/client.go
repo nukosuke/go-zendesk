@@ -1286,18 +1286,18 @@ func (mr *ClientMockRecorder) ListInstallations(arg0 interface{}) *gomock.Call {
 }
 
 // ListTicketComments mocks base method.
-func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64) ([]zendesk.TicketComment, error) {
+func (m *Client) ListTicketComments(arg0 context.Context, arg1 int64, arg2 *zendesk.ListTicketCommentsOptions) (*zendesk.ListTicketCommentsResult, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListTicketComments", arg0, arg1)
-	ret0, _ := ret[0].([]zendesk.TicketComment)
+	ret := m.ctrl.Call(m, "ListTicketComments", arg0, arg1, arg2)
+	ret0, _ := ret[0].(*zendesk.ListTicketCommentsResult)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // ListTicketComments indicates an expected call of ListTicketComments.
-func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) ListTicketComments(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketComments", reflect.TypeOf((*Client)(nil).ListTicketComments), arg0, arg1, arg2)
 }
 
 // MakeCommentPrivate mocks base method.
