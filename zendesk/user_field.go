@@ -32,6 +32,7 @@ type UserFieldListOptions struct {
 
 type UserFieldAPI interface {
 	GetUserFields(ctx context.Context, opts *UserFieldListOptions) ([]UserField, Page, error)
+	CreateUserField(ctx context.Context, userField UserField) (UserField, error)
 }
 
 // GetUserFields fetch trigger list
@@ -63,4 +64,24 @@ func (z *Client) GetUserFields(ctx context.Context, opts *UserFieldListOptions) 
 		return nil, Page{}, err
 	}
 	return data.UserFields, data.Page, nil
+}
+
+// CreateUserField creates new user field
+// ref: https://developer.zendesk.com/api-reference/ticketing/users/user_fields/#create-user-field
+func (z *Client) CreateUserField(ctx context.Context, userField UserField) (UserField, error) {
+	var data, result struct {
+		UserField UserField `json:"user_field"`
+	}
+	data.UserField = userField
+
+	body, err := z.post(ctx, "/user_fields.json", data)
+	if err != nil {
+		return UserField{}, err
+	}
+
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return UserField{}, err
+	}
+	return result.UserField, nil
 }
