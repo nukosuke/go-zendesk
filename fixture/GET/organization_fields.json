@@ -1,0 +1,58 @@
+{
+  "organization_fields": [
+    {
+      "id": 1110988024701,
+      "url": "https://example.zendesk.com/api/v2/organization_fields/1110988024701.json",
+      "title": "Title",
+      "type": "lookup",
+      "relationship_target_type": "zen:user",
+      "relationship_filter": {
+        "all": [
+          {
+            "field": "role",
+            "operator": "is",
+            "value": "4"
+          },
+          {
+            "field": "tags",
+            "operator": "includes",
+            "value": "goofy"
+          }
+        ],
+        "any": [
+          {
+            "field": "role",
+            "operator": "is_not",
+            "value": "0"
+          }
+        ]
+      },
+      "active": true,
+      "description": "Test description",
+      "key": "test_key",
+      "raw_description": "This is just at test description",
+      "raw_title": "Raw test title",
+      "created_at": "2023-02-02T15:36:25Z",
+      "updated_at": "2023-02-23T10:24:49Z"
+    },
+    {
+      "id": 9170294642017,
+      "url": "https://example.zendesk.com/api/v2/organization_fields/9170294642017.json",
+      "title": "External Test ID",
+      "type": "text",
+      "relationship_target_type": "",
+      "relationship_filter": {
+        "all": null,
+        "any": null
+      },
+      "active": true,
+      "description": "This field contains an external testing ID",
+      "key": "test_external_id",
+      "position": 1,
+      "raw_description": "This field contains an external testing ID",
+      "raw_title": "External testing ID",
+      "created_at": "2023-02-06T14:43:05Z",
+      "updated_at": "2023-02-06T14:43:05Z"
+    }
+  ]
+}

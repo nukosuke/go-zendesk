@@ -17,6 +17,7 @@ type API interface {
 	LocaleAPI
 	MacroAPI
 	OrganizationAPI
+	OrganizationFieldAPI
 	OrganizationMembershipAPI
 	SearchAPI
 	SLAPolicyAPI

@@ -185,6 +185,21 @@ func (mr *ClientMockRecorder) CreateOrganization(arg0, arg1 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*Client)(nil).CreateOrganization), arg0, arg1)
 }
 
+// CreateOrganizationField mocks base method.
+func (m *Client) CreateOrganizationField(arg0 context.Context, arg1 zendesk.OrganizationField) (zendesk.OrganizationField, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrganizationField", arg0, arg1)
+	ret0, _ := ret[0].(zendesk.OrganizationField)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrganizationField indicates an expected call of CreateOrganizationField.
+func (mr *ClientMockRecorder) CreateOrganizationField(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganizationField", reflect.TypeOf((*Client)(nil).CreateOrganizationField), arg0, arg1)
+}
+
 // CreateOrganizationMembership mocks base method.
 func (m *Client) CreateOrganizationMembership(arg0 context.Context, arg1 zendesk.OrganizationMembershipOptions) (zendesk.OrganizationMembership, error) {
 	m.ctrl.T.Helper()
@@ -851,6 +866,22 @@ func (m *Client) GetOrganizationByExternalID(arg0 context.Context, arg1 string) 
 func (mr *ClientMockRecorder) GetOrganizationByExternalID(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationByExternalID", reflect.TypeOf((*Client)(nil).GetOrganizationByExternalID), arg0, arg1)
+}
+
+// GetOrganizationFields mocks base method.
+func (m *Client) GetOrganizationFields(arg0 context.Context) ([]zendesk.OrganizationField, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationFields", arg0)
+	ret0, _ := ret[0].([]zendesk.OrganizationField)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationFields indicates an expected call of GetOrganizationFields.
+func (mr *ClientMockRecorder) GetOrganizationFields(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationFields", reflect.TypeOf((*Client)(nil).GetOrganizationFields), arg0)
 }
 
 // GetOrganizationMemberships mocks base method.
