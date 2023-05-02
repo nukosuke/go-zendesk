@@ -116,6 +116,7 @@ type UserAPI interface {
 	SearchUsers(ctx context.Context, opts *SearchUsersOptions) ([]User, Page, error)
 	GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([]User, Page, error)
 	GetUsers(ctx context.Context, opts *UserListOptions) ([]User, Page, error)
+	GetOrganizationUsers(ctx context.Context, orgID int64, opts *UserListOptions) ([]User, Page, error)
 	GetUser(ctx context.Context, userID int64) (User, error)
 	CreateUser(ctx context.Context, user User) (User, error)
 	CreateOrUpdateUser(ctx context.Context, user User) (User, error)
@@ -137,6 +138,38 @@ func (z *Client) GetUsers(ctx context.Context, opts *UserListOptions) ([]User, P
 	}
 
 	u, err := addOptions("/users.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, Page{}, err
+	}
+	return data.Users, data.Page, nil
+}
+
+// GetOrganizationUsers fetch organization users list
+// https://developer.zendesk.com/api-reference/ticketing/users/users/#list-users
+// /api/v2/organizations/{organization_id}/users
+func (z *Client) GetOrganizationUsers(ctx context.Context, orgID int64, opts *UserListOptions) ([]User, Page, error) {
+	var data struct {
+		Users []User `json:"users"`
+		Page
+	}
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &UserListOptions{}
+	}
+	apiURL := fmt.Sprintf("/organizations/%d/users.json", orgID)
+
+	u, err := addOptions(apiURL, tmp)
 	if err != nil {
 		return nil, Page{}, err
 	}
