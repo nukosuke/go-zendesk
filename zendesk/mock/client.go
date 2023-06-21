@@ -915,6 +915,22 @@ func (mr *ClientMockRecorder) GetOrganizationTags(arg0, arg1 interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTags", reflect.TypeOf((*Client)(nil).GetOrganizationTags), arg0, arg1)
 }
 
+// GetOrganizationTickets mocks base method.
+func (m *Client) GetOrganizationTickets(arg0 context.Context, arg1 int64, arg2 *zendesk.TicketListOptions) ([]zendesk.Ticket, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationTickets", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]zendesk.Ticket)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationTickets indicates an expected call of GetOrganizationTickets.
+func (mr *ClientMockRecorder) GetOrganizationTickets(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTickets", reflect.TypeOf((*Client)(nil).GetOrganizationTickets), arg0, arg1, arg2)
+}
+
 // GetOrganizationUsers mocks base method.
 func (m *Client) GetOrganizationUsers(arg0 context.Context, arg1 int64, arg2 *zendesk.UserListOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
