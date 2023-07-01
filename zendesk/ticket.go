@@ -143,6 +143,7 @@ type TicketListOptions struct {
 // TicketAPI an interface containing all ticket related methods
 type TicketAPI interface {
 	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
+	GetOrganizationTickets(ctx context.Context, organizationID int64, ops *TicketListOptions) ([]Ticket, Page, error)
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
@@ -165,6 +166,40 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 	}
 
 	u, err := addOptions("/tickets.json", tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, Page{}, err
+	}
+	return data.Tickets, data.Page, nil
+}
+
+// GetOrganizationTickets get organization ticket list
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
+func (z *Client) GetOrganizationTickets(
+	ctx context.Context, organizationID int64, opts *TicketListOptions,
+) ([]Ticket, Page, error) {
+	var data struct {
+		Tickets []Ticket `json:"tickets"`
+		Page
+	}
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &TicketListOptions{}
+	}
+
+	path := fmt.Sprintf("/organizations/%d/tickets.json", organizationID)
+	u, err := addOptions(path, tmp)
 	if err != nil {
 		return nil, Page{}, err
 	}
