@@ -110,6 +110,21 @@ func (mr *ClientMockRecorder) CreateBrand(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBrand", reflect.TypeOf((*Client)(nil).CreateBrand), arg0, arg1)
 }
 
+// CreateCustomObjectRecord mocks base method.
+func (m *Client) CreateCustomObjectRecord(arg0 context.Context, arg1 zendesk.CustomObjectRecord, arg2 string) (zendesk.CustomObjectRecord, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCustomObjectRecord", arg0, arg1, arg2)
+	ret0, _ := ret[0].(zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateCustomObjectRecord indicates an expected call of CreateCustomObjectRecord.
+func (mr *ClientMockRecorder) CreateCustomObjectRecord(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomObjectRecord", reflect.TypeOf((*Client)(nil).CreateCustomObjectRecord), arg0, arg1, arg2)
+}
+
 // CreateDynamicContentItem mocks base method.
 func (m *Client) CreateDynamicContentItem(arg0 context.Context, arg1 zendesk.DynamicContentItem) (zendesk.DynamicContentItem, error) {
 	m.ctrl.T.Helper()
@@ -1451,6 +1466,22 @@ func (m *Client) SearchCount(arg0 context.Context, arg1 *zendesk.CountOptions) (
 func (mr *ClientMockRecorder) SearchCount(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchCount", reflect.TypeOf((*Client)(nil).SearchCount), arg0, arg1)
+}
+
+// SearchCustomObjectRecords mocks base method.
+func (m *Client) SearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectListOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SearchCustomObjectRecords", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SearchCustomObjectRecords indicates an expected call of SearchCustomObjectRecords.
+func (mr *ClientMockRecorder) SearchCustomObjectRecords(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchCustomObjectRecords", reflect.TypeOf((*Client)(nil).SearchCustomObjectRecords), arg0, arg1, arg2)
 }
 
 // SearchUsers mocks base method.
