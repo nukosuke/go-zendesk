@@ -116,6 +116,7 @@ type ListTicketCommentsOptions struct {
 type ListTicketCommentsResult struct {
 	TicketComments []TicketComment      `json:"comments"`
 	Meta           CursorPaginationMeta `json:"meta"`
+	Users          []User               `json:"users"`
 }
 
 // ListTicketComments gets a list of comment for a specified ticket
