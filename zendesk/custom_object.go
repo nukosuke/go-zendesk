@@ -27,12 +27,14 @@ type CustomObjectAPI interface {
 	SearchCustomObjectRecords(
 		ctx context.Context,
 		customObjectKey string,
-		opts *CustomObjectListOptions,
+		opts *CustomObjectAutocompleteOptions,
 	) ([]CustomObjectRecord, Page, error)
+	ListCustomObjectRecords(
+		ctx context.Context, customObjectKey string, opts *CustomObjectListOptions) ([]CustomObjectRecord, Page, error)
 }
 
-// CustomObjectListOptions custom object search options
-type CustomObjectListOptions struct {
+// CustomObjectAutocompleteOptions custom object search options
+type CustomObjectAutocompleteOptions struct {
 	PageOptions
 	Name string `url:"name"`
 }
@@ -58,9 +60,15 @@ func (z *Client) CreateCustomObjectRecord(
 	return result.CustomObjectRecord, nil
 }
 
-// SearchCustomObjectRecords search for a custom object record by the name field
-// https://developer.zendesk.com/api-reference/custom-objects/custom_object_records/#search-custom-object-records
-func (z *Client) SearchCustomObjectRecords(
+// CustomObjectListOptions custom object list options
+type CustomObjectListOptions struct {
+	PageOptions
+	ExternalIds []string `url:"external_ids"`
+}
+
+// ListCustomObjectRecords list objects
+// https://developer.zendesk.com/api-reference/custom-objects/custom_object_records/#list-custom-object-records
+func (z *Client) ListCustomObjectRecords(
 	ctx context.Context, customObjectKey string, opts *CustomObjectListOptions) ([]CustomObjectRecord, Page, error) {
 	var result struct {
 		CustomObjectRecords []CustomObjectRecord `json:"custom_object_records"`
@@ -69,6 +77,32 @@ func (z *Client) SearchCustomObjectRecords(
 	tmp := opts
 	if tmp == nil {
 		tmp = &CustomObjectListOptions{}
+	}
+	url := fmt.Sprintf("/custom_objects/%s/records", customObjectKey)
+	urlWithOptions, err := addOptions(url, tmp)
+	body, err := z.get(ctx, urlWithOptions)
+
+	if err != nil {
+		return nil, Page{}, err
+	}
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return nil, Page{}, err
+	}
+	return result.CustomObjectRecords, result.Page, nil
+}
+
+// SearchCustomObjectRecords search for a custom object record by the name field
+// https://developer.zendesk.com/api-reference/custom-objects/custom_object_records/#search-custom-object-records
+func (z *Client) SearchCustomObjectRecords(
+	ctx context.Context, customObjectKey string, opts *CustomObjectAutocompleteOptions) ([]CustomObjectRecord, Page, error) {
+	var result struct {
+		CustomObjectRecords []CustomObjectRecord `json:"custom_object_records"`
+		Page
+	}
+	tmp := opts
+	if tmp == nil {
+		tmp = &CustomObjectAutocompleteOptions{}
 	}
 	url := fmt.Sprintf("/custom_objects/%s/records/autocomplete", customObjectKey)
 	urlWithOptions, err := addOptions(url, tmp)

@@ -1363,6 +1363,22 @@ func (mr *ClientMockRecorder) GetWebhookSigningSecret(arg0, arg1 interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWebhookSigningSecret", reflect.TypeOf((*Client)(nil).GetWebhookSigningSecret), arg0, arg1)
 }
 
+// ListCustomObjectRecords mocks base method.
+func (m *Client) ListCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectListOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCustomObjectRecords", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// ListCustomObjectRecords indicates an expected call of ListCustomObjectRecords.
+func (mr *ClientMockRecorder) ListCustomObjectRecords(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCustomObjectRecords", reflect.TypeOf((*Client)(nil).ListCustomObjectRecords), arg0, arg1, arg2)
+}
+
 // ListInstallations mocks base method.
 func (m *Client) ListInstallations(arg0 context.Context) ([]zendesk.AppInstallation, error) {
 	m.ctrl.T.Helper()
@@ -1469,7 +1485,7 @@ func (mr *ClientMockRecorder) SearchCount(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // SearchCustomObjectRecords mocks base method.
-func (m *Client) SearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectListOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
+func (m *Client) SearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectAutocompleteOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchCustomObjectRecords", arg0, arg1, arg2)
 	ret0, _ := ret[0].([]zendesk.CustomObjectRecord)
