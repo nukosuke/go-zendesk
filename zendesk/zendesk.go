@@ -220,6 +220,42 @@ func (z *Client) put(ctx context.Context, path string, data interface{}) ([]byte
 	return body, nil
 }
 
+// patch sends data to API and returns response body as []bytes
+func (z *Client) patch(ctx context.Context, path string, data interface{}) ([]byte, error) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, z.baseURL.String()+path, strings.NewReader(string(bytes)))
+	if err != nil {
+		return nil, err
+	}
+
+	req = z.prepareRequest(ctx, req)
+
+	resp, err := z.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	// NOTE: some webhook mutation APIs return status No Content.
+	if !(resp.StatusCode == http.StatusOK || resp.StatusCode == http.StatusNoContent) {
+		return nil, Error{
+			body: body,
+			resp: resp,
+		}
+	}
+
+	return body, nil
+}
+
 // delete sends data to API and returns an error if unsuccessful
 func (z *Client) delete(ctx context.Context, path string) error {
 	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)

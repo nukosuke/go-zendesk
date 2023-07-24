@@ -12,7 +12,7 @@ type CustomObjectRecord struct {
 	Name               string                 `json:"name"`
 	ID                 string                 `json:"id"`
 	CustomObjectKey    string                 `json:"custom_object_key"`
-	CustomObjectFields map[string]interface{} `json:"custom_object_fields"`
+	CustomObjectFields map[string]interface{} `json:"custom_object_fields" binding:"required"`
 	CreatedByUserID    string                 `json:"created_by_user_id"`
 	UpdatedByUserID    string                 `json:"updated_by_user_id"`
 	CreatedAt          time.Time              `json:"created_at"`
@@ -31,6 +31,12 @@ type CustomObjectAPI interface {
 	) ([]CustomObjectRecord, Page, error)
 	ListCustomObjectRecords(
 		ctx context.Context, customObjectKey string, opts *CustomObjectListOptions) ([]CustomObjectRecord, Page, error)
+	ShowCustomObjectRecord(
+		ctx context.Context, customObjectKey string, customObjectRecordID string,
+	) (*CustomObjectRecord, error)
+	UpdateCustomObjectRecord(
+		ctx context.Context, customObjectKey string, customObjectRecordID string, record CustomObjectRecord,
+	) (*CustomObjectRecord, error)
 }
 
 // CustomObjectAutocompleteOptions custom object search options
@@ -116,4 +122,51 @@ func (z *Client) SearchCustomObjectRecords(
 		return nil, Page{}, err
 	}
 	return result.CustomObjectRecords, result.Page, nil
+}
+
+// ShowCustomObjectRecord returns a custom record for a specific object using a provided id.
+// https://developer.zendesk.com/api-reference/custom-objects/custom_object_records/#show-custom-object-record
+func (z *Client) ShowCustomObjectRecord(
+	ctx context.Context, customObjectKey string, customObjectRecordID string,
+) (*CustomObjectRecord, error) {
+	var result struct {
+		CustomObjectRecord CustomObjectRecord `json:"custom_object_record"`
+	}
+
+	url := fmt.Sprintf("/custom_objects/%s/records/%s", customObjectKey, customObjectRecordID)
+	body, err := z.get(ctx, url)
+
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(body, &result)
+
+	if err != nil {
+		return nil, err
+	}
+	return &result.CustomObjectRecord, nil
+}
+
+// UpdateCustomObjectRecord Updates an individual custom object record
+// https://developer.zendesk.com/api-reference/custom-objects/custom_object_records/#update-custom-object-record
+func (z *Client) UpdateCustomObjectRecord(
+	ctx context.Context, customObjectKey string, customObjectRecordID string, record CustomObjectRecord,
+) (*CustomObjectRecord, error) {
+	var data, result struct {
+		CustomObjectRecord CustomObjectRecord `json:"custom_object_record"`
+	}
+	data.CustomObjectRecord = record
+
+	url := fmt.Sprintf("/custom_objects/%s/records/%s", customObjectKey, customObjectRecordID)
+	body, err := z.patch(ctx, url, data)
+
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(body, &result)
+
+	if err != nil {
+		return nil, err
+	}
+	return &result.CustomObjectRecord, nil
 }

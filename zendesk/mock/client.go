@@ -1531,6 +1531,21 @@ func (mr *ClientMockRecorder) SetDefaultOrganization(arg0, arg1 interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetDefaultOrganization", reflect.TypeOf((*Client)(nil).SetDefaultOrganization), arg0, arg1)
 }
 
+// ShowCustomObjectRecord mocks base method.
+func (m *Client) ShowCustomObjectRecord(arg0 context.Context, arg1, arg2 string) (*zendesk.CustomObjectRecord, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ShowCustomObjectRecord", arg0, arg1, arg2)
+	ret0, _ := ret[0].(*zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ShowCustomObjectRecord indicates an expected call of ShowCustomObjectRecord.
+func (mr *ClientMockRecorder) ShowCustomObjectRecord(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ShowCustomObjectRecord", reflect.TypeOf((*Client)(nil).ShowCustomObjectRecord), arg0, arg1, arg2)
+}
+
 // UpdateAutomation mocks base method.
 func (m *Client) UpdateAutomation(arg0 context.Context, arg1 int64, arg2 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
@@ -1559,6 +1574,21 @@ func (m *Client) UpdateBrand(arg0 context.Context, arg1 int64, arg2 zendesk.Bran
 func (mr *ClientMockRecorder) UpdateBrand(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBrand", reflect.TypeOf((*Client)(nil).UpdateBrand), arg0, arg1, arg2)
+}
+
+// UpdateCustomObjectRecord mocks base method.
+func (m *Client) UpdateCustomObjectRecord(arg0 context.Context, arg1, arg2 string, arg3 zendesk.CustomObjectRecord) (*zendesk.CustomObjectRecord, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateCustomObjectRecord", arg0, arg1, arg2, arg3)
+	ret0, _ := ret[0].(*zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCustomObjectRecord indicates an expected call of UpdateCustomObjectRecord.
+func (mr *ClientMockRecorder) UpdateCustomObjectRecord(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCustomObjectRecord", reflect.TypeOf((*Client)(nil).UpdateCustomObjectRecord), arg0, arg1, arg2, arg3)
 }
 
 // UpdateDynamicContentItem mocks base method.
