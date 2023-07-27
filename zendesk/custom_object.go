@@ -8,16 +8,16 @@ import (
 )
 
 type CustomObjectRecord struct {
-	Url                string                 `json:"url"`
-	Name               string                 `json:"name"`
-	ID                 string                 `json:"id"`
+	Url                string                 `json:"url,omitempty"`
+	Name               string                 `json:"name,omitempty"`
+	ID                 string                 `json:"id,omitempty"`
 	CustomObjectKey    string                 `json:"custom_object_key"`
 	CustomObjectFields map[string]interface{} `json:"custom_object_fields" binding:"required"`
-	CreatedByUserID    string                 `json:"created_by_user_id"`
-	UpdatedByUserID    string                 `json:"updated_by_user_id"`
-	CreatedAt          time.Time              `json:"created_at"`
-	UpdatedAt          time.Time              `json:"updated_at"`
-	ExternalID         string                 `json:"external_id"`
+	CreatedByUserID    string                 `json:"created_by_user_id,omitempty"`
+	UpdatedByUserID    string                 `json:"updated_by_user_id,omitempty"`
+	CreatedAt          time.Time              `json:"created_at,omitempty"`
+	UpdatedAt          time.Time              `json:"updated_at,omitempty"`
+	ExternalID         string                 `json:"external_id,omitempty"`
 }
 
 // CustomObjectAPI an interface containing all custom object related methods
