@@ -107,7 +107,7 @@ type UserRelated struct {
 // ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#search-users
 type SearchUsersOptions struct {
 	PageOptions
-	ExternalIDs string `json:"external_ids,omitempty" url:"external_ids,omitempty"`
+	ExternalIDs string `json:"external_id,omitempty" url:"external_id,omitempty"`
 	Query       string `json:"query,omitempty" url:"query,omitempty"`
 }
 
