@@ -28,7 +28,7 @@ type (
 	ViewAPI interface {
 		GetView(context.Context, int64) (View, error)
 		GetViews(context.Context) ([]View, Page, error)
-		GetTicketsFromView(context.Context, int64) ([]Ticket, error)
+		GetTicketsFromView(context.Context, int64, *TicketListOptions) ([]Ticket, Page, error)
 	}
 )
 
@@ -75,20 +75,32 @@ func (z *Client) GetView(ctx context.Context, viewID int64) (View, error) {
 
 // GetTicketsFromView gets the tickets of the specified view
 // ref: https://developer.zendesk.com/api-reference/ticketing/business-rules/views/#list-tickets-from-a-view
-func (z *Client) GetTicketsFromView(ctx context.Context, viewID int64) ([]Ticket, error) {
+func (z *Client) GetTicketsFromView(ctx context.Context, viewID int64, opts *TicketListOptions,
+) ([]Ticket, Page, error) {
 	var result struct {
 		Tickets []Ticket `json:"tickets"`
+		Page
+	}
+	tmp := opts
+	if tmp == nil {
+		tmp = &TicketListOptions{}
 	}
 
-	body, err := z.get(ctx, fmt.Sprintf("/views/%d/tickets.json", viewID))
+	path := fmt.Sprintf("/views/%d/tickets.json", viewID)
+	url, err := addOptions(path, tmp)
+	if err != nil {
+		return nil, Page{}, err
+	}
+
+	body, err := z.get(ctx, url)
 
 	if err != nil {
-		return []Ticket{}, err
+		return []Ticket{}, Page{}, err
 	}
 
 	if err := json.Unmarshal(body, &result); err != nil {
-		return []Ticket{}, err
+		return []Ticket{}, Page{}, err
 	}
 
-	return result.Tickets, nil
+	return result.Tickets, result.Page, nil
 }
