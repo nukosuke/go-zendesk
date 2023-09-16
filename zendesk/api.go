@@ -33,6 +33,7 @@ type API interface {
 	UserFieldAPI
 	ViewAPI
 	WebhookAPI
+	CustomObjectAPI
 }
 
 var _ API = (*Client)(nil)
