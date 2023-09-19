@@ -80,6 +80,22 @@ func (mr *ClientMockRecorder) AddUserTags(arg0, arg1, arg2 interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddUserTags", reflect.TypeOf((*Client)(nil).AddUserTags), arg0, arg1, arg2)
 }
 
+// AutocompleteSearchCustomObjectRecords mocks base method.
+func (m *Client) AutocompleteSearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectAutocompleteOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AutocompleteSearchCustomObjectRecords", arg0, arg1, arg2)
+	ret0, _ := ret[0].([]zendesk.CustomObjectRecord)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// AutocompleteSearchCustomObjectRecords indicates an expected call of AutocompleteSearchCustomObjectRecords.
+func (mr *ClientMockRecorder) AutocompleteSearchCustomObjectRecords(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AutocompleteSearchCustomObjectRecords", reflect.TypeOf((*Client)(nil).AutocompleteSearchCustomObjectRecords), arg0, arg1, arg2)
+}
+
 // CreateAutomation mocks base method.
 func (m *Client) CreateAutomation(arg0 context.Context, arg1 zendesk.Automation) (zendesk.Automation, error) {
 	m.ctrl.T.Helper()
@@ -1486,7 +1502,7 @@ func (mr *ClientMockRecorder) SearchCount(arg0, arg1 interface{}) *gomock.Call {
 }
 
 // SearchCustomObjectRecords mocks base method.
-func (m *Client) SearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.CustomObjectAutocompleteOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
+func (m *Client) SearchCustomObjectRecords(arg0 context.Context, arg1 string, arg2 *zendesk.SearchCustomObjectRecordsOptions) ([]zendesk.CustomObjectRecord, zendesk.Page, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SearchCustomObjectRecords", arg0, arg1, arg2)
 	ret0, _ := ret[0].([]zendesk.CustomObjectRecord)
