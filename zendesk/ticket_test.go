@@ -34,6 +34,76 @@ func TestGetTickets(t *testing.T) {
 	}
 }
 
+func TestGetTicketsCBP(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	tickets, err := client.GetTicketsCBP(ctx, &TicketListCBPOptions{
+		CursorPagination: CursorPagination{
+			PageSize:  10,
+			PageAfter: "",
+		},
+	})
+	if err != nil {
+		t.Fatalf("Failed to get tickets: %s", err)
+	}
+
+	expectedLength := 2
+	if len(tickets.Tickets) != expectedLength {
+		t.Fatalf("Returned tickets does not have the expected length %d. Tickets length is %d", expectedLength, len(tickets.Tickets))
+	}
+}
+
+func TestGetTicketsExCBPDefault(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	ops := NewPaginationOptions()
+	it := client.GetTicketsEx(ctx, ops)
+
+	expectedLength := 2
+	ticketCount := 0
+	for it.HasMore() {
+		tickets, err := it.GetNext()
+		if err == nil {
+			for _, ticket := range tickets {
+				println(ticket.Subject)
+				ticketCount++
+			}
+		}
+	}
+	if ticketCount != expectedLength {
+		t.Fatalf("Returned tickets does not have the expected length %d. Tickets length is %d", expectedLength, ticketCount)
+	}
+}
+
+func TestGetTicketsExOBPOptional(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	ops := NewPaginationOptions()
+	ops.IsCBP = false
+	it := client.GetTicketsEx(ctx, ops)
+
+	expectedLength := 2
+	ticketCount := 0
+	for it.HasMore() {
+		tickets, err := it.GetNext()
+		if err == nil {
+			for _, ticket := range tickets {
+				println(ticket.Subject)
+				ticketCount++
+			}
+		}
+	}
+	if ticketCount != expectedLength {
+		t.Fatalf("Returned tickets does not have the expected length %d. Tickets length is %d", expectedLength, ticketCount)
+	}
+}
+
 func TestGetOrganizationTickets(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
 	client := newTestClient(mockAPI)

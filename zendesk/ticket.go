@@ -129,6 +129,9 @@ type Via struct {
 	} `json:"source"`
 }
 
+// TicketListOptions struct is used to specify options for listing tickets in OBP (Offset Based Pagination).
+// It embeds the PageOptions struct for pagination and provides options for sorting the result;
+// SortBy specifies the field to sort by, and SortOrder specifies the order (either 'asc' or 'desc').
 type TicketListOptions struct {
 	PageOptions
 
@@ -140,9 +143,119 @@ type TicketListOptions struct {
 	SortOrder string `url:"sort_order,omitempty"`
 }
 
+// TicketListCBPOptions struct is used to specify options for listing tickets in CBP (Cursor Based Pagination).
+// It embeds the CursorPagination struct for pagination and provides an option Sort for sorting the result.
+type TicketListCBPOptions struct {
+	CursorPagination
+	Sort string `url:"sort,omitempty"`
+}
+
+// TicketListCBPResult struct represents the result of a ticket list operation in CBP. It includes an array of Ticket objects, and Meta that holds pagination metadata.
+type TicketListCBPResult struct {
+	Tickets []Ticket             `json:"tickets"`
+	Meta    CursorPaginationMeta `json:"meta"`
+}
+
+// PaginationOptions struct represents general pagination options.
+// PageSize specifies the number of items per page, IsCBP indicates if it's cursor-based pagination,
+// SortBy and SortOrder describe how to sort the items in Offset Based Pagination, and Sort describes how to sort items in Cursor Based Pagination.
+type PaginationOptions struct {
+	PageSize int  //default is 100
+	IsCBP    bool //default is true
+
+	SortBy string
+	// SortOrder can take "asc" or "desc"
+	SortOrder string
+	Sort      string
+}
+
+// NewPaginationOptions() returns a pointer to a new PaginationOptions struct with default values (PageSize is 100, IsCBP is true).
+func NewPaginationOptions() *PaginationOptions {
+	return &PaginationOptions{
+		PageSize: 100,
+		IsCBP:    true,
+	}
+}
+
+// TicketIterator struct provides a convenient way to iterate over pages of tickets in either OBP or CBP.
+// It holds state for iteration, including the current page size, a flag indicating more pages, pagination type (OBP or CBP), and sorting options.
+type TicketIterator struct {
+	// generic fields
+	pageSize int
+	hasMore  bool
+	isCBP    bool
+
+	// OBP fields
+	sortBy string
+	// SortOrder can take "asc" or "desc"
+	sortOrder string
+	pageIndex int
+
+	// CBP fields
+	sort      string
+	pageAfter string
+
+	// common fields
+	client *Client
+	ctx    context.Context
+}
+
+// HasMore() returns a boolean indicating whether more pages are available for iteration.
+func (i *TicketIterator) HasMore() bool {
+	return i.hasMore
+}
+
+// GetNext() retrieves the next batch of tickets according to the current pagination and sorting options.
+// It updates the state of the iterator for subsequent calls.
+// In case of an error, it sets hasMore to false and returns an error.
+func (i *TicketIterator) GetNext() ([]Ticket, error) {
+	if i.isCBP {
+		cbpOps := &TicketListCBPOptions{
+			CursorPagination: CursorPagination{
+				PageSize:  i.pageSize,
+				PageAfter: i.pageAfter,
+			},
+		}
+		if i.sort != "" {
+			cbpOps.Sort = i.sort
+		}
+		ticketListCBPResult, err := i.client.GetTicketsCBP(i.ctx, cbpOps)
+		if err != nil {
+			i.hasMore = false
+			return nil, err
+		}
+		i.hasMore = ticketListCBPResult.Meta.HasMore
+		i.pageAfter = ticketListCBPResult.Meta.AfterCursor
+		return ticketListCBPResult.Tickets, nil
+	} else {
+		obpOps := &TicketListOptions{
+			PageOptions: PageOptions{
+				PerPage: i.pageSize,
+				Page:    i.pageIndex,
+			},
+		}
+		if i.sortBy != "" {
+			obpOps.SortBy = i.sortBy
+		}
+		if i.sortOrder != "" {
+			obpOps.SortOrder = i.sortOrder
+		}
+		tickets, page, err := i.client.GetTickets(i.ctx, obpOps)
+		if err != nil {
+			i.hasMore = false
+			return nil, err
+		}
+		i.hasMore = page.HasNext()
+		i.pageIndex++
+		return tickets, nil
+	}
+}
+
 // TicketAPI an interface containing all ticket related methods
 type TicketAPI interface {
+	GetTicketsEx(ctx context.Context, opts *PaginationOptions) *TicketIterator
 	GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error)
+	GetTicketsCBP(ctx context.Context, opts *TicketListCBPOptions) (*TicketListCBPResult, error)
 	GetOrganizationTickets(ctx context.Context, organizationID int64, ops *TicketListOptions) ([]Ticket, Page, error)
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
@@ -151,7 +264,25 @@ type TicketAPI interface {
 	DeleteTicket(ctx context.Context, ticketID int64) error
 }
 
-// GetTickets get ticket list
+// GetTicketsEx returns a TicketIterator to iterate over tickets
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
+func (z *Client) GetTicketsEx(ctx context.Context, opts *PaginationOptions) *TicketIterator {
+	return &TicketIterator{
+		pageSize:  opts.PageSize,
+		hasMore:   true,
+		isCBP:     opts.IsCBP,
+		sort:      opts.Sort,
+		pageAfter: "",
+		sortOrder: opts.SortOrder,
+		sortBy:    opts.SortBy,
+		pageIndex: 1,
+		client:    z,
+		ctx:       ctx,
+	}
+}
+
+// GetTickets get ticket list with offset based pagination
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
 func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Ticket, Page, error) {
@@ -180,6 +311,34 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 		return nil, Page{}, err
 	}
 	return data.Tickets, data.Page, nil
+}
+
+// GetTicketsCBP get ticket list with cursor based pagination
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
+func (z *Client) GetTicketsCBP(ctx context.Context, opts *TicketListCBPOptions) (*TicketListCBPResult, error) {
+	var data TicketListCBPResult
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &TicketListCBPOptions{}
+	}
+
+	u, err := addOptions("/tickets.json", tmp)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
 }
 
 // GetOrganizationTickets get organization ticket list

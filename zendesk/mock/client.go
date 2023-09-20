@@ -1179,6 +1179,35 @@ func (mr *ClientMockRecorder) GetTickets(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTickets", reflect.TypeOf((*Client)(nil).GetTickets), arg0, arg1)
 }
 
+// GetTicketsCBP mocks base method.
+func (m *Client) GetTicketsCBP(arg0 context.Context, arg1 *zendesk.TicketListCBPOptions) (*zendesk.TicketListCBPResult, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsCBP", arg0, arg1)
+	ret0, _ := ret[0].(*zendesk.TicketListCBPResult)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicketsCBP indicates an expected call of GetTicketsCBP.
+func (mr *ClientMockRecorder) GetTicketsCBP(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsCBP", reflect.TypeOf((*Client)(nil).GetTicketsCBP), arg0, arg1)
+}
+
+// GetTicketsEx mocks base method.
+func (m *Client) GetTicketsEx(arg0 context.Context, arg1 *zendesk.PaginationOptions) *zendesk.TicketIterator {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsEx", arg0, arg1)
+	ret0, _ := ret[0].(*zendesk.TicketIterator)
+	return ret0
+}
+
+// GetTicketsEx indicates an expected call of GetTicketsEx.
+func (mr *ClientMockRecorder) GetTicketsEx(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsEx", reflect.TypeOf((*Client)(nil).GetTicketsEx), arg0, arg1)
+}
+
 // GetTicketsFromView mocks base method.
 func (m *Client) GetTicketsFromView(arg0 context.Context, arg1 int64, arg2 *zendesk.TicketListOptions) ([]zendesk.Ticket, zendesk.Page, error) {
 	m.ctrl.T.Helper()
