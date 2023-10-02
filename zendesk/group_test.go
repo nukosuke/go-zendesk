@@ -11,6 +11,33 @@ func TestGetGroups(t *testing.T) {
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
+	ops := NewPaginationOptions()
+	ops.PageSize = 10
+
+	it := client.GetGroupsIterator(ctx, ops)
+
+	expectedLength := 1
+	for it.HasMore() {
+		groups, err := it.GetNext()
+		if len(groups) != expectedLength {
+			t.Fatalf("expected length of groups is 1, but got %d", len(groups))
+		}
+		if err == nil {
+			for _, group := range groups {
+				println(group.Name)
+			}
+		}
+		if err != nil {
+			t.Fatalf("Failed to get groups: %s", err)
+		}
+	}
+}
+
+func TestGetGroupsIterator(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
 	groups, _, err := client.GetGroups(ctx, nil)
 	if err != nil {
 		t.Fatalf("Failed to get groups: %s", err)

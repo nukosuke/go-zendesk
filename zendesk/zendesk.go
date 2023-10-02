@@ -324,6 +324,28 @@ func addOptions(s string, opts interface{}) (string, error) {
 	return u.String(), nil
 }
 
+// getData is a generic helper function that retrieves and unmarshals JSON data from a specified URL.
+// It takes four parameters:
+// - a pointer to a Client (z) which is used to execute the GET request,
+// - a context (ctx) for managing the request's lifecycle,
+// - a string (url) representing the endpoint from which data should be retrieved,
+// - and an empty interface (data) where the retrieved data will be stored after being unmarshalled from JSON.
+//
+// The function starts by sending a GET request to the specified URL. If the request is successful,
+// the returned body in the form of a byte slice is unmarshalled into the provided empty interface using the json.Unmarshal function.
+//
+// If an error occurs during either the GET request or the JSON unmarshalling, the function will return this error.
+func getData(z *Client, ctx context.Context, url string, data any) error {
+	body, err := z.get(ctx, url)
+	if err == nil {
+		err = json.Unmarshal(body, data)
+		if err != nil {
+			return err
+		}
+	}
+	return err
+}
+
 // Get allows users to send requests not yet implemented
 func (z *Client) Get(ctx context.Context, path string) ([]byte, error) {
 	return z.get(ctx, path)
