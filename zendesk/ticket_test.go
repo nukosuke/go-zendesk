@@ -133,11 +133,10 @@ func TestGetOrganizationTicketsIterator(t *testing.T) {
 	defer mockAPI.Close()
 
 	ops := NewPaginationOptions()
-	ops.Id = 360363695492
 	ops.Sort = "updated_at"
 	ops.PageSize = 10
 
-	it := client.GetTicketsIterator(ctx, ops)
+	it := client.GetOrganizationTicketsIterator(ctx, 360363695492, ops)
 
 	expectedLength := 2
 	ticketCount := 0
