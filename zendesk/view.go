@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -24,11 +25,20 @@ type (
 		// Restriction Restriction
 	}
 
+	ViewCount struct {
+		ViewID int64  `json:"view_id"`
+		URL    string `json:"url"`
+		Value  int64  `json:"value"`
+		Pretty string `json:"pretty"`
+		Fresh  bool   `json:"fresh"`
+	}
+
 	// ViewAPI encapsulates methods on view
 	ViewAPI interface {
 		GetView(context.Context, int64) (View, error)
 		GetViews(context.Context) ([]View, Page, error)
 		GetTicketsFromView(context.Context, int64, *TicketListOptions) ([]Ticket, Page, error)
+		GetCountTicketsInViews(ctx context.Context, ids []string) ([]ViewCount, error)
 	}
 )
 
@@ -103,4 +113,23 @@ func (z *Client) GetTicketsFromView(ctx context.Context, viewID int64, opts *Tic
 	}
 
 	return result.Tickets, result.Page, nil
+}
+
+// GetCountTicketsInViews count tickets in views using views ids
+// ref https://developer.zendesk.com/api-reference/ticketing/business-rules/views/#count-tickets-in-views
+func (z *Client) GetCountTicketsInViews(ctx context.Context, ids []string) ([]ViewCount, error) {
+	var result struct {
+		ViewCounts []ViewCount `json:"view_counts"`
+	}
+	idsURLParameter := strings.Join(ids, ",")
+	body, err := z.get(ctx, fmt.Sprintf("/views/count_many?ids=%s", idsURLParameter))
+
+	if err != nil {
+		return []ViewCount{}, err
+	}
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return []ViewCount{}, err
+	}
+	return result.ViewCounts, nil
 }

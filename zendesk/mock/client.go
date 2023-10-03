@@ -682,6 +682,21 @@ func (mr *ClientMockRecorder) GetBrand(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBrand", reflect.TypeOf((*Client)(nil).GetBrand), arg0, arg1)
 }
 
+// GetCountTicketsInViews mocks base method.
+func (m *Client) GetCountTicketsInViews(arg0 context.Context, arg1 []string) ([]zendesk.ViewCount, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCountTicketsInViews", arg0, arg1)
+	ret0, _ := ret[0].([]zendesk.ViewCount)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCountTicketsInViews indicates an expected call of GetCountTicketsInViews.
+func (mr *ClientMockRecorder) GetCountTicketsInViews(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), arg0, arg1)
+}
+
 // GetCustomRoles mocks base method.
 func (m *Client) GetCustomRoles(arg0 context.Context) ([]zendesk.CustomRole, error) {
 	m.ctrl.T.Helper()
