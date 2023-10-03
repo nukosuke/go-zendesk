@@ -127,6 +127,58 @@ func TestGetOrganizationTickets(t *testing.T) {
 	}
 }
 
+func TestGetOrganizationTicketsOBP(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	tickets, _, err := client.GetOrganizationTicketsOBP(ctx, &OBPOptions{
+		PageOptions: PageOptions{
+			Page:    1,
+			PerPage: 10,
+		},
+		CommonOptions: CommonOptions{
+			SortBy:    "created_at",
+			SortOrder: "asc",
+			Id:        360363695492,
+		},
+	})
+	if err != nil {
+		t.Fatalf("Failed to get tickets: %s", err)
+	}
+
+	expectedLength := 2
+	if len(tickets) != expectedLength {
+		t.Fatalf("Returned tickets does not have the expected length %d. Tickets length is %d", expectedLength, len(tickets))
+	}
+}
+
+func TestGetOrganizationTicketsCBP(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	tickets, _, err := client.GetOrganizationTicketsCBP(ctx, &CBPOptions{
+		CursorPagination: CursorPagination{
+			PageSize:  10,
+			PageAfter: "",
+		},
+		CommonOptions: CommonOptions{
+			SortBy:    "created_at",
+			SortOrder: "asc",
+			Id:        360363695492,
+		},
+	})
+	if err != nil {
+		t.Fatalf("Failed to get tickets: %s", err)
+	}
+
+	expectedLength := 2
+	if len(tickets) != expectedLength {
+		t.Fatalf("Returned tickets does not have the expected length %d. Tickets length is %d", expectedLength, len(tickets))
+	}
+}
+
 func TestGetOrganizationTicketsIterator(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "tickets.json")
 	client := newTestClient(mockAPI)
