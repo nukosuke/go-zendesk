@@ -6,12 +6,69 @@ import (
 	"testing"
 )
 
+func TestGetGroupsIterator(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	ops := NewPaginationOptions()
+	ops.PageSize = 10
+
+	it := client.GetGroupsIterator(ctx, ops)
+
+	expectedLength := 1
+	groupsCount := 0
+	for it.HasMore() {
+		groups, err := it.GetNext()
+		if len(groups) != expectedLength {
+			t.Fatalf("expected length of groups is 1, but got %d", len(groups))
+		}
+		groupsCount += len(groups)
+		if err != nil {
+			t.Fatalf("Failed to get groups: %s", err)
+		}
+	}
+	if groupsCount != 1 {
+		t.Fatalf("expected length of groups is 1, but got %d", groupsCount)
+	}
+}
+
 func TestGetGroups(t *testing.T) {
 	mockAPI := newMockAPI(http.MethodGet, "groups.json")
 	client := newTestClient(mockAPI)
 	defer mockAPI.Close()
 
 	groups, _, err := client.GetGroups(ctx, nil)
+	if err != nil {
+		t.Fatalf("Failed to get groups: %s", err)
+	}
+
+	if len(groups) != 1 {
+		t.Fatalf("expected length of groups is 1, but got %d", len(groups))
+	}
+}
+
+func TestGetGroupsOBP(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	groups, _, err := client.GetGroupsOBP(ctx, nil)
+	if err != nil {
+		t.Fatalf("Failed to get groups: %s", err)
+	}
+
+	if len(groups) != 1 {
+		t.Fatalf("expected length of groups is 1, but got %d", len(groups))
+	}
+}
+
+func TestGetGroupsCBP(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	groups, _, err := client.GetGroupsCBP(ctx, nil)
 	if err != nil {
 		t.Fatalf("Failed to get groups: %s", err)
 	}

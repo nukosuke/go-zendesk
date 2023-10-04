@@ -141,6 +141,32 @@ func TestGet(t *testing.T) {
 	}
 }
 
+func TestGetData(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "groups.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	var data struct {
+		Groups []Group `json:"groups"`
+		Page
+	}
+
+	opts := &OBPOptions{}
+
+	u, err := addOptions("/groups.json", opts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	err = getData(client, ctx, u, &data)
+	if err != nil {
+		t.Fatalf("Failed to send request: %s", err)
+	}
+	if len(data.Groups) == 0 {
+		t.Fatal("Response body is empty")
+	}
+}
+
 func TestGetFailure(t *testing.T) {
 	mockAPI := newMockAPIWithStatus(http.MethodGet, "groups.json", http.StatusInternalServerError)
 	client := newTestClient(mockAPI)

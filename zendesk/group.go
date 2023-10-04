@@ -30,6 +30,9 @@ type GroupListOptions struct {
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
 	GetGroups(ctx context.Context, opts *GroupListOptions) ([]Group, Page, error)
+	GetGroupsOBP(ctx context.Context, opts *OBPOptions) ([]Group, Page, error)
+	GetGroupsCBP(ctx context.Context, opts *CBPOptions) ([]Group, CursorPaginationMeta, error)
+	GetGroupsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Group]
 	GetGroup(ctx context.Context, groupID int64) (Group, error)
 	CreateGroup(ctx context.Context, group Group) (Group, error)
 	UpdateGroup(ctx context.Context, groupID int64, group Group) (Group, error)
@@ -64,6 +67,72 @@ func (z *Client) GetGroups(ctx context.Context, opts *GroupListOptions) ([]Group
 		return []Group{}, Page{}, err
 	}
 	return data.Groups, data.Page, nil
+}
+
+// GetGroupsOBP fetches group list from OBP (Offset Based Pagination)
+// https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
+func (z *Client) GetGroupsOBP(ctx context.Context, opts *OBPOptions) ([]Group, Page, error) {
+	var data struct {
+		Groups []Group `json:"groups"`
+		Page
+	}
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &OBPOptions{}
+	}
+
+	u, err := addOptions("/groups.json", tmp)
+	if err != nil {
+		return []Group{}, Page{}, err
+	}
+
+	err = getData(z, ctx, u, &data)
+	if err != nil {
+		return []Group{}, Page{}, err
+	}
+	return data.Groups, data.Page, nil
+}
+
+// GetGroupsIterator returns an Iterator to iterate over groups
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
+func (z *Client) GetGroupsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Group] {
+	return &Iterator[Group]{
+		pageSize:  opts.PageSize,
+		hasMore:   true,
+		isCBP:     opts.IsCBP,
+		pageAfter: "",
+		pageIndex: 1,
+		ctx:       ctx,
+		obpFunc:   z.GetGroupsOBP,
+		cbpFunc:   z.GetGroupsCBP,
+	}
+}
+
+// GetGroupsCBP fetches group list from CBP (Cursor Based Pagination)
+// https://developer.zendesk.com/rest_api/docs/support/groups#list-groups
+func (z *Client) GetGroupsCBP(ctx context.Context, opts *CBPOptions) ([]Group, CursorPaginationMeta, error) {
+	var data struct {
+		Groups []Group              `json:"groups"`
+		Meta   CursorPaginationMeta `json:"meta"`
+	}
+
+	tmp := opts
+	if tmp == nil {
+		tmp = &CBPOptions{}
+	}
+
+	u, err := addOptions("/groups.json", tmp)
+	if err != nil {
+		return []Group{}, data.Meta, err
+	}
+
+	err = getData(z, ctx, u, &data)
+	if err != nil {
+		return []Group{}, data.Meta, err
+	}
+	return data.Groups, data.Meta, nil
 }
 
 // CreateGroup creates new group
