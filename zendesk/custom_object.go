@@ -72,7 +72,8 @@ func (z *Client) CreateCustomObjectRecord(
 // CustomObjectListOptions custom object list options
 type CustomObjectListOptions struct {
 	PageOptions
-	ExternalIds []string `url:"external_ids"`
+	Ids         string `url:"filter[ids],omitempty"`
+	ExternalIds string `url:"filter[external_ids],omitempty"`
 }
 
 // ListCustomObjectRecords list objects
