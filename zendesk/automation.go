@@ -59,6 +59,9 @@ type AutomationAPI interface {
 	GetAutomation(ctx context.Context, id int64) (Automation, error)
 	UpdateAutomation(ctx context.Context, id int64, automation Automation) (Automation, error)
 	DeleteAutomation(ctx context.Context, id int64) error
+	GetAutomationsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Automation]
+	GetAutomationsOBP(ctx context.Context, opts *OBPOptions) ([]Automation, Page, error)
+	GetAutomationsCBP(ctx context.Context, opts *CBPOptions) ([]Automation, CursorPaginationMeta, error)
 }
 
 // GetAutomations fetch automation list

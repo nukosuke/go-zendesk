@@ -41,6 +41,9 @@ type OrganizationAPI interface {
 	GetOrganizationByExternalID(ctx context.Context, externalID string) ([]Organization, Page, error)
 	UpdateOrganization(ctx context.Context, orgID int64, org Organization) (Organization, error)
 	DeleteOrganization(ctx context.Context, orgID int64) error
+	GetOrganizationsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Organization]
+	GetOrganizationsOBP(ctx context.Context, opts *OBPOptions) ([]Organization, Page, error)
+	GetOrganizationsCBP(ctx context.Context, opts *CBPOptions) ([]Organization, CursorPaginationMeta, error)
 }
 
 // GetOrganizations fetch organization list

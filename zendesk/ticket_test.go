@@ -188,7 +188,7 @@ func TestGetOrganizationTicketsIterator(t *testing.T) {
 	ops.Sort = "updated_at"
 	ops.PageSize = 10
 
-	it := client.GetOrganizationTicketsIterator(ctx, 360363695492, ops)
+	it := client.GetOrganizationTicketsIterator(ctx, ops)
 
 	expectedLength := 2
 	ticketCount := 0

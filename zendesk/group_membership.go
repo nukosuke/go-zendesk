@@ -31,6 +31,9 @@ type (
 	// GroupMembershipAPI is an interface containing group membership related methods
 	GroupMembershipAPI interface {
 		GetGroupMemberships(context.Context, *GroupMembershipListOptions) ([]GroupMembership, Page, error)
+		GetGroupMembershipsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[GroupMembership]
+		GetGroupMembershipsOBP(ctx context.Context, opts *OBPOptions) ([]GroupMembership, Page, error)
+		GetGroupMembershipsCBP(ctx context.Context, opts *CBPOptions) ([]GroupMembership, CursorPaginationMeta, error)
 	}
 )
 

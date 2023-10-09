@@ -70,6 +70,9 @@ type SLAPolicyAPI interface {
 	GetSLAPolicy(ctx context.Context, id int64) (SLAPolicy, error)
 	UpdateSLAPolicy(ctx context.Context, id int64, slaPolicy SLAPolicy) (SLAPolicy, error)
 	DeleteSLAPolicy(ctx context.Context, id int64) error
+	GetSLAPoliciesIterator(ctx context.Context, opts *PaginationOptions) *Iterator[SLAPolicy]
+	GetSLAPoliciesOBP(ctx context.Context, opts *OBPOptions) ([]SLAPolicy, Page, error)
+	GetSLAPoliciesCBP(ctx context.Context, opts *CBPOptions) ([]SLAPolicy, CursorPaginationMeta, error)
 }
 
 // GetSLAPolicies fetch slaPolicy list

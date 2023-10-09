@@ -687,6 +687,52 @@ func (mr *ClientMockRecorder) GetAutomations(ctx, opts any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomations", reflect.TypeOf((*Client)(nil).GetAutomations), ctx, opts)
 }
 
+// GetAutomationsCBP mocks base method.
+func (m *Client) GetAutomationsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.Automation, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAutomationsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Automation)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutomationsCBP indicates an expected call of GetAutomationsCBP.
+func (mr *ClientMockRecorder) GetAutomationsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationsCBP", reflect.TypeOf((*Client)(nil).GetAutomationsCBP), ctx, opts)
+}
+
+// GetAutomationsIterator mocks base method.
+func (m *Client) GetAutomationsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Automation] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAutomationsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Automation])
+	return ret0
+}
+
+// GetAutomationsIterator indicates an expected call of GetAutomationsIterator.
+func (mr *ClientMockRecorder) GetAutomationsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationsIterator", reflect.TypeOf((*Client)(nil).GetAutomationsIterator), ctx, opts)
+}
+
+// GetAutomationsOBP mocks base method.
+func (m *Client) GetAutomationsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.Automation, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAutomationsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Automation)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutomationsOBP indicates an expected call of GetAutomationsOBP.
+func (mr *ClientMockRecorder) GetAutomationsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutomationsOBP", reflect.TypeOf((*Client)(nil).GetAutomationsOBP), ctx, opts)
+}
+
 // GetBrand mocks base method.
 func (m *Client) GetBrand(ctx context.Context, brandID int64) (zendesk.Brand, error) {
 	m.ctrl.T.Helper()
@@ -748,6 +794,52 @@ func (mr *ClientMockRecorder) GetDynamicContentItems(ctx any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItems", reflect.TypeOf((*Client)(nil).GetDynamicContentItems), ctx)
 }
 
+// GetDynamicContentItemsCBP mocks base method.
+func (m *Client) GetDynamicContentItemsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.DynamicContentItem, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDynamicContentItemsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetDynamicContentItemsCBP indicates an expected call of GetDynamicContentItemsCBP.
+func (mr *ClientMockRecorder) GetDynamicContentItemsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItemsCBP", reflect.TypeOf((*Client)(nil).GetDynamicContentItemsCBP), ctx, opts)
+}
+
+// GetDynamicContentItemsIterator mocks base method.
+func (m *Client) GetDynamicContentItemsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.DynamicContentItem] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDynamicContentItemsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.DynamicContentItem])
+	return ret0
+}
+
+// GetDynamicContentItemsIterator indicates an expected call of GetDynamicContentItemsIterator.
+func (mr *ClientMockRecorder) GetDynamicContentItemsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItemsIterator", reflect.TypeOf((*Client)(nil).GetDynamicContentItemsIterator), ctx, opts)
+}
+
+// GetDynamicContentItemsOBP mocks base method.
+func (m *Client) GetDynamicContentItemsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.DynamicContentItem, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDynamicContentItemsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.DynamicContentItem)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetDynamicContentItemsOBP indicates an expected call of GetDynamicContentItemsOBP.
+func (mr *ClientMockRecorder) GetDynamicContentItemsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDynamicContentItemsOBP", reflect.TypeOf((*Client)(nil).GetDynamicContentItemsOBP), ctx, opts)
+}
+
 // GetGroup mocks base method.
 func (m *Client) GetGroup(ctx context.Context, groupID int64) (zendesk.Group, error) {
 	m.ctrl.T.Helper()
@@ -777,6 +869,52 @@ func (m *Client) GetGroupMemberships(arg0 context.Context, arg1 *zendesk.GroupMe
 func (mr *ClientMockRecorder) GetGroupMemberships(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMemberships", reflect.TypeOf((*Client)(nil).GetGroupMemberships), arg0, arg1)
+}
+
+// GetGroupMembershipsCBP mocks base method.
+func (m *Client) GetGroupMembershipsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.GroupMembership, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupMembershipsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.GroupMembership)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGroupMembershipsCBP indicates an expected call of GetGroupMembershipsCBP.
+func (mr *ClientMockRecorder) GetGroupMembershipsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMembershipsCBP", reflect.TypeOf((*Client)(nil).GetGroupMembershipsCBP), ctx, opts)
+}
+
+// GetGroupMembershipsIterator mocks base method.
+func (m *Client) GetGroupMembershipsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.GroupMembership] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupMembershipsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.GroupMembership])
+	return ret0
+}
+
+// GetGroupMembershipsIterator indicates an expected call of GetGroupMembershipsIterator.
+func (mr *ClientMockRecorder) GetGroupMembershipsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMembershipsIterator", reflect.TypeOf((*Client)(nil).GetGroupMembershipsIterator), ctx, opts)
+}
+
+// GetGroupMembershipsOBP mocks base method.
+func (m *Client) GetGroupMembershipsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.GroupMembership, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupMembershipsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.GroupMembership)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGroupMembershipsOBP indicates an expected call of GetGroupMembershipsOBP.
+func (mr *ClientMockRecorder) GetGroupMembershipsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMembershipsOBP", reflect.TypeOf((*Client)(nil).GetGroupMembershipsOBP), ctx, opts)
 }
 
 // GetGroups mocks base method.
@@ -887,6 +1025,52 @@ func (mr *ClientMockRecorder) GetMacros(ctx, opts any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacros", reflect.TypeOf((*Client)(nil).GetMacros), ctx, opts)
 }
 
+// GetMacrosCBP mocks base method.
+func (m *Client) GetMacrosCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.Macro, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMacrosCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Macro)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetMacrosCBP indicates an expected call of GetMacrosCBP.
+func (mr *ClientMockRecorder) GetMacrosCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacrosCBP", reflect.TypeOf((*Client)(nil).GetMacrosCBP), ctx, opts)
+}
+
+// GetMacrosIterator mocks base method.
+func (m *Client) GetMacrosIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Macro] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMacrosIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Macro])
+	return ret0
+}
+
+// GetMacrosIterator indicates an expected call of GetMacrosIterator.
+func (mr *ClientMockRecorder) GetMacrosIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacrosIterator", reflect.TypeOf((*Client)(nil).GetMacrosIterator), ctx, opts)
+}
+
+// GetMacrosOBP mocks base method.
+func (m *Client) GetMacrosOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.Macro, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMacrosOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Macro)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetMacrosOBP indicates an expected call of GetMacrosOBP.
+func (mr *ClientMockRecorder) GetMacrosOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMacrosOBP", reflect.TypeOf((*Client)(nil).GetMacrosOBP), ctx, opts)
+}
+
 // GetManyUsers mocks base method.
 func (m *Client) GetManyUsers(ctx context.Context, opts *zendesk.GetManyUsersOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()
@@ -965,6 +1149,52 @@ func (mr *ClientMockRecorder) GetOrganizationFields(ctx any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationFields", reflect.TypeOf((*Client)(nil).GetOrganizationFields), ctx)
 }
 
+// GetOrganizationFieldsCBP mocks base method.
+func (m *Client) GetOrganizationFieldsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.OrganizationField, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationFieldsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.OrganizationField)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationFieldsCBP indicates an expected call of GetOrganizationFieldsCBP.
+func (mr *ClientMockRecorder) GetOrganizationFieldsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationFieldsCBP", reflect.TypeOf((*Client)(nil).GetOrganizationFieldsCBP), ctx, opts)
+}
+
+// GetOrganizationFieldsIterator mocks base method.
+func (m *Client) GetOrganizationFieldsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.OrganizationField] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationFieldsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.OrganizationField])
+	return ret0
+}
+
+// GetOrganizationFieldsIterator indicates an expected call of GetOrganizationFieldsIterator.
+func (mr *ClientMockRecorder) GetOrganizationFieldsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationFieldsIterator", reflect.TypeOf((*Client)(nil).GetOrganizationFieldsIterator), ctx, opts)
+}
+
+// GetOrganizationFieldsOBP mocks base method.
+func (m *Client) GetOrganizationFieldsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.OrganizationField, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationFieldsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.OrganizationField)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationFieldsOBP indicates an expected call of GetOrganizationFieldsOBP.
+func (mr *ClientMockRecorder) GetOrganizationFieldsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationFieldsOBP", reflect.TypeOf((*Client)(nil).GetOrganizationFieldsOBP), ctx, opts)
+}
+
 // GetOrganizationMemberships mocks base method.
 func (m *Client) GetOrganizationMemberships(arg0 context.Context, arg1 *zendesk.OrganizationMembershipListOptions) ([]zendesk.OrganizationMembership, zendesk.Page, error) {
 	m.ctrl.T.Helper()
@@ -979,6 +1209,52 @@ func (m *Client) GetOrganizationMemberships(arg0 context.Context, arg1 *zendesk.
 func (mr *ClientMockRecorder) GetOrganizationMemberships(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationMemberships", reflect.TypeOf((*Client)(nil).GetOrganizationMemberships), arg0, arg1)
+}
+
+// GetOrganizationMembershipsCBP mocks base method.
+func (m *Client) GetOrganizationMembershipsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.OrganizationMembership, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationMembershipsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.OrganizationMembership)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationMembershipsCBP indicates an expected call of GetOrganizationMembershipsCBP.
+func (mr *ClientMockRecorder) GetOrganizationMembershipsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationMembershipsCBP", reflect.TypeOf((*Client)(nil).GetOrganizationMembershipsCBP), ctx, opts)
+}
+
+// GetOrganizationMembershipsIterator mocks base method.
+func (m *Client) GetOrganizationMembershipsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.OrganizationMembership] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationMembershipsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.OrganizationMembership])
+	return ret0
+}
+
+// GetOrganizationMembershipsIterator indicates an expected call of GetOrganizationMembershipsIterator.
+func (mr *ClientMockRecorder) GetOrganizationMembershipsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationMembershipsIterator", reflect.TypeOf((*Client)(nil).GetOrganizationMembershipsIterator), ctx, opts)
+}
+
+// GetOrganizationMembershipsOBP mocks base method.
+func (m *Client) GetOrganizationMembershipsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.OrganizationMembership, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationMembershipsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.OrganizationMembership)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationMembershipsOBP indicates an expected call of GetOrganizationMembershipsOBP.
+func (mr *ClientMockRecorder) GetOrganizationMembershipsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationMembershipsOBP", reflect.TypeOf((*Client)(nil).GetOrganizationMembershipsOBP), ctx, opts)
 }
 
 // GetOrganizationTags mocks base method.
@@ -1029,17 +1305,17 @@ func (mr *ClientMockRecorder) GetOrganizationTicketsCBP(ctx, opts any) *gomock.C
 }
 
 // GetOrganizationTicketsIterator mocks base method.
-func (m *Client) GetOrganizationTicketsIterator(ctx context.Context, organizationID int64, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Ticket] {
+func (m *Client) GetOrganizationTicketsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Ticket] {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetOrganizationTicketsIterator", ctx, organizationID, opts)
+	ret := m.ctrl.Call(m, "GetOrganizationTicketsIterator", ctx, opts)
 	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Ticket])
 	return ret0
 }
 
 // GetOrganizationTicketsIterator indicates an expected call of GetOrganizationTicketsIterator.
-func (mr *ClientMockRecorder) GetOrganizationTicketsIterator(ctx, organizationID, opts any) *gomock.Call {
+func (mr *ClientMockRecorder) GetOrganizationTicketsIterator(ctx, opts any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTicketsIterator", reflect.TypeOf((*Client)(nil).GetOrganizationTicketsIterator), ctx, organizationID, opts)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationTicketsIterator", reflect.TypeOf((*Client)(nil).GetOrganizationTicketsIterator), ctx, opts)
 }
 
 // GetOrganizationTicketsOBP mocks base method.
@@ -1074,6 +1350,52 @@ func (mr *ClientMockRecorder) GetOrganizationUsers(ctx, orgID, opts any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationUsers", reflect.TypeOf((*Client)(nil).GetOrganizationUsers), ctx, orgID, opts)
 }
 
+// GetOrganizationUsersCBP mocks base method.
+func (m *Client) GetOrganizationUsersCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.User, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationUsersCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationUsersCBP indicates an expected call of GetOrganizationUsersCBP.
+func (mr *ClientMockRecorder) GetOrganizationUsersCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationUsersCBP", reflect.TypeOf((*Client)(nil).GetOrganizationUsersCBP), ctx, opts)
+}
+
+// GetOrganizationUsersIterator mocks base method.
+func (m *Client) GetOrganizationUsersIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.User] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationUsersIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.User])
+	return ret0
+}
+
+// GetOrganizationUsersIterator indicates an expected call of GetOrganizationUsersIterator.
+func (mr *ClientMockRecorder) GetOrganizationUsersIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationUsersIterator", reflect.TypeOf((*Client)(nil).GetOrganizationUsersIterator), ctx, opts)
+}
+
+// GetOrganizationUsersOBP mocks base method.
+func (m *Client) GetOrganizationUsersOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.User, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationUsersOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationUsersOBP indicates an expected call of GetOrganizationUsersOBP.
+func (mr *ClientMockRecorder) GetOrganizationUsersOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationUsersOBP", reflect.TypeOf((*Client)(nil).GetOrganizationUsersOBP), ctx, opts)
+}
+
 // GetOrganizations mocks base method.
 func (m *Client) GetOrganizations(ctx context.Context, opts *zendesk.OrganizationListOptions) ([]zendesk.Organization, zendesk.Page, error) {
 	m.ctrl.T.Helper()
@@ -1088,6 +1410,52 @@ func (m *Client) GetOrganizations(ctx context.Context, opts *zendesk.Organizatio
 func (mr *ClientMockRecorder) GetOrganizations(ctx, opts any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizations", reflect.TypeOf((*Client)(nil).GetOrganizations), ctx, opts)
+}
+
+// GetOrganizationsCBP mocks base method.
+func (m *Client) GetOrganizationsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.Organization, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Organization)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationsCBP indicates an expected call of GetOrganizationsCBP.
+func (mr *ClientMockRecorder) GetOrganizationsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationsCBP", reflect.TypeOf((*Client)(nil).GetOrganizationsCBP), ctx, opts)
+}
+
+// GetOrganizationsIterator mocks base method.
+func (m *Client) GetOrganizationsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Organization] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Organization])
+	return ret0
+}
+
+// GetOrganizationsIterator indicates an expected call of GetOrganizationsIterator.
+func (mr *ClientMockRecorder) GetOrganizationsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationsIterator", reflect.TypeOf((*Client)(nil).GetOrganizationsIterator), ctx, opts)
+}
+
+// GetOrganizationsOBP mocks base method.
+func (m *Client) GetOrganizationsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.Organization, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizationsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Organization)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOrganizationsOBP indicates an expected call of GetOrganizationsOBP.
+func (mr *ClientMockRecorder) GetOrganizationsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizationsOBP", reflect.TypeOf((*Client)(nil).GetOrganizationsOBP), ctx, opts)
 }
 
 // GetSLAPolicies mocks base method.
@@ -1106,6 +1474,52 @@ func (mr *ClientMockRecorder) GetSLAPolicies(ctx, opts any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPolicies", reflect.TypeOf((*Client)(nil).GetSLAPolicies), ctx, opts)
 }
 
+// GetSLAPoliciesCBP mocks base method.
+func (m *Client) GetSLAPoliciesCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.SLAPolicy, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSLAPoliciesCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.SLAPolicy)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSLAPoliciesCBP indicates an expected call of GetSLAPoliciesCBP.
+func (mr *ClientMockRecorder) GetSLAPoliciesCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPoliciesCBP", reflect.TypeOf((*Client)(nil).GetSLAPoliciesCBP), ctx, opts)
+}
+
+// GetSLAPoliciesIterator mocks base method.
+func (m *Client) GetSLAPoliciesIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.SLAPolicy] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSLAPoliciesIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.SLAPolicy])
+	return ret0
+}
+
+// GetSLAPoliciesIterator indicates an expected call of GetSLAPoliciesIterator.
+func (mr *ClientMockRecorder) GetSLAPoliciesIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPoliciesIterator", reflect.TypeOf((*Client)(nil).GetSLAPoliciesIterator), ctx, opts)
+}
+
+// GetSLAPoliciesOBP mocks base method.
+func (m *Client) GetSLAPoliciesOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.SLAPolicy, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSLAPoliciesOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.SLAPolicy)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSLAPoliciesOBP indicates an expected call of GetSLAPoliciesOBP.
+func (mr *ClientMockRecorder) GetSLAPoliciesOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPoliciesOBP", reflect.TypeOf((*Client)(nil).GetSLAPoliciesOBP), ctx, opts)
+}
+
 // GetSLAPolicy mocks base method.
 func (m *Client) GetSLAPolicy(ctx context.Context, id int64) (zendesk.SLAPolicy, error) {
 	m.ctrl.T.Helper()
@@ -1119,6 +1533,52 @@ func (m *Client) GetSLAPolicy(ctx context.Context, id int64) (zendesk.SLAPolicy,
 func (mr *ClientMockRecorder) GetSLAPolicy(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSLAPolicy", reflect.TypeOf((*Client)(nil).GetSLAPolicy), ctx, id)
+}
+
+// GetSearchCBP mocks base method.
+func (m *Client) GetSearchCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.SearchResults, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSearchCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.SearchResults)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSearchCBP indicates an expected call of GetSearchCBP.
+func (mr *ClientMockRecorder) GetSearchCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSearchCBP", reflect.TypeOf((*Client)(nil).GetSearchCBP), ctx, opts)
+}
+
+// GetSearchIterator mocks base method.
+func (m *Client) GetSearchIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.SearchResults] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSearchIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.SearchResults])
+	return ret0
+}
+
+// GetSearchIterator indicates an expected call of GetSearchIterator.
+func (mr *ClientMockRecorder) GetSearchIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSearchIterator", reflect.TypeOf((*Client)(nil).GetSearchIterator), ctx, opts)
+}
+
+// GetSearchOBP mocks base method.
+func (m *Client) GetSearchOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.SearchResults, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSearchOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.SearchResults)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSearchOBP indicates an expected call of GetSearchOBP.
+func (mr *ClientMockRecorder) GetSearchOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSearchOBP", reflect.TypeOf((*Client)(nil).GetSearchOBP), ctx, opts)
 }
 
 // GetTarget mocks base method.
@@ -1198,6 +1658,98 @@ func (mr *ClientMockRecorder) GetTicketAudits(ctx, ticketID, opts any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAudits", reflect.TypeOf((*Client)(nil).GetTicketAudits), ctx, ticketID, opts)
 }
 
+// GetTicketAuditsCBP mocks base method.
+func (m *Client) GetTicketAuditsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.TicketAudit, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketAuditsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketAudit)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketAuditsCBP indicates an expected call of GetTicketAuditsCBP.
+func (mr *ClientMockRecorder) GetTicketAuditsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAuditsCBP", reflect.TypeOf((*Client)(nil).GetTicketAuditsCBP), ctx, opts)
+}
+
+// GetTicketAuditsIterator mocks base method.
+func (m *Client) GetTicketAuditsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.TicketAudit] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketAuditsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.TicketAudit])
+	return ret0
+}
+
+// GetTicketAuditsIterator indicates an expected call of GetTicketAuditsIterator.
+func (mr *ClientMockRecorder) GetTicketAuditsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAuditsIterator", reflect.TypeOf((*Client)(nil).GetTicketAuditsIterator), ctx, opts)
+}
+
+// GetTicketAuditsOBP mocks base method.
+func (m *Client) GetTicketAuditsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.TicketAudit, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketAuditsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketAudit)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketAuditsOBP indicates an expected call of GetTicketAuditsOBP.
+func (mr *ClientMockRecorder) GetTicketAuditsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketAuditsOBP", reflect.TypeOf((*Client)(nil).GetTicketAuditsOBP), ctx, opts)
+}
+
+// GetTicketCommentsCBP mocks base method.
+func (m *Client) GetTicketCommentsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.TicketComment, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketCommentsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketComment)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketCommentsCBP indicates an expected call of GetTicketCommentsCBP.
+func (mr *ClientMockRecorder) GetTicketCommentsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketCommentsCBP", reflect.TypeOf((*Client)(nil).GetTicketCommentsCBP), ctx, opts)
+}
+
+// GetTicketCommentsIterator mocks base method.
+func (m *Client) GetTicketCommentsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.TicketComment] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketCommentsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.TicketComment])
+	return ret0
+}
+
+// GetTicketCommentsIterator indicates an expected call of GetTicketCommentsIterator.
+func (mr *ClientMockRecorder) GetTicketCommentsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketCommentsIterator", reflect.TypeOf((*Client)(nil).GetTicketCommentsIterator), ctx, opts)
+}
+
+// GetTicketCommentsOBP mocks base method.
+func (m *Client) GetTicketCommentsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.TicketComment, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketCommentsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketComment)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketCommentsOBP indicates an expected call of GetTicketCommentsOBP.
+func (mr *ClientMockRecorder) GetTicketCommentsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketCommentsOBP", reflect.TypeOf((*Client)(nil).GetTicketCommentsOBP), ctx, opts)
+}
+
 // GetTicketField mocks base method.
 func (m *Client) GetTicketField(ctx context.Context, ticketID int64) (zendesk.TicketField, error) {
 	m.ctrl.T.Helper()
@@ -1229,6 +1781,52 @@ func (mr *ClientMockRecorder) GetTicketFields(ctx any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFields", reflect.TypeOf((*Client)(nil).GetTicketFields), ctx)
 }
 
+// GetTicketFieldsCBP mocks base method.
+func (m *Client) GetTicketFieldsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.TicketField, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFieldsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketField)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketFieldsCBP indicates an expected call of GetTicketFieldsCBP.
+func (mr *ClientMockRecorder) GetTicketFieldsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFieldsCBP", reflect.TypeOf((*Client)(nil).GetTicketFieldsCBP), ctx, opts)
+}
+
+// GetTicketFieldsIterator mocks base method.
+func (m *Client) GetTicketFieldsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.TicketField] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFieldsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.TicketField])
+	return ret0
+}
+
+// GetTicketFieldsIterator indicates an expected call of GetTicketFieldsIterator.
+func (mr *ClientMockRecorder) GetTicketFieldsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFieldsIterator", reflect.TypeOf((*Client)(nil).GetTicketFieldsIterator), ctx, opts)
+}
+
+// GetTicketFieldsOBP mocks base method.
+func (m *Client) GetTicketFieldsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.TicketField, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFieldsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketField)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketFieldsOBP indicates an expected call of GetTicketFieldsOBP.
+func (mr *ClientMockRecorder) GetTicketFieldsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFieldsOBP", reflect.TypeOf((*Client)(nil).GetTicketFieldsOBP), ctx, opts)
+}
+
 // GetTicketForm mocks base method.
 func (m *Client) GetTicketForm(ctx context.Context, id int64) (zendesk.TicketForm, error) {
 	m.ctrl.T.Helper()
@@ -1258,6 +1856,52 @@ func (m *Client) GetTicketForms(ctx context.Context, options *zendesk.TicketForm
 func (mr *ClientMockRecorder) GetTicketForms(ctx, options any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketForms", reflect.TypeOf((*Client)(nil).GetTicketForms), ctx, options)
+}
+
+// GetTicketFormsCBP mocks base method.
+func (m *Client) GetTicketFormsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.TicketForm, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFormsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketForm)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketFormsCBP indicates an expected call of GetTicketFormsCBP.
+func (mr *ClientMockRecorder) GetTicketFormsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFormsCBP", reflect.TypeOf((*Client)(nil).GetTicketFormsCBP), ctx, opts)
+}
+
+// GetTicketFormsIterator mocks base method.
+func (m *Client) GetTicketFormsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.TicketForm] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFormsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.TicketForm])
+	return ret0
+}
+
+// GetTicketFormsIterator indicates an expected call of GetTicketFormsIterator.
+func (mr *ClientMockRecorder) GetTicketFormsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFormsIterator", reflect.TypeOf((*Client)(nil).GetTicketFormsIterator), ctx, opts)
+}
+
+// GetTicketFormsOBP mocks base method.
+func (m *Client) GetTicketFormsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.TicketForm, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketFormsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.TicketForm)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketFormsOBP indicates an expected call of GetTicketFormsOBP.
+func (mr *ClientMockRecorder) GetTicketFormsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketFormsOBP", reflect.TypeOf((*Client)(nil).GetTicketFormsOBP), ctx, opts)
 }
 
 // GetTicketTags mocks base method.
@@ -1323,6 +1967,52 @@ func (mr *ClientMockRecorder) GetTicketsFromView(arg0, arg1, arg2 any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromView", reflect.TypeOf((*Client)(nil).GetTicketsFromView), arg0, arg1, arg2)
 }
 
+// GetTicketsFromViewCBP mocks base method.
+func (m *Client) GetTicketsFromViewCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.Ticket, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsFromViewCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Ticket)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketsFromViewCBP indicates an expected call of GetTicketsFromViewCBP.
+func (mr *ClientMockRecorder) GetTicketsFromViewCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromViewCBP", reflect.TypeOf((*Client)(nil).GetTicketsFromViewCBP), ctx, opts)
+}
+
+// GetTicketsFromViewIterator mocks base method.
+func (m *Client) GetTicketsFromViewIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Ticket] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsFromViewIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Ticket])
+	return ret0
+}
+
+// GetTicketsFromViewIterator indicates an expected call of GetTicketsFromViewIterator.
+func (mr *ClientMockRecorder) GetTicketsFromViewIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromViewIterator", reflect.TypeOf((*Client)(nil).GetTicketsFromViewIterator), ctx, opts)
+}
+
+// GetTicketsFromViewOBP mocks base method.
+func (m *Client) GetTicketsFromViewOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.Ticket, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketsFromViewOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Ticket)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTicketsFromViewOBP indicates an expected call of GetTicketsFromViewOBP.
+func (mr *ClientMockRecorder) GetTicketsFromViewOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketsFromViewOBP", reflect.TypeOf((*Client)(nil).GetTicketsFromViewOBP), ctx, opts)
+}
+
 // GetTicketsIterator mocks base method.
 func (m *Client) GetTicketsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Ticket] {
 	m.ctrl.T.Helper()
@@ -1384,6 +2074,52 @@ func (mr *ClientMockRecorder) GetTriggers(ctx, opts any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggers", reflect.TypeOf((*Client)(nil).GetTriggers), ctx, opts)
 }
 
+// GetTriggersCBP mocks base method.
+func (m *Client) GetTriggersCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.Trigger, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTriggersCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Trigger)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTriggersCBP indicates an expected call of GetTriggersCBP.
+func (mr *ClientMockRecorder) GetTriggersCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggersCBP", reflect.TypeOf((*Client)(nil).GetTriggersCBP), ctx, opts)
+}
+
+// GetTriggersIterator mocks base method.
+func (m *Client) GetTriggersIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.Trigger] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTriggersIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.Trigger])
+	return ret0
+}
+
+// GetTriggersIterator indicates an expected call of GetTriggersIterator.
+func (mr *ClientMockRecorder) GetTriggersIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggersIterator", reflect.TypeOf((*Client)(nil).GetTriggersIterator), ctx, opts)
+}
+
+// GetTriggersOBP mocks base method.
+func (m *Client) GetTriggersOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.Trigger, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTriggersOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.Trigger)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTriggersOBP indicates an expected call of GetTriggersOBP.
+func (mr *ClientMockRecorder) GetTriggersOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTriggersOBP", reflect.TypeOf((*Client)(nil).GetTriggersOBP), ctx, opts)
+}
+
 // GetUser mocks base method.
 func (m *Client) GetUser(ctx context.Context, userID int64) (zendesk.User, error) {
 	m.ctrl.T.Helper()
@@ -1413,6 +2149,52 @@ func (m *Client) GetUserFields(ctx context.Context, opts *zendesk.UserFieldListO
 func (mr *ClientMockRecorder) GetUserFields(ctx, opts any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFields", reflect.TypeOf((*Client)(nil).GetUserFields), ctx, opts)
+}
+
+// GetUserFieldsCBP mocks base method.
+func (m *Client) GetUserFieldsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.UserField, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserFieldsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.UserField)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUserFieldsCBP indicates an expected call of GetUserFieldsCBP.
+func (mr *ClientMockRecorder) GetUserFieldsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFieldsCBP", reflect.TypeOf((*Client)(nil).GetUserFieldsCBP), ctx, opts)
+}
+
+// GetUserFieldsIterator mocks base method.
+func (m *Client) GetUserFieldsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.UserField] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserFieldsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.UserField])
+	return ret0
+}
+
+// GetUserFieldsIterator indicates an expected call of GetUserFieldsIterator.
+func (mr *ClientMockRecorder) GetUserFieldsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFieldsIterator", reflect.TypeOf((*Client)(nil).GetUserFieldsIterator), ctx, opts)
+}
+
+// GetUserFieldsOBP mocks base method.
+func (m *Client) GetUserFieldsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.UserField, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserFieldsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.UserField)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUserFieldsOBP indicates an expected call of GetUserFieldsOBP.
+func (mr *ClientMockRecorder) GetUserFieldsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFieldsOBP", reflect.TypeOf((*Client)(nil).GetUserFieldsOBP), ctx, opts)
 }
 
 // GetUserRelated mocks base method.
@@ -1461,6 +2243,52 @@ func (mr *ClientMockRecorder) GetUsers(ctx, opts any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*Client)(nil).GetUsers), ctx, opts)
 }
 
+// GetUsersCBP mocks base method.
+func (m *Client) GetUsersCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.User, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUsersCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUsersCBP indicates an expected call of GetUsersCBP.
+func (mr *ClientMockRecorder) GetUsersCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsersCBP", reflect.TypeOf((*Client)(nil).GetUsersCBP), ctx, opts)
+}
+
+// GetUsersIterator mocks base method.
+func (m *Client) GetUsersIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.User] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUsersIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.User])
+	return ret0
+}
+
+// GetUsersIterator indicates an expected call of GetUsersIterator.
+func (mr *ClientMockRecorder) GetUsersIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsersIterator", reflect.TypeOf((*Client)(nil).GetUsersIterator), ctx, opts)
+}
+
+// GetUsersOBP mocks base method.
+func (m *Client) GetUsersOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.User, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUsersOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUsersOBP indicates an expected call of GetUsersOBP.
+func (mr *ClientMockRecorder) GetUsersOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsersOBP", reflect.TypeOf((*Client)(nil).GetUsersOBP), ctx, opts)
+}
+
 // GetView mocks base method.
 func (m *Client) GetView(arg0 context.Context, arg1 int64) (zendesk.View, error) {
 	m.ctrl.T.Helper()
@@ -1490,6 +2318,52 @@ func (m *Client) GetViews(arg0 context.Context) ([]zendesk.View, zendesk.Page, e
 func (mr *ClientMockRecorder) GetViews(arg0 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViews", reflect.TypeOf((*Client)(nil).GetViews), arg0)
+}
+
+// GetViewsCBP mocks base method.
+func (m *Client) GetViewsCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.View, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetViewsCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.View)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetViewsCBP indicates an expected call of GetViewsCBP.
+func (mr *ClientMockRecorder) GetViewsCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViewsCBP", reflect.TypeOf((*Client)(nil).GetViewsCBP), ctx, opts)
+}
+
+// GetViewsIterator mocks base method.
+func (m *Client) GetViewsIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.View] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetViewsIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.View])
+	return ret0
+}
+
+// GetViewsIterator indicates an expected call of GetViewsIterator.
+func (mr *ClientMockRecorder) GetViewsIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViewsIterator", reflect.TypeOf((*Client)(nil).GetViewsIterator), ctx, opts)
+}
+
+// GetViewsOBP mocks base method.
+func (m *Client) GetViewsOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.View, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetViewsOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.View)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetViewsOBP indicates an expected call of GetViewsOBP.
+func (mr *ClientMockRecorder) GetViewsOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetViewsOBP", reflect.TypeOf((*Client)(nil).GetViewsOBP), ctx, opts)
 }
 
 // GetWebhook mocks base method.

@@ -41,6 +41,9 @@ type (
 		GetOrganizationMemberships(context.Context, *OrganizationMembershipListOptions) ([]OrganizationMembership, Page, error)
 		CreateOrganizationMembership(context.Context, OrganizationMembershipOptions) (OrganizationMembership, error)
 		SetDefaultOrganization(context.Context, OrganizationMembershipOptions) (OrganizationMembership, error)
+		GetOrganizationMembershipsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[OrganizationMembership]
+		GetOrganizationMembershipsOBP(ctx context.Context, opts *OBPOptions) ([]OrganizationMembership, Page, error)
+		GetOrganizationMembershipsCBP(ctx context.Context, opts *CBPOptions) ([]OrganizationMembership, CursorPaginationMeta, error)
 	}
 )
 

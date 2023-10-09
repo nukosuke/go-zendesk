@@ -32,6 +32,9 @@ type OrganizationField struct {
 type OrganizationFieldAPI interface {
 	GetOrganizationFields(ctx context.Context) ([]OrganizationField, Page, error)
 	CreateOrganizationField(ctx context.Context, organizationField OrganizationField) (OrganizationField, error)
+	GetOrganizationFieldsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[OrganizationField]
+	GetOrganizationFieldsOBP(ctx context.Context, opts *OBPOptions) ([]OrganizationField, Page, error)
+	GetOrganizationFieldsCBP(ctx context.Context, opts *CBPOptions) ([]OrganizationField, CursorPaginationMeta, error)
 }
 
 // GetOrganizationFields fetches organization field list

@@ -158,29 +158,12 @@ type TicketAPI interface {
 	GetOrganizationTickets(ctx context.Context, organizationID int64, ops *TicketListOptions) ([]Ticket, Page, error)
 	GetOrganizationTicketsOBP(ctx context.Context, opts *OBPOptions) ([]Ticket, Page, error)
 	GetOrganizationTicketsCBP(ctx context.Context, opts *CBPOptions) ([]Ticket, CursorPaginationMeta, error)
-	GetOrganizationTicketsIterator(ctx context.Context, organizationID int64, opts *PaginationOptions) *Iterator[Ticket]
+	GetOrganizationTicketsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Ticket]
 	GetTicket(ctx context.Context, id int64) (Ticket, error)
 	GetMultipleTickets(ctx context.Context, ticketIDs []int64) ([]Ticket, error)
 	CreateTicket(ctx context.Context, ticket Ticket) (Ticket, error)
 	UpdateTicket(ctx context.Context, ticketID int64, ticket Ticket) (Ticket, error)
 	DeleteTicket(ctx context.Context, ticketID int64) error
-}
-
-// GetTicketsIterator returns a TicketIterator to iterate over tickets
-//
-// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
-func (z *Client) GetTicketsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Ticket] {
-	return &Iterator[Ticket]{
-		CommonOptions: opts.CommonOptions,
-		pageSize:      opts.PageSize,
-		hasMore:       true,
-		isCBP:         opts.IsCBP,
-		pageAfter:     "",
-		pageIndex:     1,
-		ctx:           ctx,
-		obpFunc:       z.GetTicketsOBP,
-		cbpFunc:       z.GetTicketsCBP,
-	}
 }
 
 // GetTickets get ticket list with offset based pagination
@@ -214,54 +197,6 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 	return data.Tickets, data.Page, nil
 }
 
-// GetTickets get ticket list with offset based pagination
-//
-// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
-func (z *Client) GetTicketsOBP(ctx context.Context, opts *OBPOptions) ([]Ticket, Page, error) {
-	var data struct {
-		Tickets []Ticket `json:"tickets"`
-		Page
-	}
-
-	tmp := opts
-	if tmp == nil {
-		tmp = &OBPOptions{}
-	}
-
-	u, err := addOptions("/tickets.json", tmp)
-	if err != nil {
-		return nil, Page{}, err
-	}
-
-	err = getData(z, ctx, u, &data)
-	if err != nil {
-		return nil, Page{}, err
-	}
-	return data.Tickets, data.Page, nil
-}
-
-// GetTicketsCBP get ticket list with cursor based pagination
-//
-// ref: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
-func (z *Client) GetTicketsCBP(ctx context.Context, opts *CBPOptions) ([]Ticket, CursorPaginationMeta, error) {
-	var data TicketListCBPResult
-
-	tmp := opts
-	if tmp == nil {
-		tmp = &CBPOptions{}
-	}
-
-	u, err := addOptions("/tickets.json", tmp)
-	if err != nil {
-		return nil, data.Meta, err
-	}
-
-	err = getData(z, ctx, u, &data)
-	if err != nil {
-		return nil, data.Meta, err
-	}
-	return data.Tickets, data.Meta, nil
-}
 
 // GetOrganizationTickets get organization ticket list
 //
@@ -290,74 +225,6 @@ func (z *Client) GetOrganizationTickets(
 		return nil, Page{}, err
 	}
 	return data.Tickets, data.Page, nil
-}
-
-func (z *Client) GetOrganizationTicketsOBP(
-	ctx context.Context, opts *OBPOptions,
-) ([]Ticket, Page, error) {
-	var data struct {
-		Tickets []Ticket `json:"tickets"`
-		Page
-	}
-
-	tmp := opts
-	if tmp == nil {
-		tmp = &OBPOptions{}
-	}
-
-	path := fmt.Sprintf("/organizations/%d/tickets.json", tmp.Id)
-	u, err := addOptions(path, tmp)
-	if err != nil {
-		return nil, Page{}, err
-	}
-
-	err = getData(z, ctx, u, &data)
-	if err != nil {
-		return nil, Page{}, err
-	}
-	return data.Tickets, data.Page, nil
-}
-
-func (z *Client) GetOrganizationTicketsCBP(
-	ctx context.Context, opts *CBPOptions,
-) ([]Ticket, CursorPaginationMeta, error) {
-	var data struct {
-		Tickets []Ticket             `json:"tickets"`
-		Meta    CursorPaginationMeta `json:"meta"`
-	}
-
-	tmp := opts
-	if tmp == nil {
-		tmp = &CBPOptions{}
-	}
-
-	path := fmt.Sprintf("/organizations/%d/tickets.json", tmp.Id)
-	u, err := addOptions(path, tmp)
-	if err != nil {
-		return nil, data.Meta, err
-	}
-
-	err = getData(z, ctx, u, &data)
-	if err != nil {
-		return nil, data.Meta, err
-	}
-	return data.Tickets, data.Meta, nil
-}
-
-func (z *Client) GetOrganizationTicketsIterator(ctx context.Context, organizationID int64, opts *PaginationOptions) *Iterator[Ticket] {
-	commonOpts := opts.CommonOptions
-	commonOpts.Id = organizationID
-	return &Iterator[Ticket]{
-		CommonOptions: commonOpts,
-		pageSize:      opts.PageSize,
-		hasMore:       true,
-		isCBP:         opts.IsCBP,
-		pageAfter:     "",
-		pageIndex:     1,
-		ctx:           ctx,
-		obpFunc:       z.GetOrganizationTicketsOBP,
-		cbpFunc:       z.GetOrganizationTicketsCBP,
-	}
 }
 
 // GetTicket gets a specified ticket
