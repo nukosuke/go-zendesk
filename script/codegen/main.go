@@ -269,7 +269,7 @@ func main() {
 	tt := template.Must(template.New("func").Parse(tpl))
 
 	for _, v := range funcData {
-		dest := "../../zendesk/" + v.FileName + "_generated.go"
+		dest := "zendesk/" + v.FileName + "_generated.go"
 		file, err := os.Create(dest)
 		if err != nil {
 			panic(err)

@@ -57,37 +57,7 @@ You can simulate the response from Zendesk API with it.
 
 `go generate ./...`
 
-## To regenerate CBP(Cursor Based Pagination), OBP(Offset Based Pagination) helper function and Iterators
-
-If a new API endpoint supports CBP, add a new element to the funcData in script/codegen/main.go file like this:
-
-```go
-{
-    FuncName:    "Automations",
-    ObjectName:  "Automation",
-    ApiEndpoint: "/automation.json",
-    JsonName:    "automations",
-    FileName:    "automation",
-},
-```
-should use the script to generate the helper functions and the iterator
-`go run script/codegen/main.go`
-
-## Example for using the CBP/OBP iterator
-
-```go
-ops := NewPaginationOptions()
-it := client.GetTicketsIterator(ctx, ops)
-for it.HasMore() {
-    tickets, err := it.GetNext()
-    if err == nil {
-        for _, ticket := range tickets {
-            println(ticket.Subject)
-        }
-    }
-}
-```
-
+## Zendesk [OBP(Offset Based Pagination) to CBP(Cursor Based Pagination) migration guide](CBPMigration.md)
 
 ## Maintainer
 
