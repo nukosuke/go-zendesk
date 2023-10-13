@@ -1,0 +1,18 @@
+{
+  "view_counts": [
+    {
+      "fresh": true,
+      "pretty": "~700",
+      "url": "https://company.zendesk.com/api/v2/views/25/count.json",
+      "value": 719,
+      "view_id": 25
+    },
+    {
+      "fresh": false,
+      "pretty": "...",
+      "url": "https://company.zendesk.com/api/v2/views/78/count.json",
+      "value": null,
+      "view_id": 78
+    }
+  ]
+}
