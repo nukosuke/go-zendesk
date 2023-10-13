@@ -63,7 +63,7 @@ type Ticket struct {
 	SubmitterID     int64         `json:"submitter_id,omitempty"`
 	AssigneeID      int64         `json:"assignee_id,omitempty"`
 	OrganizationID  int64         `json:"organization_id,omitempty"`
-	GroupID         int64         `json:"group_id,omitempty"`
+	GroupID         json.Number   `json:"group_id,omitempty"`
 	CollaboratorIDs []int64       `json:"collaborator_ids,omitempty"`
 	FollowerIDs     []int64       `json:"follower_ids,omitempty"`
 	EmailCCIDs      []int64       `json:"email_cc_ids,omitempty"`
