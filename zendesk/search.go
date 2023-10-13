@@ -26,6 +26,9 @@ type CountOptions struct {
 type SearchAPI interface {
 	Search(ctx context.Context, opts *SearchOptions) (SearchResults, Page, error)
 	SearchCount(ctx context.Context, opts *CountOptions) (int, error)
+	GetSearchIterator(ctx context.Context, opts *PaginationOptions) *Iterator[SearchResults]
+	GetSearchOBP(ctx context.Context, opts *OBPOptions) ([]SearchResults, Page, error)
+	GetSearchCBP(ctx context.Context, opts *CBPOptions) ([]SearchResults, CursorPaginationMeta, error)
 }
 
 type SearchResults struct {

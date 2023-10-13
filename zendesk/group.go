@@ -30,6 +30,9 @@ type GroupListOptions struct {
 // GroupAPI an interface containing all methods associated with zendesk groups
 type GroupAPI interface {
 	GetGroups(ctx context.Context, opts *GroupListOptions) ([]Group, Page, error)
+	GetGroupsOBP(ctx context.Context, opts *OBPOptions) ([]Group, Page, error)
+	GetGroupsCBP(ctx context.Context, opts *CBPOptions) ([]Group, CursorPaginationMeta, error)
+	GetGroupsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Group]
 	GetGroup(ctx context.Context, groupID int64) (Group, error)
 	CreateGroup(ctx context.Context, group Group) (Group, error)
 	UpdateGroup(ctx context.Context, groupID int64, group Group) (Group, error)

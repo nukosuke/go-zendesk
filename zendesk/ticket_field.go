@@ -53,6 +53,9 @@ type TicketFieldAPI interface {
 	GetTicketField(ctx context.Context, ticketID int64) (TicketField, error)
 	UpdateTicketField(ctx context.Context, ticketID int64, field TicketField) (TicketField, error)
 	DeleteTicketField(ctx context.Context, ticketID int64) error
+	GetTicketFieldsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[TicketField]
+	GetTicketFieldsOBP(ctx context.Context, opts *OBPOptions) ([]TicketField, Page, error)
+	GetTicketFieldsCBP(ctx context.Context, opts *CBPOptions) ([]TicketField, CursorPaginationMeta, error)
 }
 
 // GetTicketFields fetches ticket field list

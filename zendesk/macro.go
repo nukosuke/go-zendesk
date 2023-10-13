@@ -55,6 +55,9 @@ type MacroAPI interface {
 	CreateMacro(ctx context.Context, macro Macro) (Macro, error)
 	UpdateMacro(ctx context.Context, macroID int64, macro Macro) (Macro, error)
 	DeleteMacro(ctx context.Context, macroID int64) error
+	GetMacrosIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Macro]
+	GetMacrosOBP(ctx context.Context, opts *OBPOptions) ([]Macro, Page, error)
+	GetMacrosCBP(ctx context.Context, opts *CBPOptions) ([]Macro, CursorPaginationMeta, error)
 }
 
 // GetMacros get macro list

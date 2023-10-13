@@ -61,6 +61,9 @@ type TriggerAPI interface {
 	GetTrigger(ctx context.Context, id int64) (Trigger, error)
 	UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (Trigger, error)
 	DeleteTrigger(ctx context.Context, id int64) error
+	GetTriggersIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Trigger]
+	GetTriggersOBP(ctx context.Context, opts *OBPOptions) ([]Trigger, Page, error)
+	GetTriggersCBP(ctx context.Context, opts *CBPOptions) ([]Trigger, CursorPaginationMeta, error)
 }
 
 // GetTriggers fetch trigger list

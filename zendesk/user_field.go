@@ -33,6 +33,9 @@ type UserFieldListOptions struct {
 type UserFieldAPI interface {
 	GetUserFields(ctx context.Context, opts *UserFieldListOptions) ([]UserField, Page, error)
 	CreateUserField(ctx context.Context, userField UserField) (UserField, error)
+	GetUserFieldsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[UserField]
+	GetUserFieldsOBP(ctx context.Context, opts *OBPOptions) ([]UserField, Page, error)
+	GetUserFieldsCBP(ctx context.Context, opts *CBPOptions) ([]UserField, CursorPaginationMeta, error)
 }
 
 // GetUserFields fetch trigger list
