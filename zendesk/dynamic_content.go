@@ -14,6 +14,9 @@ type DynamicContentAPI interface {
 	GetDynamicContentItem(ctx context.Context, id int64) (DynamicContentItem, error)
 	UpdateDynamicContentItem(ctx context.Context, id int64, item DynamicContentItem) (DynamicContentItem, error)
 	DeleteDynamicContentItem(ctx context.Context, id int64) error
+	GetDynamicContentItemsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[DynamicContentItem]
+	GetDynamicContentItemsOBP(ctx context.Context, opts *OBPOptions) ([]DynamicContentItem, Page, error)
+	GetDynamicContentItemsCBP(ctx context.Context, opts *CBPOptions) ([]DynamicContentItem, CursorPaginationMeta, error)
 }
 
 // DynamicContentItem is zendesk dynamic content item JSON payload format

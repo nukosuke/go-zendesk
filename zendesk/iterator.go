@@ -32,9 +32,24 @@ type CommonOptions struct {
 	SortBy string `url:"sort_by,omitempty"`
 
 	// SortOrder can take "asc" or "desc"
-	SortOrder string `url:"sort_order,omitempty"`
-	Sort      string `url:"sort,omitempty"`
-	Id        int64
+	SortOrder      string `url:"sort_order,omitempty"`
+	Sort           string `url:"sort,omitempty"`
+	Id             int64
+	GroupID        int64 `json:"group_id,omitempty" url:"group_id,omitempty"`
+	UserID         int64 `json:"user_id,omitempty" url:"user_id,omitempty"`
+	OrganizationID int64 `json:"organization_id,omitempty" url:"organization_id,omitempty"`
+
+	Access            string `json:"access"`
+	Category          int    `json:"category"`
+	Include           string `json:"include" url:"include,omitempty"`
+	OnlyViewable      bool   `json:"only_viewable"`
+	Query             string `url:"query"`
+	EndUserVisible    bool   `url:"end_user_visible,omitempty"`
+	FallbackToDefault bool   `url:"fallback_to_default,omitempty"`
+	AssociatedToBrand bool   `url:"associated_to_brand,omitempty"`
+	CategoryID        string `url:"category_id,omitempty"`
+
+	IncludeInlineImages string `url:"include_inline_images,omitempty"`
 }
 
 // CBPOptions struct is used to specify options for listing objects in CBP (Cursor Based Pagination).

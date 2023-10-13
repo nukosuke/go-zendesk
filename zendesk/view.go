@@ -29,6 +29,12 @@ type (
 		GetView(context.Context, int64) (View, error)
 		GetViews(context.Context) ([]View, Page, error)
 		GetTicketsFromView(context.Context, int64, *TicketListOptions) ([]Ticket, Page, error)
+		GetTicketsFromViewIterator(ctx context.Context, opts *PaginationOptions) *Iterator[Ticket]
+		GetTicketsFromViewOBP(ctx context.Context, opts *OBPOptions) ([]Ticket, Page, error)
+		GetTicketsFromViewCBP(ctx context.Context, opts *CBPOptions) ([]Ticket, CursorPaginationMeta, error)
+		GetViewsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[View]
+		GetViewsOBP(ctx context.Context, opts *OBPOptions) ([]View, Page, error)
+		GetViewsCBP(ctx context.Context, opts *CBPOptions) ([]View, CursorPaginationMeta, error)
 	}
 )
 

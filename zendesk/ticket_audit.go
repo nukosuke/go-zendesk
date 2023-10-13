@@ -33,6 +33,9 @@ type TicketAuditAPI interface {
 	GetAllTicketAudits(ctx context.Context, opts CursorOption) ([]TicketAudit, Cursor, error)
 	GetTicketAudits(ctx context.Context, ticketID int64, opts PageOptions) ([]TicketAudit, Page, error)
 	GetTicketAudit(ctx context.Context, TicketID, ID int64) (TicketAudit, error)
+	GetTicketAuditsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[TicketAudit]
+	GetTicketAuditsOBP(ctx context.Context, opts *OBPOptions) ([]TicketAudit, Page, error)
+	GetTicketAuditsCBP(ctx context.Context, opts *CBPOptions) ([]TicketAudit, CursorPaginationMeta, error)
 }
 
 // GetAllTicketAudits list all ticket audits

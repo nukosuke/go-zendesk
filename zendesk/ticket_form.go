@@ -41,6 +41,9 @@ type TicketFormAPI interface {
 	DeleteTicketForm(ctx context.Context, id int64) error
 	UpdateTicketForm(ctx context.Context, id int64, form TicketForm) (TicketForm, error)
 	GetTicketForm(ctx context.Context, id int64) (TicketForm, error)
+	GetTicketFormsIterator(ctx context.Context, opts *PaginationOptions) *Iterator[TicketForm]
+	GetTicketFormsOBP(ctx context.Context, opts *OBPOptions) ([]TicketForm, Page, error)
+	GetTicketFormsCBP(ctx context.Context, opts *CBPOptions) ([]TicketForm, CursorPaginationMeta, error)
 }
 
 // GetTicketForms fetches ticket forms

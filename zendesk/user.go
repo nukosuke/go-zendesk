@@ -122,6 +122,12 @@ type UserAPI interface {
 	CreateOrUpdateUser(ctx context.Context, user User) (User, error)
 	UpdateUser(ctx context.Context, userID int64, user User) (User, error)
 	GetUserRelated(ctx context.Context, userID int64) (UserRelated, error)
+	GetUsersIterator(ctx context.Context, opts *PaginationOptions) *Iterator[User]
+	GetUsersOBP(ctx context.Context, opts *OBPOptions) ([]User, Page, error)
+	GetUsersCBP(ctx context.Context, opts *CBPOptions) ([]User, CursorPaginationMeta, error)
+	GetOrganizationUsersIterator(ctx context.Context, opts *PaginationOptions) *Iterator[User]
+	GetOrganizationUsersOBP(ctx context.Context, opts *OBPOptions) ([]User, Page, error)
+	GetOrganizationUsersCBP(ctx context.Context, opts *CBPOptions) ([]User, CursorPaginationMeta, error)
 }
 
 // GetUsers fetch user list
