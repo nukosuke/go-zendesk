@@ -274,12 +274,11 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+		defer file.Close()
 		err = tt.Execute(file, v)
 		if err != nil {
 			panic(err)
 		}
-		file.Close()
 		fmt.Println("Generated " + dest + " successfully")
 	}
-
 }
