@@ -218,6 +218,14 @@ var funcData []FuncTemplateData = []FuncTemplateData{
 		ExtraParam:  true,
 	},
 	{
+		FuncName:    "GroupUsers",
+		ObjectName:  "User",
+		ApiEndpoint: "/groups/%d/users.json",
+		JsonName:    "users",
+		FileName:    "group_users",
+		ExtraParam:  true,
+	},
+	{
 		FuncName:    "Views",
 		ObjectName:  "View",
 		ApiEndpoint: "/views.json",
