@@ -18,7 +18,7 @@ const (
 )
 
 var defaultHeaders = map[string]string{
-	"User-Agent":   "nukosuke/go-zendesk",
+	"User-Agent":   "nukosuke/go-zendesk/0.18.0",
 	"Content-Type": "application/json",
 }
 
