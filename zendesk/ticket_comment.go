@@ -176,6 +176,7 @@ func (z *Client) RedactTicketComment(
 	return err
 }
 
+// RedactTicketCommentStringRequest contains the body of the RedactTicketCommentString PUT request
 type RedactTicketCommentStringRequest struct {
 	Text string `json:"text"`
 }

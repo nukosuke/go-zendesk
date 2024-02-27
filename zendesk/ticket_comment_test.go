@@ -127,3 +127,17 @@ func TestRedactTicketComment(t *testing.T) {
 		t.Fatalf("Failed to redact ticket comment: %s", err)
 	}
 }
+
+func TestRedactTicketCommentString(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodPut, "redact_ticket_comment_string.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	err := client.RedactTicketCommentString(ctx, 456, 123, RedactTicketCommentStringRequest{
+		Text: "My social security number is 847564!",
+	})
+
+	if err != nil {
+		t.Fatalf("Failed to redact ticket comment: %s", err)
+	}
+}
