@@ -116,7 +116,8 @@ type Ticket struct {
 type Requester struct {
 	Name     string `json:"name,omitempty"`
 	Email    string `json:"email,omitempty"`
-	LocaleID string `json:"locale_id,omitempty"`
+	Locale   string `json:"locale,omitempty"`
+	LocaleID int64  `json:"locale_id,omitempty"`
 }
 
 // Via is information about source of Ticket or TicketComment
@@ -196,7 +197,6 @@ func (z *Client) GetTickets(ctx context.Context, opts *TicketListOptions) ([]Tic
 	}
 	return data.Tickets, data.Page, nil
 }
-
 
 // GetOrganizationTickets get organization ticket list
 //
