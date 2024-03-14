@@ -11,6 +11,7 @@ type API interface {
 	BaseAPI
 	BrandAPI
 	CustomRoleAPI
+	CustomTicketStatusAPI
 	DynamicContentAPI
 	GroupAPI
 	GroupMembershipAPI

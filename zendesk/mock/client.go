@@ -5,6 +5,7 @@
 //
 //	mockgen -source=api.go -destination=mock/client.go -package=mock -mock_names=API=Client github.com/nukosuke/go-zendesk/zendesk API
 //
+
 // Package mock is a generated GoMock package.
 package mock
 
@@ -143,6 +144,21 @@ func (m *Client) CreateCustomObjectRecord(ctx context.Context, record zendesk.Cu
 func (mr *ClientMockRecorder) CreateCustomObjectRecord(ctx, record, customObjectKey any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomObjectRecord", reflect.TypeOf((*Client)(nil).CreateCustomObjectRecord), ctx, record, customObjectKey)
+}
+
+// CreateCustomTicketStatus mocks base method.
+func (m *Client) CreateCustomTicketStatus(ctx context.Context, customTicketStatusCreateOptions zendesk.CustomTicketStatusCreateOption) (zendesk.CustomTicketStatus, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCustomTicketStatus", ctx, customTicketStatusCreateOptions)
+	ret0, _ := ret[0].(zendesk.CustomTicketStatus)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateCustomTicketStatus indicates an expected call of CreateCustomTicketStatus.
+func (mr *ClientMockRecorder) CreateCustomTicketStatus(ctx, customTicketStatusCreateOptions any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomTicketStatus", reflect.TypeOf((*Client)(nil).CreateCustomTicketStatus), ctx, customTicketStatusCreateOptions)
 }
 
 // CreateDynamicContentItem mocks base method.
@@ -749,18 +765,18 @@ func (mr *ClientMockRecorder) GetBrand(ctx, brandID any) *gomock.Call {
 }
 
 // GetCountTicketsInViews mocks base method.
-func (m *Client) GetCountTicketsInViews(arg0 context.Context, arg1 []string) ([]zendesk.ViewCount, error) {
+func (m *Client) GetCountTicketsInViews(ctx context.Context, ids []string) ([]zendesk.ViewCount, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCountTicketsInViews", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetCountTicketsInViews", ctx, ids)
 	ret0, _ := ret[0].([]zendesk.ViewCount)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetCountTicketsInViews indicates an expected call of GetCountTicketsInViews.
-func (mr *ClientMockRecorder) GetCountTicketsInViews(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetCountTicketsInViews(ctx, ids any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), ctx, ids)
 }
 
 // GetCustomRoles mocks base method.
@@ -776,6 +792,36 @@ func (m *Client) GetCustomRoles(ctx context.Context) ([]zendesk.CustomRole, erro
 func (mr *ClientMockRecorder) GetCustomRoles(ctx any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomRoles", reflect.TypeOf((*Client)(nil).GetCustomRoles), ctx)
+}
+
+// GetCustomTicketStatus mocks base method.
+func (m *Client) GetCustomTicketStatus(ctx context.Context, customTicketStatusID int64) (zendesk.CustomTicketStatus, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomTicketStatus", ctx, customTicketStatusID)
+	ret0, _ := ret[0].(zendesk.CustomTicketStatus)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomTicketStatus indicates an expected call of GetCustomTicketStatus.
+func (mr *ClientMockRecorder) GetCustomTicketStatus(ctx, customTicketStatusID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomTicketStatus", reflect.TypeOf((*Client)(nil).GetCustomTicketStatus), ctx, customTicketStatusID)
+}
+
+// GetCustomTicketStatuses mocks base method.
+func (m *Client) GetCustomTicketStatuses(ctx context.Context, opts *zendesk.CustomTicketStatusListOptions) ([]zendesk.CustomTicketStatus, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomTicketStatuses", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.CustomTicketStatus)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomTicketStatuses indicates an expected call of GetCustomTicketStatuses.
+func (mr *ClientMockRecorder) GetCustomTicketStatuses(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomTicketStatuses", reflect.TypeOf((*Client)(nil).GetCustomTicketStatuses), ctx, opts)
 }
 
 // GetDynamicContentItem mocks base method.
@@ -2637,6 +2683,21 @@ func (m *Client) UpdateCustomObjectRecord(ctx context.Context, customObjectKey, 
 func (mr *ClientMockRecorder) UpdateCustomObjectRecord(ctx, customObjectKey, customObjectRecordID, record any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCustomObjectRecord", reflect.TypeOf((*Client)(nil).UpdateCustomObjectRecord), ctx, customObjectKey, customObjectRecordID, record)
+}
+
+// UpdateCustomTicketStatus mocks base method.
+func (m *Client) UpdateCustomTicketStatus(ctx context.Context, customTicketStatusID int64, customTicketStatus zendesk.CustomTicketStatusUpdateOption) (zendesk.CustomTicketStatus, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateCustomTicketStatus", ctx, customTicketStatusID, customTicketStatus)
+	ret0, _ := ret[0].(zendesk.CustomTicketStatus)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateCustomTicketStatus indicates an expected call of UpdateCustomTicketStatus.
+func (mr *ClientMockRecorder) UpdateCustomTicketStatus(ctx, customTicketStatusID, customTicketStatus any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCustomTicketStatus", reflect.TypeOf((*Client)(nil).UpdateCustomTicketStatus), ctx, customTicketStatusID, customTicketStatus)
 }
 
 // UpdateDynamicContentItem mocks base method.
