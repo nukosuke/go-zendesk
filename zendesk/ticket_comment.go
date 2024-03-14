@@ -175,3 +175,22 @@ func (z *Client) RedactTicketComment(
 	_, err := z.put(ctx, path, body)
 	return err
 }
+
+// RedactTicketCommentStringRequest contains the body of the RedactTicketCommentString PUT request
+type RedactTicketCommentStringRequest struct {
+	Text string `json:"text"`
+}
+
+// RedactTicketCommentString permanently removes words, or strings from a ticket comment
+//
+// ref: https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/#redact-string-in-comment
+func (z *Client) RedactTicketCommentString(
+	ctx context.Context,
+	ticketID int64,
+	ticketCommentID int64,
+	body RedactTicketCommentStringRequest,
+) error {
+	path := fmt.Sprintf("/api/v2/tickets/%d/comments/%d/redact", ticketID, ticketCommentID)
+	_, err := z.put(ctx, path, body)
+	return err
+}
