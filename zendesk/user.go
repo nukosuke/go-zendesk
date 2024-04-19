@@ -128,6 +128,9 @@ type UserAPI interface {
 	GetOrganizationUsersIterator(ctx context.Context, opts *PaginationOptions) *Iterator[User]
 	GetOrganizationUsersOBP(ctx context.Context, opts *OBPOptions) ([]User, Page, error)
 	GetOrganizationUsersCBP(ctx context.Context, opts *CBPOptions) ([]User, CursorPaginationMeta, error)
+	GetGroupUsersIterator(ctx context.Context, opts *PaginationOptions) *Iterator[User]
+	GetGroupUsersOBP(ctx context.Context, opts *OBPOptions) ([]User, Page, error)
+	GetGroupUsersCBP(ctx context.Context, opts *CBPOptions) ([]User, CursorPaginationMeta, error)
 }
 
 // GetUsers fetch user list
@@ -255,8 +258,6 @@ func (z *Client) GetManyUsers(ctx context.Context, opts *GetManyUsersOptions) ([
 	}
 	return data.Users, data.Page, nil
 }
-
-//TODO: GetUsersByGroupID, GetUsersByOrganizationID
 
 // CreateUser creates new user
 // ref: https://developer.zendesk.com/api-reference/ticketing/users/users/#create-user
