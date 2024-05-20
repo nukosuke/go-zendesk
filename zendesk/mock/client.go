@@ -749,18 +749,18 @@ func (mr *ClientMockRecorder) GetBrand(ctx, brandID any) *gomock.Call {
 }
 
 // GetCountTicketsInViews mocks base method.
-func (m *Client) GetCountTicketsInViews(arg0 context.Context, arg1 []string) ([]zendesk.ViewCount, error) {
+func (m *Client) GetCountTicketsInViews(ctx context.Context, ids []string) ([]zendesk.ViewCount, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCountTicketsInViews", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetCountTicketsInViews", ctx, ids)
 	ret0, _ := ret[0].([]zendesk.ViewCount)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetCountTicketsInViews indicates an expected call of GetCountTicketsInViews.
-func (mr *ClientMockRecorder) GetCountTicketsInViews(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetCountTicketsInViews(ctx, ids any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), ctx, ids)
 }
 
 // GetCustomRoles mocks base method.
@@ -930,6 +930,52 @@ func (m *Client) GetGroupMembershipsOBP(ctx context.Context, opts *zendesk.OBPOp
 func (mr *ClientMockRecorder) GetGroupMembershipsOBP(ctx, opts any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupMembershipsOBP", reflect.TypeOf((*Client)(nil).GetGroupMembershipsOBP), ctx, opts)
+}
+
+// GetGroupUsersCBP mocks base method.
+func (m *Client) GetGroupUsersCBP(ctx context.Context, opts *zendesk.CBPOptions) ([]zendesk.User, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupUsersCBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGroupUsersCBP indicates an expected call of GetGroupUsersCBP.
+func (mr *ClientMockRecorder) GetGroupUsersCBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupUsersCBP", reflect.TypeOf((*Client)(nil).GetGroupUsersCBP), ctx, opts)
+}
+
+// GetGroupUsersIterator mocks base method.
+func (m *Client) GetGroupUsersIterator(ctx context.Context, opts *zendesk.PaginationOptions) *zendesk.Iterator[zendesk.User] {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupUsersIterator", ctx, opts)
+	ret0, _ := ret[0].(*zendesk.Iterator[zendesk.User])
+	return ret0
+}
+
+// GetGroupUsersIterator indicates an expected call of GetGroupUsersIterator.
+func (mr *ClientMockRecorder) GetGroupUsersIterator(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupUsersIterator", reflect.TypeOf((*Client)(nil).GetGroupUsersIterator), ctx, opts)
+}
+
+// GetGroupUsersOBP mocks base method.
+func (m *Client) GetGroupUsersOBP(ctx context.Context, opts *zendesk.OBPOptions) ([]zendesk.User, zendesk.Page, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGroupUsersOBP", ctx, opts)
+	ret0, _ := ret[0].([]zendesk.User)
+	ret1, _ := ret[1].(zendesk.Page)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGroupUsersOBP indicates an expected call of GetGroupUsersOBP.
+func (mr *ClientMockRecorder) GetGroupUsersOBP(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGroupUsersOBP", reflect.TypeOf((*Client)(nil).GetGroupUsersOBP), ctx, opts)
 }
 
 // GetGroups mocks base method.
