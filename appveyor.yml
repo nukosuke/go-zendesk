@@ -10,7 +10,7 @@ cache:
   - '%LocalAppData%\go-build'
   - '%GOPATH%\pkg\mod'
 
-stack: go 1.19
+stack: go 1.22
 
 install:
   - go mod download
