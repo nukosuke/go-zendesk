@@ -28,10 +28,18 @@ type Webhook struct {
 	UpdatedBy      string                 `json:"updated_by,omitempty"`
 }
 
+type WebhookCredentials struct {
+	HeaderName  string `tfsdk:"name,omitempty"`
+	HeaderValue string `tfsdk:"value,omitempty"`
+	Username    string `tfsdk:"username,omitempty"`
+	Password    string `tfsdk:"password,omitempty"`
+	Token       string `tfsdk:"token,omitempty"`
+}
+
 type WebhookAuthentication struct {
-	Type        string      `json:"type"`
-	Data        interface{} `json:"data"`
-	AddPosition string      `json:"add_position"`
+	Type        string              `json:"type"`
+	Data        *WebhookCredentials `json:"data"`
+	AddPosition string              `json:"add_position"`
 }
 
 type WebhookSigningSecret struct {
