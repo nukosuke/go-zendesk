@@ -49,6 +49,31 @@ func TestCountTickets(t *testing.T) {
 	}
 }
 
+func TestSearchExportTickets(t *testing.T) {
+	mockAPI := newMockAPI(http.MethodGet, "search_ticket.json")
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+
+	results, _, err := client.SearchExport(ctx, &SearchExportOptions{})
+	if err != nil {
+		t.Fatalf("Failed to get export search results: %s", err)
+	}
+
+	list := results.List()
+	if len(list) != 1 {
+		t.Fatalf("expected length of sla policies is , but got %d", len(list))
+	}
+
+	ticket, ok := list[0].(Ticket)
+	if !ok {
+		t.Fatalf("Cannot assert %v as a ticket", list[0])
+	}
+
+	if ticket.ID != 4 {
+		t.Fatalf("Ticket did not have the expected id %v", ticket)
+	}
+}
+
 func BenchmarkUnmarshalSearchResults(b *testing.B) {
 	file := readFixture("ticket_result.json")
 	for i := 0; i < b.N; i++ {

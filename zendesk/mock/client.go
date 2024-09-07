@@ -2548,6 +2548,22 @@ func (mr *ClientMockRecorder) SearchCustomObjectRecords(ctx, customObjectKey, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchCustomObjectRecords", reflect.TypeOf((*Client)(nil).SearchCustomObjectRecords), ctx, customObjectKey, opts)
 }
 
+// SearchExport mocks base method.
+func (m *Client) SearchExport(ctx context.Context, opts *zendesk.SearchExportOptions) (zendesk.SearchResults, zendesk.CursorPaginationMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SearchExport", ctx, opts)
+	ret0, _ := ret[0].(zendesk.SearchResults)
+	ret1, _ := ret[1].(zendesk.CursorPaginationMeta)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// SearchExport indicates an expected call of SearchExport.
+func (mr *ClientMockRecorder) SearchExport(ctx, opts any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchExport", reflect.TypeOf((*Client)(nil).SearchExport), ctx, opts)
+}
+
 // SearchUsers mocks base method.
 func (m *Client) SearchUsers(ctx context.Context, opts *zendesk.SearchUsersOptions) ([]zendesk.User, zendesk.Page, error) {
 	m.ctrl.T.Helper()

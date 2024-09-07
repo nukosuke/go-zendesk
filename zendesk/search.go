@@ -23,9 +23,19 @@ type CountOptions struct {
 	Query string `url:"query"`
 }
 
+// SearchExportOptions are the options that can be provided to the export search API
+//
+// https://developer.zendesk.com/api-reference/ticketing/ticket-management/search/#export-search-results
+type SearchExportOptions struct {
+	CursorPagination
+	Query  string `url:"query"`
+	Filter string `url:"filter[type],omitempty"`
+}
+
 type SearchAPI interface {
 	Search(ctx context.Context, opts *SearchOptions) (SearchResults, Page, error)
 	SearchCount(ctx context.Context, opts *CountOptions) (int, error)
+	SearchExport(ctx context.Context, opts *SearchExportOptions) (SearchResults, CursorPaginationMeta, error)
 	GetSearchIterator(ctx context.Context, opts *PaginationOptions) *Iterator[SearchResults]
 	GetSearchOBP(ctx context.Context, opts *OBPOptions) ([]SearchResults, Page, error)
 	GetSearchCBP(ctx context.Context, opts *CBPOptions) ([]SearchResults, CursorPaginationMeta, error)
@@ -180,4 +190,35 @@ func (z *Client) SearchCount(ctx context.Context, opts *CountOptions) (int, erro
 	}
 
 	return data.Count, nil
+}
+
+// SearchExport allows users to query zendesk's unified export search api.
+//
+// ref: https://developer.zendesk.com/api-reference/ticketing/ticket-management/search/#export-search-results
+func (z *Client) SearchExport(ctx context.Context, opts *SearchExportOptions) (SearchResults, CursorPaginationMeta, error) {
+	var data struct {
+		Results SearchResults        `json:"results"`
+		Meta    CursorPaginationMeta `json:"meta"`
+	}
+
+	if opts == nil {
+		return SearchResults{}, CursorPaginationMeta{}, &OptionsError{opts}
+	}
+
+	u, err := addOptions("/search/export", opts)
+	if err != nil {
+		return SearchResults{}, CursorPaginationMeta{}, err
+	}
+
+	body, err := z.get(ctx, u)
+	if err != nil {
+		return SearchResults{}, CursorPaginationMeta{}, err
+	}
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return SearchResults{}, CursorPaginationMeta{}, err
+	}
+
+	return data.Results, data.Meta, nil
 }
