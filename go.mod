@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/google/go-querystring v1.1.0
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	go.uber.org/mock v0.4.0
 )
 
