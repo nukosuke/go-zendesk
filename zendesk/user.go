@@ -52,6 +52,7 @@ type User struct {
 	LastLoginAt          time.Time  `json:"last_login_at,omitempty"`
 	CreatedAt            time.Time  `json:"created_at,omitempty"`
 	UpdatedAt            time.Time  `json:"updated_at,omitempty"`
+	SkipVerifyEmail      bool       `json:"skip_verify_email,omitempty"`
 }
 
 const (
