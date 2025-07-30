@@ -5,6 +5,7 @@
 //
 //	mockgen -source=api.go -destination=mock/client.go -package=mock -mock_names=API=Client github.com/nukosuke/go-zendesk/zendesk API
 //
+
 // Package mock is a generated GoMock package.
 package mock
 
@@ -20,6 +21,7 @@ import (
 type Client struct {
 	ctrl     *gomock.Controller
 	recorder *ClientMockRecorder
+	isgomock struct{}
 }
 
 // ClientMockRecorder is the mock recorder for Client.
@@ -401,17 +403,17 @@ func (mr *ClientMockRecorder) CreateWebhook(ctx, hook any) *gomock.Call {
 }
 
 // Delete mocks base method.
-func (m *Client) Delete(ctx context.Context, path string) error {
+func (m *Client) Delete(ctx context.Context, path string, data any) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Delete", ctx, path)
+	ret := m.ctrl.Call(m, "Delete", ctx, path, data)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Delete indicates an expected call of Delete.
-func (mr *ClientMockRecorder) Delete(ctx, path any) *gomock.Call {
+func (mr *ClientMockRecorder) Delete(ctx, path, data any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*Client)(nil).Delete), ctx, path)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*Client)(nil).Delete), ctx, path, data)
 }
 
 // DeleteAutomation mocks base method.
@@ -749,18 +751,18 @@ func (mr *ClientMockRecorder) GetBrand(ctx, brandID any) *gomock.Call {
 }
 
 // GetCountTicketsInViews mocks base method.
-func (m *Client) GetCountTicketsInViews(arg0 context.Context, arg1 []string) ([]zendesk.ViewCount, error) {
+func (m *Client) GetCountTicketsInViews(ctx context.Context, ids []string) ([]zendesk.ViewCount, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetCountTicketsInViews", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetCountTicketsInViews", ctx, ids)
 	ret0, _ := ret[0].([]zendesk.ViewCount)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetCountTicketsInViews indicates an expected call of GetCountTicketsInViews.
-func (mr *ClientMockRecorder) GetCountTicketsInViews(arg0, arg1 interface{}) *gomock.Call {
+func (mr *ClientMockRecorder) GetCountTicketsInViews(ctx, ids any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCountTicketsInViews", reflect.TypeOf((*Client)(nil).GetCountTicketsInViews), ctx, ids)
 }
 
 // GetCustomRoles mocks base method.
@@ -2499,6 +2501,20 @@ func (m *Client) Put(ctx context.Context, path string, data any) ([]byte, error)
 func (mr *ClientMockRecorder) Put(ctx, path, data any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Put", reflect.TypeOf((*Client)(nil).Put), ctx, path, data)
+}
+
+// RemoveTicketTags mocks base method.
+func (m *Client) RemoveTicketTags(ctx context.Context, ticketID int64, tags []zendesk.Tag) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveTicketTags", ctx, ticketID, tags)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RemoveTicketTags indicates an expected call of RemoveTicketTags.
+func (mr *ClientMockRecorder) RemoveTicketTags(ctx, ticketID, tags any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveTicketTags", reflect.TypeOf((*Client)(nil).RemoveTicketTags), ctx, ticketID, tags)
 }
 
 // Search mocks base method.

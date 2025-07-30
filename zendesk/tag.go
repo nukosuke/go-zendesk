@@ -17,6 +17,7 @@ type TagAPI interface {
 	AddTicketTags(ctx context.Context, ticketID int64, tags []Tag) ([]Tag, error)
 	AddOrganizationTags(ctx context.Context, organizationID int64, tags []Tag) ([]Tag, error)
 	AddUserTags(ctx context.Context, userID int64, tags []Tag) ([]Tag, error)
+	RemoveTicketTags(ctx context.Context, ticketID int64, tags []Tag) error
 }
 
 // GetTicketTags get ticket tag list
@@ -143,4 +144,16 @@ func (z *Client) AddUserTags(ctx context.Context, userID int64, tags []Tag) ([]T
 		return nil, err
 	}
 	return result.Tags, nil
+}
+
+// RemoveTicketTags remove tags from ticket
+//
+// ref: https://developer.zendesk.com/rest_api/docs/support/tags#remove-tags
+func (z *Client) RemoveTicketTags(ctx context.Context, ticketID int64, tags []Tag) error {
+	var data struct {
+		Tags []Tag `json:"tags"`
+	}
+	data.Tags = tags
+	err := z.delete(ctx, fmt.Sprintf("/tickets/%d/tags", ticketID), data)
+	return err
 }

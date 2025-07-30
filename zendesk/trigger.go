@@ -163,7 +163,7 @@ func (z *Client) UpdateTrigger(ctx context.Context, id int64, trigger Trigger) (
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/triggers#delete-trigger
 func (z *Client) DeleteTrigger(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/triggers/%d.json", id))
+	err := z.delete(ctx, fmt.Sprintf("/triggers/%d.json", id), nil)
 	if err != nil {
 		return err
 	}

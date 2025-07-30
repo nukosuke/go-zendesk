@@ -166,7 +166,7 @@ func (z *Client) UpdateAutomation(ctx context.Context, id int64, automation Auto
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/automations#delete-automation
 func (z *Client) DeleteAutomation(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/automations/%d.json", id))
+	err := z.delete(ctx, fmt.Sprintf("/automations/%d.json", id), nil)
 	if err != nil {
 		return err
 	}

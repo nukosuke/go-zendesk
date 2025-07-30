@@ -135,7 +135,7 @@ func (z *Client) UpdateGroup(ctx context.Context, groupID int64, group Group) (G
 // DeleteGroup deletes the specified group
 // ref: https://developer.zendesk.com/rest_api/docs/support/groups#delete-group
 func (z *Client) DeleteGroup(ctx context.Context, groupID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/groups/%d.json", groupID))
+	err := z.delete(ctx, fmt.Sprintf("/groups/%d.json", groupID), nil)
 
 	if err != nil {
 		return err

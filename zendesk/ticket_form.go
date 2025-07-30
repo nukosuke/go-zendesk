@@ -139,7 +139,7 @@ func (z *Client) UpdateTicketForm(ctx context.Context, id int64, form TicketForm
 // DeleteTicketForm deletes the specified ticket form
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_forms#delete-ticket-form
 func (z *Client) DeleteTicketForm(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/ticket_forms/%d.json", id))
+	err := z.delete(ctx, fmt.Sprintf("/ticket_forms/%d.json", id), nil)
 	if err != nil {
 		return err
 	}

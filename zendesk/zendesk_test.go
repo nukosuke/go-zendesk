@@ -276,7 +276,7 @@ func TestDelete(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.delete(ctx, "/foo/id")
+	err := c.delete(ctx, "/foo/id", nil)
 	if err != nil {
 		t.Fatalf("Failed to send request: %s", err)
 	}
@@ -289,7 +289,7 @@ func TestDeleteFailure(t *testing.T) {
 	}))
 
 	c := newTestClient(mockAPI)
-	err := c.delete(ctx, "/foo/id")
+	err := c.delete(ctx, "/foo/id", nil)
 	if err == nil {
 		t.Fatalf("Failed to recieve error from Delete")
 	}

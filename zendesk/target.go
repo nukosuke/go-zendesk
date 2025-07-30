@@ -125,7 +125,7 @@ func (z *Client) UpdateTarget(ctx context.Context, targetID int64, field Target)
 // DeleteTarget deletes the specified target
 // ref: https://developer.zendesk.com/rest_api/docs/support/targets#delete-target
 func (z *Client) DeleteTarget(ctx context.Context, targetID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/targets/%d.json", targetID))
+	err := z.delete(ctx, fmt.Sprintf("/targets/%d.json", targetID), nil)
 
 	if err != nil {
 		return err

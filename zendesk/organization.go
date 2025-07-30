@@ -165,7 +165,7 @@ func (z *Client) UpdateOrganization(ctx context.Context, orgID int64, org Organi
 // DeleteOrganization deletes the specified organization
 // ref: https://developer.zendesk.com/rest_api/docs/support/organizations#delete-organization
 func (z *Client) DeleteOrganization(ctx context.Context, orgID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/organizations/%d.json", orgID))
+	err := z.delete(ctx, fmt.Sprintf("/organizations/%d.json", orgID), nil)
 	if err != nil {
 		return err
 	}

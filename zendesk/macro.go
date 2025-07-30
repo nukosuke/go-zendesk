@@ -158,7 +158,7 @@ func (z *Client) UpdateMacro(ctx context.Context, macroID int64, macro Macro) (M
 // DeleteMacro deletes the specified macro
 // ref: https://developer.zendesk.com/rest_api/docs/support/macros#delete-macro
 func (z *Client) DeleteMacro(ctx context.Context, macroID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/macros/%d.json", macroID))
+	err := z.delete(ctx, fmt.Sprintf("/macros/%d.json", macroID), nil)
 
 	if err != nil {
 		return err

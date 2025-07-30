@@ -102,7 +102,7 @@ func (z *Client) UpdateBrand(ctx context.Context, brandID int64, brand Brand) (B
 // DeleteBrand deletes the specified brand
 // ref: https://developer.zendesk.com/rest_api/docs/support/brands#delete-brand
 func (z *Client) DeleteBrand(ctx context.Context, brandID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/brands/%d.json", brandID))
+	err := z.delete(ctx, fmt.Sprintf("/brands/%d.json", brandID), nil)
 
 	if err != nil {
 		return err

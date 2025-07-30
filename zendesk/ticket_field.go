@@ -145,7 +145,7 @@ func (z *Client) UpdateTicketField(ctx context.Context, ticketID int64, field Ti
 // DeleteTicketField deletes the specified ticket field
 // ref: https://developer.zendesk.com/rest_api/docs/support/ticket_fields#delete-ticket-field
 func (z *Client) DeleteTicketField(ctx context.Context, ticketID int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID))
+	err := z.delete(ctx, fmt.Sprintf("/ticket_fields/%d.json", ticketID), nil)
 
 	if err != nil {
 		return err

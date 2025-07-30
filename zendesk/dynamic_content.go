@@ -136,7 +136,7 @@ func (z *Client) UpdateDynamicContentItem(ctx context.Context, id int64, item Dy
 //
 // ref: https://developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content/#delete-item
 func (z *Client) DeleteDynamicContentItem(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/dynamic_content/items/%d.json", id))
+	err := z.delete(ctx, fmt.Sprintf("/dynamic_content/items/%d.json", id), nil)
 	if err != nil {
 		return err
 	}

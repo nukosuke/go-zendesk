@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -38,7 +39,7 @@ type (
 		Get(ctx context.Context, path string) ([]byte, error)
 		Post(ctx context.Context, path string, data interface{}) ([]byte, error)
 		Put(ctx context.Context, path string, data interface{}) ([]byte, error)
-		Delete(ctx context.Context, path string) error
+		Delete(ctx context.Context, path string, data interface{}) error
 	}
 
 	// CursorPagination contains options for using cursor pagination.
@@ -257,8 +258,17 @@ func (z *Client) patch(ctx context.Context, path string, data interface{}) ([]by
 }
 
 // delete sends data to API and returns an error if unsuccessful
-func (z *Client) delete(ctx context.Context, path string) error {
-	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, nil)
+func (z *Client) delete(ctx context.Context, path string, data interface{}) error {
+	var b io.Reader
+	if data != nil {
+		bytes, err := json.Marshal(data)
+		if err != nil {
+			return err
+		}
+		b = strings.NewReader(string(bytes))
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, z.baseURL.String()+path, b)
 	if err != nil {
 		return err
 	}
@@ -362,6 +372,6 @@ func (z *Client) Put(ctx context.Context, path string, data interface{}) ([]byte
 }
 
 // Delete allows users to send requests not yet implemented
-func (z *Client) Delete(ctx context.Context, path string) error {
-	return z.delete(ctx, path)
+func (z *Client) Delete(ctx context.Context, path string, data interface{}) error {
+	return z.delete(ctx, path, data)
 }

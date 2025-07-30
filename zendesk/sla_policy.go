@@ -177,7 +177,7 @@ func (z *Client) UpdateSLAPolicy(ctx context.Context, id int64, slaPolicy SLAPol
 //
 // ref: https://developer.zendesk.com/rest_api/docs/support/slas/policies#delete-slaPolicy
 func (z *Client) DeleteSLAPolicy(ctx context.Context, id int64) error {
-	err := z.delete(ctx, fmt.Sprintf("/slas/policies/%d.json", id))
+	err := z.delete(ctx, fmt.Sprintf("/slas/policies/%d.json", id), nil)
 	if err != nil {
 		return err
 	}
