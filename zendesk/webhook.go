@@ -11,6 +11,7 @@ import (
 // https://developer.zendesk.com/api-reference/event-connectors/webhooks/webhooks/
 type Webhook struct {
 	Authentication *WebhookAuthentication `json:"authentication,omitempty"`
+	CustomHeaders  map[string]string      `json:"custom_headers,omitempty"`
 	CreatedAt      time.Time              `json:"created_at,omitempty"`
 	CreatedBy      string                 `json:"created_by,omitempty"`
 	Description    string                 `json:"description,omitempty"`
