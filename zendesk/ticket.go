@@ -47,6 +47,11 @@ func (cf *CustomField) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type EmailCC struct {
+	UserEmail string `json:"user_email"`
+	Action    string `json:"action"`
+}
+
 type Ticket struct {
 	ID              int64         `json:"id,omitempty"`
 	URL             string        `json:"url,omitempty"`
@@ -67,6 +72,7 @@ type Ticket struct {
 	CollaboratorIDs []int64       `json:"collaborator_ids,omitempty"`
 	FollowerIDs     []int64       `json:"follower_ids,omitempty"`
 	EmailCCIDs      []int64       `json:"email_cc_ids,omitempty"`
+	EmailCCs        []EmailCC     `json:"email_ccs,omitempty"`
 	ForumTopicID    int64         `json:"forum_topic_id,omitempty"`
 	ProblemID       int64         `json:"problem_id,omitempty"`
 	HasIncidents    bool          `json:"has_incidents,omitempty"`
